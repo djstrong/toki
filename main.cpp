@@ -40,8 +40,8 @@ void test1()
     IcuStreamWrapper isw(ss3, 1);
     std::cout << ">>";
     while (isw.hasMoreChars()) {
-        UChar u = isw.getNextChar();
-        UnicodeString us(u);
+        //UChar u = isw.getNextChar();
+        UnicodeString us(isw.getBuffer());
         std::string s;
         std::cout << us.toUTF8String(s);
     }
@@ -54,14 +54,17 @@ int main(int argc, char** argv)
 {
     std::string input_enc;
     int bufsize;
+    bool bufget;
     using boost::program_options::value;
     boost::program_options::options_description desc("Allowed options");
     desc.add_options()
             ("input-encoding,e", value(&input_enc)->default_value("UTF8"),
              "Input encoding (ICU string identifier), for example UTF8, cp1250")
-            ("buffer-size,b", value(&bufsize)->default_value(200),
+            ("buffer-size,b", value(&bufsize)->default_value(500),
              "Stream buffer size, set to 0 to convert the entire input "
-             "in-memory. Disregards the encoding setting and assumes UTF-8.")
+             "in-memory and disregard the encoding, assuming UTF-8.")
+            ("buffer-get,B", value(&bufget)->default_value(false)->zero_tokens(),
+             "Use buffer-by-buffer copying later, intsetad of char-by-char")
             ("help,h", "Show help")
             ;
     boost::program_options::variables_map vm;
@@ -79,12 +82,20 @@ int main(int argc, char** argv)
         return 1;
     }
 
+    if (bufsize < 0) return 0;
+
     UnicodeString us;
     if (bufsize > 0) {
         IcuStreamWrapper isw(std::cin, bufsize, input_enc.c_str());
-        while (isw.hasMoreChars()) {
-            UChar u = isw.getNextChar();
-            us += u;
+        if (bufget) {
+            while (isw.hasMoreChars()) {
+                us += isw.getBuffer();
+            }
+        } else {
+            while (isw.hasMoreChars()) {
+                UChar u = isw.getNextChar();
+                us += u;
+            }
         }
     } else {
         std::stringstream ss;

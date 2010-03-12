@@ -46,6 +46,14 @@ UChar IcuStreamWrapper::getNextChar()
     }
 }
 
+UnicodeString IcuStreamWrapper::getBuffer()
+{
+    ensure_more();
+    UnicodeString ret(out_, target_ - out_);
+    out_ = target_;
+    return ret;
+}
+
 bool IcuStreamWrapper::hasMoreChars()
 {
     ensure_more();
