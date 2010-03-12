@@ -1,7 +1,8 @@
 #include "icustreamwrapper.h"
 #include <iostream>
 
-IcuStreamWrapper::IcuStreamWrapper(std::istream& is, int buf_size)
+IcuStreamWrapper::IcuStreamWrapper(std::istream& is, int buf_size /* = 200 */,
+                                   const char* input_encoding /* = "UTF8" */)
         : is_(is)
         , converter_(NULL)
         , buf_size_(buf_size)
@@ -13,7 +14,7 @@ IcuStreamWrapper::IcuStreamWrapper(std::istream& is, int buf_size)
         , out_(target_)
 {
     UErrorCode status = U_ZERO_ERROR;
-    converter_ = ucnv_open("utf8", &status);
+    converter_ = ucnv_open(input_encoding, &status);
 }
 
 IcuStreamWrapper::~IcuStreamWrapper()
@@ -25,36 +26,35 @@ IcuStreamWrapper::~IcuStreamWrapper()
 
 UChar IcuStreamWrapper::peekNextChar()
 {
+    ensure_more();
     if (target_ > out_) {
         return *out_;
     } else {
-        more();
-        if (target_ > out_) {
-            return *out_;
-        } else {
-            return 0;
-        }
+        std::cerr << "peekNextChar 0!\n";
+        return 0;
     }
 }
 
 UChar IcuStreamWrapper::getNextChar()
 {
+    ensure_more();
     if (target_ > out_) {
         return *out_++;
     } else {
-        more();
-        if (target_ > out_) {
-            return *out_++;
-        } else {
-            return 0;
-        }
-
+        std::cerr << "getNextChar 0!\n";
+        return 0;
     }
 }
 
-void IcuStreamWrapper::more()
+bool IcuStreamWrapper::hasMoreChars()
 {
-    is_.get(source_buf_, buf_size_, 0); //0x00 can't happen
+    ensure_more();
+    return target_ > out_;
+}
+
+int IcuStreamWrapper::more()
+{
+    is_.read(source_buf_, buf_size_);
     int buf_read = is_.gcount();
     bool flush = is_.eof();
     char* source_limit = source_buf_ + buf_read;
@@ -71,9 +71,13 @@ void IcuStreamWrapper::more()
         std::cerr << "err!" << err_ << "\n";
     }
     out_ = target_buf_;
+    return buf_read;
 }
 
-bool IcuStreamWrapper::hasMoreChars()
+void IcuStreamWrapper::ensure_more()
 {
-    return target_ > out_ || is_.good();
+    //keep calling more() as long as there's nothing ready in the target buffer
+    //and it reads something from the inut stream
+    while (target_ <= out_ && more());
 }
+

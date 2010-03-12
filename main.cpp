@@ -57,8 +57,12 @@ int main(int argc, char** argv)
     using boost::program_options::value;
     boost::program_options::options_description desc("Allowed options");
     desc.add_options()
-//            ("input-encoding,e", value(&input_enc)->default_value("utf8"), "Input encoding")
-            ("buffer-size,b", value(&bufsize)->default_value(200), "Stream buffer size, set to 0 to convert the entire input in-memory")
+            ("input-encoding,e", value(&input_enc)->default_value("UTF8"),
+             "Input encoding (ICU string identifier), for example UTF8, cp1250")
+            ("buffer-size,b", value(&bufsize)->default_value(200),
+             "Stream buffer size, set to 0 to convert the entire input "
+             "in-memory. Disregards the encoding setting and assumes UTF-8.")
+            ("help,h", "Show help")
             ;
     boost::program_options::variables_map vm;
 
@@ -77,7 +81,7 @@ int main(int argc, char** argv)
 
     UnicodeString us;
     if (bufsize > 0) {
-        IcuStreamWrapper isw(std::cin, bufsize);
+        IcuStreamWrapper isw(std::cin, bufsize, input_enc.c_str());
         while (isw.hasMoreChars()) {
             UChar u = isw.getNextChar();
             us += u;
