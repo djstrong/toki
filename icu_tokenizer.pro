@@ -10,4 +10,5 @@ SOURCES += token.cpp \
     icustreamwrapper.cpp \
     icustringsource.cpp
 LIBS += -licuuc \
-    -licuio
+    -licuio \
+    -lboost_program_options-mt
