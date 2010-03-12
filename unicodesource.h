@@ -6,14 +6,14 @@
 class UnicodeSource
 {
 public:
-    UnicodeSource() {}
-    virtual ~UnicodeSource() {}
+	UnicodeSource() {}
+	virtual ~UnicodeSource() {}
 
-    virtual UChar peekNextChar() = 0;
+	virtual UChar peekNextChar() = 0;
 
-    virtual UChar getNextChar() = 0;
+	virtual UChar getNextChar() = 0;
 
-    virtual bool hasMoreChars() = 0;
+	virtual bool hasMoreChars() = 0;
 };
 
 #endif // UNICODESOURCE_H

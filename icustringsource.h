@@ -8,16 +8,16 @@
 class IcuStringSource : public UnicodeSource
 {
 public:
-    IcuStringSource(const UnicodeString& u);
+	IcuStringSource(const UnicodeString& u);
 
-    UChar peekNextChar();
+	UChar peekNextChar();
 
-    UChar getNextChar();
+	UChar getNextChar();
 
-    bool hasMoreChars();
+	bool hasMoreChars();
 
 private:
-    StringCharacterIterator iter_;
+	StringCharacterIterator iter_;
 };
 
 #endif // ICUSTRINGSOURCE_H

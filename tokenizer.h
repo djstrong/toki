@@ -11,19 +11,19 @@
 class Tokenizer
 {
 public:
-    Tokenizer(UnicodeSource& us);
+	Tokenizer(UnicodeSource& us);
 
-    Token getNextToken();
+	Token getNextToken();
 
-    bool hasMoreTokens();
+	bool hasMoreTokens();
 
-    void debug_tokenize();
+	void debug_tokenize();
 
 private:
-    void eatWhitespace();
+	void eatWhitespace();
 
-    UnicodeSource& us_;
-    Token::WhitespaceAmount wa_;
+	UnicodeSource& us_;
+	Token::WhitespaceAmount wa_;
 };
 
 #endif // TOKENIZER_H
