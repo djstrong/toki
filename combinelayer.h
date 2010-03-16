@@ -6,9 +6,9 @@
 class CombineLayer : public QueueTokenLayer
 {
 public:
-    CombineLayer(boost::shared_ptr<TokenLayer> lower);
+	CombineLayer(boost::shared_ptr<TokenSource> lower);
 
-	void reset();
+	static bool registered;
 
 protected:
 	void prepareMoreTokens();

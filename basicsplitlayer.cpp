@@ -1,13 +1,8 @@
 #include "basicsplitlayer.h"
 
-BasicSplitLayer::BasicSplitLayer(boost::shared_ptr<TokenLayer> lower)
+BasicSplitLayer::BasicSplitLayer(boost::shared_ptr<TokenSource> lower)
 	: QueueTokenLayer(lower)
 {
-}
-
-void BasicSplitLayer::reset()
-{
-
 }
 
 void BasicSplitLayer::prepareMoreTokens()
@@ -19,6 +14,4 @@ void BasicSplitLayer::prepareMoreTokens()
 	}
 }
 
-namespace {
-	bool registered = TokenLayerFactory::Instance().Register("split", LayerCreator<BasicSplitLayer>);
-}
+bool BasicSplitLayer::registered = TokenLayer::register_layer<BasicSplitLayer>("split");

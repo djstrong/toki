@@ -7,7 +7,10 @@ HEADERS += token.h \
     queuetokenlayer.h \
     tokenlayerfactory.h \
     basicsplitlayer.h \
-    combinelayer.h
+    combinelayer.h \
+    tokensource.h \
+    whitespacetokenizer.h \
+    config.h
 SOURCES += token.cpp \
     main.cpp \
     tokenizer.cpp \
@@ -17,7 +20,10 @@ SOURCES += token.cpp \
     tokenlayer.cpp \
     queuetokenlayer.cpp \
     basicsplitlayer.cpp \
-    combinelayer.cpp
+    combinelayer.cpp \
+    tokensource.cpp \
+    whitespacetokenizer.cpp \
+    config.cpp
 LIBS += -licuuc \
     -licuio \
     -lloki \

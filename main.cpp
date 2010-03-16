@@ -59,7 +59,7 @@ int main(int argc, char** argv)
 
 	TokenLayer* tl = TokenLayer::create("split", input_layer);
 	assert(tl);
-
+	return 0;
 
 	std::string input_enc;
 	int bufsize;

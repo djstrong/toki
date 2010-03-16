@@ -1,11 +1,8 @@
 #include "combinelayer.h"
+#include "token.h"
 
-CombineLayer::CombineLayer(boost::shared_ptr<TokenLayer> lower)
+CombineLayer::CombineLayer(boost::shared_ptr<TokenSource> lower)
 	: QueueTokenLayer(lower)
-{
-}
-
-void CombineLayer::reset()
 {
 }
 
@@ -22,7 +19,6 @@ void CombineLayer::prepareMoreTokens()
 	}
 }
 
-namespace {
-	bool registered = TokenLayerFactory::Instance().Register("split", LayerCreator<CombineLayer>);
-}
+bool CombineLayer::registered = TokenLayer::register_layer<CombineLayer>("combine");
+
 

@@ -1,13 +1,14 @@
 #include "queuetokenlayer.h"
 #include <cassert>
 
-QueueTokenLayer::QueueTokenLayer(boost::shared_ptr<TokenLayer> lower)
+QueueTokenLayer::QueueTokenLayer(boost::shared_ptr<TokenSource> lower)
 	: TokenLayer(lower), queue_()
 {
 }
 
 QueueTokenLayer::~QueueTokenLayer()
 {
+	clear_queue();
 }
 
 void QueueTokenLayer::enqueueOutputToken(Token *t)
@@ -30,3 +31,16 @@ Token* QueueTokenLayer::getNextToken()
 	}
 }
 
+void QueueTokenLayer::clear_queue()
+{
+	while (!queue_.empty()) {
+		Token* t = queue_.front();
+		delete t;
+		queue_.pop();
+	}
+}
+
+void QueueTokenLayer::reset()
+{
+	clear_queue();
+}
