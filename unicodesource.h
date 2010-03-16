@@ -11,7 +11,7 @@
  * It is similar to ICU's ForwardCharacterIterator, but we probably don't want
  * to inherit directly from ICU, and we want the extra "peek" functionality.
  */
-class UnicodeSource : public
+class UnicodeSource
 {
 public:
 

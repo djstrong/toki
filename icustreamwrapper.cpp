@@ -64,7 +64,7 @@ int IcuStreamWrapper::more()
 	int buf_read = is_.gcount();
 	bool flush = is_.eof();
 	char* source_limit = source_buf_ + buf_read;
-	UChar* target_limit_ = target_buf_ + buf_size * 2;
+	UChar* target_limit_ = target_buf_ + buf_size_ * 2;
 	target_ = target_buf_;
 	UErrorCode err = U_ZERO_ERROR;
 	const char* source = source_buf_;
@@ -75,7 +75,7 @@ int IcuStreamWrapper::more()
 	if (err == U_BUFFER_OVERFLOW_ERROR) {
 		std::cerr << "overflow\n";
 	} else if (err != U_ZERO_ERROR) {
-		std::cerr << "err!" << err_ << "\n";
+		std::cerr << "err!" << err << "\n";
 	}
 	out_ = target_buf_;
 	return buf_read;
