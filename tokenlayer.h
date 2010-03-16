@@ -81,7 +81,7 @@ protected:
  */
 typedef Loki::SingletonHolder<
 	Loki::Factory<
-		TokenLayer, // The base class for objects created in teh factory
+		TokenLayer, // The base class for objects created in the factory
 		std::string, // Identifier type
 		Loki::TL::MakeTypelist< boost::shared_ptr<TokenSource> >::Result
 		// TokenLayer constructor arguments' types specification
