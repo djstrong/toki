@@ -41,8 +41,10 @@ void WhitespaceTokenizer::eatWhitespace()
 
 Token* WhitespaceTokenizer::getNextToken()
 {
+	if (!us_.hasMoreChars()) {
+		return NULL;
+	}
 	UnicodeString orth;
-
 	UChar u = us_.getNextChar();
 	orth = u;
 	while (us_.hasMoreChars()) {
