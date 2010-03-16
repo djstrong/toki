@@ -23,12 +23,24 @@ public:
 		return orth_;
 	}
 
+	void set_orth(const UnicodeString& new_orth) {
+		orth_ = new_orth;
+	}
+
 	const std::string& type() const {
 		return type_;
 	}
 
+	void set_type(const std::string& new_type) {
+		type_ = new_type;
+	}
+
 	WhitespaceAmount preceeding_whitespace() const {
 		return preceeding_whitespace_;
+	}
+
+	void set_preceeding_whitespace(WhitespaceAmount new_wa) {
+		preceeding_whitespace_ = new_wa;
 	}
 
 	std::string orth_utf8() const;

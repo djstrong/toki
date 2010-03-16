@@ -7,6 +7,9 @@
 
 #include <boost/program_options.hpp>
 
+#include "basicsplitlayer.h"
+#include "combinelayer.h"
+
 void test1()
 {
 	Token tok("arghżźć", "a", Token::WA_None);
@@ -52,6 +55,12 @@ void test1()
 
 int main(int argc, char** argv)
 {
+	boost::shared_ptr<TokenLayer> input_layer;
+
+	TokenLayer* tl = TokenLayer::create("split", input_layer);
+	assert(tl);
+
+
 	std::string input_enc;
 	int bufsize;
 	bool bufget;
