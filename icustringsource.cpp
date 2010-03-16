@@ -1,7 +1,11 @@
 #include "icustringsource.h"
 
 IcuStringSource::IcuStringSource(const UnicodeString& u)
-		: iter_(u)
+	: iter_(u)
+{
+}
+
+IcuStringSource::~IcuStringSource()
 {
 }
 
