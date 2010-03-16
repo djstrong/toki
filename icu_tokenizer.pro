@@ -27,4 +27,5 @@ SOURCES += token.cpp \
 LIBS += -licuuc \
     -licuio \
     -lloki \
-    -lboost_program_options-mt
+    -lboost_program_options-mt \
+    -lclaw_configuration_file

@@ -1,4 +1,5 @@
 #include "tokenizer.h"
+#include "token.h"
 #include "icustreamwrapper.h"
 #include "icustringsource.h"
 #include <iostream>
@@ -30,12 +31,14 @@ void test1()
 	const char test[] = "ŻŻŻas żźŻŹół  Ę  \nxx\n\nZżźŻŹ \n";
 	IcuStringSource iss(UnicodeString::fromUTF8(test));
 	Tokenizer tkz(iss);
+	tkz.parse_configuration_file("config.ini");
 	tkz.debug_tokenize();
 
 	std::stringstream ss4;
 	ss4 << test;
 	IcuStreamWrapper isw2(ss4, 1);
 	Tokenizer tkz2(isw2);
+	tkz2.parse_configuration_file("config.ini");
 	tkz2.debug_tokenize();
 
 	std::stringstream ss3;
@@ -55,6 +58,7 @@ void test1()
 
 int main(int argc, char** argv)
 {
+	test1();
 	boost::shared_ptr<TokenLayer> input_layer;
 
 	TokenLayer* tl = TokenLayer::create("split", input_layer);

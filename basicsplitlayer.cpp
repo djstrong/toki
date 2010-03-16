@@ -1,4 +1,5 @@
 #include "basicsplitlayer.h"
+#include "token.h"
 
 BasicSplitLayer::BasicSplitLayer(boost::shared_ptr<TokenSource> lower)
 	: QueueTokenLayer(lower)
@@ -8,8 +9,9 @@ BasicSplitLayer::BasicSplitLayer(boost::shared_ptr<TokenSource> lower)
 void BasicSplitLayer::prepareMoreTokens()
 {
 	Token* t = lower_->getNextToken();
-	// do stuff with t, split etc
 	if (t) {
+		// do stuff with t, split etc
+		t->set_orth(t->orth() + "!!!");
 		enqueueOutputToken(t);
 	}
 }
