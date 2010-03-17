@@ -8,7 +8,7 @@ BasicSplitLayer::BasicSplitLayer(TokenSource* input)
 
 void BasicSplitLayer::prepareMoreTokens()
 {
-	Token* t = input_->getNextToken();
+	Token* t = getTokenFromInput();
 	if (t) {
 		// do stuff with t, split etc
 		t->set_orth(t->orth() + "!!!");

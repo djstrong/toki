@@ -70,6 +70,9 @@ public:
 	static bool register_layer(const std::string& class_id);
 
 protected:
+	virtual Token* getTokenFromInput();
+
+private:
 	/**
 	 * Pointer to the source TokenSource (e.g. a layer). No ownership.
 	 */

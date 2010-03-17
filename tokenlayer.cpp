@@ -13,3 +13,8 @@ TokenLayer* TokenLayer::create(std::string class_id, TokenSource* input)
 {
 	return TokenLayerFactory::Instance().CreateObject(class_id, input);
 }
+
+Token* TokenLayer::getTokenFromInput()
+{
+	return input_->getNextToken();
+}

@@ -8,9 +8,9 @@ CombineLayer::CombineLayer(TokenSource* input)
 
 void CombineLayer::prepareMoreTokens()
 {
-	Token* t1 = input_->getNextToken();
+	Token* t1 = getTokenFromInput();
 	if (t1) {
-		Token* t2 = input_->getNextToken();
+		Token* t2 = getTokenFromInput();
 		if (t2) {
 			t1->set_orth(t1->orth() + t2->orth());
 			delete t2;

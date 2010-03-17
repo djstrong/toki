@@ -10,7 +10,8 @@ HEADERS += token.h \
     combinelayer.h \
     tokensource.h \
     whitespacetokenizer.h \
-    config.h
+    config.h \
+    bufferedtokenlayer.h
 SOURCES += token.cpp \
     main.cpp \
     tokenizer.cpp \
@@ -23,7 +24,8 @@ SOURCES += token.cpp \
     combinelayer.cpp \
     tokensource.cpp \
     whitespacetokenizer.cpp \
-    config.cpp
+    config.cpp \
+    bufferedtokenlayer.cpp
 LIBS += -licuuc \
     -licuio \
     -lloki \
@@ -33,4 +35,3 @@ CONFIG += link_pkgconfig
 PKGCONFIG += libxml++-2.6
 INCLUDEPATH += /usr/local/include
 DEPENDPATH += /usr/local/lib
-
