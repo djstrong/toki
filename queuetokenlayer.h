@@ -4,7 +4,7 @@
 #include "tokenlayer.h"
 
 #include <queue>
-
+//TODO rename OutputQueue...
 /**
  * A base class for queue-based token layers that work by consuming tokens from
  * the source, processing them, and adding processed tokens to an output queue.
@@ -13,7 +13,7 @@ class QueueTokenLayer : public TokenLayer
 {
 public:
 	/// Consructor
-	QueueTokenLayer(boost::shared_ptr<TokenSource> lower);
+	QueueTokenLayer(TokenSource* lower);
 
 	/// Destructor
 	~QueueTokenLayer();

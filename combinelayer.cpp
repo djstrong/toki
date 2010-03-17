@@ -1,7 +1,7 @@
 #include "combinelayer.h"
 #include "token.h"
 
-CombineLayer::CombineLayer(boost::shared_ptr<TokenSource> lower)
+CombineLayer::CombineLayer(TokenSource* lower)
 	: QueueTokenLayer(lower)
 {
 }

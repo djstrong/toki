@@ -3,6 +3,7 @@
 #include "whitespacetokenizer.h"
 
 #include <claw/configuration_file.hpp>
+#include <libxml++/libxml++.h>
 
 #include <unicode/ucnv.h>
 #include <unicode/uchar.h>
@@ -19,11 +20,10 @@ Tokenizer::Tokenizer(UnicodeSource& us)
 
 Tokenizer::~Tokenizer()
 {
-}
-
-Token* Tokenizer::getNextToken()
-{
-	return layers_.back()->getNextToken();
+	for (size_t i = 0; i < layers_.size(); ++i) {
+		delete layers_[i];
+	}
+	delete source_;
 }
 
 void Tokenizer::parse_configuration_file(const std::string &fn)
@@ -44,18 +44,18 @@ void Tokenizer::parse_configuration(std::istream& s)
 	while (i != end) {
 		layer_names.push_back(*i);
 		std::string layer_class = cfg("layer_" + *i, "class");
-		boost::shared_ptr<TokenSource> ptr(previous);
 		TokenLayer* layer;
 		try {
-			layer = TokenLayer::create(layer_class, ptr);
-		} catch (Loki::DefaultFactoryError<std::string, TokenLayer>::Exception) {
-			std::cerr << "Bad layer class ID :" << layer_class
-				<< " (" << *i << ")\n";
+			layer = TokenLayer::create(layer_class, previous);
+			previous = layer;
+			layers_.push_back(layer);
+		} catch (TokenLayerFactoryException) {
+			std::cerr << "Bad layer class ID " << layer_class
+				<< ". Layer with id " << *i << " ignored.\n";
 		}
-		previous = layer;
-		layers_.push_back(layer);
 		i++;
 	}
+
 }
 
 void Tokenizer::parse_configuration(const std::string& s)
@@ -63,6 +63,18 @@ void Tokenizer::parse_configuration(const std::string& s)
 	std::stringstream ss;
 	ss << s;
 	parse_configuration(ss);
+}
+
+Token* Tokenizer::getNextToken()
+{
+	return layers_.back()->getNextToken();
+}
+
+void Tokenizer::reset()
+{
+	for (size_t i = 0; i < layers_.size(); ++i) {
+		layers_[i]->reset();
+	}
 }
 
 void Tokenizer::debug_tokenize()

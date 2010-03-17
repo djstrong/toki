@@ -27,5 +27,10 @@ SOURCES += token.cpp \
 LIBS += -licuuc \
     -licuio \
     -lloki \
-    -lboost_program_options-mt \
+    -lboost_program_options \
     -lclaw_configuration_file
+CONFIG += link_pkgconfig
+PKGCONFIG += libxml++-2.6
+INCLUDEPATH += /usr/local/include
+DEPENDPATH += /usr/local/lib
+

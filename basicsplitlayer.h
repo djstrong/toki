@@ -6,7 +6,7 @@
 class BasicSplitLayer : public QueueTokenLayer
 {
 public:
-	BasicSplitLayer(boost::shared_ptr<TokenSource> lower);
+	BasicSplitLayer(TokenSource* lower);
 
 	static bool registered;
 

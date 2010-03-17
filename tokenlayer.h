@@ -3,7 +3,6 @@
 
 #include "tokensource.h"
 
-#include <boost/shared_ptr.hpp>
 #include <boost/utility.hpp>
 #include <loki/Factory.h>
 #include <loki/Singleton.h>
@@ -29,7 +28,7 @@ public:
 	 * The constructor.
 	 * @param lower The token source this layer will process tokens from.
 	 */
-	TokenLayer(boost::shared_ptr<TokenSource> lower);
+	TokenLayer(TokenSource* lower);
 
 	/// The destructor
 	virtual ~TokenLayer();
@@ -37,17 +36,18 @@ public:
 	/**
 	 * Getter for the used source.
 	 */
-	boost::shared_ptr<TokenSource> getSource();
+	TokenSource* getSource(); //TODO rename -- lower?
 
 	/**
 	 * Reset this layer's state so when a token is requested it will start over,
 	 * processing tokens from the underlying source just like it was just
 	 * constructed.
+	 * It does *NOT* automatically call reset() on the lower layer / source.
 	 *
 	 * Derived classes should override this to maintain this requirement, and
 	 * always call the parent class' reset().
 	 */
-	virtual void reset() = 0;
+	virtual void reset() = 0; //add impl
 
 	/**
 	 * Factory interface for creating layers from string identifiers
@@ -59,7 +59,7 @@ public:
 	 * @param lower the underlying layer to pass to the layer's constructor
 	 */
 	static TokenLayer* create(const std::string class_id,
-	                          boost::shared_ptr<TokenSource> lower);
+	                          TokenSource* lower);
 
 	/**
 	 * Convenience template for registering TokenLayer derived classes.
@@ -69,9 +69,9 @@ public:
 
 protected:
 	/**
-	 * Pointer to the source TokenSource (e.g. a layer)
+	 * Pointer to the source TokenSource (e.g. a layer). No ownership.
 	 */
-	boost::shared_ptr<TokenSource> lower_;
+	TokenSource* lower_;
 };
 
 /**
@@ -83,7 +83,7 @@ typedef Loki::SingletonHolder<
 	Loki::Factory<
 		TokenLayer, // The base class for objects created in the factory
 		std::string, // Identifier type
-		Loki::TL::MakeTypelist< boost::shared_ptr<TokenSource> >::Result
+		Loki::TL::MakeTypelist< TokenSource* >::Result
 		// TokenLayer constructor arguments' types specification
 	>,
 	Loki::CreateUsingNew, // Default, needed to change the item below
@@ -91,12 +91,17 @@ typedef Loki::SingletonHolder<
 >
 TokenLayerFactory;
 
+typedef Loki::DefaultFactoryError<
+	std::string, TokenLayer
+>::Exception
+TokenLayerFactoryException;
+
 /**
  * Convenience template TokenLayer creation function
  */
 template <typename T>
 inline
-T* LayerCreator(boost::shared_ptr<TokenSource> lower)
+T* LayerCreator(TokenSource* lower)
 {
 	return new T(lower);
 }

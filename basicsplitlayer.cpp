@@ -1,7 +1,7 @@
 #include "basicsplitlayer.h"
 #include "token.h"
 
-BasicSplitLayer::BasicSplitLayer(boost::shared_ptr<TokenSource> lower)
+BasicSplitLayer::BasicSplitLayer(TokenSource* lower)
 	: QueueTokenLayer(lower)
 {
 }

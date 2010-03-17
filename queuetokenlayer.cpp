@@ -2,7 +2,7 @@
 #include "token.h"
 #include <cassert>
 
-QueueTokenLayer::QueueTokenLayer(boost::shared_ptr<TokenSource> lower)
+QueueTokenLayer::QueueTokenLayer(TokenSource* lower)
 	: TokenLayer(lower), queue_()
 {
 }

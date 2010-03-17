@@ -38,6 +38,7 @@ void test1()
 	ss4 << test;
 	IcuStreamWrapper isw2(ss4, 1);
 	Tokenizer tkz2(isw2);
+
 	tkz2.parse_configuration_file("config.ini");
 	tkz2.debug_tokenize();
 
@@ -59,7 +60,7 @@ void test1()
 int main(int argc, char** argv)
 {
 	test1();
-	boost::shared_ptr<TokenLayer> input_layer;
+	TokenSource* input_layer(0);
 
 	TokenLayer* tl = TokenLayer::create("split", input_layer);
 	assert(tl);

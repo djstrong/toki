@@ -25,6 +25,8 @@ public:
 
 	Token* getNextToken();
 
+	void reset();
+
 	void debug_tokenize();
 
 private:
