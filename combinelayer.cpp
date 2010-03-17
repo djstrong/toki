@@ -1,16 +1,16 @@
 #include "combinelayer.h"
 #include "token.h"
 
-CombineLayer::CombineLayer(TokenSource* lower)
-	: QueueTokenLayer(lower)
+CombineLayer::CombineLayer(TokenSource* input)
+	: QueueTokenLayer(input)
 {
 }
 
 void CombineLayer::prepareMoreTokens()
 {
-	Token* t1 = lower_->getNextToken();
+	Token* t1 = input_->getNextToken();
 	if (t1) {
-		Token* t2 = lower_->getNextToken();
+		Token* t2 = input_->getNextToken();
 		if (t2) {
 			t1->set_orth(t1->orth() + t2->orth());
 			delete t2;

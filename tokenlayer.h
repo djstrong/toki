@@ -9,8 +9,9 @@
 
 
 /**
- * A token layer processes tokens form a source and allows getting the processed
- * tokens, so a layer is a token source itself.
+ * A token layer processes tokens from some input source (TokenSource) and
+ * allows getting the processed tokens, so a layer is a token source itself.
+ * This allows stacking -- or layering -- TokenLayers.
  *
  * Layers are designed to be dynamically created by a factory based on unique
  * string class identifires. To register a derived Layer class, add a static
@@ -26,23 +27,24 @@ class TokenLayer : public TokenSource, private boost::noncopyable
 public:
 	/**
 	 * The constructor.
-	 * @param lower The token source this layer will process tokens from.
+	 * @param input The token source this layer will process tokens from.
 	 */
-	TokenLayer(TokenSource* lower);
+	TokenLayer(TokenSource* input);
 
 	/// The destructor
 	virtual ~TokenLayer();
 
 	/**
-	 * Getter for the used source.
+	 * Getter for the input source.
 	 */
-	TokenSource* getSource(); //TODO rename -- lower?
+	TokenSource* getInput();
 
 	/**
 	 * Reset this layer's state so when a token is requested it will start over,
-	 * processing tokens from the underlying source just like it was just
+	 * processing tokens from the input source just like it was just
 	 * constructed.
-	 * It does *NOT* automatically call reset() on the lower layer / source.
+	 *
+	 * Note that It does *NOT* automatically call reset() on the input source.
 	 *
 	 * Derived classes should override this to maintain this requirement, and
 	 * always call the parent class' reset().
@@ -56,10 +58,10 @@ public:
 	 * to the TokenLayerFactory instance.
 	 *
 	 * @param class_id the unique class identifier
-	 * @param lower the underlying layer to pass to the layer's constructor
+	 * @param input the input source to pass to the layer's constructor
 	 */
 	static TokenLayer* create(const std::string class_id,
-	                          TokenSource* lower);
+	                          TokenSource* input);
 
 	/**
 	 * Convenience template for registering TokenLayer derived classes.
@@ -71,7 +73,7 @@ protected:
 	/**
 	 * Pointer to the source TokenSource (e.g. a layer). No ownership.
 	 */
-	TokenSource* lower_;
+	TokenSource* input_;
 };
 
 /**
@@ -91,6 +93,9 @@ typedef Loki::SingletonHolder<
 >
 TokenLayerFactory;
 
+/**
+ * Convenience typedef for the exception type the factory throws
+ */
 typedef Loki::DefaultFactoryError<
 	std::string, TokenLayer
 >::Exception
@@ -101,9 +106,9 @@ TokenLayerFactoryException;
  */
 template <typename T>
 inline
-T* LayerCreator(TokenSource* lower)
+T* LayerCreator(TokenSource* input)
 {
-	return new T(lower);
+	return new T(input);
 }
 
 template <typename T>

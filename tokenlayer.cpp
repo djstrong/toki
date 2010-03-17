@@ -1,7 +1,7 @@
 #include "tokenlayer.h"
 
-TokenLayer::TokenLayer(TokenSource* lower)
-	: lower_(lower)
+TokenLayer::TokenLayer(TokenSource* input)
+	: input_(input)
 {
 }
 
@@ -9,7 +9,7 @@ TokenLayer::~TokenLayer()
 {
 }
 
-TokenLayer* TokenLayer::create(std::string class_id, TokenSource* lower)
+TokenLayer* TokenLayer::create(std::string class_id, TokenSource* input)
 {
-	return TokenLayerFactory::Instance().CreateObject(class_id, lower);
+	return TokenLayerFactory::Instance().CreateObject(class_id, input);
 }

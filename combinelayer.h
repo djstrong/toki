@@ -6,7 +6,7 @@
 class CombineLayer : public QueueTokenLayer
 {
 public:
-	CombineLayer(TokenSource* lower);
+	CombineLayer(TokenSource* input);
 
 	static bool registered;
 

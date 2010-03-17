@@ -2,8 +2,8 @@
 #include "token.h"
 #include <cassert>
 
-QueueTokenLayer::QueueTokenLayer(TokenSource* lower)
-	: TokenLayer(lower), queue_()
+QueueTokenLayer::QueueTokenLayer(TokenSource* input)
+	: TokenLayer(input), queue_()
 {
 }
 

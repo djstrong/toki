@@ -13,7 +13,7 @@ class QueueTokenLayer : public TokenLayer
 {
 public:
 	/// Consructor
-	QueueTokenLayer(TokenSource* lower);
+	QueueTokenLayer(TokenSource* input);
 
 	/// Destructor
 	~QueueTokenLayer();

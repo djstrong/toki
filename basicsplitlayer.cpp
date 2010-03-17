@@ -1,14 +1,14 @@
 #include "basicsplitlayer.h"
 #include "token.h"
 
-BasicSplitLayer::BasicSplitLayer(TokenSource* lower)
-	: QueueTokenLayer(lower)
+BasicSplitLayer::BasicSplitLayer(TokenSource* input)
+	: QueueTokenLayer(input)
 {
 }
 
 void BasicSplitLayer::prepareMoreTokens()
 {
-	Token* t = lower_->getNextToken();
+	Token* t = input_->getNextToken();
 	if (t) {
 		// do stuff with t, split etc
 		t->set_orth(t->orth() + "!!!");

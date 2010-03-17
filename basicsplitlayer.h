@@ -6,7 +6,7 @@
 class BasicSplitLayer : public QueueTokenLayer
 {
 public:
-	BasicSplitLayer(TokenSource* lower);
+	BasicSplitLayer(TokenSource* input);
 
 	static bool registered;
 
