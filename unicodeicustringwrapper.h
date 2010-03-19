@@ -9,7 +9,7 @@
  * A thin wrapper around UnicodeString (using aStringCharacterIterator) to adapt
  * it to the UnicodeSource interface.
  */
-class IcuStringSource : public UnicodeSource
+class UnicodeIcuStringWrapper : public UnicodeSource
 {
 public:
 	/**
@@ -17,10 +17,10 @@ public:
 	 *
 	 * @param u The Unicode string to wrap. The string is copied.
 	 */
-	IcuStringSource(const UnicodeString& u);
+	UnicodeIcuStringWrapper(const UnicodeString& u);
 
 	/// The destructor
-	~IcuStringSource();
+	~UnicodeIcuStringWrapper();
 
 	/// Override from UnicodeSource
 	UChar peekNextChar();

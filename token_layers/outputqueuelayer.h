@@ -1,22 +1,21 @@
-#ifndef QUEUETOKENLAYER_H
-#define QUEUETOKENLAYER_H
+#ifndef OUTPUTQUEUELAYER_H
+#define OUTPUTQUEUELAYER_H
 
 #include "tokenlayer.h"
 
 #include <queue>
-//TODO rename OutputQueue...
 /**
  * A base class for queue-based token layers that work by consuming tokens from
  * the source, processing them, and adding processed tokens to an output queue.
  */
-class QueueTokenLayer : public TokenLayer
+class OutputQueueLayer : public TokenLayer
 {
 public:
 	/// Consructor
-	QueueTokenLayer(TokenSource* input, const Properties& props);
+	OutputQueueLayer(TokenSource* input, const Properties& props);
 
 	/// Destructor
-	~QueueTokenLayer();
+	~OutputQueueLayer();
 
 	/**
 	 * TokenSource override. Returns the front element from the queue if any,
@@ -59,4 +58,4 @@ private:
 	std::queue<Token*> queue_;
 };
 
-#endif // QUEUETOKENLAYER_H
+#endif // OUTPUTQUEUELAYER_H

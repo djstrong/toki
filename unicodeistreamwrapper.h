@@ -13,7 +13,7 @@
  * Note that this class will read ahead from the stream and maintain a buffer
  * of characters to return.
  */
-class IcuStreamWrapper : public UnicodeSource
+class UnicodeIstreamWrapper : public UnicodeSource
 {
 public:
 	/**
@@ -26,11 +26,11 @@ public:
 	 *                       terribly inefficient, but everything will work even
 	 *                       with a 1 byte buffer.
 	 */
-	IcuStreamWrapper(std::istream& is, int buf_size = 200,
+	UnicodeIstreamWrapper(std::istream& is, int buf_size = 200,
 	                 const char* input_encoding = "UTF8");
 
 	/// The destructor.
-	~IcuStreamWrapper();
+	~UnicodeIstreamWrapper();
 
 	/// Override from UnicodeSource
 	UChar peekNextChar();

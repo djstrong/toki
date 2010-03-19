@@ -2,7 +2,7 @@
 #include "token.h"
 
 BasicSplitLayer::BasicSplitLayer(TokenSource* input, const Properties& props)
-	: QueueTokenLayer(input, props)
+	: OutputQueueLayer(input, props)
 {
 }
 

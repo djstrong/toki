@@ -1,8 +1,9 @@
-#include "icustreamwrapper.h"
+#include "unicodeistreamwrapper.h"
 #include <iostream>
 
-IcuStreamWrapper::IcuStreamWrapper(std::istream& is, int buf_size /* = 200 */,
-                                   const char* input_encoding /* = "UTF8" */)
+UnicodeIstreamWrapper::UnicodeIstreamWrapper(std::istream& is,
+		int buf_size /* = 200 */,
+		const char* input_encoding /* = "UTF8" */)
 	: is_(is)
 	, converter_(NULL)
 	, buf_size_(buf_size)
@@ -15,14 +16,14 @@ IcuStreamWrapper::IcuStreamWrapper(std::istream& is, int buf_size /* = 200 */,
 	converter_ = ucnv_open(input_encoding, &err);
 }
 
-IcuStreamWrapper::~IcuStreamWrapper()
+UnicodeIstreamWrapper::~UnicodeIstreamWrapper()
 {
 	delete [] source_buf_;
 	delete [] target_buf_;
 	ucnv_close(converter_);
 }
 
-UChar IcuStreamWrapper::peekNextChar()
+UChar UnicodeIstreamWrapper::peekNextChar()
 {
 	ensure_more();
 	if (target_ > out_) {
@@ -33,7 +34,7 @@ UChar IcuStreamWrapper::peekNextChar()
 	}
 }
 
-UChar IcuStreamWrapper::getNextChar()
+UChar UnicodeIstreamWrapper::getNextChar()
 {
 	ensure_more();
 	if (target_ > out_) {
@@ -44,7 +45,7 @@ UChar IcuStreamWrapper::getNextChar()
 	}
 }
 
-UnicodeString IcuStreamWrapper::getBuffer()
+UnicodeString UnicodeIstreamWrapper::getBuffer()
 {
 	ensure_more();
 	UnicodeString ret(out_, target_ - out_);
@@ -52,13 +53,13 @@ UnicodeString IcuStreamWrapper::getBuffer()
 	return ret;
 }
 
-bool IcuStreamWrapper::hasMoreChars()
+bool UnicodeIstreamWrapper::hasMoreChars()
 {
 	ensure_more();
 	return target_ > out_;
 }
 
-int IcuStreamWrapper::more()
+int UnicodeIstreamWrapper::more()
 {
 	is_.read(source_buf_, buf_size_);
 	int buf_read = is_.gcount();
@@ -81,7 +82,7 @@ int IcuStreamWrapper::more()
 	return buf_read;
 }
 
-void IcuStreamWrapper::ensure_more()
+void UnicodeIstreamWrapper::ensure_more()
 {
 	//keep calling more() as long as there's nothing ready in the target buffer
 	//and it reads something from the inut stream.

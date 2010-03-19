@@ -1,33 +1,32 @@
 HEADERS += token.h \
     tokenizer.h \
     unicodesource.h \
-    icustreamwrapper.h \
-    icustringsource.h \
+    unicodeistreamwrapper.h \
+    unicodeicustringwrapper.h \
     tokenlayer.h \
-    queuetokenlayer.h \
-    tokenlayerfactory.h \
-    basicsplitlayer.h \
-    combinelayer.h \
+    token_layers/outputqueuelayer.h \
+    token_layers/basicsplitlayer.h \
+    token_layers/combinelayer.h \
     tokensource.h \
     whitespacetokenizer.h \
     config.h \
-    bufferedtokenlayer.h \
-    appendlayer.h
+    token_layers/inputbufferlayer.h \
+    token_layers/appendlayer.h
 SOURCES += token.cpp \
     main.cpp \
     tokenizer.cpp \
     unicodesource.cpp \
-    icustreamwrapper.cpp \
-    icustringsource.cpp \
+    unicodeistreamwrapper.cpp \
+    unicodeicustringwrapper.cpp \
     tokenlayer.cpp \
-    queuetokenlayer.cpp \
-    basicsplitlayer.cpp \
-    combinelayer.cpp \
+    token_layers/outputqueuelayer.cpp \
+    token_layers/basicsplitlayer.cpp \
+    token_layers/combinelayer.cpp \
     tokensource.cpp \
     whitespacetokenizer.cpp \
     config.cpp \
-    bufferedtokenlayer.cpp \
-    appendlayer.cpp
+    token_layers/inputbufferlayer.cpp \
+    token_layers/appendlayer.cpp
 LIBS += -licuuc \
     -licuio \
     -lloki \

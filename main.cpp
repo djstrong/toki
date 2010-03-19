@@ -1,15 +1,12 @@
 #include "tokenizer.h"
 #include "token.h"
-#include "icustreamwrapper.h"
-#include "icustringsource.h"
+#include "unicodeistreamwrapper.h"
+#include "unicodeicustringwrapper.h"
 #include <iostream>
 #include <sstream>
 #include <unicode/ustream.h>
 
 #include <boost/program_options.hpp>
-
-#include "basicsplitlayer.h"
-#include "combinelayer.h"
 
 void test1()
 {
@@ -29,14 +26,14 @@ void test1()
 		std::cout << us << "!\n";
 	}
 	const char test[] = "ŻŻŻas żźŻŹół  Ę  \nxx\n\nZżźŻŹ \n";
-	IcuStringSource iss(UnicodeString::fromUTF8(test));
+	UnicodeIcuStringWrapper iss(UnicodeString::fromUTF8(test));
 	Tokenizer tkz(iss);
 	tkz.parse_configuration_file("config.ini");
 	tkz.debug_tokenize();
 
 	std::stringstream ss4;
 	ss4 << test;
-	IcuStreamWrapper isw2(ss4, 1);
+	UnicodeIstreamWrapper isw2(ss4, 1);
 	Tokenizer tkz2(isw2);
 
 	tkz2.parse_configuration_file("config.ini");
@@ -44,7 +41,7 @@ void test1()
 
 	std::stringstream ss3;
 	ss3 << "zfg ążÓŁx";
-	IcuStreamWrapper isw(ss3, 1);
+	UnicodeIstreamWrapper isw(ss3, 1);
 	std::cout << ">>";
 	while (isw.hasMoreChars()) {
 		//UChar u = isw.getNextChar();
@@ -100,7 +97,7 @@ int main(int argc, char** argv)
 
 	UnicodeString us;
 	if (bufsize > 0) {
-		IcuStreamWrapper isw(std::cin, bufsize, input_enc.c_str());
+		UnicodeIstreamWrapper isw(std::cin, bufsize, input_enc.c_str());
 		if (bufget) {
 			while (isw.hasMoreChars()) {
 				us += isw.getBuffer();
@@ -114,7 +111,7 @@ int main(int argc, char** argv)
 	} else {
 		std::stringstream ss;
 		ss << std::cin.rdbuf();
-		IcuStringSource iss(UnicodeString::fromUTF8(ss.str()));
+		UnicodeIcuStringWrapper iss(UnicodeString::fromUTF8(ss.str()));
 		while (iss.hasMoreChars()) {
 			UChar u = iss.getNextChar();
 			us += u;

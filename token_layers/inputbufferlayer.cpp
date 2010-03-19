@@ -1,17 +1,17 @@
-#include "bufferedtokenlayer.h"
+#include "inputbufferlayer.h"
 #include "token.h"
 
-BufferedTokenLayer::BufferedTokenLayer(TokenSource* input, const Properties& props)
+InputBufferLayer::InputBufferLayer(TokenSource* input, const Properties& props)
 	: TokenLayer(input, props), buffer_()
 {
 }
 
-BufferedTokenLayer::~BufferedTokenLayer()
+InputBufferLayer::~InputBufferLayer()
 {
 	reset();
 }
 
-void BufferedTokenLayer::reset()
+void InputBufferLayer::reset()
 {
 	while (!buffer_.empty()) {
 		delete buffer_.front();
@@ -19,7 +19,7 @@ void BufferedTokenLayer::reset()
 	}
 }
 
-Token* BufferedTokenLayer::getTokenFromInput()
+Token* InputBufferLayer::getTokenFromInput()
 {
 	if (buffer_.empty()) {
 		return TokenLayer::getTokenFromInput();
@@ -30,7 +30,7 @@ Token* BufferedTokenLayer::getTokenFromInput()
 	}
 }
 
-void BufferedTokenLayer::putBackToken(Token *t)
+void InputBufferLayer::putBackToken(Token *t)
 {
 	buffer_.push(t);
 }

@@ -1,9 +1,9 @@
 #ifndef COMBINELAYER_H
 #define COMBINELAYER_H
 
-#include "queuetokenlayer.h"
+#include "outputqueuelayer.h"
 
-class CombineLayer : public QueueTokenLayer
+class CombineLayer : public OutputQueueLayer
 {
 public:
 	CombineLayer(TokenSource* input, const Properties& props);

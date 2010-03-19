@@ -1,9 +1,9 @@
 #ifndef BASICSPLITLAYER_H
 #define BASICSPLITLAYER_H
 
-#include "queuetokenlayer.h"
+#include "outputqueuelayer.h"
 
-class BasicSplitLayer : public QueueTokenLayer
+class BasicSplitLayer : public OutputQueueLayer
 {
 public:
 	BasicSplitLayer(TokenSource* input, const Properties& props);

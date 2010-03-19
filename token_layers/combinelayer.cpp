@@ -2,7 +2,7 @@
 #include "token.h"
 
 CombineLayer::CombineLayer(TokenSource* input, const Properties& props)
-	: QueueTokenLayer(input, props)
+	: OutputQueueLayer(input, props)
 {
 }
 

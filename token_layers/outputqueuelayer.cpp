@@ -1,24 +1,24 @@
-#include "queuetokenlayer.h"
+#include "outputqueuelayer.h"
 #include "token.h"
 #include <cassert>
 
-QueueTokenLayer::QueueTokenLayer(TokenSource* input, const Properties& props)
+OutputQueueLayer::OutputQueueLayer(TokenSource* input, const Properties& props)
 	: TokenLayer(input, props), queue_()
 {
 }
 
-QueueTokenLayer::~QueueTokenLayer()
+OutputQueueLayer::~OutputQueueLayer()
 {
 	clear_queue();
 }
 
-void QueueTokenLayer::enqueueOutputToken(Token *t)
+void OutputQueueLayer::enqueueOutputToken(Token *t)
 {
 	assert(t);
 	queue_.push(t);
 }
 
-Token* QueueTokenLayer::getNextToken()
+Token* OutputQueueLayer::getNextToken()
 {
 	if (queue_.empty()) {
 		prepareMoreTokens();
@@ -32,7 +32,7 @@ Token* QueueTokenLayer::getNextToken()
 	}
 }
 
-void QueueTokenLayer::clear_queue()
+void OutputQueueLayer::clear_queue()
 {
 	while (!queue_.empty()) {
 		Token* t = queue_.front();
@@ -41,7 +41,7 @@ void QueueTokenLayer::clear_queue()
 	}
 }
 
-void QueueTokenLayer::reset()
+void OutputQueueLayer::reset()
 {
 	clear_queue();
 }

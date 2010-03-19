@@ -7,8 +7,8 @@
 #include "tokenlayer.h"
 #include "unicodesource.h"
 #include "tokensource.h"
-#include "icustreamwrapper.h"
-#include "icustringsource.h"
+#include "unicodeistreamwrapper.h"
+#include "unicodeicustringwrapper.h"
 
 class Tokenizer : public TokenSource
 {
