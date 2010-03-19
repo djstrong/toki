@@ -16,26 +16,24 @@ TokenizerConfig::TokenizerConfig(std::istream &is)
 	boost::property_tree::ini_parser::read_ini(is, props_);
 }
 
-TokenizerConfig& TokenizerConfig::append(const TokenizerConfig &other)
-{
-	typedef const boost::property_tree::ptree::value_type& iter_t;
-	typedef boost::optional< boost::property_tree::ptree & > maybe_ptree;
+namespace {
+	using boost::property_tree::ptree;
 
-	BOOST_FOREACH (iter_t outer, other.props()) {
-		maybe_ptree child;
-		if ((child = props_.get_child_optional(outer.first))) {
-			BOOST_FOREACH (iter_t inner, *child) {
-				maybe_ptree inner_child;
-				if ((inner_child = child->get_child_optional(inner.first))) {
-					inner_child->data() = inner.second.data();
-				} else {
-					inner_child->push_back(inner);
-				}
+	void merge_boost_ptrees(ptree& one, const ptree& other) {
+		one.data() = other.data();
+		BOOST_FOREACH( const ptree::value_type& in_other, other) {
+			boost::optional< ptree& > in_one;
+			if ((in_one = one.get_child_optional(in_other.first))) {
+				merge_boost_ptrees(*in_one, in_other.second);
+			} else {
+				one.push_back(in_other);
 			}
-		} else {
-			props_.push_back(outer);
 		}
 	}
+}
 
+TokenizerConfig& TokenizerConfig::append(const TokenizerConfig &other)
+{
+	merge_boost_ptrees(props_, other.props_);
 	return *this;
 }
