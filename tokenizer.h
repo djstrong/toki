@@ -15,6 +15,8 @@ class Tokenizer : public TokenSource
 public:
 	Tokenizer(UnicodeSource& us);
 
+	//DRAFT: Tokenizer(const TokenizerConfig& cfg = TokenizerConfig::Default());
+
 	~Tokenizer();
 
 	void parse_configuration_file(const std::string& fn);

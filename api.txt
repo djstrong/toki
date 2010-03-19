@@ -1,0 +1,13 @@
+TokenizerConfig tg("my_file.ini", append_to_default_config=true)
+tg.append_config("my_other_file.ini"); <--- returns *this
+
+Tokenizer tk(tg);
+
+
+
+----
+
+Tokenizer tk2(TokenizerConfig::CONF_MORFEUSZ)
+Tokenizer tk3(TokenizerConfig::CONF_MORFEUSZ().append_config("my.ini"));
+
+tk2.load_istream(...

@@ -1,8 +1,8 @@
 #include "combinelayer.h"
 #include "token.h"
 
-CombineLayer::CombineLayer(TokenSource* input)
-	: QueueTokenLayer(input)
+CombineLayer::CombineLayer(TokenSource* input, const Properties& props)
+	: QueueTokenLayer(input, props)
 {
 }
 

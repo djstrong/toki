@@ -6,7 +6,7 @@
 class CombineLayer : public QueueTokenLayer
 {
 public:
-	CombineLayer(TokenSource* input);
+	CombineLayer(TokenSource* input, const Properties& props);
 
 	static bool registered;
 

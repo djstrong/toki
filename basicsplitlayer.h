@@ -6,7 +6,7 @@
 class BasicSplitLayer : public QueueTokenLayer
 {
 public:
-	BasicSplitLayer(TokenSource* input);
+	BasicSplitLayer(TokenSource* input, const Properties& props);
 
 	static bool registered;
 

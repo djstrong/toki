@@ -60,10 +60,10 @@ void test1()
 int main(int argc, char** argv)
 {
 	test1();
-	TokenSource* input_layer(0);
+	//TokenSource* input_layer(0);
 
-	TokenLayer* tl = TokenLayer::create("split", input_layer);
-	assert(tl);
+	//TokenLayer* tl = TokenLayer::create("split", input_layer);
+	//assert(tl);
 	return 0;
 
 	std::string input_enc;

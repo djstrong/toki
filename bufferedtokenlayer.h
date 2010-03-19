@@ -7,7 +7,7 @@
 class BufferedTokenLayer : public TokenLayer
 {
 public:
-	BufferedTokenLayer(TokenSource* input);
+	BufferedTokenLayer(TokenSource* input, const Properties& props);
 
 	~BufferedTokenLayer();
 

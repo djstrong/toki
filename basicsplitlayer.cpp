@@ -1,8 +1,8 @@
 #include "basicsplitlayer.h"
 #include "token.h"
 
-BasicSplitLayer::BasicSplitLayer(TokenSource* input)
-	: QueueTokenLayer(input)
+BasicSplitLayer::BasicSplitLayer(TokenSource* input, const Properties& props)
+	: QueueTokenLayer(input, props)
 {
 }
 

@@ -1,8 +1,8 @@
 #include "bufferedtokenlayer.h"
 #include "token.h"
 
-BufferedTokenLayer::BufferedTokenLayer(TokenSource* input)
-	: TokenLayer(input), buffer_()
+BufferedTokenLayer::BufferedTokenLayer(TokenSource* input, const Properties& props)
+	: TokenLayer(input, props), buffer_()
 {
 }
 
