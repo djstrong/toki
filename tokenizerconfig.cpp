@@ -37,3 +37,10 @@ TokenizerConfig& TokenizerConfig::append(const TokenizerConfig &other)
 	merge_boost_ptrees(props_, other.props_);
 	return *this;
 }
+
+void TokenizerConfig::write(const std::string &filename) const
+{
+	boost::property_tree::ini_parser::write_ini(filename + ".ini", props_);
+	boost::property_tree::xml_parser::write_xml(filename + ".xml", props_);
+	boost::property_tree::json_parser::write_json(filename + ".json", props_);
+}

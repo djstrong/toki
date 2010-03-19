@@ -2,11 +2,14 @@
 #include "token.h"
 #include "unicodeistreamwrapper.h"
 #include "unicodeicustringwrapper.h"
+#include "tokenizerconfig.h"
+
 #include <iostream>
 #include <sstream>
 #include <unicode/ustream.h>
 
 #include <boost/program_options.hpp>
+
 
 void test1()
 {
@@ -56,6 +59,10 @@ void test1()
 
 int main(int argc, char** argv)
 {
+	TokenizerConfig global("config.ini");
+	TokenizerConfig user("user.ini");
+	global.append(user);
+	global.write("combined");
 	test1();
 	//TokenSource* input_layer(0);
 

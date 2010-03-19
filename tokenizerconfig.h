@@ -12,11 +12,13 @@ public:
 
 	TokenizerConfig& append(const TokenizerConfig& other);
 
+	void write(const std::string& filename) const;
+
 	const boost::property_tree::ptree& props() const {
 		return props_;
 	}
 
-	static TokenizerConfig Default;
+	static const TokenizerConfig Default;
 
 private:
 	boost::property_tree::ptree props_;
