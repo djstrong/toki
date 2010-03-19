@@ -11,7 +11,8 @@ HEADERS += token.h \
     whitespacetokenizer.h \
     config.h \
     token_layers/inputbufferlayer.h \
-    token_layers/appendlayer.h
+    token_layers/appendlayer.h \
+    tokenizerconfig.h
 SOURCES += token.cpp \
     main.cpp \
     tokenizer.cpp \
@@ -26,7 +27,8 @@ SOURCES += token.cpp \
     whitespacetokenizer.cpp \
     config.cpp \
     token_layers/inputbufferlayer.cpp \
-    token_layers/appendlayer.cpp
+    token_layers/appendlayer.cpp \
+    tokenizerconfig.cpp
 LIBS += -licuuc \
     -licuio \
     -lloki \
