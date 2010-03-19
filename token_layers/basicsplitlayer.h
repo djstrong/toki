@@ -2,6 +2,8 @@
 #define BASICSPLITLAYER_H
 
 #include "outputqueuelayer.h"
+#include <set>
+#include <unicode/utypes.h>
 
 class BasicSplitLayer : public OutputQueueLayer
 {
@@ -12,6 +14,13 @@ public:
 
 protected:
 	void prepareMoreTokens();
+
+private:
+	bool isSplitChar(UChar c);
+
+	std::set<UChar> split_chars_;
+
+	std::string sep_type_;
 };
 
 #endif // BASICSPLITLAYER_H

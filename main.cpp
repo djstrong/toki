@@ -25,7 +25,7 @@ void test1()
 		ss >> us;
 		std::cout << us << "!\n";
 	}
-	const char test[] = "ŻŻŻas żźŻŹół  Ę  \nxx\n\nZżźŻŹ \n";
+	const char test[] = "ŻŻŻas żźŻ.Źół  Ę  \n!xx\n\nZżźŻŹ \n";
 	UnicodeIcuStringWrapper iss(UnicodeString::fromUTF8(test));
 	Tokenizer tkz(iss);
 	tkz.parse_configuration_file("config.ini");
