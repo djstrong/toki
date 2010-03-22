@@ -24,35 +24,35 @@ public:
 	 * will always claim there are no more characters, so getNextToken() will
 	 * just return null.
 	 */
-	Tokenizer(const TokenizerConfig& cfg = TokenizerConfig::Default());
+	Tokenizer(const TokenizerConfig::Cfg& cfg = TokenizerConfig::Default());
 
 	/**
 	 * Constructor shorthand -- start with the given UnicodeSource, and take
 	 * ownership (through a shared pointer).
 	 * @see setInputSource
 	 */
-	Tokenizer(UnicodeSource* input, const TokenizerConfig& cfg = TokenizerConfig::Default());
+	Tokenizer(UnicodeSource* input, const TokenizerConfig::Cfg& cfg = TokenizerConfig::Default());
 
 	/**
 	 * Constructor shorthand -- start with the given UnicodeSource as a shared
 	 * pointer
 	 * @see setInputSource
 	 */
-	Tokenizer(boost::shared_ptr<UnicodeSource> input, const TokenizerConfig& cfg = TokenizerConfig::Default());
+	Tokenizer(boost::shared_ptr<UnicodeSource> input, const TokenizerConfig::Cfg& cfg = TokenizerConfig::Default());
 
 	/**
 	 * Constructor shorthand -- start with the given std::istream. Note no
 	 * ownership is taken and the stream must live long enough.
 	 * @see setInputSource
 	 */
-	Tokenizer(std::istream& is, const TokenizerConfig& cfg = TokenizerConfig::Default());
+	Tokenizer(std::istream& is, const TokenizerConfig::Cfg& cfg = TokenizerConfig::Default());
 
 	/**
 	 * Constructor shorthand -- start with the given UnicodeString, which is
 	 * copied.
 	 * @see setInputSource
 	 */
-	Tokenizer(const UnicodeString& s, const TokenizerConfig& cfg = TokenizerConfig::Default());
+	Tokenizer(const UnicodeString& s, const TokenizerConfig::Cfg& cfg = TokenizerConfig::Default());
 
 	/**
 	 * Destructor

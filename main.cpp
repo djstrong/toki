@@ -57,10 +57,10 @@ void test1()
 
 int main(int argc, char** argv)
 {
-	TokenizerConfig global("config.ini");
-	TokenizerConfig user("user.ini");
-	global.append(user);
-	global.write("combined");
+	TokenizerConfig::Cfg global = TokenizerConfig::fromFile("config.ini");
+	TokenizerConfig::Cfg user = TokenizerConfig::fromFile("user.ini");
+	TokenizerConfig::merge(global, user);
+	TokenizerConfig::write(global, "combined");
 	test1();
 	//TokenSource* input_layer(0);
 

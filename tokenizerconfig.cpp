@@ -6,57 +6,46 @@
 
 #include <boost/foreach.hpp>
 
-TokenizerConfig::TokenizerConfig()
+
+TokenizerConfig::Cfg TokenizerConfig::fromFile(const std::string &filename)
 {
+	TokenizerConfig::Cfg p;
+	boost::property_tree::ini_parser::read_ini(filename, p);
+	return p;
 }
 
-TokenizerConfig::TokenizerConfig(const std::string &filename)
+TokenizerConfig::Cfg TokenizerConfig::fromStream(std::istream &is)
 {
-	boost::property_tree::ini_parser::read_ini(filename, props_);
+	TokenizerConfig::Cfg p;
+	boost::property_tree::ini_parser::read_ini(is, p);
+	return p;
 }
 
-TokenizerConfig::TokenizerConfig(std::istream &is)
+TokenizerConfig::Cfg& TokenizerConfig::merge(TokenizerConfig::Cfg& accu,
+		const TokenizerConfig::Cfg& other)
 {
-	boost::property_tree::ini_parser::read_ini(is, props_);
-}
-
-const TokenizerConfig& child(const std::string& key)
-{
-
-}
-
-namespace {
+	accu.data() = other.data();
 	using boost::property_tree::ptree;
-
-	void merge_boost_ptrees(ptree& one, const ptree& other) {
-		one.data() = other.data();
-		BOOST_FOREACH (const ptree::value_type& in_other, other) {
-			boost::optional< ptree& > in_one;
-			if ((in_one = one.get_child_optional(in_other.first))) {
-				merge_boost_ptrees(*in_one, in_other.second);
-			} else {
-				one.push_back(in_other);
-			}
+	BOOST_FOREACH (const ptree::value_type& in_other, other) {
+		boost::optional< ptree& > in_one;
+		if ((in_one = accu.get_child_optional(in_other.first))) {
+			merge(*in_one, in_other.second);
+		} else {
+			accu.push_back(in_other);
 		}
 	}
+	return accu;
 }
 
-TokenizerConfig& TokenizerConfig::append(const TokenizerConfig &other)
+void TokenizerConfig::write(const Cfg &c, const std::string &filename)
 {
-	merge_boost_ptrees(props_, other.props_);
-	return *this;
+	boost::property_tree::ini_parser::write_ini(filename + ".ini", c);
+	boost::property_tree::xml_parser::write_xml(filename + ".xml", c);
+	boost::property_tree::json_parser::write_json(filename + ".json", c);
 }
 
-void TokenizerConfig::write(const std::string &filename) const
+const TokenizerConfig::Cfg& TokenizerConfig::Default()
 {
-	boost::property_tree::ini_parser::write_ini(filename + ".ini", props_);
-	boost::property_tree::xml_parser::write_xml(filename + ".xml", props_);
-	boost::property_tree::json_parser::write_json(filename + ".json", props_);
-}
-
-
-const TokenizerConfig& TokenizerConfig::Default()
-{
-	static TokenizerConfig cfg("config.ini");
+	static TokenizerConfig::Cfg cfg = TokenizerConfig::fromFile("config.ini");
 	return cfg;
 }

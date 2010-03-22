@@ -15,13 +15,13 @@ public:
 	/**
 	 * Constructor
 	 */
-	WhitespaceTokenizer(const TokenizerConfig& cfg = TokenizerConfig::Default());
+	WhitespaceTokenizer(const TokenizerConfig::Cfg& cfg = TokenizerConfig::Default());
 
 	/**
 	 * Constructor shorthand
 	 * @see Tokenizer::Tokenizer
 	 */
-	WhitespaceTokenizer(UnicodeSource* us, const TokenizerConfig& cfg = TokenizerConfig::Default());
+	WhitespaceTokenizer(UnicodeSource* us, const TokenizerConfig::Cfg& cfg = TokenizerConfig::Default());
 
 	/// TokenSource override
 	Token* getNextToken();

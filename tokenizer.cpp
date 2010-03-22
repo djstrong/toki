@@ -7,31 +7,31 @@
 
 #include <ostream>
 
-Tokenizer::Tokenizer(const TokenizerConfig& /*cfg*/)
+Tokenizer::Tokenizer(const TokenizerConfig::Cfg& /*cfg*/)
 	: TokenSource(), input_()
 {
 	setNullInputSource();
 }
 
-Tokenizer::Tokenizer(UnicodeSource *input, const TokenizerConfig& /*cfg*/)
+Tokenizer::Tokenizer(UnicodeSource *input, const TokenizerConfig::Cfg& /*cfg*/)
 	: TokenSource(), input_()
 {
 	setInputSource(input);
 }
 
-Tokenizer::Tokenizer(boost::shared_ptr<UnicodeSource> input, const TokenizerConfig &/*cfg*/)
+Tokenizer::Tokenizer(boost::shared_ptr<UnicodeSource> input, const TokenizerConfig::Cfg &/*cfg*/)
 	: TokenSource(), input_()
 {
 	setInputSource(input);
 }
 
-Tokenizer::Tokenizer(std::istream &is, const TokenizerConfig &cfg)
+Tokenizer::Tokenizer(std::istream &is, const TokenizerConfig::Cfg &cfg)
 	: TokenSource(), input_()
 {
-	setInputSource(is, cfg.props().get<int>("input_buffer_size", 200));
+	setInputSource(is, cfg.get<int>("input_buffer_size", 200));
 }
 
-Tokenizer::Tokenizer(const UnicodeString &s, const TokenizerConfig &/*cfg*/)
+Tokenizer::Tokenizer(const UnicodeString &s, const TokenizerConfig::Cfg &/*cfg*/)
 	: TokenSource(), input_()
 {
 	setInputSource(s);

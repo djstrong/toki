@@ -5,16 +5,16 @@
 #include <unicode/uchar.h>
 #include <iostream>
 
-WhitespaceTokenizer::WhitespaceTokenizer(const TokenizerConfig &cfg)
+WhitespaceTokenizer::WhitespaceTokenizer(const TokenizerConfig::Cfg &cfg)
 	: Tokenizer(cfg), wa_(Token::WA_None), token_type_()
 {
-	token_type_ = cfg.props().get("append", "t");
+	token_type_ = cfg.get("token_type", "t");
 }
 
-WhitespaceTokenizer::WhitespaceTokenizer(UnicodeSource* us, const TokenizerConfig& cfg)
+WhitespaceTokenizer::WhitespaceTokenizer(UnicodeSource* us, const TokenizerConfig::Cfg& cfg)
 	: Tokenizer(us, cfg), wa_(Token::WA_None)
 {
-	token_type_ = cfg.props().get("append", "t");
+	token_type_ = cfg.get("token_type", "t");
 	eatWhitespace();
 }
 
