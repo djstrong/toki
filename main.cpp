@@ -28,7 +28,7 @@ void test1()
 		ss >> us;
 		std::cout << us << "!\n";
 	}
-	const char test[] = "ŻŻŻas żźŻ.Źół  Ę  \n!xx\n\nZżźŻŹ \n";
+	const char test[] = "(szatan)) )zło(\" ŻŻŻas żźŻ.Źół  Ę  \n!xx\n\nZżźŻŹ \n";
 	LayerTokenizer tkz(UnicodeString::fromUTF8(test));
 	//tkz.parse_configuration_file("config.ini");
 	tkz.debug_tokenize(std::cout);
@@ -38,7 +38,7 @@ void test1()
 	LayerTokenizer tkz2(ss4);
 
 	//tkz2.parse_configuration_file("config.ini");
-	tkz2.debug_tokenize(std::cout);
+	//tkz2.debug_tokenize(std::cout);
 
 	std::stringstream ss3;
 	ss3 << "zfg ążÓŁx";
