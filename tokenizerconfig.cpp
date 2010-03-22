@@ -6,6 +6,10 @@
 
 #include <boost/foreach.hpp>
 
+TokenizerConfig::TokenizerConfig()
+{
+}
+
 TokenizerConfig::TokenizerConfig(const std::string &filename)
 {
 	boost::property_tree::ini_parser::read_ini(filename, props_);
@@ -14,6 +18,11 @@ TokenizerConfig::TokenizerConfig(const std::string &filename)
 TokenizerConfig::TokenizerConfig(std::istream &is)
 {
 	boost::property_tree::ini_parser::read_ini(is, props_);
+}
+
+const TokenizerConfig& child(const std::string& key)
+{
+
 }
 
 namespace {

@@ -6,26 +6,21 @@
 class TokenizerConfig
 {
 public:
-	explicit TokenizerConfig(const std::string &filename);
+	typedef boost::property_tree::ptree Cfg;
 
-	explicit TokenizerConfig(std::istream& is);
+	static Cfg fromFile(const std::string &filename);
 
-	TokenizerConfig& append(const TokenizerConfig& other);
+	static Cfg fromStream(std::istream& is);
 
-	void write(const std::string& filename) const;
+	static Cfg empty();
 
-	const boost::property_tree::ptree& props() const {
-		return props_;
-	}
+	static Cfg& merge(Cfg& accu, const Cfg& other);
 
-	static const TokenizerConfig Default;
+	static void write(const Cfg& c, const std::string& filename);
 
-	TokenizerConfig load_default_config(const std::string& id);
+	static const Cfg& Default();
 
-private:
-	TokenizerConfig();
-
-	boost::property_tree::ptree props_;
+	Cfg load_default_config(const std::string& id);
 };
 
 #endif // TOKENIZERCONFIG_H
