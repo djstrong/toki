@@ -13,7 +13,7 @@ public:
 	static bool registered;
 
 protected:
-	void prepareMoreTokens();
+	void prepareMoreTokens(Token* t);
 
 private:
 	bool isSplitChar(UChar c);

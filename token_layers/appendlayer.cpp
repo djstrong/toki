@@ -12,13 +12,11 @@ Token* AppendLayer::getNextToken()
 {
 	Token* t = getTokenFromInput();
 	if (t) {
-		t->set_orth(t->orth() + append_);
+		if (shouldProcessTokenType(t->type())) {
+			t->set_orth(t->orth() + append_);
+		}
 	}
 	return t;
-}
-
-void AppendLayer::reset()
-{
 }
 
 bool AppendLayer::registered = TokenLayer::register_layer<AppendLayer>("append");

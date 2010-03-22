@@ -21,7 +21,14 @@ void OutputQueueLayer::enqueueOutputToken(Token *t)
 Token* OutputQueueLayer::getNextToken()
 {
 	if (queue_.empty()) {
-		prepareMoreTokens();
+		Token* t = getTokenFromInput();
+		if (t) {
+			if (shouldProcessTokenType(t->type())) {
+				prepareMoreTokens(t);
+			} else {
+				enqueueOutputToken(t);
+			}
+		}
 	}
 	if (queue_.empty()) {
 		return NULL;

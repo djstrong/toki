@@ -11,8 +11,6 @@ public:
 
 	Token* getNextToken();
 
-	void reset();
-
 	static bool registered;
 
 private:

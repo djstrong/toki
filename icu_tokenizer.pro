@@ -15,7 +15,8 @@ HEADERS += token.h \
     tokenizerconfig.h \
     layertokenizer.h \
     nullunicodesource.h \
-    token_layers/affixsplitlayer.h
+    token_layers/affixsplitlayer.h \
+    token_layers/regexpclassifylayer.h
 SOURCES += token.cpp \
     main.cpp \
     tokenizer.cpp \
@@ -34,7 +35,8 @@ SOURCES += token.cpp \
     tokenizerconfig.cpp \
     layertokenizer.cpp \
     nullunicodesource.cpp \
-    token_layers/affixsplitlayer.cpp
+    token_layers/affixsplitlayer.cpp \
+    token_layers/regexpclassifylayer.cpp
 LIBS += -licuuc \
     -licuio \
     -lloki \

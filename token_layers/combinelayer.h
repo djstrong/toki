@@ -11,7 +11,7 @@ public:
 	static bool registered;
 
 protected:
-	void prepareMoreTokens();
+	void prepareMoreTokens(Token* t);
 };
 
 #endif // COMBINELAYER_H

@@ -41,12 +41,16 @@ protected:
 	/**
 	 * Derived classes should override this with code that consumes tokens from
 	 * the source as many times as it is necessary to have at least one token
-	 * ready (=call enqueueOutputToken() at least once).
+	 * ready (=call enqueueOutputToken() at least once). The argument is a
+	 * token grabbed from the input source, guaranteed to be not null. The
+	 * derived class should either delete this token or enqueue it, and may
+	 * call getTokenFromInput to get more tokens if necessary, but should check
+	 * processThisTokenType().
 	 *
 	 * If enqueueOutputToken() is not called, getNextToken will end up returning
 	 * NULL which will signal an end of tokens to the client.
 	 */
-	virtual void prepareMoreTokens() = 0;
+	virtual void prepareMoreTokens(Token* t) = 0;
 
 private:
 	/**

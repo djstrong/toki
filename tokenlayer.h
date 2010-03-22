@@ -9,6 +9,8 @@
 
 #include <boost/property_tree/ptree_fwd.hpp>
 
+#include <set>
+
 /**
  * A token layer processes tokens from some input source (TokenSource) and
  * allows getting the processed tokens, so a layer is a token source itself.
@@ -52,7 +54,7 @@ public:
 	 * Derived classes should override this to maintain this requirement, and
 	 * always call the parent class' reset().
 	 */
-	virtual void reset() = 0; //add impl
+	virtual void reset();
 
 	/**
 	 * Factory interface for creating layers from string identifiers
@@ -76,11 +78,17 @@ public:
 protected:
 	virtual Token* getTokenFromInput();
 
+	bool shouldProcessTokenType(const std::string& t);
+
 private:
 	/**
 	 * Pointer to the source TokenSource (e.g. a layer). No ownership.
 	 */
 	TokenSource* input_;
+
+	std::set<std::string> process_token_types_;
+
+	std::set<std::string> do_not_process_token_types_;
 };
 
 /**
