@@ -28,7 +28,7 @@ void test1()
 		ss >> us;
 		std::cout << us << "!\n";
 	}
-	const char test[] = "(szatan)) )zło(\" ŻŻŻas żźŻ.Źół  Ę  \n!xx\n\nZżźŻŹ \n";
+	const char test[] = "(szatan)) )zło(\" 129.18.20.19 ŻŻŻas żźŻ.Źół  Ę  \n!xx\n\nZżźŻŹ \n";
 	LayerTokenizer tkz(UnicodeString::fromUTF8(test));
 	//tkz.parse_configuration_file("config.ini");
 	tkz.debug_tokenize(std::cout);
