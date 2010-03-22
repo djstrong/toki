@@ -2,26 +2,36 @@
 #define WHITESPACETOKENIZER_H
 
 #include "unicodesource.h"
-#include "tokensource.h"
+#include "tokenizer.h"
 #include "token.h"
 
 /**
  * A simple tokenizer that takes a UnicodeSource (i.e. continous text) and
  * outputs (via getNextToken) tokens split according to whitespace in the text.
  */
-class WhitespaceTokenizer : public TokenSource
+class WhitespaceTokenizer : public Tokenizer
 {
 public:
 	/**
-	 * Constructor.
-	 * @param us The UnicodeSource with the text to tokenize
+	 * Constructor
 	 */
-	WhitespaceTokenizer(UnicodeSource& us);
+	WhitespaceTokenizer(const TokenizerConfig& cfg = TokenizerConfig::Default());
 
 	/**
-	 * TokenSource override
+	 * Constructor shorthand
+	 * @see Tokenizer::Tokenizer
 	 */
+	WhitespaceTokenizer(UnicodeSource* us, const TokenizerConfig& cfg = TokenizerConfig::Default());
+
+	/// TokenSource override
 	Token* getNextToken();
+
+	/// Tokenizer override
+	void reset();
+
+protected:
+	/// Tokenizer override
+	void newInputSource();
 
 private:
 	/**
@@ -31,14 +41,14 @@ private:
 	void eatWhitespace();
 
 	/**
-	 * The source of the text
-	 */
-	UnicodeSource& us_;
-
-	/**
 	 * Stored whitespace amount that preceeds the next token
 	 */
 	Token::WhitespaceAmount wa_;
+
+	/**
+	 * The type of tokens to return
+	 */
+	std::string token_type_;
 };
 
 #endif // WHITESPACETOKENIZER_H

@@ -5,17 +5,35 @@
 #include <unicode/uchar.h>
 #include <iostream>
 
-WhitespaceTokenizer::WhitespaceTokenizer(UnicodeSource& us)
-	: us_(us), wa_(Token::WA_None)
+WhitespaceTokenizer::WhitespaceTokenizer(const TokenizerConfig &cfg)
+	: Tokenizer(cfg), wa_(Token::WA_None), token_type_()
+{
+	token_type_ = cfg.props().get("append", "t");
+}
+
+WhitespaceTokenizer::WhitespaceTokenizer(UnicodeSource* us, const TokenizerConfig& cfg)
+	: Tokenizer(us, cfg), wa_(Token::WA_None)
+{
+	token_type_ = cfg.props().get("append", "t");
+	eatWhitespace();
+}
+
+void WhitespaceTokenizer::reset()
+{
+	wa_ = Token::WA_None;
+}
+
+void WhitespaceTokenizer::newInputSource()
 {
 	eatWhitespace();
 }
 
+
 void WhitespaceTokenizer::eatWhitespace()
 {
 	int ws = 0; int nl = 0;
-	while (us_.hasMoreChars()) {
-		UChar u = us_.peekNextChar();
+	while (input().hasMoreChars()) {
+		UChar u = input_->peekNextChar();
 		if (!u_isUWhiteSpace(u)) {
 			break;
 		} else {
@@ -23,7 +41,7 @@ void WhitespaceTokenizer::eatWhitespace()
 			if (u == 0xA) {
 				nl++;
 			}
-			us_.getNextChar();
+			input().getNextChar();
 		}
 	}
 	if (nl > 1) {
@@ -41,22 +59,22 @@ void WhitespaceTokenizer::eatWhitespace()
 
 Token* WhitespaceTokenizer::getNextToken()
 {
-	if (!us_.hasMoreChars()) {
+	if (!input().hasMoreChars()) {
 		return NULL;
 	}
 	UnicodeString orth;
-	UChar u = us_.getNextChar();
+	UChar u = input().getNextChar();
 	orth = u;
-	while (us_.hasMoreChars()) {
-		u = us_.peekNextChar();
+	while (input().hasMoreChars()) {
+		u = input().peekNextChar();
 		if (u_isUWhiteSpace(u)) {
 			break;
 		} else {
 			orth += u;
-			us_.getNextChar();
+			input().getNextChar();
 		}
 	}
-	Token* t  = new Token(orth, "t", wa_);
+	Token* t  = new Token(orth, token_type_, wa_);
 	eatWhitespace();
 	return t;
 }

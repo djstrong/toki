@@ -23,6 +23,8 @@ public:
 	TokenizerConfig load_default_config(const std::string& id);
 
 private:
+	TokenizerConfig();
+
 	boost::property_tree::ptree props_;
 };
 

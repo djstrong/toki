@@ -1,4 +1,4 @@
-#include "tokenizer.h"
+#include "layertokenizer.h"
 #include "token.h"
 #include "unicodeistreamwrapper.h"
 #include "unicodeicustringwrapper.h"
@@ -29,18 +29,16 @@ void test1()
 		std::cout << us << "!\n";
 	}
 	const char test[] = "ŻŻŻas żźŻ.Źół  Ę  \n!xx\n\nZżźŻŹ \n";
-	UnicodeIcuStringWrapper iss(UnicodeString::fromUTF8(test));
-	Tokenizer tkz(iss);
-	tkz.parse_configuration_file("config.ini");
-	tkz.debug_tokenize();
+	LayerTokenizer tkz(UnicodeString::fromUTF8(test));
+	//tkz.parse_configuration_file("config.ini");
+	tkz.debug_tokenize(std::cout);
 
 	std::stringstream ss4;
 	ss4 << test;
-	UnicodeIstreamWrapper isw2(ss4, 1);
-	Tokenizer tkz2(isw2);
+	LayerTokenizer tkz2(ss4);
 
-	tkz2.parse_configuration_file("config.ini");
-	tkz2.debug_tokenize();
+	//tkz2.parse_configuration_file("config.ini");
+	tkz2.debug_tokenize(std::cout);
 
 	std::stringstream ss3;
 	ss3 << "zfg ążÓŁx";

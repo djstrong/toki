@@ -12,7 +12,9 @@ HEADERS += token.h \
     config.h \
     token_layers/inputbufferlayer.h \
     token_layers/appendlayer.h \
-    tokenizerconfig.h
+    tokenizerconfig.h \
+    layertokenizer.h \
+    nullunicodesource.h
 SOURCES += token.cpp \
     main.cpp \
     tokenizer.cpp \
@@ -28,7 +30,9 @@ SOURCES += token.cpp \
     config.cpp \
     token_layers/inputbufferlayer.cpp \
     token_layers/appendlayer.cpp \
-    tokenizerconfig.cpp
+    tokenizerconfig.cpp \
+    layertokenizer.cpp \
+    nullunicodesource.cpp
 LIBS += -licuuc \
     -licuio \
     -lloki \

@@ -2,6 +2,7 @@
 #define TOKENSOURCE_H
 
 class Token;
+#include <iosfwd>
 
 /**
  * A simple interface for classes that can be used as token sources, for example
@@ -21,6 +22,18 @@ public:
 	 * Caller takes ownership of the token.
 	 */
 	virtual Token* getNextToken() = 0;
+
+	/**
+	 * Debug aid to tokenize everything and return the resulting orths,
+	 * one per line.
+	 */
+	void debug_orths_newline(std::ostream& os);
+
+	/**
+	 * Debug aid to tokenize everything and return the resulting tokens,
+	 * using Token's debug print.
+	 */
+	void debug_tokenize(std::ostream& os);
 };
 
 #endif // TOKENSOURCE_H

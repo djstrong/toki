@@ -21,7 +21,7 @@ namespace {
 
 	void merge_boost_ptrees(ptree& one, const ptree& other) {
 		one.data() = other.data();
-		BOOST_FOREACH( const ptree::value_type& in_other, other) {
+		BOOST_FOREACH (const ptree::value_type& in_other, other) {
 			boost::optional< ptree& > in_one;
 			if ((in_one = one.get_child_optional(in_other.first))) {
 				merge_boost_ptrees(*in_one, in_other.second);
@@ -43,4 +43,11 @@ void TokenizerConfig::write(const std::string &filename) const
 	boost::property_tree::ini_parser::write_ini(filename + ".ini", props_);
 	boost::property_tree::xml_parser::write_xml(filename + ".xml", props_);
 	boost::property_tree::json_parser::write_json(filename + ".json", props_);
+}
+
+
+const TokenizerConfig& TokenizerConfig::Default()
+{
+	static TokenizerConfig cfg("config.ini");
+	return cfg;
 }

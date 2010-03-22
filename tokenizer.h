@@ -1,44 +1,131 @@
 #ifndef TOKENIZER_H
 #define TOKENIZER_H
 
-#include <istream>
-#include <vector>
-
-#include "tokenlayer.h"
-#include "unicodesource.h"
 #include "tokensource.h"
-#include "unicodeistreamwrapper.h"
-#include "unicodeicustringwrapper.h"
+#include "tokenizerconfig.h"
+#include "unicodesource.h"
 
+#include <vector>
+#include <iosfwd>
+
+#include <unicode/unistr.h>
+
+#include <boost/shared_ptr.hpp>
+
+/**
+ * A tokenizer represents a class that grabs unicode characters from a
+ * UnicodeSource and returns Tokens.
+ */
 class Tokenizer : public TokenSource
 {
 public:
-	Tokenizer(UnicodeSource& us);
+	/**
+	 * Construct an empty Tokenizer. The input source will be a null object that
+	 * will always claim there are no more characters, so getNextToken() will
+	 * just return null.
+	 */
+	Tokenizer(const TokenizerConfig& cfg = TokenizerConfig::Default());
 
-	//DRAFT: Tokenizer(const TokenizerConfig& cfg = TokenizerConfig::Default());
+	/**
+	 * Constructor shorthand -- start with the given UnicodeSource, and take
+	 * ownership (through a shared pointer).
+	 * @see setInputSource
+	 */
+	Tokenizer(UnicodeSource* input, const TokenizerConfig& cfg = TokenizerConfig::Default());
 
+	/**
+	 * Constructor shorthand -- start with the given UnicodeSource as a shared
+	 * pointer
+	 * @see setInputSource
+	 */
+	Tokenizer(boost::shared_ptr<UnicodeSource> input, const TokenizerConfig& cfg = TokenizerConfig::Default());
+
+	/**
+	 * Constructor shorthand -- start with the given std::istream. Note no
+	 * ownership is taken and the stream must live long enough.
+	 * @see setInputSource
+	 */
+	Tokenizer(std::istream& is, const TokenizerConfig& cfg = TokenizerConfig::Default());
+
+	/**
+	 * Constructor shorthand -- start with the given UnicodeString, which is
+	 * copied.
+	 * @see setInputSource
+	 */
+	Tokenizer(const UnicodeString& s, const TokenizerConfig& cfg = TokenizerConfig::Default());
+
+	/**
+	 * Destructor
+	 */
 	~Tokenizer();
 
-	void parse_configuration_file(const std::string& fn);
+	/**
+	 * Explicitly set the input source to be a null object that never returns
+	 * any unicode characters
+	 */
+	void setNullInputSource();
 
-	void parse_configuration(std::istream& is);
+	/**
+	 * Input source setter. The tokenizer takes ownership of the source
+	 * (through a shared pointer)and will delete it.
+	 * Note, however, that if the source is a UnicodeIstreamWrapper, the
+	 * underlying istream object will *not* be deleted -- see
+	 * UnicodeIstreamWrapper, which also requires that the istream lives for as
+	 * long as the UnicodeIstreamWrapper lives.
+	 * @param us a valid UnicodeSource to use and take ownership of. Behavior is
+	 *           undefined if the pointer is invalid or NULL.
+	 */
+	void setInputSource(UnicodeSource* us);
 
-	void parse_configuration(const std::string& s);
+	/**
+	 * Input source setter -- as a shared pointer. See the are pointer version
+	 * for info on what happens on the atcual destruction.
+	 */
+	void setInputSource(boost::shared_ptr<UnicodeSource> us);
 
-	Token* getNextToken();
+	/**
+	 * Input source setter. The stream must live for as long as the tokenizer
+	 * lives.
+	 */
+	void setInputSource(std::istream& is, int bufsize);
 
-	void reset();
+	/**
+	 * Input source setter. The string is copied.
+	 */
+	void setInputSource(const UnicodeString& s);
 
-	void debug_tokenize();
+	/**
+	 * Reset the tokenizer internal state (other than the input source).
+	 * Call this when after setting a new input source if the processing should
+	 * start from scratch.
+	 *
+	 * Derived classes should take care to always call the parent class' reset()
+	 */
+	virtual void reset();
 
-private:
-	void eatWhitespace();
+protected:
+	/**
+	 * Shorthand to avoid derived classes having to explicitly use the pointer
+	 */
+	UnicodeSource& input() {
+		return *input_;
+	}
 
-	UnicodeSource& us_;
+	/**
+	 * Called when a new input source is created, derived classes might want to
+	 * override this.
+	 *
+	 * WARNING: this will *NOT* be called during the initial construction of a
+	 * Tokenizer, or rather, the overriden version will not be called, so
+	 * derived classess should manually call their handler in constructors that
+	 * cause an actual input source to be set.
+	 */
+	virtual void newInputSource() {}
 
-	TokenSource* source_;
-
-	std::vector<TokenLayer*> layers_;
+	/**
+	 * The source of the text.
+	 */
+	boost::shared_ptr<UnicodeSource> input_;
 };
 
 #endif // TOKENIZER_H
