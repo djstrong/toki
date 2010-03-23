@@ -63,8 +63,6 @@ void LayerTokenizer::newInputSource()
 
 void LayerTokenizer::apply_configuration(const TokenizerConfig::Cfg &cfg)
 {
-	//init_token_layers();
-
 	using boost::property_tree::ptree;
 	const ptree& layers_tree = cfg.get_child("layers");
 
@@ -78,16 +76,20 @@ void LayerTokenizer::apply_configuration(const TokenizerConfig::Cfg &cfg)
 
 	TokenSource* previous = input_tokenizer_.get();
 	BOOST_FOREACH (const std::string& id, layer_ids) {
-		std::string layer_class = cfg.get("layer_" + id + ".class", "");
+		std::string layer_class = cfg.get("layer:" + id + ".class", "");
 		TokenLayer* layer;
 		try {
-			layer = TokenLayer::create(layer_class, previous, cfg.get_child("layer_" + id));
+			layer = TokenLayer::create(layer_class, previous, cfg.get_child("layer:" + id));
 			previous = layer;
 			layers_.push_back(layer);
 		} catch (TokenLayerFactoryException) {
 			std::cerr << "Bad layer class ID " << layer_class
 				<< ". Layer with id " << id << " ignored.\n";
 		}
+	}
+
+	if (layers_.empty()) {
+		std::cerr << "No valid layers in layer tokenizer!\n";
 	}
 }
 
