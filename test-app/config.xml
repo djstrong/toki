@@ -1,0 +1,16 @@
+<input_layer>
+	<buffer>200</buffer>
+</input_layer>
+
+
+<layer 	id="pre_cplit"
+	class="pre_split">
+	<cutoff>0.1<cutoff>
+	<separators></separators>
+</layer>
+
+
+<layers>
+	<layer>pre_split</layer>
+	<layer>combine</layer>
+</layer>
