@@ -54,9 +54,10 @@ void test1()
 }
 
 
-
+#include "token_layers/affixsplitlayer.h"
 int main(int argc, char** argv)
 {
+	std::cout << "main\n";
 	TokenizerConfig::Cfg global = TokenizerConfig::fromFile("config.ini");
 	TokenizerConfig::Cfg user = TokenizerConfig::fromFile("user.ini");
 	TokenizerConfig::merge(global, user);
