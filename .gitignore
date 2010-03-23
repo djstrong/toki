@@ -1,6 +1,8 @@
 *.o
+*.a
 Makefile*
 icu_tokenizer
-icu_tokenizer.pro.user
+test-app
+*.pro.user
 #*#
 *~
