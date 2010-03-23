@@ -14,6 +14,9 @@ RegexpClassifyLayer::RegexpClassifyLayer(TokenSource* input, const Properties& p
 			RegexMatcher *m = new RegexMatcher(UnicodeString::fromUTF8(v.second.data()), 0, status);
 			if (U_SUCCESS(status)) {
 				classifiers_.push_back(std::make_pair(type, m));
+			} else {
+				std::cerr << "Error in regexp for type:" << type
+					<< " -- " << v.second.data() << "\n";
 			}
 		}
 	}
@@ -27,20 +30,15 @@ RegexpClassifyLayer::~RegexpClassifyLayer()
 	}
 }
 
-Token* RegexpClassifyLayer::getNextToken()
+Token* RegexpClassifyLayer::processToken(Token* t)
 {
-	Token* t = getTokenFromInput();
-	if (t) {
-		if (shouldProcessTokenType(t->type())) {
-			for (size_t i = 0; i < classifiers_.size(); ++i) {
-				RegexMatcher& m = *classifiers_[i].second;
-				m.reset(t->orth());
-				UErrorCode status = U_ZERO_ERROR;
-				if (m.matches(status)) {
-					t->set_type(classifiers_[i].first);
-					break;
-				}
-			}
+	for (size_t i = 0; i < classifiers_.size(); ++i) {
+		RegexMatcher& m = *classifiers_[i].second;
+		m.reset(t->orth());
+		UErrorCode status = U_ZERO_ERROR;
+		if (m.matches(status)) {
+			t->set_type(classifiers_[i].first);
+			break;
 		}
 	}
 	return t;

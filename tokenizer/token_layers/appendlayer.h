@@ -9,7 +9,7 @@ class AppendLayer : public TokenLayer
 public:
 	AppendLayer(TokenSource* input, const Properties& props);
 
-	Token* getNextToken();
+	Token* processToken(Token *t);
 
 private:
 	UnicodeString append_;

@@ -22,7 +22,8 @@ HEADERS += token.h \
     nullunicodesource.h \
     token_layers/affixsplitlayer.h \
     token_layers/regexpclassifylayer.h \
-    token_layers/inittokenlayers.h
+    token_layers/inittokenlayers.h \
+    exception.h
 SOURCES += token.cpp \
     tokenizer.cpp \
     unicodesource.cpp \

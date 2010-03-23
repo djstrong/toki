@@ -11,7 +11,7 @@ public:
 
 	~RegexpClassifyLayer();
 
-	Token* getNextToken();
+	Token* processToken(Token *t);
 
 private:
 	std::vector< std::pair<std::string, RegexMatcher*> > classifiers_;

@@ -8,13 +8,8 @@ AppendLayer::AppendLayer(TokenSource *input, const Properties &props)
 	append_ = UnicodeString::fromUTF8(props.get("append", "!")).unescape();
 }
 
-Token* AppendLayer::getNextToken()
+Token* AppendLayer::processToken(Token* t)
 {
-	Token* t = getTokenFromInput();
-	if (t) {
-		if (shouldProcessTokenType(t->type())) {
-			t->set_orth(t->orth() + append_);
-		}
-	}
+	t->set_orth(t->orth() + append_);
 	return t;
 }

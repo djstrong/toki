@@ -6,18 +6,30 @@
 
 #include <boost/foreach.hpp>
 
+#include <iostream>
+
+#include "exception.h"
 
 TokenizerConfig::Cfg TokenizerConfig::fromFile(const std::string &filename)
 {
 	TokenizerConfig::Cfg p;
-	boost::property_tree::ini_parser::read_ini(filename, p);
+	try {
+		boost::property_tree::ini_parser::read_ini(filename, p);
+	} catch (boost::property_tree::file_parser_error& e) {
+		throw TokenizerLibError(e.what());
+	}
+
 	return p;
 }
 
 TokenizerConfig::Cfg TokenizerConfig::fromStream(std::istream &is)
 {
 	TokenizerConfig::Cfg p;
-	boost::property_tree::ini_parser::read_ini(is, p);
+	try {
+		boost::property_tree::ini_parser::read_ini(is, p);
+	} catch (boost::property_tree::file_parser_error& e) {
+		throw TokenizerLibError(e.what());
+	}
 	return p;
 }
 
@@ -39,13 +51,38 @@ TokenizerConfig::Cfg& TokenizerConfig::merge(TokenizerConfig::Cfg& accu,
 
 void TokenizerConfig::write(const Cfg &c, const std::string &filename)
 {
-	boost::property_tree::ini_parser::write_ini(filename + ".ini", c);
-	boost::property_tree::xml_parser::write_xml(filename + ".xml", c);
-	boost::property_tree::json_parser::write_json(filename + ".json", c);
+	int errors = 0;
+	try {
+		boost::property_tree::ini_parser::write_ini(filename + ".ini", c);
+	} catch (boost::property_tree::file_parser_error& e) {
+		errors++;
+	}
+	try {
+		boost::property_tree::xml_parser::write_xml(filename + ".xml", c);
+	} catch (boost::property_tree::file_parser_error& e) {
+		errors++;
+	}
+	try {
+		boost::property_tree::json_parser::write_json(filename + ".json", c);
+	} catch (boost::property_tree::file_parser_error& e) {
+		errors++;
+	}
+	if (errors > 0) {
+		std::cerr << "Config write failed!\n";
+	}
 }
 
 const TokenizerConfig::Cfg& TokenizerConfig::Default()
 {
-	static TokenizerConfig::Cfg cfg = TokenizerConfig::fromFile("config.ini");
+	bool initialized = false;
+	static TokenizerConfig::Cfg cfg;
+	if (!initialized) {
+		try {
+			cfg = TokenizerConfig::fromFile("config.ini");
+		} catch (TokenizerLibError& e) {
+			throw TokenizerLibError(std::string("Default config error! ") + e.what());
+		}
+		initialized = true;
+	}
 	return cfg;
 }

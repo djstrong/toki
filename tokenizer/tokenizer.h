@@ -87,7 +87,7 @@ public:
 	 * Input source setter. The stream must live for as long as the tokenizer
 	 * lives.
 	 */
-	void setInputSource(std::istream& is, int bufsize);
+	void setInputSource(std::istream& is, int bufsize = 1000);
 
 	/**
 	 * Input source setter. The string is copied.

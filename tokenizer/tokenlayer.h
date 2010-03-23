@@ -58,6 +58,21 @@ public:
 	TokenSource* getInput();
 
 	/**
+	 * TokenSource override. Default implementation for layers that only work
+	 * by examining a single token and possibly modyfying it -- grabs a token
+	 * from the input, examines it for NULL and shouldProcessTokenType, calls
+	 * @c processToken and returns whatever that function returns.
+	 */
+	Token* getNextToken();
+
+	/**
+	 * Used by the default getNextToken implementation, should be overriden by
+	 * derived classes. Defaults to a no-op passthrough of the token.
+	 * @param t token to process. Guaranteed to be not-NULL.
+	 */
+	virtual Token* processToken(Token* t);
+
+	/**
 	 * Reset this layer's state so when a token is requested it will start over,
 	 * processing tokens from the input source just like it was just
 	 * constructed.

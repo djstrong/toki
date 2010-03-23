@@ -13,6 +13,8 @@
 #include <iostream>
 #include <sstream>
 
+#include "exception.h"
+
 LayerTokenizer::LayerTokenizer(const TokenizerConfig::Cfg& cfg)
 	: Tokenizer(cfg), input_tokenizer_(new WhitespaceTokenizer(cfg.get_child("input", TokenizerConfig::Cfg())))
 {
@@ -76,20 +78,27 @@ void LayerTokenizer::apply_configuration(const TokenizerConfig::Cfg &cfg)
 
 	TokenSource* previous = input_tokenizer_.get();
 	BOOST_FOREACH (const std::string& id, layer_ids) {
-		std::string layer_class = cfg.get("layer:" + id + ".class", "");
-		TokenLayer* layer;
 		try {
-			layer = TokenLayer::create(layer_class, previous, cfg.get_child("layer:" + id));
-			previous = layer;
-			layers_.push_back(layer);
-		} catch (TokenLayerFactoryException) {
-			std::cerr << "Bad layer class ID " << layer_class
-				<< ". Layer with id " << id << " ignored.\n";
+			std::string layer_class;
+			layer_class = cfg.get("layer:" + id + ".class", "");
+			TokenLayer* layer;
+			try {
+				layer = TokenLayer::create(layer_class, previous, cfg.get_child("layer:" + id));
+				previous = layer;
+				layers_.push_back(layer);
+			} catch (TokenLayerFactoryException) {
+				std::cerr << "Bad layer class ID " << layer_class
+					<< ". Layer with id " << id << " ignored.\n";
+			}
+		} catch (boost::property_tree::ptree_error& e) {
+			std::cerr << "Error while processing configuration for layer with id "
+				<< id << ". " << e.what() << "\n";
 		}
 	}
 
 	if (layers_.empty()) {
 		std::cerr << "No valid layers in layer tokenizer!\n";
+		throw TokenizerLibError("No valid layers in LayerTokenizer");
 	}
 }
 

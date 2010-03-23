@@ -1,17 +1,13 @@
 #include "basicsplitlayer.h"
 #include "token.h"
 
-#include <boost/property_tree/ptree.hpp>
+#include "tokenizerconfig.h"
 
 BasicSplitLayer::BasicSplitLayer(TokenSource* input, const Properties& props)
 	: OutputQueueLayer(input, props), split_chars_(), sep_type_()
 {
 	sep_type_ = props.get<std::string>("sep_tok_type", "sep");
-	std::string seplist = props.get<std::string>("separators");
-	UnicodeString us = UnicodeString::fromUTF8(seplist);
-	for (int i = 0; i < us.length(); ++i) {
-		split_chars_.insert(us.charAt(i));
-	}
+	TokenizerConfig::addUcharsToContainer(props, "separators", split_chars_);
 }
 
 void BasicSplitLayer::prepareMoreTokens(Token* t)

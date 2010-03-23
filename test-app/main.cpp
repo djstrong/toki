@@ -13,10 +13,12 @@
 
 int main(int argc, char** argv)
 {
+	/*
 	TokenizerConfig::Cfg global = TokenizerConfig::fromFile("config.ini");
 	TokenizerConfig::Cfg user = TokenizerConfig::fromFile("user.ini");
 	TokenizerConfig::merge(global, user);
 	TokenizerConfig::write(global, "combined");
+	*/
 
 	std::string input_enc;
 	std::string config_file;
@@ -29,9 +31,9 @@ int main(int argc, char** argv)
 			 "Input encoding (ICU string identifier), for example UTF8, cp1250")
 			("config-file,c", value(&config_file)->default_value(""),
 			 "Config file to use, defaults to library-default config")
-			("buffer-size,b", value(&bufsize)->default_value(5),
+			("buffer-size,b", value(&bufsize)->default_value(1),
 			 "Stream buffer size, set to 0 to convert the entire input "
-			 "in-memory and disregard the encoding, assuming UTF-8.")
+			 "in-memory before processing and disregard the encoding, assuming UTF-8.")
 			("orths,o", value(&orths)->default_value(false)->zero_tokens(),
 			 "Only output orths, not entire token descriptions")
 			("help,h", "Show help")
