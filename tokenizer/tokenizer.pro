@@ -1,3 +1,8 @@
+QT -= core \
+    gui
+TARGET = tokenizer
+TEMPLATE = lib
+CONFIG += staticlib
 HEADERS += token.h \
     tokenizer.h \
     unicodesource.h \
@@ -18,7 +23,6 @@ HEADERS += token.h \
     token_layers/affixsplitlayer.h \
     token_layers/regexpclassifylayer.h
 SOURCES += token.cpp \
-    main.cpp \
     tokenizer.cpp \
     unicodesource.cpp \
     unicodeistreamwrapper.cpp \
@@ -39,10 +43,9 @@ SOURCES += token.cpp \
     token_layers/regexpclassifylayer.cpp
 LIBS += -licuuc \
     -licuio \
-    -lloki \
-    -lboost_program_options \
-    -lclaw_configuration_file
+    -lboost_program_options
 CONFIG += link_pkgconfig
 PKGCONFIG += libxml++-2.6
 INCLUDEPATH += /usr/local/include
 DEPENDPATH += /usr/local/lib
+QMAKE_CXXFLAGS += -static
