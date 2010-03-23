@@ -143,8 +143,11 @@ T* LayerCreator(TokenSource* input, const TokenLayer::Properties& props)
 template <typename T>
 bool TokenLayer::register_layer(const std::string& class_id)
 {
-	std::cerr << "Register " << class_id << " layer type\n";
-	return TokenLayerFactory::Instance().Register(class_id, LayerCreator<T>);
+	std::cout << "Register layer type '" << class_id << "'";
+	bool ret = TokenLayerFactory::Instance().Register(class_id, LayerCreator<T>);
+	if (ret) std::cout << " (ok)";
+	std::cout << "\n";
+	return ret;
 }
 
 
