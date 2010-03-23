@@ -10,8 +10,6 @@ class BasicSplitLayer : public OutputQueueLayer
 public:
 	BasicSplitLayer(TokenSource* input, const Properties& props);
 
-	static bool registered;
-
 protected:
 	void prepareMoreTokens(Token* t);
 

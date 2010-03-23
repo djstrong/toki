@@ -1,4 +1,5 @@
 #include "tokenlayer.h"
+#include "token_layers/inittokenlayers.h"
 #include <boost/algorithm/string.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/foreach.hpp>
@@ -54,3 +55,5 @@ bool TokenLayer::shouldProcessTokenType(const std::string &t)
 		}
 	}
 }
+
+static bool registered = init_token_layers();

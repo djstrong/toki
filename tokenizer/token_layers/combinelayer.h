@@ -8,8 +8,6 @@ class CombineLayer : public OutputQueueLayer
 public:
 	CombineLayer(TokenSource* input, const Properties& props);
 
-	static bool registered;
-
 protected:
 	void prepareMoreTokens(Token* t);
 };

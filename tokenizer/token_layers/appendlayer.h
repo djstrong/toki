@@ -11,8 +11,6 @@ public:
 
 	Token* getNextToken();
 
-	static bool registered;
-
 private:
 	UnicodeString append_;
 };

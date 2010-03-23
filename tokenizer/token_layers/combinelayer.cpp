@@ -15,7 +15,3 @@ void CombineLayer::prepareMoreTokens(Token* t)
 	}
 	enqueueOutputToken(t);
 }
-
-bool CombineLayer::registered = TokenLayer::register_layer<CombineLayer>("combine");
-
-

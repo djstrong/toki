@@ -12,8 +12,6 @@ class AffixSplitLayer : public OutputQueueLayer
 public:
 	AffixSplitLayer(TokenSource* input, const Properties& props);
 
-	static bool registered;
-
 protected:
 	void prepareMoreTokens(Token* t);
 
@@ -31,4 +29,5 @@ private:
 	std::string postfix_type_;
 };
 
+void foo();
 #endif // AFFIXSPLITLAYER_H

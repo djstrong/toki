@@ -18,5 +18,3 @@ Token* AppendLayer::getNextToken()
 	}
 	return t;
 }
-
-bool AppendLayer::registered = TokenLayer::register_layer<AppendLayer>("append");

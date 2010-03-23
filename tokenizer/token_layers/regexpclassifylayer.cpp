@@ -45,5 +45,3 @@ Token* RegexpClassifyLayer::getNextToken()
 	}
 	return t;
 }
-
-bool RegexpClassifyLayer::registered = TokenLayer::register_layer<RegexpClassifyLayer>("classify_regexp");

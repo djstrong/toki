@@ -58,5 +58,3 @@ bool AffixSplitLayer::isPostfixChar(UChar c)
 {
 	return postfix_chars_.find(c) != postfix_chars_.end();
 }
-
-bool AffixSplitLayer::registered = TokenLayer::register_layer<AffixSplitLayer>("affix_split");

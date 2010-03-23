@@ -16,14 +16,27 @@
  * allows getting the processed tokens, so a layer is a token source itself.
  * This allows stacking -- or layering -- TokenLayers.
  *
+ * The constructor of the derived class should take the same arguments as the
+ * base TokenLayer does, and should pass them upwards.
+ *
  * Layers are designed to be dynamically created by a factory based on unique
- * string class identifires. To register a derived Layer class, add a static
- * bool member e.g. \c registered to the class, and initialize it in the layer's
- * source file as follows:
+ * string class identifires. To register a derived Layer class, add a call
+ * @code
+ * TokenLayer::register_type<MyLayer>("my_layer_id")
+ * @code
+ * in the init_token_layers() function.
+ *
+ * Client code might add a static bool member e.g. \c registered to the class,
+ * and initialize it in the layer's source file as follows:
  * @code
  * bool MyLayer::registered = TokenLayer::register_type<MyLayer>("my_layer_id");
  * @endcode
- * The constructor of the derived class should take the same arguments.
+ * Note however that due to C++ dynamic initalization order, it is not generally
+ * safe to rely on this trick to always work, especially when linking to a
+ * library -- the dynamic initialization of static members in a library that is
+ * being linked to statically can happen *after* the beginning of main(). In
+ * particular, having the layers in the library register themselves in such
+ * manner does not work when statically linking the library in gcc 4.4.1.
  */
 class TokenLayer : public TokenSource, private boost::noncopyable
 {
@@ -126,9 +139,11 @@ T* LayerCreator(TokenSource* input, const TokenLayer::Properties& props)
 	return new T(input, props);
 }
 
+#include <iostream>
 template <typename T>
 bool TokenLayer::register_layer(const std::string& class_id)
 {
+	std::cerr << "Register " << class_id << " layer type\n";
 	return TokenLayerFactory::Instance().Register(class_id, LayerCreator<T>);
 }
 

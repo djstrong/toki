@@ -13,7 +13,6 @@
 #include <iostream>
 #include <sstream>
 
-
 LayerTokenizer::LayerTokenizer(const TokenizerConfig::Cfg& cfg)
 	: Tokenizer(cfg), input_tokenizer_(new WhitespaceTokenizer(cfg.get_child("input", TokenizerConfig::Cfg())))
 {
@@ -64,6 +63,8 @@ void LayerTokenizer::newInputSource()
 
 void LayerTokenizer::apply_configuration(const TokenizerConfig::Cfg &cfg)
 {
+	//init_token_layers();
+
 	using boost::property_tree::ptree;
 	const ptree& layers_tree = cfg.get_child("layers");
 

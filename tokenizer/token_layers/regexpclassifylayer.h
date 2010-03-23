@@ -13,8 +13,6 @@ public:
 
 	Token* getNextToken();
 
-	static bool registered;
-
 private:
 	std::vector< std::pair<std::string, RegexMatcher*> > classifiers_;
 };

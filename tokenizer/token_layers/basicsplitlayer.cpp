@@ -48,5 +48,3 @@ bool BasicSplitLayer::isSplitChar(UChar c)
 {
 	return split_chars_.find(c) != split_chars_.end();
 }
-
-bool BasicSplitLayer::registered = TokenLayer::register_layer<BasicSplitLayer>("split");
