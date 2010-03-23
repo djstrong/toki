@@ -15,7 +15,6 @@ WhitespaceTokenizer::WhitespaceTokenizer(UnicodeSource* us, const TokenizerConfi
 	: Tokenizer(us, cfg), wa_(Token::WA_None)
 {
 	token_type_ = cfg.get("token_type", "t");
-	eatWhitespace();
 }
 
 void WhitespaceTokenizer::reset()
@@ -25,7 +24,6 @@ void WhitespaceTokenizer::reset()
 
 void WhitespaceTokenizer::newInputSource()
 {
-	eatWhitespace();
 }
 
 
@@ -62,19 +60,23 @@ Token* WhitespaceTokenizer::getNextToken()
 	if (!input().hasMoreChars()) {
 		return NULL;
 	}
-	UnicodeString orth;
-	UChar u = input().getNextChar();
-	orth = u;
-	while (input().hasMoreChars()) {
-		u = input().peekNextChar();
-		if (u_isUWhiteSpace(u)) {
-			break;
-		} else {
-			orth += u;
-			input().getNextChar();
-		}
-	}
-	Token* t  = new Token(orth, token_type_, wa_);
 	eatWhitespace();
-	return t;
+	UnicodeString orth;
+	if (input().hasMoreChars()) {
+		UChar u = input().getNextChar();
+		orth = u;
+		while (input().hasMoreChars()) {
+			u = input().peekNextChar();
+			if (u_isUWhiteSpace(u)) {
+				break;
+			} else {
+				orth += u;
+				input().getNextChar();
+			}
+		}
+		Token* t  = new Token(orth, token_type_, wa_);
+		return t;
+	} else {
+		return NULL;
+	}
 }
