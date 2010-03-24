@@ -18,7 +18,7 @@ static const char subdir_name[] = "test_compare";
 
 typedef std::pair<const TokenizerConfig::Cfg*, std::string> compare_item;
 
-static std::list<TokenizerConfig::Cfg> configs;
+static std::map<std::string, TokenizerConfig::Cfg> configs;
 
 void test_one_item(const compare_item& c)
 {
@@ -44,22 +44,29 @@ void subdir_exists()
 		subdir_name << " must be a directory");
 }
 
+void init_subdir(boost::unit_test::test_suite *ts, fs::path dir)
+{
+
+}
+
+
 void init_compare_suite(boost::unit_test::test_suite *ts)
 {
 	ts->add(BOOST_TEST_CASE(&subdir_exists));
 	if (!fs::exists(subdir_name)) return;
 	fs::directory_iterator end_itr; // default construction yields past-the-end
-	std::vector<compare_item> tests;
+	std::map<std::string, compare_item> tests;
 	configs.push_back(TokenizerConfig::Default());
 	TokenizerConfig::Cfg* def = &configs.back();
 	for (fs::directory_iterator itr(subdir_name); itr != end_itr; ++itr) {
+		if (itr->path().extension() == ".ini")
 		if (is_directory(itr->status())) {
 			//
 		} else {
 			if (boost::algorithm::ends_with(itr->leaf(), ".in")) {
 				std::string path = itr->path().string();
 				std::string base = path.substr(0, path.size() - 3);
-				tests.push_back(std::make_pair(def, base));
+				tests.push_back(std::make_pair(base, std::make_pair(0, base)));
 			}
 		}
 	}
