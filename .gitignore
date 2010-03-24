@@ -3,6 +3,7 @@
 Makefile*
 icu_tokenizer
 test-app
+unit_tests
 *.pro.user
 #*#
 *~
