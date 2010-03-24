@@ -1,4 +1,5 @@
 #include "layertokenizer.h"
+#include "compare.h"
 #include <fstream>
 #include <sstream>
 #include <iostream>
@@ -35,15 +36,18 @@ void test_one_item(const compare_item& c)
 	BOOST_CHECK_EQUAL( ss.str(), ss_expected.str() );
 }
 
-BOOST_AUTO_TEST_CASE( subdir_exists )
+void subdir_exists()
 {
-	BOOST_REQUIRE( fs::exists(subdir_name) );
-	BOOST_REQUIRE( fs::is_directory(subdir_name) );
+	BOOST_REQUIRE_MESSAGE(fs::exists(subdir_name),
+		subdir_name << " directory must exist");
+	BOOST_REQUIRE_MESSAGE(fs::is_directory(subdir_name),
+		subdir_name << " must be a directory");
 }
 
-bool prep_test_cases()
+void init_compare_suite(boost::unit_test::test_suite *ts)
 {
-	if (!fs::exists( subdir_name)) return false;
+	ts->add(BOOST_TEST_CASE(&subdir_exists));
+	if (!fs::exists(subdir_name)) return;
 	fs::directory_iterator end_itr; // default construction yields past-the-end
 	std::vector<compare_item> tests;
 	configs.push_back(TokenizerConfig::Default());
@@ -59,18 +63,10 @@ bool prep_test_cases()
 			}
 		}
 	}
-	boost::unit_test::framework::master_test_suite().add(BOOST_PARAM_TEST_CASE(
-		test_one_item, &tests[0], &tests[0] + tests.size()));
-
-	return true;
+	ts->add(BOOST_PARAM_TEST_CASE(test_one_item, &tests[0], &tests[0] + tests.size()));
 }
 
-boost::unit_test::test_suite* init_unit_test_suite(int argc, char* argv[])
-{
-	std::cerr << "!!!\n";
-	prep_test_cases();
-	return 0;
-}
+
 
 //BOOST_AUTO_TEST_SUITE_END()
 
