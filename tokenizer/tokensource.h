@@ -3,6 +3,7 @@
 
 class Token;
 #include <iosfwd>
+#include <boost/function.hpp>
 
 /**
  * A simple interface for classes that can be used as token sources, for example
@@ -22,6 +23,12 @@ public:
 	 * Caller takes ownership of the token.
 	 */
 	virtual Token* getNextToken() = 0;
+
+	/**
+	 * Tokenization helper. Tokenizes the entire input, calling the sink
+	 * functor or each token. The sink takes ownership of the token.
+	 */
+	void tokenize(boost::function<void (Token*)> sink);
 
 	/**
 	 * Debug aid to tokenize everything and output the resulting orths into

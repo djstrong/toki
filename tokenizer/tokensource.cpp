@@ -11,6 +11,13 @@ TokenSource::~TokenSource()
 {
 }
 
+void TokenSource::tokenize(boost::function<void(Token *)> sink)
+{
+	while (Token* t = getNextToken()) {
+		sink(t);
+	}
+}
+
 void TokenSource::debug_orths_newline(std::ostream& os)
 {
 	while (Token* t = getNextToken()) {
@@ -25,7 +32,6 @@ std::string TokenSource::debug_orths_newline()
 	debug_orths_newline(ss);
 	return ss.str();
 }
-
 
 void TokenSource::debug_tokenize(std::ostream& os)
 {
