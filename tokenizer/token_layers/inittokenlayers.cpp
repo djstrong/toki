@@ -16,7 +16,7 @@ bool init_token_layers()
 	TokenLayer::register_layer<AppendLayer>("append");
 	TokenLayer::register_layer<BasicSplitLayer>("split");
 	TokenLayer::register_layer<CombineLayer>("combine");
-	TokenLayer::register_layer<RegexpClassifyLayer>("classify_regexp");
+	TokenLayer::register_layer<RegexpClassifyLayer>("regexp");
 	TokenLayer::register_layer<LexiconClassifyLayer>("lexicon");
 
 	init_done = true;
