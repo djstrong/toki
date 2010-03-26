@@ -8,50 +8,17 @@
 //
 // For more information, see www.boost.org
 // ----------------------------------------------------------------------------
-#ifndef BOOST_PROPERTY_TREE_INI_PARSER_HPP_INCLUDED
-#define BOOST_PROPERTY_TREE_INI_PARSER_HPP_INCLUDED
+#ifndef LOOSE_INI_PARSER_H
+#define LOOSE_INI_PARSER_H
 
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/detail/ptree_utils.hpp>
-#include <boost/property_tree/detail/file_parser_error.hpp>
-#include <fstream>
-#include <string>
-#include <sstream>
-#include <stdexcept>
-#include <locale>
+#include <boost/property_tree/ini_parser.hpp>
 
-namespace boost { namespace property_tree { namespace ini_parser
+namespace loose_ini_parser
 {
-
-    /**
-     * Determines whether the @c flags are valid for use with the ini_parser.
-     * @param flags value to check for validity as flags to ini_parser.
-     * @return true if the flags are valid, false otherwise.
-     */
-    inline bool validate_flags(int flags)
-    {
-        return flags == 0;
-    }
-
-    /** Indicates an error parsing INI formatted data. */
-    class ini_parser_error: public file_parser_error
-    {
-    public:
-        /**
-         * Construct an @c ini_parser_error
-         * @param message Message describing the parser error.
-         * @param filename The name of the file being parsed containing the
-         *                 error.
-         * @param line The line in the given file where an error was
-         *             encountered.
-         */
-        ini_parser_error(const std::string &message,
-                         const std::string &filename,
-                         unsigned long line)
-            : file_parser_error(message, filename, line)
-        {
-        }
-    };
+	namespace property_tree = boost::property_tree;
+	using boost::property_tree::ini_parser_error;
+	using boost::throw_exception;
+	using boost::property_tree::ini_parser::validate_flags;
 
     /**
      * Read INI from a the given stream and translate it to a property tree.
@@ -62,7 +29,7 @@ namespace boost { namespace property_tree { namespace ini_parser
      * @param[out] pt The property tree to populate.
      */
     template<class Ptree>
-    void read_ini(std::basic_istream<
+	void read_loose_ini(std::basic_istream<
                     typename Ptree::key_type::value_type> &stream,
                   Ptree &pt)
     {
@@ -99,9 +66,6 @@ namespace boost { namespace property_tree { namespace ini_parser
                 }
                 else if (line[0] == lbracket)
                 {
-                    // If the previous section was empty, drop it again.
-                    if (section && section->empty())
-                        local.pop_back();
                     typename Str::size_type end = line.find(rbracket);
                     if (end == Str::npos)
                         BOOST_PROPERTY_TREE_THROW(ini_parser_error(
@@ -128,16 +92,10 @@ namespace boost { namespace property_tree { namespace ini_parser
                         line.substr(0, eqpos), stream.getloc());
                     Str data = property_tree::detail::trim(
                         line.substr(eqpos + 1, Str::npos), stream.getloc());
-                    if (container.find(key) != container.not_found())
-                        BOOST_PROPERTY_TREE_THROW(ini_parser_error(
-                            "duplicate key name", "", line_no));
                     container.push_back(std::make_pair(key, Ptree(data)));
                 }
             }
         }
-        // If the last section was empty, drop it again.
-        if (section && section->empty())
-            local.pop_back();
 
         // Swap local ptree with result ptree
         pt.swap(local);
@@ -154,7 +112,7 @@ namespace boost { namespace property_tree { namespace ini_parser
      * @param loc The locale to use when reading in the file contents.
      */
     template<class Ptree>
-    void read_ini(const std::string &filename, 
+	void read_loose_ini(const std::string &filename,
                   Ptree &pt,
                   const std::locale &loc = std::locale())
     {
@@ -165,7 +123,7 @@ namespace boost { namespace property_tree { namespace ini_parser
                 "cannot open file", filename, 0));
         stream.imbue(loc);
         try {
-            read_ini(stream, pt);
+			read_loose_ini(stream, pt);
         }
         catch (ini_parser_error &e) {
             BOOST_PROPERTY_TREE_THROW(ini_parser_error(
@@ -209,7 +167,7 @@ namespace boost { namespace property_tree { namespace ini_parser
      *              No flags are currently supported.
      */
     template<class Ptree>
-    void write_ini(std::basic_ostream<
+	void write_loose_ini(std::basic_ostream<
                        typename Ptree::key_type::value_type
                    > &stream,
                    const Ptree &pt,
@@ -231,7 +189,6 @@ namespace boost { namespace property_tree { namespace ini_parser
         for (typename Ptree::const_iterator it = pt.begin(), end = pt.end();
              it != end; ++it)
         {
-            check_dupes(it->second);
             if (it->second.empty()) {
                 stream << it->first << Ch('=')
                     << it->second.template get_value<
@@ -277,7 +234,7 @@ namespace boost { namespace property_tree { namespace ini_parser
      * @param loc The locale to use when writing the file.
      */
     template<class Ptree>
-    void write_ini(const std::string &filename,
+	void write_loose_ini(const std::string &filename,
                    const Ptree &pt,
                    int flags = 0,
                    const std::locale &loc = std::locale())
@@ -289,7 +246,7 @@ namespace boost { namespace property_tree { namespace ini_parser
                 "cannot open file", filename, 0));
         stream.imbue(loc);
         try {
-            write_ini(stream, pt, flags);
+			write_loose_ini(stream, pt, flags);
         }
         catch (ini_parser_error &e) {
             BOOST_PROPERTY_TREE_THROW(ini_parser_error(
@@ -297,13 +254,6 @@ namespace boost { namespace property_tree { namespace ini_parser
         }
     }
 
-} } }
-
-namespace boost { namespace property_tree
-{
-    using ini_parser::ini_parser_error;
-    using ini_parser::read_ini;
-    using ini_parser::write_ini;
-} }
+}
 
 #endif

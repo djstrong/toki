@@ -24,7 +24,8 @@ HEADERS += token.h \
     token_layers/regexpclassifylayer.h \
     token_layers/inittokenlayers.h \
     exception.h \
-    token_layers/lexiconclassifylayer.h
+    token_layers/lexiconclassifylayer.h \
+    parser/loose_ini_paser.h
 SOURCES += token.cpp \
     tokenizer.cpp \
     unicodesource.cpp \
