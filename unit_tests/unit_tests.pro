@@ -16,8 +16,6 @@ LIBS += -licuuc \
     -licuio \
     -lloki \
     -lboost_program_options \
-    -lboost_unit_test_framework \
-    -lboost_test_exec_monitor \
     -lboost_filesystem
 PRE_TARGETDEPS += ../tokenizer/libtokenizer.a
 HEADERS += compare.h
