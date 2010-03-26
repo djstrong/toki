@@ -126,6 +126,12 @@ protected:
 	 * The source of the text.
 	 */
 	boost::shared_ptr<UnicodeSource> input_;
+
+	/**
+	 * Format of the debug tokenization output
+	 * @see debug_formatted
+	 */
+	std::string debug_format_;
 };
 
 #endif // TOKENIZER_H
