@@ -14,6 +14,7 @@ INCLUDEPATH += ../tokenizer/
 LIBS += ../tokenizer/libtokenizer.a
 LIBS += -licuuc \
     -licuio \
+    -licui18n \
     -lloki \
     -lboost_program_options \
     -lboost_unit_test_framework \
