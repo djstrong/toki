@@ -14,6 +14,10 @@ class WhitespaceTokenizer : public Tokenizer
 public:
 	/**
 	 * Constructor
+	 *
+	 * Keys recognized in the configuration:
+	 * - token_type - Token type to set in created tokens, defaults to "t".
+	 *
 	 */
 	WhitespaceTokenizer(const TokenizerConfig::Cfg& cfg = TokenizerConfig::Default());
 

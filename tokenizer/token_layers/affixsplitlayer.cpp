@@ -6,8 +6,8 @@
 AffixSplitLayer::AffixSplitLayer(TokenSource* input, const Properties& props)
 	: OutputQueueLayer(input, props)
 {
-	prefix_type_ = props.get<std::string>("prefix_tok_type", "pre");
-	postfix_type_ = props.get<std::string>("postfix_tok_type", "post");
+	prefix_type_ = props.get<std::string>("prefix_token_type", "pre");
+	postfix_type_ = props.get<std::string>("postfix_token_type", "post");
 	TokenizerConfig::addUcharsToContainer(props, "prefix_chars", prefix_chars_);
 	TokenizerConfig::addUcharsToContainer(props, "postfix_chars", postfix_chars_);
 }
