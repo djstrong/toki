@@ -6,12 +6,10 @@ struct F {
 	F()
 	 : cfg(), tok(cfg), ss()
 	{
-		BOOST_TEST_MESSAGE( "setup fixture" );
 	}
 
 	~F()
 	{
-		BOOST_TEST_MESSAGE( "teardown fixture" );
 	}
 
 	TokenizerConfig::Cfg cfg;
