@@ -4,6 +4,7 @@
 #include "basicsplitlayer.h"
 #include "combinelayer.h"
 #include "regexpclassifylayer.h"
+#include "lexiconclassifylayer.h"
 
 bool init_token_layers()
 {
@@ -16,6 +17,7 @@ bool init_token_layers()
 	TokenLayer::register_layer<BasicSplitLayer>("split");
 	TokenLayer::register_layer<CombineLayer>("combine");
 	TokenLayer::register_layer<RegexpClassifyLayer>("classify_regexp");
+	TokenLayer::register_layer<LexiconClassifyLayer>("lexicon");
 
 	init_done = true;
 	return true;
