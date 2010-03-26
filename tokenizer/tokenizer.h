@@ -103,6 +103,22 @@ public:
 	 */
 	virtual void reset();
 
+	/**
+	 * Return a string with all tokens processed and printed according to the
+	 * given format string. The following replacements will be done:
+	 * - $orth   -> the token's orth
+	 * - $type   -> the token's type
+	 * - $ws     -> the preceeding whitespace amount string representation
+	 *              e.g. "none". @see Token::WhitespaceAmount
+	 * - $ws_id  -> the preceeding whitespace numeric code, 0 for no whtespace
+	 * - $ws_any -> 0 if there was any whitespace preceeding the token, else 1
+	 */
+	std::string debug_formatted(const std::string& format);
+
+	/**
+	 * @overload uses a default format (from the config)
+	 */
+	std::string debug_formatted();
 protected:
 	/**
 	 * Shorthand to avoid derived classes having to explicitly use the pointer
@@ -110,6 +126,11 @@ protected:
 	UnicodeSource& input() {
 		return *input_;
 	}
+
+	/**
+	 * Apply the configuration -- helper o avoid repeating code in ctors
+	 */
+	void apply_configuration(const TokenizerConfig::Cfg& cfg);
 
 	/**
 	 * Called when a new input source is created, derived classes might want to
@@ -126,6 +147,12 @@ protected:
 	 * The source of the text.
 	 */
 	boost::shared_ptr<UnicodeSource> input_;
+
+	/**
+	 * Format of the debug tokenization output
+	 * @see debug_formatted
+	 */
+	std::string debug_format_;
 };
 
 #endif // TOKENIZER_H
