@@ -22,7 +22,9 @@ static const char subdir_name[] = "test_compare";
 //BOOST_AUTO_TEST_SUITE( test_compare )
 struct compare_item
 {
-	TokenizerConfig::Cfg* config;
+	TokenizerConfig::Cfg* base_config;
+
+	std::vector<fs::path> configs;
 
 	fs::path in_file;
 
@@ -39,9 +41,21 @@ void test_one_item(const compare_item& c)
 	fs::path file_out = c.out_file;
 	BOOST_REQUIRE_MESSAGE(fs::exists(file_in), "Input file " << file_in << " not found!");
 	BOOST_REQUIRE_MESSAGE(fs::exists(file_out), "Expected output file " << file_out << " not found!");
+
 	fs::ifstream ifs_in(file_in);
 	fs::ifstream ifs_out(file_out);
-	LayerTokenizer tok(ifs_in, *c.config);
+
+	TokenizerConfig::Cfg cfg;
+	if (c.base_config != NULL) {
+		cfg = *(c.base_config);
+	}
+
+	BOOST_FOREACH (const fs::path& p, c.configs) {
+		TokenizerConfig::Cfg additional = TokenizerConfig::fromFile(p.string());
+		TokenizerConfig::merge(cfg, additional);
+	}
+
+	LayerTokenizer tok(ifs_in, cfg);
 	std::stringstream ss;
 	tok.debug_orths_newline(ss);
 	std::stringstream ss_expected;
@@ -84,32 +98,34 @@ void init_subdir(fs::path dir)
 		std::string p = (dir / "main.ini").string();
 		*cfg = TokenizerConfig::fromFile(p);
 	} else {
+		//check fir name, load special config if possible, else default
 		*cfg = TokenizerConfig::Default();
 	}
 	global_configs.push_back(boost::shared_ptr<TokenizerConfig::Cfg>(cfg));
+	int count = 0;
 	BOOST_FOREACH(const std::string& s, tests_out) {
-		compare_item cmp;
+		compare_item c;
 		if (tests_in.find(s) == tests_in.end()) {
 			if (tests_in.find("main") == tests_in.end()) {
-				BOOST_TEST_MESSAGE("massing .in file : " << s);
+				BOOST_TEST_MESSAGE("missing .in file : " << s);
 				continue;
 			} else {
-				cmp.in_file = dir / "main.in";
+				c.in_file = dir / "main.in";
 			}
 		} else {
-			cmp.in_file = dir / (s + ".in");
+			c.in_file = dir / (s + ".in");
 		}
-		cmp.out_file = dir / (s + ".out");
-		if (configs.find(s) == configs.end()) {
-			cmp.config = cfg;
-		} else {
-			cmp.config = new TokenizerConfig::Cfg();
-			std::string p = (dir / (s + ".ini")).string();
-			*cmp.config = TokenizerConfig::fromFile(p);
-			global_configs.push_back(boost::shared_ptr<TokenizerConfig::Cfg>(cmp.config));
+		c.out_file = dir / (s + ".out");
+		c.base_config = cfg;
+		if (configs.find(s) != configs.end()) {
+			c.configs.push_back(dir / (s + ".ini"));
 		}
-		global_compares.push_back(cmp);
+		global_compares.push_back(c);
+		++count;
 	}
+	BOOST_TEST_MESSAGE("Found " << count << " valid compare test case"
+		<< (count > 1 ? "s" : "")
+		<< " in " << dir);
 	BOOST_FOREACH(const fs::path& s, subdirs) {
 		init_subdir(s);
 	}
