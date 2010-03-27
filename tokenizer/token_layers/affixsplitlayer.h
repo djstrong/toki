@@ -10,6 +10,20 @@
 class AffixSplitLayer : public OutputQueueLayer
 {
 public:
+	/**
+	 * Constructor.
+	 *
+	 * Keys recognized in the configuration:
+	 * - prefix_chars  - List of prefix characters, treated as UTF-8 and
+	 *                   unescaped. Defaults to empty.
+	 * - postfix_chars - List of postfix characters, treated as UTF-8 and
+	 *                   unescaped. Defaults to empty.
+	 * - prefix_token_type  - Token type to set in the extracted prefixes.
+	 *                        Defaults to "pre".
+	 * - postfix_token_type - Token type to set in the extracted postfixes.
+	 *                        Defaults to "post".
+	 */
+
 	AffixSplitLayer(TokenSource* input, const Properties& props);
 
 protected:

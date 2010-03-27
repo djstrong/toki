@@ -6,7 +6,7 @@
 BasicSplitLayer::BasicSplitLayer(TokenSource* input, const Properties& props)
 	: OutputQueueLayer(input, props), split_chars_(), sep_type_()
 {
-	sep_type_ = props.get<std::string>("sep_tok_type", "sep");
+	sep_type_ = props.get<std::string>("separator_token_type", "sep");
 	TokenizerConfig::addUcharsToContainer(props, "separators", split_chars_);
 }
 

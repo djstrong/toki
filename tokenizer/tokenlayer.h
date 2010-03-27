@@ -46,6 +46,15 @@ public:
 	/**
 	 * The constructor.
 	 * @param input The token source this layer will process tokens from.
+	 * @param props Configuration of the token layer.
+	 *
+	 * Keys recognized in the configuration:
+	 * - process_types - Space-separated list of token types to include in
+	 *                   processing. All tokens are considered if it is empty.
+	 *                   Defaults to empty.
+	 * - ignore_types  - Space-separated list of token types to explicitly
+	 *                   ignore, even if they pass the process_types check.
+	 *                   Defaults to empty.
 	 */
 	TokenLayer(TokenSource* input, const Properties& props);
 
@@ -104,8 +113,16 @@ public:
 	static bool register_layer(const std::string& class_id);
 
 protected:
+	/**
+	 * Convenience helper to avoid having derived classes access the input
+	 * source directly
+	 */
 	virtual Token* getTokenFromInput();
 
+	/**
+	 * Determine if the given token type should be processed according to
+	 * process / ignore rules
+	 */
 	bool shouldProcessTokenType(const std::string& t);
 
 private:
@@ -114,8 +131,14 @@ private:
 	 */
 	TokenSource* input_;
 
+	/**
+	 * Set of token types to process, if empty, all are considered
+	 */
 	std::set<std::string> process_token_types_;
 
+	/**
+	 * Set of token types to ignore, checked after they pass the inclusion check
+	 */
 	std::set<std::string> do_not_process_token_types_;
 };
 

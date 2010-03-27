@@ -56,11 +56,11 @@ void test_one_item(const compare_item& c)
 	}
 
 	LayerTokenizer tok(ifs_in, cfg);
-	std::stringstream ss;
-	tok.debug_orths_newline(ss);
 	std::stringstream ss_expected;
 	ss_expected << ifs_out.rdbuf();
-	BOOST_CHECK_EQUAL( ss.str(), ss_expected.str() );
+	std::string actual = tok.debug_formatted();
+	BOOST_CHECK_EQUAL (actual, ss_expected.str());
+
 }
 
 void subdir_exists()

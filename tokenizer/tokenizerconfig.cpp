@@ -1,5 +1,7 @@
 #include "tokenizerconfig.h"
 
+#include "parser/loose_ini_paser.h"
+
 #include <boost/property_tree/ini_parser.hpp>
 #include <boost/property_tree/xml_parser.hpp>
 #include <boost/property_tree/json_parser.hpp>
@@ -14,7 +16,7 @@ TokenizerConfig::Cfg TokenizerConfig::fromFile(const std::string &filename)
 {
 	TokenizerConfig::Cfg p;
 	try {
-		boost::property_tree::ini_parser::read_ini(filename, p);
+		loose_ini_parser::read_loose_ini(filename, p);
 	} catch (boost::property_tree::file_parser_error& e) {
 		throw TokenizerLibError(e.what());
 	}
