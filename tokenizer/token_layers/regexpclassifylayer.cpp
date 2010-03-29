@@ -17,6 +17,7 @@ RegexpClassifyLayer::RegexpClassifyLayer(TokenSource* input, const Properties& p
 			} else {
 				std::cerr << "Error in regexp for type:" << type
 					<< " -- " << v.second.data() << "\n";
+				delete m;
 			}
 		}
 	}

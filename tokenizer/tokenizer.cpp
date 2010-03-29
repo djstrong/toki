@@ -97,6 +97,7 @@ std::string Tokenizer::debug_formatted(const std::string& format)
 		boost::replace_first(out, "$wa_n",
 		boost::lexical_cast<std::string>(t->preceeding_whitespace()));
 		ss << out;
+		delete t;
 	}
 	return ss.str();
 }
