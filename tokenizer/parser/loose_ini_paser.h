@@ -1,3 +1,4 @@
+// Based on boost property_tree ini_parser, original copyright notice follows.
 // ----------------------------------------------------------------------------
 // Copyright (C) 2002-2006 Marcin Kalicinski
 // Copyright (C) 2009 Sebastian Redl
