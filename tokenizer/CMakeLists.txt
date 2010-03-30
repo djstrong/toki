@@ -7,7 +7,6 @@ SET(libtokenizer_STAT_SRC
     layertokenizer.cpp
     nullunicodesource.cpp
     token.cpp
-    tokenizerconfig.cpp
     tokenizer.cpp
     tokenlayer.cpp
     token_layers/affixsplitlayer.cpp

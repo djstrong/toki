@@ -12,7 +12,7 @@ struct F {
 	{
 	}
 
-	TokenizerConfig::Cfg cfg;
+	Config::Node cfg;
 	WhitespaceTokenizer tok;
 	std::stringstream ss;
 };

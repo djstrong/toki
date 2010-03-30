@@ -8,6 +8,8 @@
 # ICU_LIBRARIES - Libraries to link against for the common ICU
 # ICU_I18N_LIBRARIES - Libraries to link against for ICU internationaliation
 # (note: in addition to ICU_LIBRARIES)
+
+MARK_AS_ADVANCED(ICU_DIR)
  
 # Look for the header file.
 find_path(
