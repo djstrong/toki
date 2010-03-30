@@ -4,6 +4,9 @@
 #include <unicode/unistr.h>
 #include <string>
 
+/**
+ * A single token being processed. The orth is stored as an ICU UnicodeString.
+ */
 class Token
 {
 public:
@@ -15,8 +18,20 @@ public:
 		WA_ManyNewlines
 	};
 
+	/**
+	 * Constructor.
+	 * @param orth      the token orth
+	 * @param type      the token type
+	 * @param wa_before preceeding whitespace amount indicator
+	 */
 	Token(const UnicodeString& orth, const std::string& type, WhitespaceAmount wa_before);
 
+	/**
+	 * Constructor.
+	 * @param orth_utf8 the token orth, treated as an UTF8
+	 * @param type      the token type
+	 * @param wa_before preceeding whitespace amount indicator
+	 */
 	Token(const char* orth_utf8, const std::string& type, WhitespaceAmount wa_before);
 
 	const UnicodeString& orth() const {
@@ -44,8 +59,6 @@ public:
 	}
 
 	std::string orth_utf8() const;
-
-	std::string debugUtf8() const;
 
 protected:
 	UnicodeString orth_;

@@ -1,5 +1,7 @@
 #include "layertokenizer.h"
 #include "compare.h"
+#include "debug.h"
+#include "util.h"
 
 #include <fstream>
 #include <boost/filesystem/fstream.hpp>
@@ -57,9 +59,10 @@ void test_one_item(const compare_item& c)
 	}
 
 	LayerTokenizer tok(ifs_in, cfg);
+	std::string format = Util::unescape_utf8(cfg.get("debug.format", "[$orth]"));
 	std::stringstream ss_expected;
 	ss_expected << ifs_out.rdbuf();
-	std::string actual = tok.debug_formatted();
+	std::string actual = Debug::tokenize_formatted(tok, format);
 	BOOST_CHECK_EQUAL (actual, ss_expected.str());
 
 }

@@ -22,9 +22,4 @@ std::string Token::orth_utf8() const
 	return result;
 }
 
-std::string Token::debugUtf8() const
-{
-	std::stringstream ss;
-	ss << "[" << orth_utf8() << "]-" << type_ << "-" << preceeding_whitespace_ << "-";
-	return ss.str();
-}
+

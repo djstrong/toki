@@ -2,6 +2,7 @@
 #include "token.h"
 #include "unicodeistreamwrapper.h"
 #include "unicodeicustringwrapper.h"
+#include "debug.h"
 
 #include <iostream>
 #include <sstream>
@@ -61,8 +62,9 @@ int main(int argc, char** argv)
 	std::cout << "Tokenizer started. C-d or C-c to exit.\n";
 	tok.setInputSource(std::cin, bufsize);
 	if (orths) {
-		tok.debug_orths_newline(std::cout);
+		Debug::tokenize_orths_newline(tok, std::cout);
 	} else {
-		tok.debug_tokenize(std::cout);
+		std::string format = conf.get("debug.format", "$orth\n");
+		Debug::tokenize_formatted(tok, format, std::cout);
 	}
 }

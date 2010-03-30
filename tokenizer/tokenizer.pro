@@ -25,7 +25,8 @@ HEADERS += token.h \
     exception.h \
     token_layers/lexiconclassifylayer.h \
     parser/loose_ini_paser.h \
-    util.h
+    util.h \
+    debug.h
 SOURCES += token.cpp \
     tokenizer.cpp \
     unicodesource.cpp \
@@ -45,7 +46,9 @@ SOURCES += token.cpp \
     token_layers/affixsplitlayer.cpp \
     token_layers/regexpclassifylayer.cpp \
     token_layers/inittokenlayers.cpp \
-    token_layers/lexiconclassifylayer.cpp
+    token_layers/lexiconclassifylayer.cpp \
+    debug.cpp \
+    util.cpp
 LIBS += -licuuc \
     -licuio \
     -lboost_program_options

@@ -15,6 +15,8 @@ void utf8StringToUcharContainer(const std::string& s, TContainer& container)
 	}
 }
 
+std::string unescape_utf8(const std::string& str);
+
 } //end namespace Util
 
 #endif // UTIL_H
