@@ -10,7 +10,7 @@
 class LexiconClassifyLayer : public TokenLayer
 {
 public:
-	LexiconClassifyLayer(TokenSource* input, const Properties& props);
+	LexiconClassifyLayer(TokenSource* input, const Config::Node& props);
 
 	~LexiconClassifyLayer();
 

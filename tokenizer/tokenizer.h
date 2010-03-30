@@ -2,7 +2,7 @@
 #define TOKENIZER_H
 
 #include "tokensource.h"
-#include "tokenizerconfig.h"
+#include "config.h"
 #include "unicodesource.h"
 
 #include <vector>
@@ -24,35 +24,35 @@ public:
 	 * will always claim there are no more characters, so getNextToken() will
 	 * just return null.
 	 */
-	Tokenizer(const TokenizerConfig::Cfg& cfg = TokenizerConfig::Default());
+	Tokenizer(const Config::Node& cfg = Config::Default());
 
 	/**
 	 * Constructor shorthand -- start with the given UnicodeSource, and take
 	 * ownership (through a shared pointer).
 	 * @see setInputSource
 	 */
-	Tokenizer(UnicodeSource* input, const TokenizerConfig::Cfg& cfg = TokenizerConfig::Default());
+	Tokenizer(UnicodeSource* input, const Config::Node& cfg = Config::Default());
 
 	/**
 	 * Constructor shorthand -- start with the given UnicodeSource as a shared
 	 * pointer
 	 * @see setInputSource
 	 */
-	Tokenizer(boost::shared_ptr<UnicodeSource> input, const TokenizerConfig::Cfg& cfg = TokenizerConfig::Default());
+	Tokenizer(boost::shared_ptr<UnicodeSource> input, const Config::Node& cfg = Config::Default());
 
 	/**
 	 * Constructor shorthand -- start with the given std::istream. Note no
 	 * ownership is taken and the stream must live long enough.
 	 * @see setInputSource
 	 */
-	Tokenizer(std::istream& is, const TokenizerConfig::Cfg& cfg = TokenizerConfig::Default());
+	Tokenizer(std::istream& is, const Config::Node& cfg = Config::Default());
 
 	/**
 	 * Constructor shorthand -- start with the given UnicodeString, which is
 	 * copied.
 	 * @see setInputSource
 	 */
-	Tokenizer(const UnicodeString& s, const TokenizerConfig::Cfg& cfg = TokenizerConfig::Default());
+	Tokenizer(const UnicodeString& s, const Config::Node& cfg = Config::Default());
 
 	/**
 	 * Destructor
@@ -130,7 +130,7 @@ protected:
 	/**
 	 * Apply the configuration -- helper o avoid repeating code in ctors
 	 */
-	void apply_configuration(const TokenizerConfig::Cfg& cfg);
+	void apply_configuration(const Config::Node& cfg);
 
 	/**
 	 * Called when a new input source is created, derived classes might want to

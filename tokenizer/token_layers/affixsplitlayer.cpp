@@ -1,15 +1,16 @@
 #include "affixsplitlayer.h"
 #include "token.h"
-#include <boost/property_tree/ptree.hpp>
-#include "tokenizerconfig.h"
+#include "util.h"
 
-AffixSplitLayer::AffixSplitLayer(TokenSource* input, const Properties& props)
+AffixSplitLayer::AffixSplitLayer(TokenSource* input, const Config::Node& props)
 	: OutputQueueLayer(input, props)
 {
 	prefix_type_ = props.get<std::string>("prefix_token_type", "pre");
 	postfix_type_ = props.get<std::string>("postfix_token_type", "post");
-	TokenizerConfig::addUcharsToContainer(props, "prefix_chars", prefix_chars_);
-	TokenizerConfig::addUcharsToContainer(props, "postfix_chars", postfix_chars_);
+	std::string prefixes = props.get("prefix_chars", "");
+	Util::utf8StringToUcharContainer(prefixes, prefix_chars_);
+	std::string postfixes = props.get("postfix_chars", "");
+	Util::utf8StringToUcharContainer(postfixes, postfix_chars_);
 }
 
 void AffixSplitLayer::prepareMoreTokens(Token* t)

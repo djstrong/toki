@@ -1,11 +1,10 @@
 #include "lexiconclassifylayer.h"
 #include "token.h"
-#include "tokenizerconfig.h"
 
 #include <boost/algorithm/string.hpp>
 #include <boost/foreach.hpp>
 
-LexiconClassifyLayer::LexiconClassifyLayer(TokenSource *input, const Properties &props)
+LexiconClassifyLayer::LexiconClassifyLayer(TokenSource *input, const Config::Node &props)
 	: TokenLayer(input, props), lex_(), token_type_()
 {
 	token_type_ = props.get<std::string>("token_type", "lex");

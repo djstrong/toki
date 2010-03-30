@@ -1,7 +1,7 @@
 #include "combinelayer.h"
 #include "token.h"
 
-CombineLayer::CombineLayer(TokenSource* input, const Properties& props)
+CombineLayer::CombineLayer(TokenSource* input, const Config::Node& props)
 	: OutputQueueLayer(input, props)
 {
 }

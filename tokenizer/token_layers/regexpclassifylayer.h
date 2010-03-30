@@ -7,7 +7,7 @@
 class RegexpClassifyLayer : public TokenLayer
 {
 public:
-	RegexpClassifyLayer(TokenSource* input, const Properties& props);
+	RegexpClassifyLayer(TokenSource* input, const Config::Node& props);
 
 	~RegexpClassifyLayer();
 

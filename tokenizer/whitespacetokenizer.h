@@ -19,13 +19,13 @@ public:
 	 * - token_type - Token type to set in created tokens, defaults to "t".
 	 *
 	 */
-	WhitespaceTokenizer(const TokenizerConfig::Cfg& cfg = TokenizerConfig::Default());
+	WhitespaceTokenizer(const Config::Node& cfg = Config::Default());
 
 	/**
 	 * Constructor shorthand
 	 * @see Tokenizer::Tokenizer
 	 */
-	WhitespaceTokenizer(UnicodeSource* us, const TokenizerConfig::Cfg& cfg = TokenizerConfig::Default());
+	WhitespaceTokenizer(UnicodeSource* us, const Config::Node& cfg = Config::Default());
 
 	/// TokenSource override
 	Token* getNextToken();

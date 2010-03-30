@@ -7,7 +7,7 @@
 class InputBufferLayer : public TokenLayer
 {
 public:
-	InputBufferLayer(TokenSource* input, const Properties& props);
+	InputBufferLayer(TokenSource* input, const Config::Node& props);
 
 	~InputBufferLayer();
 

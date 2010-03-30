@@ -24,7 +24,7 @@ public:
 	 *                        Defaults to "post".
 	 */
 
-	AffixSplitLayer(TokenSource* input, const Properties& props);
+	AffixSplitLayer(TokenSource* input, const Config::Node& props);
 
 protected:
 	void prepareMoreTokens(Token* t);

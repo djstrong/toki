@@ -5,6 +5,7 @@
 #include <boost/filesystem/fstream.hpp>
 #include <iostream>
 #include <map>
+#include <set>
 #include <sstream>
 
 #include <boost/algorithm/string.hpp>
@@ -22,7 +23,7 @@ static const char subdir_name[] = "test_compare";
 //BOOST_AUTO_TEST_SUITE( test_compare )
 struct compare_item
 {
-	TokenizerConfig::Cfg* base_config;
+	Config::Node* base_config;
 
 	std::vector<fs::path> configs;
 
@@ -31,7 +32,7 @@ struct compare_item
 	fs::path out_file;
 };
 
-static std::vector< boost::shared_ptr<TokenizerConfig::Cfg> > global_configs;
+static std::vector< boost::shared_ptr<Config::Node> > global_configs;
 
 static std::vector< compare_item > global_compares;
 
@@ -45,14 +46,14 @@ void test_one_item(const compare_item& c)
 	fs::ifstream ifs_in(file_in);
 	fs::ifstream ifs_out(file_out);
 
-	TokenizerConfig::Cfg cfg;
+	Config::Node cfg;
 	if (c.base_config != NULL) {
 		cfg = *(c.base_config);
 	}
 
 	BOOST_FOREACH (const fs::path& p, c.configs) {
-		TokenizerConfig::Cfg additional = TokenizerConfig::fromFile(p.string());
-		TokenizerConfig::merge(cfg, additional);
+		Config::Node additional = Config::fromFile(p.string());
+		Config::merge_into(cfg, additional);
 	}
 
 	LayerTokenizer tok(ifs_in, cfg);
@@ -93,15 +94,15 @@ void init_subdir(fs::path dir)
 		}
 	}
 	std::set<std::string>::iterator i = configs.find("main");
-	TokenizerConfig::Cfg* cfg = new TokenizerConfig::Cfg();
+	Config::Node* cfg = new Config::Node();
 	if (i != configs.end()) {
 		std::string p = (dir / "main.ini").string();
-		*cfg = TokenizerConfig::fromFile(p);
+		*cfg = Config::fromFile(p);
 	} else {
 		//check fir name, load special config if possible, else default
-		*cfg = TokenizerConfig::Default();
+		*cfg = Config::Default();
 	}
-	global_configs.push_back(boost::shared_ptr<TokenizerConfig::Cfg>(cfg));
+	global_configs.push_back(boost::shared_ptr<Config::Node>(cfg));
 	int count = 0;
 	BOOST_FOREACH(const std::string& s, tests_out) {
 		compare_item c;

@@ -6,7 +6,7 @@
 class CombineLayer : public OutputQueueLayer
 {
 public:
-	CombineLayer(TokenSource* input, const Properties& props);
+	CombineLayer(TokenSource* input, const Config::Node& props);
 
 protected:
 	void prepareMoreTokens(Token* t);

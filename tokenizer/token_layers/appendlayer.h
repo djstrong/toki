@@ -17,7 +17,7 @@ public:
 	 * - append - text to append, treated as UTF-8 and unescaped. Defaults to
 	 *            an exlamation mark (!).
 	 */
-	AppendLayer(TokenSource* input, const Properties& props);
+	AppendLayer(TokenSource* input, const Config::Node& props);
 
 	/// TokenLayer override
 	Token* processToken(Token *t);

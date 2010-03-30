@@ -2,7 +2,6 @@
 #include "token.h"
 #include "unicodeistreamwrapper.h"
 #include "unicodeicustringwrapper.h"
-#include "tokenizerconfig.h"
 
 #include <iostream>
 #include <sstream>
@@ -55,9 +54,9 @@ int main(int argc, char** argv)
 
 	if (bufsize < 0) return 3;
 
-	const TokenizerConfig::Cfg& conf = config_file.empty() ?
-		TokenizerConfig::Default() :
-		TokenizerConfig::fromFile(config_file);
+	const Config::Node& conf = config_file.empty() ?
+		Config::Default() :
+		Config::fromFile(config_file);
 	LayerTokenizer tok(conf);
 	std::cout << "Tokenizer started. C-d or C-c to exit.\n";
 	tok.setInputSource(std::cin, bufsize);

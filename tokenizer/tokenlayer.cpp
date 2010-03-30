@@ -5,7 +5,7 @@
 #include <boost/property_tree/ptree.hpp>
 #include <boost/foreach.hpp>
 
-TokenLayer::TokenLayer(TokenSource* input, const Properties& props)
+TokenLayer::TokenLayer(TokenSource* input, const Config::Node& props)
 	: input_(input), process_token_types_(), do_not_process_token_types_()
 {
 	std::vector<std::string> sv;
@@ -34,7 +34,7 @@ void TokenLayer::reset()
 {
 }
 
-TokenLayer* TokenLayer::create(std::string class_id, TokenSource* input, const Properties& props)
+TokenLayer* TokenLayer::create(std::string class_id, TokenSource* input, const Config::Node& props)
 {
 	return TokenLayerFactory::Instance().CreateObject(class_id, input, props);
 }

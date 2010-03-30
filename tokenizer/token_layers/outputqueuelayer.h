@@ -12,7 +12,7 @@ class OutputQueueLayer : public TokenLayer
 {
 public:
 	/// Consructor
-	OutputQueueLayer(TokenSource* input, const Properties& props);
+	OutputQueueLayer(TokenSource* input, const Config::Node& props);
 
 	/// Destructor
 	~OutputQueueLayer();

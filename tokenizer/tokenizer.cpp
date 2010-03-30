@@ -10,35 +10,35 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/lexical_cast.hpp>
 
-Tokenizer::Tokenizer(const TokenizerConfig::Cfg& cfg)
+Tokenizer::Tokenizer(const Config::Node& cfg)
 	: TokenSource(), input_()
 {
 	setNullInputSource();
 	apply_configuration(cfg);
 }
 
-Tokenizer::Tokenizer(UnicodeSource *input, const TokenizerConfig::Cfg& cfg)
+Tokenizer::Tokenizer(UnicodeSource *input, const Config::Node& cfg)
 	: TokenSource(), input_()
 {
 	setInputSource(input);
 	apply_configuration(cfg);
 }
 
-Tokenizer::Tokenizer(boost::shared_ptr<UnicodeSource> input, const TokenizerConfig::Cfg &cfg)
+Tokenizer::Tokenizer(boost::shared_ptr<UnicodeSource> input, const Config::Node &cfg)
 	: TokenSource(), input_()
 {
 	setInputSource(input);
 	apply_configuration(cfg);
 }
 
-Tokenizer::Tokenizer(std::istream &is, const TokenizerConfig::Cfg &cfg)
+Tokenizer::Tokenizer(std::istream &is, const Config::Node &cfg)
 	: TokenSource(), input_()
 {
 	setInputSource(is, cfg.get<int>("input_buffer_size", 200));
 	apply_configuration(cfg);
 }
 
-Tokenizer::Tokenizer(const UnicodeString &s, const TokenizerConfig::Cfg &cfg)
+Tokenizer::Tokenizer(const UnicodeString &s, const Config::Node &cfg)
 	: TokenSource(), input_()
 {
 	setInputSource(s);
@@ -80,7 +80,7 @@ void Tokenizer::reset()
 {
 }
 
-void Tokenizer::apply_configuration(const TokenizerConfig::Cfg &cfg)
+void Tokenizer::apply_configuration(const Config::Node &cfg)
 {
 	std::string a = cfg.get<std::string>("debug.format", "[$orth]-$type-$wa_n\n");
 	debug_format_ = "";

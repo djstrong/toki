@@ -1,13 +1,13 @@
 #include "basicsplitlayer.h"
 #include "token.h"
+#include "util.h"
 
-#include "tokenizerconfig.h"
-
-BasicSplitLayer::BasicSplitLayer(TokenSource* input, const Properties& props)
+BasicSplitLayer::BasicSplitLayer(TokenSource* input, const Config::Node& props)
 	: OutputQueueLayer(input, props), split_chars_(), sep_type_()
 {
 	sep_type_ = props.get<std::string>("separator_token_type", "sep");
-	TokenizerConfig::addUcharsToContainer(props, "separators", split_chars_);
+	std::string separators = props.get("separators", "");
+	Util::utf8StringToUcharContainer(separators, split_chars_);
 }
 
 void BasicSplitLayer::prepareMoreTokens(Token* t)

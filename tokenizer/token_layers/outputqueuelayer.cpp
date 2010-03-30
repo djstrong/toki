@@ -2,7 +2,7 @@
 #include "token.h"
 #include <cassert>
 
-OutputQueueLayer::OutputQueueLayer(TokenSource* input, const Properties& props)
+OutputQueueLayer::OutputQueueLayer(TokenSource* input, const Config::Node& props)
 	: TokenLayer(input, props), queue_()
 {
 }

@@ -15,36 +15,36 @@
 
 #include "exception.h"
 
-LayerTokenizer::LayerTokenizer(const TokenizerConfig::Cfg& cfg)
-	: Tokenizer(cfg), input_tokenizer_(new WhitespaceTokenizer(cfg.get_child("input", TokenizerConfig::Cfg())))
+LayerTokenizer::LayerTokenizer(const Config::Node &cfg)
+	: Tokenizer(cfg), input_tokenizer_(new WhitespaceTokenizer(cfg.get_child("input", Config::Node())))
 {
 	apply_configuration(cfg);
 	newInputSource();
 }
 
-LayerTokenizer::LayerTokenizer(UnicodeSource *input, const TokenizerConfig::Cfg &cfg)
-	: Tokenizer(input, cfg), input_tokenizer_(new WhitespaceTokenizer(cfg.get_child("input", TokenizerConfig::Cfg())))
+LayerTokenizer::LayerTokenizer(UnicodeSource *input, const Config::Node &cfg)
+	: Tokenizer(input, cfg), input_tokenizer_(new WhitespaceTokenizer(cfg.get_child("input", Config::Node())))
 {
 	apply_configuration(cfg);
 	newInputSource();
 }
 
-LayerTokenizer::LayerTokenizer(boost::shared_ptr<UnicodeSource> input, const TokenizerConfig::Cfg &cfg)
-	: Tokenizer(input, cfg), input_tokenizer_(new WhitespaceTokenizer(cfg.get_child("input", TokenizerConfig::Cfg())))
+LayerTokenizer::LayerTokenizer(boost::shared_ptr<UnicodeSource> input, const Config::Node &cfg)
+	: Tokenizer(input, cfg), input_tokenizer_(new WhitespaceTokenizer(cfg.get_child("input", Config::Node())))
 {
 	apply_configuration(cfg);
 	newInputSource();
 }
 
-LayerTokenizer::LayerTokenizer(std::istream &is, const TokenizerConfig::Cfg &cfg)
-	: Tokenizer(is, cfg), input_tokenizer_(new WhitespaceTokenizer(cfg.get_child("input", TokenizerConfig::Cfg())))
+LayerTokenizer::LayerTokenizer(std::istream &is, const Config::Node &cfg)
+	: Tokenizer(is, cfg), input_tokenizer_(new WhitespaceTokenizer(cfg.get_child("input", Config::Node())))
 {
 	apply_configuration(cfg);
 	newInputSource();
 }
 
-LayerTokenizer::LayerTokenizer(const UnicodeString &s, const TokenizerConfig::Cfg &cfg)
-	: Tokenizer(s, cfg), input_tokenizer_(new WhitespaceTokenizer(cfg.get_child("input", TokenizerConfig::Cfg())))
+LayerTokenizer::LayerTokenizer(const UnicodeString &s, const Config::Node &cfg)
+	: Tokenizer(s, cfg), input_tokenizer_(new WhitespaceTokenizer(cfg.get_child("input", Config::Node())))
 {
 	apply_configuration(cfg);
 	newInputSource();
@@ -63,14 +63,14 @@ void LayerTokenizer::newInputSource()
 }
 
 
-void LayerTokenizer::apply_configuration(const TokenizerConfig::Cfg &cfg)
+void LayerTokenizer::apply_configuration(const Config::Node &cfg)
 {
 	using boost::property_tree::ptree;
 	const ptree& layers_tree = cfg.get_child("layers");
 
 	std::vector<std::string> layer_ids;
 
-	BOOST_FOREACH (const ptree::value_type &v, layers_tree) {
+	BOOST_FOREACH (const Config::Node::value_type &v, layers_tree) {
 		//if (v.first == "layer") {
 			layer_ids.push_back(v.second.data());
 		//}

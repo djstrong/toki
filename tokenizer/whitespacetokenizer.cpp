@@ -5,13 +5,13 @@
 #include <unicode/uchar.h>
 #include <iostream>
 
-WhitespaceTokenizer::WhitespaceTokenizer(const TokenizerConfig::Cfg &cfg)
+WhitespaceTokenizer::WhitespaceTokenizer(const Config::Node &cfg)
 	: Tokenizer(cfg), wa_(Token::WA_None), token_type_()
 {
 	token_type_ = cfg.get("token_type", "t");
 }
 
-WhitespaceTokenizer::WhitespaceTokenizer(UnicodeSource* us, const TokenizerConfig::Cfg& cfg)
+WhitespaceTokenizer::WhitespaceTokenizer(UnicodeSource* us, const Config::Node& cfg)
 	: Tokenizer(us, cfg), wa_(Token::WA_None)
 {
 	token_type_ = cfg.get("token_type", "t");

@@ -2,7 +2,6 @@
 #define LAYERTOKENIZER_H
 
 #include "tokenizer.h"
-#include "tokenizerconfig.h"
 
 class TokenLayer;
 
@@ -15,35 +14,35 @@ public:
 	 * Constructor.
 	 * @see Tokenizer::Tokenizer
 	 */
-	LayerTokenizer(const TokenizerConfig::Cfg& cfg = TokenizerConfig::Default());
+	LayerTokenizer(const Config::Node& cfg = Config::Default());
 
 	/**
 	 * Constructor shorthand -- start with the given UnicodeSource, and take
 	 * ownership
 	 * @see Tokenizer::Tokenizer
 	 */
-	LayerTokenizer(UnicodeSource* input, const TokenizerConfig::Cfg& cfg = TokenizerConfig::Default());
+	LayerTokenizer(UnicodeSource* input, const Config::Node& cfg = Config::Default());
 
 	/**
 	 * Constructor shorthand -- start with the given UnicodeSource as a shared
 	 * pointer.
 	 * @see Tokenizer::Tokenizer
 	 */
-	LayerTokenizer(boost::shared_ptr<UnicodeSource> input, const TokenizerConfig::Cfg& cfg = TokenizerConfig::Default());
+	LayerTokenizer(boost::shared_ptr<UnicodeSource> input, const Config::Node& cfg = Config::Default());
 
 	/**
 	 * Constructor shorthand -- start with the given std::istream. Note no
 	 * ownership is taken and the stream must live long enough.
 	 * @see Tokenizer::Tokenizer
 	 */
-	LayerTokenizer(std::istream& is, const TokenizerConfig::Cfg& cfg = TokenizerConfig::Default());
+	LayerTokenizer(std::istream& is, const Config::Node& cfg = Config::Default());
 
 	/**
 	 * Constructor shorthand -- start with the given UnicodeString, which is
 	 * copied.
 	 * @see Tokenizer::Tokenizer
 	 */
-	LayerTokenizer(const UnicodeString& s, const TokenizerConfig::Cfg& cfg = TokenizerConfig::Default());
+	LayerTokenizer(const UnicodeString& s, const Config::Node& cfg = Config::Default());
 
 	/**
 	 * Destructor
@@ -53,7 +52,7 @@ public:
 	/**
 	 * Apply configuraton
 	 */
-	void apply_configuration(const TokenizerConfig::Cfg& cfg);
+	void apply_configuration(const Config::Node& cfg);
 
 	/// TokenSource override
 	void newInputSource();

@@ -1,7 +1,7 @@
 #include "inputbufferlayer.h"
 #include "token.h"
 
-InputBufferLayer::InputBufferLayer(TokenSource* input, const Properties& props)
+InputBufferLayer::InputBufferLayer(TokenSource* input, const Config::Node& props)
 	: TokenLayer(input, props), buffer_()
 {
 }

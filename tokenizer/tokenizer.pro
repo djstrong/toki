@@ -17,7 +17,6 @@ HEADERS += token.h \
     config.h \
     token_layers/inputbufferlayer.h \
     token_layers/appendlayer.h \
-    tokenizerconfig.h \
     layertokenizer.h \
     nullunicodesource.h \
     token_layers/affixsplitlayer.h \
@@ -25,7 +24,8 @@ HEADERS += token.h \
     token_layers/inittokenlayers.h \
     exception.h \
     token_layers/lexiconclassifylayer.h \
-    parser/loose_ini_paser.h
+    parser/loose_ini_paser.h \
+    util.h
 SOURCES += token.cpp \
     tokenizer.cpp \
     unicodesource.cpp \
@@ -40,7 +40,6 @@ SOURCES += token.cpp \
     config.cpp \
     token_layers/inputbufferlayer.cpp \
     token_layers/appendlayer.cpp \
-    tokenizerconfig.cpp \
     layertokenizer.cpp \
     nullunicodesource.cpp \
     token_layers/affixsplitlayer.cpp \

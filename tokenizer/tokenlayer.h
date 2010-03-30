@@ -2,6 +2,7 @@
 #define TOKENLAYER_H
 
 #include "tokensource.h"
+#include "config.h"
 
 #include <boost/utility.hpp>
 #include <loki/Factory.h>
@@ -41,8 +42,6 @@
 class TokenLayer : public TokenSource, private boost::noncopyable
 {
 public:
-	typedef boost::property_tree::ptree Properties;
-
 	/**
 	 * The constructor.
 	 * @param input The token source this layer will process tokens from.
@@ -56,7 +55,7 @@ public:
 	 *                   ignore, even if they pass the process_types check.
 	 *                   Defaults to empty.
 	 */
-	TokenLayer(TokenSource* input, const Properties& props);
+	TokenLayer(TokenSource* input, const Config::Node& props);
 
 	/// The destructor
 	virtual ~TokenLayer();
@@ -104,7 +103,7 @@ public:
 	 */
 	static TokenLayer* create(const std::string class_id,
 	                          TokenSource* input,
-	                          const Properties& props);
+	                          const Config::Node& props);
 
 	/**
 	 * Convenience template for registering TokenLayer derived classes.
@@ -151,7 +150,7 @@ typedef Loki::SingletonHolder<
 	Loki::Factory<
 		TokenLayer, // The base class for objects created in the factory
 		std::string, // Identifier type
-		Loki::TL::MakeTypelist< TokenSource*, const TokenLayer::Properties& >::Result
+		Loki::TL::MakeTypelist< TokenSource*, const Config::Node& >::Result
 		// TokenLayer constructor arguments' types specification
 	>,
 	Loki::CreateUsingNew, // Default, needed to change the item below
@@ -172,7 +171,7 @@ TokenLayerFactoryException;
  */
 template <typename T>
 inline
-T* LayerCreator(TokenSource* input, const TokenLayer::Properties& props)
+T* LayerCreator(TokenSource* input, const Config::Node& props)
 {
 	return new T(input, props);
 }

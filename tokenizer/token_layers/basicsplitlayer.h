@@ -21,7 +21,7 @@ public:
 	 * - separator_token_type - Type to set in the separator tokens. Defaults
 	 *                          to "sep".
 	 */
-	BasicSplitLayer(TokenSource* input, const Properties& props);
+	BasicSplitLayer(TokenSource* input, const Config::Node& props);
 
 protected:
 	/// OutputQueueTokenLayer override
