@@ -9,29 +9,51 @@
 
 namespace Config {
 
+	/**
+	 * Typedef for the configuration type passed around
+	 */
 	typedef boost::property_tree::ptree Node;
 
+	/**
+	 * Load configuration from a file (may throw)
+	 */
 	Node fromFile(const std::string &filename);
 
+	/**
+	 * Load configuration from a file (may throw)
+	 */
 	Node fromStream(std::istream& is);
 
-	Node empty();
-
+	/**
+	 * Merge two config nodes and return a node with the merged contents
+	 */
 	Node merge_copy(const Node& accu, const Node& other);
 
+	/**
+	 * Merge a config node into another.
+	 */
 	Node& merge_into(Node& accu, const Node& other);
 
+	/**
+	 * Write a config node into a file
+	 */
 	void write(const Node& c, const std::string& filename);
 
+	/**
+	 * The default configuration node
+	 */
 	const Node& Default();
 
-	const Node& get_default_config(const std::string& id);
+	/**
+	 * Get a default config by name
+	 */
+	Node get_library_config(const std::string& id);
 
-	std::vector<std::string> get_default_config_search_path();
+	std::vector<std::string> get_library_config_path();
 
-	void set_default_config_search_path(const std::vector<std::string> &);
+	void set_library_config_path(const std::vector<std::string> &);
 
-	void set_default_config_search_path(const std::string &);
+	void set_library_config_path(const std::string &);
 
 } // end namespace Config
 
