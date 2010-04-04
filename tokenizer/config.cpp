@@ -45,7 +45,11 @@ Node& merge_into(Node& accu, const Node& other)
 	BOOST_FOREACH (const ptree::value_type& in_other, other) {
 		boost::optional< ptree& > in_one;
 		if ((in_one = accu.get_child_optional(in_other.first))) {
-			merge_into(*in_one, in_other.second);
+			if (in_other.second.get("_merge", "") == "override") {
+				*in_one = in_other.second;
+			} else {
+				merge_into(*in_one, in_other.second);
+			}
 		} else {
 			accu.push_back(in_other);
 		}
