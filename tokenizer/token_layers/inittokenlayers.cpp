@@ -6,21 +6,10 @@
 #include "regexpclassifylayer.h"
 #include "lexiconclassifylayer.h"
 
-/*
-template <class T, bool T::mptr(const T&)>
-bool WRAP(const T& t1, const T& t2)
-{
-	return t1.*mptr(t2);
-}
-*/
-
-#include <boost/bind.hpp>
-
 bool init_token_layers()
 {
 	static bool init_done = false;
 	if (init_done) return false;
-	//boost::bind(&UnicodeString::compare, _1, _2);
 	TokenLayer::register_layer<TokenLayer>("passthrough");
 	TokenLayer::register_layer<AffixSplitLayer>("affix_split");
 	TokenLayer::register_layer<AppendLayer>("append");

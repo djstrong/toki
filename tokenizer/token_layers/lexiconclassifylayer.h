@@ -7,21 +7,45 @@
 
 #include <set>
 
+/**
+ * Classification layer that changes a token type if the orth matches one of
+ * the words in the given lexicon. The lexicon is a set of words.
+ *
+ * This layer is a templated class to allow various comparison functions in the
+ * word set, mainly to allow case-insensitive lexicons. Two concrete typedefs
+ * are provided:
+ *  - CaseLexiconClassifyLayer, for case-sensitive lexicons -- "lexicon" key
+ *  - CaselessLexiconClassifyLayer, for case-insensitive lexicons
+ *    -- "lexicon_caseless" key.
+ */
 template <typename CMP>
 class LexiconClassifyLayer : public TokenLayer
 {
 public:
+	/**
+	 * Constructor.
+	 *
+	 * Keys recognized in the configuration:
+	 * - lexicon    - The set of orths to recognize.
+	 * - token_type - Token type to set in the recognized tokens.
+	 */
 	LexiconClassifyLayer(TokenSource* input, const Config::Node& props);
 
+	/// Destructor
 	~LexiconClassifyLayer();
 
+	/// TokenLayer override
 	Token* processToken(Token *t);
 
 private:
+	/// The set of orths to recognize
 	std::set<UnicodeString, CMP> lex_;
+
+	/// Token type to set in the recognized tokens
 	std::string token_type_;
 };
 
+/** Implementation */
 
 #include "token.h"
 #include <boost/algorithm/string.hpp>

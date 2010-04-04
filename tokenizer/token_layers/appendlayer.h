@@ -14,7 +14,7 @@ public:
 	 * Constructor.
 	 *
 	 * Keys recognized in the configuration:
-	 * - append - text to append, treated as UTF-8 and unescaped. Defaults to
+	 * - append - Text to append, treated as UTF-8 and unescaped. Defaults to
 	 *            an exlamation mark (!).
 	 */
 	AppendLayer(TokenSource* input, const Config::Node& props);

@@ -3,10 +3,14 @@
 
 #include "outputqueuelayer.h"
 
-#include <unicode/utypes.h>
-
 #include <set>
 
+/**
+ * Layer to recognize and split prefix and posftix characters in tokens.
+ * All prefix characters are extracted as separate tokens, then the unrecognized
+ * part is output as the body token (with the type unmodified), and then the
+ * postfix characters are output.
+ */
 class AffixSplitLayer : public OutputQueueLayer
 {
 public:
@@ -27,21 +31,27 @@ public:
 	AffixSplitLayer(TokenSource* input, const Config::Node& props);
 
 protected:
+	/// OutputQueueLayer override
 	void prepareMoreTokens(Token* t);
 
 private:
+	/// test function for prefix characters
 	bool isPrefixChar(UChar c);
 
+	/// test function for postfix characters
 	bool isPostfixChar(UChar c);
 
+	/// prefix characters
 	std::set<UChar> prefix_chars_;
 
+	/// postfix characters
 	std::set<UChar> postfix_chars_;
 
+	/// type of the extracted prefix tokens
 	std::string prefix_type_;
 
+	/// type of the extracted postfix tokens
 	std::string postfix_type_;
 };
 
-void foo();
 #endif // AFFIXSPLITLAYER_H

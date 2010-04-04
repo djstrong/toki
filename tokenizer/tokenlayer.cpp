@@ -39,6 +39,11 @@ TokenLayer* TokenLayer::create(std::string class_id, TokenSource* input, const C
 	return TokenLayerFactory::Instance().CreateObject(class_id, input, props);
 }
 
+std::vector<std::string> TokenLayer::available_layer_types()
+{
+	return TokenLayerFactory::Instance().RegisteredIds();
+}
+
 Token* TokenLayer::getTokenFromInput()
 {
 	return input_->getNextToken();

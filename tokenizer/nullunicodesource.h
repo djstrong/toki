@@ -4,10 +4,14 @@
 #include "unicodesource.h"
 
 #include "exception.h"
-
+/**
+ * A null UnicodeSource that never returns anything and always claims there are
+ * no more characters. Will throw when peek/get next char is requested.
+ */
 class NullUnicodeSource : public UnicodeSource
 {
 public:
+	/// The constructor
 	NullUnicodeSource() {}
 
 	/// UnicodeSource override

@@ -6,8 +6,9 @@
 #include <unicode/utypes.h>
 
 /**
- * A layer to split tokens containing one of the listed characters so they are
- * always separate tokens.
+ * A layer to split tokens containing one of the listed characters. Extracted
+ * characters are made into separate tokens with a given type, remaining bits
+ * of the orth are made tokens with the original token's type.
  */
 class BasicSplitLayer : public OutputQueueLayer
 {
@@ -28,10 +29,13 @@ protected:
 	void prepareMoreTokens(Token* t);
 
 private:
+	/// test function for the split chars
 	bool isSplitChar(UChar c);
 
+	/// the split characters
 	std::set<UChar> split_chars_;
 
+	/// type of the extracted tokens
 	std::string sep_type_;
 };
 
