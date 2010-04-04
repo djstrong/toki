@@ -71,9 +71,9 @@ void LayerTokenizer::apply_configuration(const Config::Node &cfg)
 	std::vector<std::string> layer_ids;
 
 	BOOST_FOREACH (const Config::Node::value_type &v, layers_tree) {
-		//if (v.first == "layer") {
+		if (v.first == "layer") {
 			layer_ids.push_back(v.second.data());
-		//}
+		}
 	}
 
 	TokenSource* previous = input_tokenizer_.get();

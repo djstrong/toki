@@ -12,6 +12,15 @@ class LayerTokenizer : public Tokenizer
 public:
 	/**
 	 * Constructor.
+	 *
+	 * The configuration is processed for [layer:ID] sections that define
+	 * layers and a [layers] section with one or more layer=ID entries that
+	 * define which layers to actually use and in what order. Each layer=ID
+	 * should have a corresponding [layer:ID] section, but not all [layer:ID]
+	 * sections need to be used. The IDs should be unique across a config.
+	 *
+	 * The subkeys of each [layer:ID] are passed to the appropriate layer's
+	 * constructor, the layer class to use being determined by the class subkey.
 	 * @see Tokenizer::Tokenizer
 	 */
 	LayerTokenizer(const Config::Node& cfg = Config::Default());
@@ -49,11 +58,6 @@ public:
 	 */
 	~LayerTokenizer();
 
-	/**
-	 * Apply configuraton
-	 */
-	void apply_configuration(const Config::Node& cfg);
-
 	/// TokenSource override
 	void newInputSource();
 
@@ -64,6 +68,11 @@ public:
 	Token* getNextToken();
 
 private:
+	/**
+	 * Apply configuraton
+	 */
+	void apply_configuration(const Config::Node& cfg);
+
 	/// The underlying input token source for the first layer
 	boost::scoped_ptr<Tokenizer> input_tokenizer_;
 
