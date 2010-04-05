@@ -1,4 +1,5 @@
 #include "layertokenizer.h"
+#include "tokenlayer.h"
 #include "token.h"
 #include "unicodeistreamwrapper.h"
 #include "unicodeicustringwrapper.h"
@@ -8,6 +9,7 @@
 #include <sstream>
 #include <unicode/ustream.h>
 
+#include <boost/algorithm/string.hpp>
 #include <boost/program_options.hpp>
 
 
@@ -59,6 +61,9 @@ int main(int argc, char** argv)
 		Config::Default() :
 		Config::fromFile(config_file);
 	LayerTokenizer tok(conf);
+	std::cout << "Available layer types: "
+		<< boost::algorithm::join(TokenLayer::available_layer_types(), ", ")
+		<< "\n";
 	std::cout << "Tokenizer started. C-d or C-c to exit.\n";
 	tok.setInputSource(std::cin, bufsize);
 	if (orths) {
