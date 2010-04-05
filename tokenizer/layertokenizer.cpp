@@ -112,6 +112,6 @@ void LayerTokenizer::reset()
 	for (size_t i = 0; i < layers_.size(); ++i) {
 		layers_[i]->reset();
 	}
-	input_tokenizer_.reset();
+	input_tokenizer_->reset();
 }
 
