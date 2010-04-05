@@ -2,7 +2,7 @@ include_directories( ${CMAKE_SOURCE_DIR}/tokenizer/ )
 
 link_directories( ${CMAKE_SOURCE_DIR}/tokenizer/ )
 
-add_executable( unit_tests main.cpp whitespace.cpp compare.cpp )
+add_executable( unit_tests main.cpp whitespace.cpp compare.cpp conf.cpp )
 
 target_link_libraries ( unit_tests tokenizer ${Boost_LIBRARIES} icuuc icuio loki) 
 

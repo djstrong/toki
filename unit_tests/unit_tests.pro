@@ -9,7 +9,8 @@ CONFIG -= app_bundle
 TEMPLATE = app
 SOURCES += main.cpp \
     whitespace.cpp \
-    compare.cpp
+    compare.cpp \
+    conf.cpp
 INCLUDEPATH += ../tokenizer/
 LIBS += ../tokenizer/libtokenizer.a
 LIBS += -licuuc \
