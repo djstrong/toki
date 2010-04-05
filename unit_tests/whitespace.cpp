@@ -3,6 +3,8 @@
 
 #include <boost/test/unit_test.hpp>
 
+BOOST_AUTO_TEST_SUITE( whitespace )
+
 struct F {
 	F()
 	 : cfg(), tok(cfg), ss()
@@ -60,4 +62,4 @@ BOOST_FIXTURE_TEST_CASE( tokens_with_whitespace, F )
 		std::string("token\nnekot\n"));
 }
 
-
+BOOST_AUTO_TEST_SUITE_END()

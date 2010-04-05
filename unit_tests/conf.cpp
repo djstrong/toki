@@ -4,6 +4,8 @@
 #include <boost/test/unit_test.hpp>
 #include <boost/foreach.hpp>
 
+BOOST_AUTO_TEST_SUITE( config )
+
 BOOST_AUTO_TEST_CASE(test_empty_config)
 {
 	Config::Node n = Config::Node();
@@ -157,3 +159,5 @@ BOOST_FIXTURE_TEST_CASE( config_dup_merge_dup, Fc2 )
 	std::vector<int> va = all_values<int>(m.get_child("a"), "aa");
 	BOOST_CHECK_EQUAL_COLLECTIONS( v.begin(), v.end(), va.begin(), va.end() );
 }
+
+BOOST_AUTO_TEST_SUITE_END()

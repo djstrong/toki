@@ -76,7 +76,7 @@ void test_one_item(const compare_item& c)
 		std::stringstream ss_in;
 		ss_in << ss.str();
 		tok.reset();
-		tok.setInputSource(ss_in);
+		tok.setInputSource(ss_in, i + 1);
 		actual = Debug::tokenize_formatted(tok, format);
 		BOOST_CHECK_EQUAL (actual, ss_expected.str());
 		tok.reset();

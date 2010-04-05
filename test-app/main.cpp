@@ -37,7 +37,8 @@ int main(int argc, char** argv)
 			 "Stream buffer size, set to 0 to convert the entire input "
 			 "in-memory before processing and disregard the encoding, assuming UTF-8.")
 			("orths,o", value(&orths)->default_value(false)->zero_tokens(),
-			 "Only output orths, not entire token descriptions")
+			 "Only output orths, not entire token descriptions "
+			 "(ignore debug.format in config file)")
 			("help,h", "Show help")
 			;
 	boost::program_options::variables_map vm;
@@ -62,7 +63,7 @@ int main(int argc, char** argv)
 		Config::fromFile(config_file);
 	LayerTokenizer tok(conf);
 	std::cout << "Available layer types: "
-		<< boost::algorithm::join(TokenLayer::available_layer_types(), ", ")
+		<< boost::algorithm::join(TokenLayer::available_layer_types(), " ")
 		<< "\n";
 	std::cout << "Tokenizer started. C-d or C-c to exit.\n";
 	tok.setInputSource(std::cin, bufsize);
