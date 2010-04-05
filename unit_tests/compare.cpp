@@ -65,6 +65,25 @@ void test_one_item(const compare_item& c)
 	std::string actual = Debug::tokenize_formatted(tok, format);
 	BOOST_CHECK_EQUAL (actual, ss_expected.str());
 
+	ifs_in.close();
+	ifs_in.open(file_in);
+	std::stringstream ss;
+	ss << ifs_in.rdbuf();
+	UnicodeString us = UnicodeString::fromUTF8(ss.str());
+	ifs_in.close();
+
+	for (int i = 0; i < 5; ++i) {
+		std::stringstream ss_in;
+		ss_in << ss.str();
+		tok.reset();
+		tok.setInputSource(ss_in);
+		actual = Debug::tokenize_formatted(tok, format);
+		BOOST_CHECK_EQUAL (actual, ss_expected.str());
+		tok.reset();
+		tok.setInputSource(us);
+		actual = Debug::tokenize_formatted(tok, format);
+		BOOST_CHECK_EQUAL (actual, ss_expected.str());
+	}
 }
 
 void subdir_exists()
@@ -102,7 +121,7 @@ void init_subdir(fs::path dir)
 		std::string p = (dir / "main.ini").string();
 		*cfg = Config::fromFile(p);
 	} else {
-		//check fir name, load special config if possible, else default
+		//check dir name, load special config if possible, else default
 		*cfg = Config::Default();
 	}
 	global_configs.push_back(boost::shared_ptr<Config::Node>(cfg));

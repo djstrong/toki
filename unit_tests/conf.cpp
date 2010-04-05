@@ -22,8 +22,6 @@ BOOST_AUTO_TEST_CASE(test_nonexistant_config)
 		Config::Node n = Config::get_library_config("nonexistant97yh(*^$4u678"),
 		TokenizerLibError
 		);
-
-
 }
 
 
