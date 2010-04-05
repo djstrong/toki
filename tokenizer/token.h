@@ -18,6 +18,8 @@ public:
 		WA_ManyNewlines
 	};
 
+	static std::string WA_as_string(WhitespaceAmount wa);
+
 	/**
 	 * Constructor.
 	 * @param orth      the token orth

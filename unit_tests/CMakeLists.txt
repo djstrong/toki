@@ -1,5 +1,3 @@
-find_package(Boost REQUIRED COMPONENTS filesystem)
-
 include_directories( ${CMAKE_SOURCE_DIR}/tokenizer/ )
 
 link_directories( ${CMAKE_SOURCE_DIR}/tokenizer/ )

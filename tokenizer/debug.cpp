@@ -35,8 +35,12 @@ std::string token_format(const std::string &format, const Token &t)
 	std::string out = format;
 	boost::replace_first(out, "$orth", t.orth_utf8());
 	boost::replace_first(out, "$type", t.type());
-	boost::replace_first(out, "$wa_n",
+	boost::replace_first(out, "$ws_id",
 		boost::lexical_cast<std::string>(t.preceeding_whitespace()));
+	boost::replace_first(out, "$ws_any",
+		t.preceeding_whitespace() == Token::WA_None ? "0" : "1");
+	boost::replace_first(out, "$ws",
+		Token::WA_as_string(t.preceeding_whitespace()));
 	return out;
 }
 

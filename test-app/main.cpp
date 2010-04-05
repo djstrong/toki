@@ -64,7 +64,7 @@ int main(int argc, char** argv)
 	if (orths) {
 		Debug::tokenize_orths_newline(tok, std::cout);
 	} else {
-		std::string format = conf.get("debug.format", "$orth\n");
+		std::string format = conf.get("debug.format", "[$orth]-$type-$ws-\n");
 		Debug::tokenize_formatted(tok, format, std::cout);
 	}
 }

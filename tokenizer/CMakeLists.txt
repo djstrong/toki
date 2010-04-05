@@ -4,6 +4,7 @@ include_directories( ${CMAKE_SOURCE_DIR}/tokenizer/ )
 
 SET(libtokenizer_STAT_SRC
     config.cpp
+    debug.cpp
     layertokenizer.cpp
     nullunicodesource.cpp
     token.cpp
@@ -22,6 +23,7 @@ SET(libtokenizer_STAT_SRC
     unicodeicustringwrapper.cpp
     unicodeistreamwrapper.cpp
     unicodesource.cpp
+    util.cpp
     whitespacetokenizer.cpp
 )
 

@@ -13,6 +13,7 @@ LIBS += ../tokenizer/libtokenizer.a
 LIBS += -licuuc \
     -licuio \
     -lloki \
-    -lboost_program_options
+    -lboost_program_options \
+    -lboost_filesystem
 PRE_TARGETDEPS += ../tokenizer/libtokenizer.a
 HEADERS += 
