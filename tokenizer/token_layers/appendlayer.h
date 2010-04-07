@@ -22,6 +22,8 @@ public:
 	/// TokenLayer override
 	Token* processToken(Token *t);
 
+	/// TokenLayer override
+	virtual std::string info() const;
 private:
 	/// The string to append
 	UnicodeString append_;

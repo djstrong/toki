@@ -10,6 +10,13 @@ BasicSplitLayer::BasicSplitLayer(TokenSource* input, const Config::Node& props)
 	Util::utf8StringToUcharContainer(separators, split_chars_);
 }
 
+std::string BasicSplitLayer::info() const
+{
+	std::stringstream ss;
+	ss << "split{" << sep_type_ << "|" << split_chars_.size() << "}";
+	return ss.str();
+}
+
 void BasicSplitLayer::prepareMoreTokens(Token* t)
 {
 	const UnicodeString& orth = t->orth();

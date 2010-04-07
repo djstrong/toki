@@ -24,6 +24,8 @@ public:
 	 */
 	BasicSplitLayer(TokenSource* input, const Config::Node& props);
 
+	/// TokenLayer override
+	virtual std::string info() const;
 protected:
 	/// OutputQueueTokenLayer override
 	void prepareMoreTokens(Token* t);

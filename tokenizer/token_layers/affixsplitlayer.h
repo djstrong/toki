@@ -30,6 +30,9 @@ public:
 
 	AffixSplitLayer(TokenSource* input, const Config::Node& props);
 
+	/// TokenLayer override
+	virtual std::string info() const;
+
 protected:
 	/// OutputQueueLayer override
 	void prepareMoreTokens(Token* t);

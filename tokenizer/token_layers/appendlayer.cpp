@@ -8,6 +8,11 @@ AppendLayer::AppendLayer(TokenSource *input, const Config::Node &props)
 	append_ = UnicodeString::fromUTF8(props.get("append", "!")).unescape();
 }
 
+std::string AppendLayer::info() const
+{
+	return "append";
+}
+
 Token* AppendLayer::processToken(Token* t)
 {
 	t->set_orth(t->orth() + append_);

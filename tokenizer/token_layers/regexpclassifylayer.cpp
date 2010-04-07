@@ -31,6 +31,13 @@ RegexpClassifyLayer::~RegexpClassifyLayer()
 	}
 }
 
+std::string RegexpClassifyLayer::info() const
+{
+	std::stringstream ss;
+	ss << "regexp{" << classifiers_.size() << "}";
+	return ss.str();
+}
+
 Token* RegexpClassifyLayer::processToken(Token* t)
 {
 	for (size_t i = 0; i < classifiers_.size(); ++i) {

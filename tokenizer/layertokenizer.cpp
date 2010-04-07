@@ -57,6 +57,17 @@ LayerTokenizer::~LayerTokenizer()
 	}
 }
 
+std::string LayerTokenizer::layers_info() const
+{
+	std::stringstream ss;
+	ss << "LTok:" << layers_.size() << ": ";
+	for (size_t i = 0; i < layers_.size(); ++i) {
+		ss << layers_[i]->info() << " ";
+	}
+	return ss.str();
+
+}
+
 void LayerTokenizer::newInputSource()
 {
 	input_tokenizer_->setInputSource(input_);

@@ -65,6 +65,7 @@ int main(int argc, char** argv)
 	std::cout << "Available layer types: "
 		<< boost::algorithm::join(TokenLayer::available_layer_types(), " ")
 		<< "\n";
+	std::cout << "Tokenizer: " << tok.layers_info() << "\n";
 	std::cout << "Tokenizer started. C-d or C-c to exit.\n";
 	tok.setInputSource(std::cin, bufsize);
 	if (orths) {

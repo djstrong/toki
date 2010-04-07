@@ -34,6 +34,11 @@ void TokenLayer::reset()
 {
 }
 
+std::string TokenLayer::info() const
+{
+	return "tokenlayer";
+}
+
 TokenLayer* TokenLayer::create(std::string class_id, TokenSource* input, const Config::Node& props)
 {
 	return TokenLayerFactory::Instance().CreateObject(class_id, input, props);

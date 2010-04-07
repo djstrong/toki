@@ -37,6 +37,9 @@ public:
 	/// TokenLayer override
 	Token* processToken(Token *t);
 
+	/// TokenLayer override
+	virtual std::string info() const;
+
 private:
 	/// The set of orths to recognize
 	std::set<UnicodeString, CMP> lex_;
@@ -74,6 +77,14 @@ LexiconClassifyLayer<CMP>::~LexiconClassifyLayer()
 }
 
 template<typename CMP>
+std::string LexiconClassifyLayer<CMP>::info() const
+{
+	std::stringstream ss;
+	ss << "lexicon{" << lex_.size() << "}";
+	return ss.str();
+}
+
+template<typename CMP>
 Token* LexiconClassifyLayer<CMP>::processToken(Token *t)
 {
 	if (lex_.find(t->orth()) != lex_.end()) {
@@ -99,5 +110,12 @@ typedef LexiconClassifyLayer<
 > CaselessLexiconClassifyLayer;
 
 
+template<>
+std::string LexiconClassifyLayer<IcuStringCaselessCompare>::info() const
+{
+	std::stringstream ss;
+	ss << "lexicon_caseless{" << lex_.size() << "}";
+	return ss.str();
+}
 
 #endif // LEXICONCLASSIFYLAYER_H

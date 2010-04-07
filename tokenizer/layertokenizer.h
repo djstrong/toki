@@ -67,6 +67,9 @@ public:
 	/// TokenSource override
 	Token* getNextToken();
 
+	/// Output a human-readable synopsis of the loaded layers
+	std::string layers_info() const;
+
 private:
 	/**
 	 * Apply configuraton

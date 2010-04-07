@@ -13,6 +13,14 @@ AffixSplitLayer::AffixSplitLayer(TokenSource* input, const Config::Node& props)
 	Util::utf8StringToUcharContainer(postfixes, postfix_chars_);
 }
 
+std::string AffixSplitLayer::info() const
+{
+	std::stringstream ss;
+	ss << "affix{" << prefix_type_ << "|" << prefix_chars_.size()
+		<< "||" << postfix_type_ << "|" << postfix_chars_.size() << "}";
+	return ss.str();
+}
+
 void AffixSplitLayer::prepareMoreTokens(Token* t)
 {
 	int body_begin_index = 0;

@@ -91,6 +91,11 @@ public:
 	virtual void reset();
 
 	/**
+	 * Return a short string with some human-readable info about this layer
+	 */
+	virtual std::string info() const;
+
+	/**
 	 * Factory interface for creating layers from string identifiers
 	 *
 	 * Mostly a convenience function to avoid having client code refer directly

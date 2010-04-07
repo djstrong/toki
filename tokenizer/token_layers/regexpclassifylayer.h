@@ -30,6 +30,9 @@ public:
 	/// TokenLayer override
 	Token* processToken(Token *t);
 
+	/// TokenLayer override
+	virtual std::string info() const;
+
 private:
 	/// token type + regexp vector
 	std::vector< std::pair<std::string, RegexMatcher*> > classifiers_;
