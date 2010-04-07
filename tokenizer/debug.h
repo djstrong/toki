@@ -30,8 +30,10 @@ namespace Debug {
 	 *              e.g. "none". @see Token::WhitespaceAmount
 	 * - $ws_id  -> the preceeding whitespace numeric code, 0 for no whtespace
 	 * - $ws_any -> 0 if there was any whitespace preceeding the token, else 1
-	 * The format string is unescaped so e.g. backslash-n is a valid way of
-	 * putting a newline into the debug output.
+	 *
+	 * The format string will usually be unescaped before getting here, so
+	 * e.g. backslash-n is usually a valid way of putting a newline into the
+	 * debug output.
 	 */
 	std::string token_format(const std::string& format, const Token& t);
 

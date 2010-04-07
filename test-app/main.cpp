@@ -3,6 +3,7 @@
 #include "token.h"
 #include "unicodeistreamwrapper.h"
 #include "unicodeicustringwrapper.h"
+#include "util.h"
 #include "debug.h"
 
 #include <iostream>
@@ -72,6 +73,7 @@ int main(int argc, char** argv)
 		Debug::tokenize_orths_newline(tok, std::cout);
 	} else {
 		std::string format = conf.get("debug.format", "[$orth]-$type-$ws-\n");
+		format = Util::unescape_utf8(format);
 		Debug::tokenize_formatted(tok, format, std::cout);
 	}
 }
