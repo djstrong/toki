@@ -21,6 +21,11 @@ public:
 	 *
 	 * The subkeys of each [layer:ID] are passed to the appropriate layer's
 	 * constructor, the layer class to use being determined by the class subkey.
+	 *
+	 * The initial tokenization using whitespace characters is confiugurable by
+	 * the [input] section, the contents are passed to the WhitespaceTokenizer.
+	 * @see WhitespaceTokenizer
+	 *
 	 * @see Tokenizer::Tokenizer
 	 */
 	LayerTokenizer(const Config::Node& cfg = Config::Default());
