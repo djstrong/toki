@@ -24,12 +24,15 @@ void BasicSplitLayer::prepareMoreTokens(Token* t)
 	Token::WhitespaceAmount wa = t->preceeding_whitespace();
 	for (int i = 0; i < orth.length(); ++i) {
 		if (isSplitChar(orth.charAt(i))) {
-			UnicodeString part;
-			orth.extractBetween(splitfrom, i, part);
-			Token* pre = new Token(part, t->type(), wa);
-			wa = Token::WA_None;
+			if (i > splitfrom) {
+				UnicodeString part;
+				orth.extractBetween(splitfrom, i, part);
+				Token* pre = new Token(part, t->type(), wa);
+				wa = Token::WA_None;
+				enqueueOutputToken(pre);
+			}
 			Token* sep = new Token(orth.charAt(i), sep_type_, wa);
-			enqueueOutputToken(pre);
+			wa = Token::WA_None;
 			enqueueOutputToken(sep);
 			splitfrom = i + 1;
 		}
