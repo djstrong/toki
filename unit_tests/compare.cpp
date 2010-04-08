@@ -63,7 +63,7 @@ void test_one_item(const compare_item& c)
 	std::stringstream ss_expected;
 	ss_expected << ifs_out.rdbuf();
 	std::string actual = Debug::tokenize_formatted(tok, format);
-	BOOST_CHECK_EQUAL (actual, ss_expected.str());
+	BOOST_REQUIRE_EQUAL (actual, ss_expected.str());
 
 	ifs_in.close();
 	ifs_in.open(file_in);
@@ -78,11 +78,11 @@ void test_one_item(const compare_item& c)
 		tok.reset();
 		tok.setInputSource(ss_in, i + 1);
 		actual = Debug::tokenize_formatted(tok, format);
-		BOOST_CHECK_EQUAL (actual, ss_expected.str());
+		BOOST_REQUIRE_EQUAL (actual, ss_expected.str());
 		tok.reset();
 		tok.setInputSource(us);
 		actual = Debug::tokenize_formatted(tok, format);
-		BOOST_CHECK_EQUAL (actual, ss_expected.str());
+		BOOST_REQUIRE_EQUAL (actual, ss_expected.str());
 	}
 }
 
