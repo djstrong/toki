@@ -5,6 +5,7 @@
 
 #include <unicode/unistr.h>
 
+#include <fstream>
 #include <set>
 
 /**
@@ -26,8 +27,9 @@ public:
 	 * Constructor.
 	 *
 	 * Keys recognized in the configuration:
-	 * - lexicon    - The set of orths to recognize.
-	 * - token_type - Token type to set in the recognized tokens.
+	 * - lexicon      - The set of orths to recognize, space or comma separated.
+	 * - token_type   - Token type to set in the recognized tokens.
+	 * - lexicon_file - Path to lexicon file, with one word per line, UTF-8.
 	 */
 	LexiconClassifyLayer(TokenSource* input, const Config::Node& props);
 
@@ -67,6 +69,20 @@ LexiconClassifyLayer<CMP>::LexiconClassifyLayer(TokenSource *input, const Config
 	BOOST_FOREACH (const std::string& s, v) {
 		if (!s.empty()) {
 			lex_.insert(UnicodeString::fromUTF8(s).unescape());
+		}
+	}
+	const std::string& file_string = props.get<std::string>("lexicon_file", "");
+	if (!file_string.empty()) {
+		std::ifstream ifs(file_string.c_str());
+		if (!ifs.good()) {
+			std::cerr << "Error opening file " << file_string << "\n";
+		}
+		while (ifs.good()) {
+			std::string s;
+			std::getline(ifs, s);
+			if (!s.empty()) {
+				lex_.insert(UnicodeString::fromUTF8(s).unescape());
+			}
 		}
 	}
 }
