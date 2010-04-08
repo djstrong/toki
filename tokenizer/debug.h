@@ -28,7 +28,7 @@ namespace Debug {
 	 * - $type   -> the token's type
 	 * - $ws     -> the preceeding whitespace amount string representation
 	 *              e.g. "none". @see Token::WhitespaceAmount
-	 * - $ws_id  -> the preceeding whitespace numeric code, 0 for no whtespace
+	 * - $ws_id  -> the preceeding whitespace numeric code, 0 for no whitespace
 	 * - $ws_any -> 0 if there was any whitespace preceeding the token, else 1
 	 *
 	 * The format string will usually be unescaped before getting here, so
