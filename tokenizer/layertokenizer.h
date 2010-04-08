@@ -75,6 +75,8 @@ public:
 	/// Output a human-readable synopsis of the loaded layers
 	std::string layers_info() const;
 
+	std::string layers_long_info(const std::string& sep) const;
+
 private:
 	/**
 	 * Apply configuraton

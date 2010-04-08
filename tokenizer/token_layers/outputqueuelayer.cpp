@@ -52,3 +52,10 @@ void OutputQueueLayer::reset()
 {
 	clear_queue();
 }
+
+std::string OutputQueueLayer::long_info() const
+{
+	std::stringstream ss;
+	ss << ", out_queue(" << queue_.size() << ")";
+	return TokenLayer::long_info() + ss.str();
+}

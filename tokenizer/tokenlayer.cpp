@@ -6,7 +6,7 @@
 #include <boost/foreach.hpp>
 
 TokenLayer::TokenLayer(TokenSource* input, const Config::Node& props)
-	: input_(input), process_token_types_(), do_not_process_token_types_()
+	: input_(input), process_token_types_(), do_not_process_token_types_(), id_()
 {
 	std::vector<std::string> sv;
 	std::string data = props.get("process_types", "");
@@ -24,6 +24,7 @@ TokenLayer::TokenLayer(TokenSource* input, const Config::Node& props)
 			do_not_process_token_types_.insert(s2);
 		}
 	}
+	id_ = props.get("id", "?");
 }
 
 TokenLayer::~TokenLayer()
@@ -37,6 +38,11 @@ void TokenLayer::reset()
 std::string TokenLayer::info() const
 {
 	return "tokenlayer";
+}
+
+std::string TokenLayer::long_info() const
+{
+	return "Layer '" + id_ + "'";
 }
 
 TokenLayer* TokenLayer::create(std::string class_id, TokenSource* input, const Config::Node& props)

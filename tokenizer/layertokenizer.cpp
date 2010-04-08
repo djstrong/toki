@@ -65,7 +65,15 @@ std::string LayerTokenizer::layers_info() const
 		ss << layers_[i]->info() << " ";
 	}
 	return ss.str();
+}
 
+std::string LayerTokenizer::layers_long_info(const std::string &sep) const
+{
+	std::stringstream ss;
+	for (size_t i = 0; i < layers_.size(); ++i) {
+		ss << layers_[i]->long_info() << sep;
+	}
+	return ss.str();
 }
 
 void LayerTokenizer::newInputSource()
@@ -77,7 +85,14 @@ void LayerTokenizer::newInputSource()
 void LayerTokenizer::apply_configuration(const Config::Node &cfg)
 {
 	using boost::property_tree::ptree;
-	const ptree& layers_tree = cfg.get_child("layers");
+
+	const ptree* ltp = NULL;
+	try {
+		ltp = &cfg.get_child("layers");
+	} catch (boost::property_tree::ptree_error& e) {
+		throw TokenizerLibError("No layers in LayerTokenizer configuration");
+	}
+	const ptree& layers_tree = *ltp;
 
 	std::vector<std::string> layer_ids;
 
@@ -94,7 +109,9 @@ void LayerTokenizer::apply_configuration(const Config::Node &cfg)
 			layer_class = cfg.get("layer:" + id + ".class", "");
 			TokenLayer* layer;
 			try {
-				layer = TokenLayer::create(layer_class, previous, cfg.get_child("layer:" + id));
+				Config::Node layer_cfg = cfg.get_child("layer:" + id);
+				layer_cfg.put("id", id);
+				layer = TokenLayer::create(layer_class, previous, layer_cfg);
 				previous = layer;
 				layers_.push_back(layer);
 			} catch (TokenLayerFactoryException) {

@@ -21,6 +21,15 @@ std::string AffixSplitLayer::info() const
 	return ss.str();
 }
 
+std::string AffixSplitLayer::long_info() const
+{
+	std::stringstream ss;
+	ss << ", affix: "
+		<< prefix_chars_.size() << " prefixes(" << prefix_type_ << ") "
+		<< postfix_chars_.size() << " postfixes(" << postfix_type_ << ")";
+	return OutputQueueLayer::long_info() + ss.str();
+}
+
 void AffixSplitLayer::prepareMoreTokens(Token* t)
 {
 	int body_begin_index = 0;

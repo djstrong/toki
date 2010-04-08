@@ -13,6 +13,11 @@ std::string AppendLayer::info() const
 	return "append";
 }
 
+std::string AppendLayer::long_info() const
+{
+	return TokenLayer::long_info() + ", append: ";// + append_;
+}
+
 Token* AppendLayer::processToken(Token* t)
 {
 	t->set_orth(t->orth() + append_);

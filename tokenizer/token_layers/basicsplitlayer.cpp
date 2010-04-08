@@ -17,6 +17,13 @@ std::string BasicSplitLayer::info() const
 	return ss.str();
 }
 
+std::string BasicSplitLayer::long_info() const
+{
+	std::stringstream ss;
+	ss << ", split: " << split_chars_.size() << " separators, type " << sep_type_;
+	return OutputQueueLayer::long_info() + ss.str();
+}
+
 void BasicSplitLayer::prepareMoreTokens(Token* t)
 {
 	const UnicodeString& orth = t->orth();

@@ -26,6 +26,9 @@ public:
 
 	/// TokenLayer override
 	virtual std::string info() const;
+
+	/// TokenLayer override
+	std::string long_info() const;
 protected:
 	/// OutputQueueTokenLayer override
 	void prepareMoreTokens(Token* t);

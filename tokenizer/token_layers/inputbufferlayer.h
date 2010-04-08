@@ -22,6 +22,9 @@ public:
 	/// reset function
 	void reset();
 
+	/// TokenLayer override
+	std::string long_info() const;
+
 protected:
 	/**
 	 * TokenLayer override that uses the buffer.

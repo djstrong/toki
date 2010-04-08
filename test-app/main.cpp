@@ -27,6 +27,7 @@ int main(int argc, char** argv)
 	std::string config_file;
 	int bufsize;
 	bool orths;
+	bool verbose;
 	using boost::program_options::value;
 	boost::program_options::options_description desc("Allowed options");
 	desc.add_options()
@@ -40,6 +41,8 @@ int main(int argc, char** argv)
 			("orths,o", value(&orths)->default_value(false)->zero_tokens(),
 			 "Only output orths, not entire token descriptions "
 			 "(ignore debug.format in config file)")
+			("verbose,v", value(&verbose)->default_value(false)->zero_tokens(),
+			 "Verbose init info")
 			("help,h", "Show help")
 			;
 	boost::program_options::variables_map vm;
@@ -66,7 +69,12 @@ int main(int argc, char** argv)
 	std::cout << "Available layer types: "
 		<< boost::algorithm::join(TokenLayer::available_layer_types(), " ")
 		<< "\n";
-	std::cout << "Tokenizer: " << tok.layers_info() << "\n";
+	if (verbose) {
+		std::cout << "Tokenizer layers:\n";
+		std::cout << tok.layers_long_info("\n");
+	} else {
+		std::cout << "Tokenizer: " << tok.layers_info() << "\n";
+	}
 	std::cout << "Tokenizer started. C-d or C-c to exit.\n";
 	tok.setInputSource(std::cin, bufsize);
 	if (orths) {

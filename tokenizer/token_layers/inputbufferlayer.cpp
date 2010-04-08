@@ -19,6 +19,13 @@ void InputBufferLayer::reset()
 	}
 }
 
+std::string InputBufferLayer::long_info() const
+{
+	std::stringstream ss;
+	ss << ", input_buffer(" << buffer_.size() << ")";
+	return TokenLayer::long_info() + ss.str();
+}
+
 Token* InputBufferLayer::getTokenFromInput()
 {
 	if (buffer_.empty()) {

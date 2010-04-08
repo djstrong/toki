@@ -24,6 +24,9 @@ public:
 
 	/// TokenLayer override
 	virtual std::string info() const;
+
+	/// TokenLayer override
+	std::string long_info() const;
 private:
 	/// The string to append
 	UnicodeString append_;

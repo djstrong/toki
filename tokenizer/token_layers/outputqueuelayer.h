@@ -32,6 +32,9 @@ public:
 	 */
 	void reset();
 
+	/// TokenLayer override
+	std::string long_info() const;
+
 protected:
 	/**
 	 * Add an token to the output queue. Derived classes should use this to

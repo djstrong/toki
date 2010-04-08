@@ -38,6 +38,15 @@ std::string RegexpClassifyLayer::info() const
 	return ss.str();
 }
 
+std::string RegexpClassifyLayer::long_info() const
+{
+	std::stringstream ss;
+	ss << ", regexp: " << classifiers_.size() << " classifiers";
+	return TokenLayer::long_info() + ss.str();
+}
+
+
+
 Token* RegexpClassifyLayer::processToken(Token* t)
 {
 	for (size_t i = 0; i < classifiers_.size(); ++i) {

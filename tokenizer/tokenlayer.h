@@ -52,6 +52,7 @@ public:
 	 * - ignore_types  - Space-separated list of token types to explicitly
 	 *                   ignore, even if they pass the process_types check.
 	 *                   Defaults to empty.
+	 * - id            - Layer identifier (debugging mostly)
 	 */
 	TokenLayer(TokenSource* input, const Config::Node& props);
 
@@ -91,9 +92,22 @@ public:
 	virtual void reset();
 
 	/**
+	 * Return the layer identifier
+	 */
+	std::string id() const {
+		return id_;
+	}
+
+	/**
 	 * Return a short string with some human-readable info about this layer
 	 */
 	virtual std::string info() const;
+
+	/**
+	 * Return a long (line) string with human readable info about the layer
+	 * Derived classes should concatenate output with parent class long_info().
+	 */
+	virtual std::string long_info() const;
 
 	/**
 	 * Factory interface for creating layers from string identifiers
@@ -147,6 +161,11 @@ private:
 	 * Set of token types to ignore, checked after they pass the inclusion check
 	 */
 	std::set<std::string> do_not_process_token_types_;
+
+	/**
+	 * Layer identifier
+	 */
+	std::string id_;
 };
 
 /**
