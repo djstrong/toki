@@ -28,6 +28,7 @@ int main(int argc, char** argv)
 	int bufsize;
 	bool orths;
 	bool verbose;
+	bool quiet;
 	using boost::program_options::value;
 	boost::program_options::options_description desc("Allowed options");
 	desc.add_options()
@@ -43,6 +44,8 @@ int main(int argc, char** argv)
 			 "(ignore debug.format in config file)")
 			("verbose,v", value(&verbose)->default_value(false)->zero_tokens(),
 			 "Verbose init info")
+			("quiet,q", value(&quiet)->default_value(false)->zero_tokens(),
+			 "Suppress info output")
 			("help,h", "Show help")
 			;
 	boost::program_options::variables_map vm;
@@ -66,16 +69,18 @@ int main(int argc, char** argv)
 		Config::Default() :
 		Config::fromFile(config_file);
 	LayerTokenizer tok(conf);
-	std::cout << "Available layer types: "
-		<< boost::algorithm::join(TokenLayer::available_layer_types(), " ")
-		<< "\n";
-	if (verbose) {
-		std::cout << "Tokenizer layers:\n";
-		std::cout << tok.layers_long_info("\n");
-	} else {
-		std::cout << "Tokenizer: " << tok.layers_info() << "\n";
+	if (!quiet) {
+		std::cout << "Available layer types: "
+			<< boost::algorithm::join(TokenLayer::available_layer_types(), " ")
+			<< "\n";
+		if (verbose) {
+			std::cout << "Tokenizer layers:\n";
+			std::cout << tok.layers_long_info("\n");
+		} else {
+			std::cout << "Tokenizer: " << tok.layers_info() << "\n";
+		}
+		std::cout << "Tokenizer started. C-d or C-c to exit.\n";
 	}
-	std::cout << "Tokenizer started. C-d or C-c to exit.\n";
 	tok.setInputSource(std::cin, bufsize);
 	if (orths) {
 		Debug::tokenize_orths_newline(tok, std::cout);
