@@ -160,8 +160,12 @@ void init_compare_suite(boost::unit_test::test_suite *ts)
 	ts->add(BOOST_TEST_CASE(&subdir_exists));
 	if (!fs::exists(subdir_name)) return;
 	init_subdir(subdir_name);
-	ts->add(BOOST_PARAM_TEST_CASE(test_one_item, &global_compares[0],
-		&global_compares[0] + global_compares.size()));
+	BOOST_FOREACH (const compare_item& ci, global_compares) {
+		std::string name = "test_compare:" + ci.out_file.string();
+		ts->add(boost::unit_test::make_test_case(
+				boost::bind(test_one_item, ci), name)
+				);
+	}
 }
 
 
