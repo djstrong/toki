@@ -1,8 +1,8 @@
 ########## libtokenizer ###############
 
-include_directories( ${CMAKE_SOURCE_DIR}/tokenizer/ )
+include_directories( ${CMAKE_SOURCE_DIR}/libtoki/ )
 
-SET(libtokenizer_STAT_SRC
+SET(libtoki_STAT_SRC
     config.cpp
     debug.cpp
     layertokenizer.cpp
@@ -28,4 +28,4 @@ SET(libtokenizer_STAT_SRC
     whitespacetokenizer.cpp
 )
 
-add_library(tokenizer STATIC EXCLUDE_FROM_ALL ${libtokenizer_STAT_SRC})
+add_library(toki STATIC EXCLUDE_FROM_ALL ${libtoki_STAT_SRC})

@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.6.0)
 
 
-# use our own version of FindBoost.cmake and other Find* scripts
+# use some of our own Find* scripts
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/CMakeScripts)
 
 
@@ -37,6 +37,6 @@ find_package(ICU REQUIRED)
 
 find_package(Loki REQUIRED)
 
-add_subdirectory(tokenizer)
-add_subdirectory(unit_tests)
-add_subdirectory(test-app)
+add_subdirectory(libtoki)
+add_subdirectory(tests)
+add_subdirectory(toki-app)

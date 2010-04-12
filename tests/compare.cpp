@@ -20,7 +20,7 @@
 namespace fs = boost::filesystem;
 
 
-static const char subdir_name[] = "test_compare";
+static const char subdir_name[] = "compare";
 
 //BOOST_AUTO_TEST_SUITE( test_compare )
 struct compare_item

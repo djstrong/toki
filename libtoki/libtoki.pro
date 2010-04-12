@@ -1,6 +1,6 @@
 QT -= core \
     gui
-TARGET = tokenizer
+TARGET = toki
 TEMPLATE = lib
 CONFIG += staticlib
 HEADERS += token.h \
@@ -55,7 +55,6 @@ LIBS += -licuuc \
     -licuio \
     -lboost_program_options
 CONFIG += link_pkgconfig
-PKGCONFIG += libxml++-2.6
 INCLUDEPATH += /usr/local/include
 DEPENDPATH += /usr/local/lib
 QMAKE_CXXFLAGS += -static

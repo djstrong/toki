@@ -1,19 +1,23 @@
 # -------------------------------------------------
-# Project created by QtCreator 2010-03-23T11:17:14
+# Project created by QtCreator 2010-03-23T15:11:17
 # -------------------------------------------------
 QT -= core \
     gui
-TARGET = test-app
+TARGET = tests
 CONFIG += console
 CONFIG -= app_bundle
 TEMPLATE = app
-SOURCES += main.cpp
-INCLUDEPATH += ../tokenizer/
-LIBS += ../tokenizer/libtokenizer.a
+SOURCES += main.cpp \
+    whitespace.cpp \
+    compare.cpp \
+    conf.cpp
+INCLUDEPATH += ../libtoki/
+LIBS += ../libtoki/libtoki.a
 LIBS += -licuuc \
     -licuio \
+    -licui18n \
     -lloki \
     -lboost_program_options \
     -lboost_filesystem
-PRE_TARGETDEPS += ../tokenizer/libtokenizer.a
-HEADERS += 
+PRE_TARGETDEPS += ../libtoki/libtoki.a
+HEADERS += compare.h
