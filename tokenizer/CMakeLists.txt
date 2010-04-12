@@ -14,6 +14,7 @@ SET(libtokenizer_STAT_SRC
     token_layers/appendlayer.cpp
     token_layers/basicsplitlayer.cpp
     token_layers/combinelayer.cpp
+    token_layers/groupsplitlayer.cpp
     token_layers/inittokenlayers.cpp
     token_layers/inputbufferlayer.cpp
     token_layers/lexiconclassifylayer.cpp

@@ -31,14 +31,20 @@ namespace Toki {
 
 		/// TokenLayer override
 		std::string long_info() const;
+
+		/// getter for the separator type
+		std::string separator_type() const {
+			return sep_type_;
+		}
+
 	protected:
 		/// OutputQueueTokenLayer override
 		void prepareMoreTokens(Token* t);
 
-	private:
 		/// test function for the split chars
 		bool isSplitChar(UChar c);
 
+	private:
 		/// the split characters
 		std::set<UChar> split_chars_;
 
