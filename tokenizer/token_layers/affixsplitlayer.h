@@ -11,7 +11,7 @@ namespace Toki {
 	 * Layer to recognize and split prefix and posftix characters in tokens.
 	 * All prefix characters are extracted as separate tokens, then the unrecognized
 	 * part is output as the body token (with the type unmodified), and then the
-	 * postfix characters are output.
+	 * suffix characters are output.
 	 */
 	class AffixSplitLayer : public OutputQueueLayer
 	{
@@ -22,11 +22,11 @@ namespace Toki {
 		 * Keys recognized in the configuration:
 		 * - prefix_chars  - List of prefix characters, treated as UTF-8 and
 		 *                   unescaped. Defaults to empty.
-		 * - postfix_chars - List of postfix characters, treated as UTF-8 and
+		 * - suffix_chars - List of suffix characters, treated as UTF-8 and
 		 *                   unescaped. Defaults to empty.
 		 * - prefix_token_type  - Token type to set in the extracted prefixes.
 		 *                        Defaults to "pre".
-		 * - postfix_token_type - Token type to set in the extracted postfixes.
+		 * - suffix_token_type - Token type to set in the extracted suffixes.
 		 *                        Defaults to "post".
 		 */
 
@@ -46,20 +46,20 @@ namespace Toki {
 		/// test function for prefix characters
 		bool isPrefixChar(UChar c);
 
-		/// test function for postfix characters
+		/// test function for suffix characters
 		bool isPostfixChar(UChar c);
 
 		/// prefix characters
 		std::set<UChar> prefix_chars_;
 
-		/// postfix characters
-		std::set<UChar> postfix_chars_;
+		/// suffix characters
+		std::set<UChar> suffix_chars_;
 
 		/// type of the extracted prefix tokens
 		std::string prefix_type_;
 
-		/// type of the extracted postfix tokens
-		std::string postfix_type_;
+		/// type of the extracted suffix tokens
+		std::string suffix_type_;
 	};
 
 } //end namespace Toki

@@ -8,18 +8,18 @@ namespace Toki {
 		: OutputQueueLayer(input, props)
 	{
 		prefix_type_ = props.get<std::string>("prefix_token_type", "pre");
-		postfix_type_ = props.get<std::string>("postfix_token_type", "post");
+		suffix_type_ = props.get<std::string>("suffix_token_type", "post");
 		std::string prefixes = props.get("prefix_chars", "");
 		Util::utf8StringToUcharContainer(prefixes, prefix_chars_);
-		std::string postfixes = props.get("postfix_chars", "");
-		Util::utf8StringToUcharContainer(postfixes, postfix_chars_);
+		std::string suffixes = props.get("suffix_chars", "");
+		Util::utf8StringToUcharContainer(suffixes, suffix_chars_);
 	}
 
 	std::string AffixSplitLayer::info() const
 	{
 		std::stringstream ss;
 		ss << "affix{" << prefix_type_ << "|" << prefix_chars_.size()
-			<< "||" << postfix_type_ << "|" << postfix_chars_.size() << "}";
+			<< "||" << suffix_type_ << "|" << suffix_chars_.size() << "}";
 		return ss.str();
 	}
 
@@ -28,7 +28,7 @@ namespace Toki {
 		std::stringstream ss;
 		ss << ", affix: "
 			<< prefix_chars_.size() << " prefixes(" << prefix_type_ << ") "
-			<< postfix_chars_.size() << " postfixes(" << postfix_type_ << ")";
+			<< suffix_chars_.size() << " suffixes(" << suffix_type_ << ")";
 		return OutputQueueLayer::long_info() + ss.str();
 	}
 
@@ -54,7 +54,7 @@ namespace Toki {
 			wa = Token::WA_None;
 		}
 		while (body_end_index < t->orth().length()) {
-			Token* post = new Token(t->orth().charAt(body_end_index), postfix_type_, wa);
+			Token* post = new Token(t->orth().charAt(body_end_index), suffix_type_, wa);
 			enqueueOutputToken(post);
 			wa = Token::WA_None;
 			++body_end_index;
@@ -69,7 +69,7 @@ namespace Toki {
 
 	bool AffixSplitLayer::isPostfixChar(UChar c)
 	{
-		return postfix_chars_.find(c) != postfix_chars_.end();
+		return suffix_chars_.find(c) != suffix_chars_.end();
 	}
 
 } /* end namespace Toki */
