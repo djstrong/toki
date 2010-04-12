@@ -1,9 +1,8 @@
 *.o
 *.a
 Makefile*
-icu_tokenizer
-test-app/test-app
-unit_tests/unit_tests
+toki-app/toki-app
+tests/tests
 *.pro.user
 #*#
 *~
@@ -11,3 +10,5 @@ unit_tests/unit_tests
 CMakeCache.txt
 CMakeFiles
 cmake_install.cmake
+/bin/
+/qtcreator-build/
