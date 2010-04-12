@@ -8,21 +8,21 @@ BOOST_AUTO_TEST_SUITE( config )
 
 BOOST_AUTO_TEST_CASE(test_empty_config)
 {
-	Config::Node n = Config::Node();
+	Toki::Config::Node n = Toki::Config::Node();
 	BOOST_CHECK(n.empty());
 }
 
 BOOST_AUTO_TEST_CASE(test_default_config)
 {
-	Config::Node n = Config::Default();
+	Toki::Config::Node n = Toki::Config::Default();
 	BOOST_CHECK(!n.empty());
 }
 
 BOOST_AUTO_TEST_CASE(test_nonexistant_config)
 {
 	BOOST_CHECK_THROW(
-		Config::Node n = Config::get_library_config("nonexistant97yh(*^$4u678"),
-		TokenizerLibError
+		Toki::Config::Node n = Toki::Config::get_library_config("nonexistant97yh(*^$4u678"),
+		Toki::TokenizerLibError
 		);
 }
 
@@ -46,8 +46,8 @@ struct Fc {
 	{
 	}
 
-	Config::Node cfg1;
-	Config::Node cfg2;
+	Toki::Config::Node cfg1;
+	Toki::Config::Node cfg2;
 };
 
 BOOST_FIXTURE_TEST_CASE( config_init, Fc )
@@ -66,7 +66,7 @@ BOOST_FIXTURE_TEST_CASE( config_set_again, Fc )
 
 BOOST_FIXTURE_TEST_CASE( config_merge1, Fc )
 {
-	Config::merge_into(cfg1, cfg2);
+	Toki::Config::merge_into(cfg1, cfg2);
 	BOOST_CHECK_EQUAL( cfg1.get<int>("a.aa"), 15 );
 	BOOST_CHECK_EQUAL( cfg1.get<int>("a.ab"), 20 );
 	BOOST_CHECK_EQUAL( cfg1.get<int>("a.ac"), 30 );
@@ -78,7 +78,7 @@ BOOST_FIXTURE_TEST_CASE( config_merge1, Fc )
 BOOST_FIXTURE_TEST_CASE( config_merge_override, Fc )
 {
 	cfg2.put("a._merge", "override");
-	Config::merge_into(cfg1, cfg2);
+	Toki::Config::merge_into(cfg1, cfg2);
 	BOOST_CHECK_EQUAL( cfg1.get<int>("a.aa"), 15 );
 	BOOST_CHECK_EQUAL( cfg1.get<int>("a.ab", 0), 0 );
 	BOOST_CHECK_EQUAL( cfg1.get<int>("a.ac", 0), 0 );
@@ -89,10 +89,10 @@ BOOST_FIXTURE_TEST_CASE( config_merge_override, Fc )
 
 namespace {
 template<typename T>
-std::vector<T> all_values(const Config::Node& c, const std::string& key)
+std::vector<T> all_values(const Toki::Config::Node& c, const std::string& key)
 {
 	std::vector<T> vec;
-	BOOST_FOREACH (const Config::Node::value_type &v, c) {
+	BOOST_FOREACH (const Toki::Config::Node::value_type &v, c) {
 		if (v.first == key) {
 			vec.push_back(v.second.get_value<T>());
 		}
@@ -106,7 +106,7 @@ struct Fc2 {
 	 : c1(), c2()
 	{
 		c1.put("a.aa", 10);
-		std::pair<std::string, Config::Node> p;
+		std::pair<std::string, Toki::Config::Node> p;
 		p.first = "aa";
 		p.second.put_value(20);
 		c1.get_child("a").push_back(p);
@@ -121,8 +121,8 @@ struct Fc2 {
 	{
 	}
 
-	Config::Node c1;
-	Config::Node c2;
+	Toki::Config::Node c1;
+	Toki::Config::Node c2;
 };
 
 BOOST_FIXTURE_TEST_CASE( config_dup, Fc2 )
@@ -138,7 +138,7 @@ BOOST_FIXTURE_TEST_CASE( config_dup, Fc2 )
 
 BOOST_FIXTURE_TEST_CASE( config_dup_merge, Fc2 )
 {
-	Config::Node m = Config::merge_copy(c1, c2);
+	Toki::Config::Node m = Toki::Config::merge_copy(c1, c2);
 	std::vector<int> v;
 	v.push_back(15);
 	std::vector<int> va = all_values<int>(m.get_child("a"), "aa");
@@ -148,11 +148,11 @@ BOOST_FIXTURE_TEST_CASE( config_dup_merge, Fc2 )
 
 BOOST_FIXTURE_TEST_CASE( config_dup_merge_dup, Fc2 )
 {
-	std::pair<std::string, Config::Node> p;
+	std::pair<std::string, Toki::Config::Node> p;
 	p.first = "aa";
 	p.second.put_value(25);
 	c2.get_child("a").push_back(p);
-	Config::Node m = Config::merge_copy(c1, c2);
+	Toki::Config::Node m = Toki::Config::merge_copy(c1, c2);
 	std::vector<int> v;
 	v.push_back(15);
 	v.push_back(25);

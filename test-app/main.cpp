@@ -65,13 +65,13 @@ int main(int argc, char** argv)
 
 	if (bufsize < 0) return 3;
 
-	const Config::Node& conf = config_file.empty() ?
-		Config::Default() :
-		Config::fromFile(config_file);
-	LayerTokenizer tok(conf);
+	const Toki::Config::Node& conf = config_file.empty() ?
+		Toki::Config::Default() :
+		Toki::Config::fromFile(config_file);
+	Toki::LayerTokenizer tok(conf);
 	if (!quiet) {
 		std::cout << "Available layer types: "
-			<< boost::algorithm::join(TokenLayer::available_layer_types(), " ")
+			<< boost::algorithm::join(Toki::TokenLayer::available_layer_types(), " ")
 			<< "\n";
 		if (verbose) {
 			std::cout << "Tokenizer layers:\n";
@@ -83,10 +83,10 @@ int main(int argc, char** argv)
 	}
 	tok.setInputSource(std::cin, bufsize);
 	if (orths) {
-		Debug::tokenize_orths_newline(tok, std::cout);
+		Toki::Debug::tokenize_orths_newline(tok, std::cout);
 	} else {
 		std::string format = conf.get("debug.format", "[$orth]-$type-$ws-\n");
-		format = Util::unescape_utf8(format);
-		Debug::tokenize_formatted(tok, format, std::cout);
+		format = Toki::Util::unescape_utf8(format);
+		Toki::Debug::tokenize_formatted(tok, format, std::cout);
 	}
 }

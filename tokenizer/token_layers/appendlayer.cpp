@@ -2,24 +2,28 @@
 #include "token.h"
 #include <boost/property_tree/ptree.hpp>
 
-AppendLayer::AppendLayer(TokenSource *input, const Config::Node &props)
-	: TokenLayer(input, props), append_()
-{
-	append_ = UnicodeString::fromUTF8(props.get("append", "!")).unescape();
-}
+namespace Toki {
 
-std::string AppendLayer::info() const
-{
-	return "append";
-}
+	AppendLayer::AppendLayer(TokenSource *input, const Config::Node &props)
+		: TokenLayer(input, props), append_()
+	{
+		append_ = UnicodeString::fromUTF8(props.get("append", "!")).unescape();
+	}
 
-std::string AppendLayer::long_info() const
-{
-	return TokenLayer::long_info() + ", append: ";// + append_;
-}
+	std::string AppendLayer::info() const
+	{
+		return "append";
+	}
 
-Token* AppendLayer::processToken(Token* t)
-{
-	t->set_orth(t->orth() + append_);
-	return t;
-}
+	std::string AppendLayer::long_info() const
+	{
+		return TokenLayer::long_info() + ", append: ";// + append_;
+	}
+
+	Token* AppendLayer::processToken(Token* t)
+	{
+		t->set_orth(t->orth() + append_);
+		return t;
+	}
+
+} /* end namespace Toki */

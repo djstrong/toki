@@ -8,7 +8,7 @@ class TokenSource;
 
 #include "tokensource.h"
 
-namespace Debug {
+namespace Toki { namespace Debug {
 
 	/**
 	 * Helper function to pass a token through a given function and feed the
@@ -66,6 +66,6 @@ namespace Debug {
 	 */
 	void tokenize_formatted(TokenSource& tok, const std::string& format, std::ostream& os);
 
-} //end namespace Debug
+} /*end ns Debug */ } /* end ns Toki */
 
 #endif // DEBUG_H

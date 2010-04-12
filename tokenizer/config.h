@@ -7,7 +7,7 @@
 #include <boost/property_tree/ptree.hpp>
 #include <unicode/unistr.h>
 
-namespace Config {
+namespace Toki { namespace Config {
 
 	/**
 	 * Typedef for the configuration type passed around
@@ -55,6 +55,6 @@ namespace Config {
 
 	void set_library_config_path(const std::string &);
 
-} // end namespace Config
+} /* end ns Config */ } /* end ns Toki */
 
 #endif // CONFIG_H

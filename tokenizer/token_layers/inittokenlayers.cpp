@@ -6,19 +6,23 @@
 #include "regexpclassifylayer.h"
 #include "lexiconclassifylayer.h"
 
-bool init_token_layers()
-{
-	static bool init_done = false;
-	if (init_done) return false;
-	TokenLayer::register_layer<TokenLayer>("passthrough");
-	TokenLayer::register_layer<AffixSplitLayer>("affix_split");
-	TokenLayer::register_layer<AppendLayer>("append");
-	TokenLayer::register_layer<BasicSplitLayer>("split");
-	TokenLayer::register_layer<CombineLayer>("combine");
-	TokenLayer::register_layer<RegexpClassifyLayer>("regexp");
-	TokenLayer::register_layer<CaseLexiconClassifyLayer>("lexicon");
-	TokenLayer::register_layer<CaselessLexiconClassifyLayer>("lexicon_caseless");
+namespace Toki {
 
-	init_done = true;
-	return true;
-}
+	bool init_token_layers()
+	{
+		static bool init_done = false;
+		if (init_done) return false;
+		TokenLayer::register_layer<TokenLayer>("passthrough");
+		TokenLayer::register_layer<AffixSplitLayer>("affix_split");
+		TokenLayer::register_layer<AppendLayer>("append");
+		TokenLayer::register_layer<BasicSplitLayer>("split");
+		TokenLayer::register_layer<CombineLayer>("combine");
+		TokenLayer::register_layer<RegexpClassifyLayer>("regexp");
+		TokenLayer::register_layer<CaseLexiconClassifyLayer>("lexicon");
+		TokenLayer::register_layer<CaselessLexiconClassifyLayer>("lexicon_caseless");
+
+		init_done = true;
+		return true;
+	}
+
+} /* end namespace Toki */

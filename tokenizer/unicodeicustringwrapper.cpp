@@ -1,25 +1,29 @@
 #include "unicodeicustringwrapper.h"
 
-UnicodeIcuStringWrapper::UnicodeIcuStringWrapper(const UnicodeString& u)
-	: iter_(u)
-{
-}
+namespace Toki {
 
-UnicodeIcuStringWrapper::~UnicodeIcuStringWrapper()
-{
-}
+	UnicodeIcuStringWrapper::UnicodeIcuStringWrapper(const UnicodeString& u)
+		: iter_(u)
+	{
+	}
 
-UChar UnicodeIcuStringWrapper::peekNextChar()
-{
-	return iter_.current();
-}
+	UnicodeIcuStringWrapper::~UnicodeIcuStringWrapper()
+	{
+	}
 
-UChar UnicodeIcuStringWrapper::getNextChar()
-{
-	return iter_.nextPostInc();
-}
+	UChar UnicodeIcuStringWrapper::peekNextChar()
+	{
+		return iter_.current();
+	}
 
-bool UnicodeIcuStringWrapper::hasMoreChars()
-{
-	return iter_.hasNext();
-}
+	UChar UnicodeIcuStringWrapper::getNextChar()
+	{
+		return iter_.nextPostInc();
+	}
+
+	bool UnicodeIcuStringWrapper::hasMoreChars()
+	{
+		return iter_.hasNext();
+	}
+
+} /* end namespace Toki */

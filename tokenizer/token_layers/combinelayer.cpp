@@ -1,17 +1,21 @@
 #include "combinelayer.h"
 #include "token.h"
 
-CombineLayer::CombineLayer(TokenSource* input, const Config::Node& props)
-	: OutputQueueLayer(input, props)
-{
-}
+namespace Toki {
 
-void CombineLayer::prepareMoreTokens(Token* t)
-{
-	Token* t2 = getTokenFromInput();
-	if (t2) {
-		t->set_orth(t->orth() + t2->orth());
-		delete t2;
+	CombineLayer::CombineLayer(TokenSource* input, const Config::Node& props)
+		: OutputQueueLayer(input, props)
+	{
 	}
-	enqueueOutputToken(t);
-}
+
+	void CombineLayer::prepareMoreTokens(Token* t)
+	{
+		Token* t2 = getTokenFromInput();
+		if (t2) {
+			t->set_orth(t->orth() + t2->orth());
+			delete t2;
+		}
+		enqueueOutputToken(t);
+	}
+
+} /* end namespace Toki */

@@ -5,54 +5,58 @@
 #include "tokenizer.h"
 #include "token.h"
 
-/**
- * A simple tokenizer that takes a UnicodeSource (i.e. continous text) and
- * outputs (via getNextToken) tokens split according to whitespace in the text.
- */
-class WhitespaceTokenizer : public Tokenizer
-{
-public:
-	/**
-	 * Constructor
-	 *
-	 * Keys recognized in the configuration:
-	 * - token_type - Token type to set in created tokens, defaults to "t".
-	 *
-	 */
-	WhitespaceTokenizer(const Config::Node& cfg = Config::Default());
+namespace Toki {
 
 	/**
-	 * Constructor shorthand
-	 * @see Tokenizer::Tokenizer
+	 * A simple tokenizer that takes a UnicodeSource (i.e. continous text) and
+	 * outputs (via getNextToken) tokens split according to whitespace in the text.
 	 */
-	WhitespaceTokenizer(UnicodeSource* us, const Config::Node& cfg = Config::Default());
+	class WhitespaceTokenizer : public Tokenizer
+	{
+	public:
+		/**
+		 * Constructor
+		 *
+		 * Keys recognized in the configuration:
+		 * - token_type - Token type to set in created tokens, defaults to "t".
+		 *
+		 */
+		WhitespaceTokenizer(const Config::Node& cfg = Config::Default());
 
-	/// TokenSource override
-	Token* getNextToken();
+		/**
+		 * Constructor shorthand
+		 * @see Tokenizer::Tokenizer
+		 */
+		WhitespaceTokenizer(UnicodeSource* us, const Config::Node& cfg = Config::Default());
 
-	/// Tokenizer override
-	void reset();
+		/// TokenSource override
+		Token* getNextToken();
 
-protected:
-	/// Tokenizer override
-	void newInputSource();
+		/// Tokenizer override
+		void reset();
 
-private:
-	/**
-	 * Read characters from the input source until a non-white character is
-	 * found, storing the amount/type of whitespace that was consumed.
-	 */
-	void eatWhitespace();
+	protected:
+		/// Tokenizer override
+		void newInputSource();
 
-	/**
-	 * Stored whitespace amount that preceeds the next token
-	 */
-	Token::WhitespaceAmount wa_;
+	private:
+		/**
+		 * Read characters from the input source until a non-white character is
+		 * found, storing the amount/type of whitespace that was consumed.
+		 */
+		void eatWhitespace();
 
-	/**
-	 * The type of tokens to return
-	 */
-	std::string token_type_;
-};
+		/**
+		 * Stored whitespace amount that preceeds the next token
+		 */
+		Token::WhitespaceAmount wa_;
+
+		/**
+		 * The type of tokens to return
+		 */
+		std::string token_type_;
+	};
+
+} //end namespace Toki
 
 #endif // WHITESPACETOKENIZER_H

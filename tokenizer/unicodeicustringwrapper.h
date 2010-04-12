@@ -5,35 +5,40 @@
 
 #include "unicodesource.h"
 
-/**
- * A thin wrapper around UnicodeString (using aStringCharacterIterator) to adapt
- * it to the UnicodeSource interface.
- */
-class UnicodeIcuStringWrapper : public UnicodeSource
-{
-public:
+namespace Toki {
+
 	/**
-	 * The constructor.
-	 *
-	 * @param u The Unicode string to wrap. The string is copied.
+	 * A thin wrapper around UnicodeString (using aStringCharacterIterator) to adapt
+	 * it to the UnicodeSource interface.
 	 */
-	UnicodeIcuStringWrapper(const UnicodeString& u);
+	class UnicodeIcuStringWrapper : public UnicodeSource
+	{
+	public:
+		/**
+		 * The constructor.
+		 *
+		 * @param u The Unicode string to wrap. The string is copied.
+		 */
+		UnicodeIcuStringWrapper(const UnicodeString& u);
 
-	/// The destructor
-	~UnicodeIcuStringWrapper();
+		/// The destructor
+		~UnicodeIcuStringWrapper();
 
-	/// Override from UnicodeSource
-	UChar peekNextChar();
+		/// Override from UnicodeSource
+		UChar peekNextChar();
 
-	/// Override from UnicodeSource
-	UChar getNextChar();
+		/// Override from UnicodeSource
+		UChar getNextChar();
 
-	/// Override from UnicodeSource
-	bool hasMoreChars();
+		/// Override from UnicodeSource
+		bool hasMoreChars();
 
-private:
-	/// The internal StringCharacterIterator object
-	StringCharacterIterator iter_;
-};
+	private:
+		/// The internal StringCharacterIterator object
+		StringCharacterIterator iter_;
+	};
+
+} /* end ns Toki */
+
 
 #endif // ICUSTRINGSOURCE_H

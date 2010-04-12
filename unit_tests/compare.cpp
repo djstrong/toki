@@ -25,7 +25,7 @@ static const char subdir_name[] = "test_compare";
 //BOOST_AUTO_TEST_SUITE( test_compare )
 struct compare_item
 {
-	Config::Node* base_config;
+	Toki::Config::Node* base_config;
 
 	std::vector<fs::path> configs;
 
@@ -34,7 +34,7 @@ struct compare_item
 	fs::path out_file;
 };
 
-static std::vector< boost::shared_ptr<Config::Node> > global_configs;
+static std::vector< boost::shared_ptr<Toki::Config::Node> > global_configs;
 
 static std::vector< compare_item > global_compares;
 
@@ -47,22 +47,21 @@ void test_one_item(const compare_item& c)
 
 	fs::ifstream ifs_in(file_in);
 	fs::ifstream ifs_out(file_out);
-
-	Config::Node cfg;
+	Toki::Config::Node cfg;
 	if (c.base_config != NULL) {
 		cfg = *(c.base_config);
 	}
 
 	BOOST_FOREACH (const fs::path& p, c.configs) {
-		Config::Node additional = Config::fromFile(p.string());
-		Config::merge_into(cfg, additional);
+		Toki::Config::Node additional = Toki::Config::fromFile(p.string());
+		Toki::Config::merge_into(cfg, additional);
 	}
 
-	LayerTokenizer tok(ifs_in, cfg);
-	std::string format = Util::unescape_utf8(cfg.get("debug.format", "[$orth]"));
+	Toki::LayerTokenizer tok(ifs_in, cfg);
+	std::string format = Toki::Util::unescape_utf8(cfg.get("debug.format", "[$orth]"));
 	std::stringstream ss_expected;
 	ss_expected << ifs_out.rdbuf();
-	std::string actual = Debug::tokenize_formatted(tok, format);
+	std::string actual = Toki::Debug::tokenize_formatted(tok, format);
 	BOOST_REQUIRE_EQUAL (actual, ss_expected.str());
 
 	ifs_in.close();
@@ -77,11 +76,11 @@ void test_one_item(const compare_item& c)
 		ss_in << ss.str();
 		tok.reset();
 		tok.setInputSource(ss_in, i + 1);
-		actual = Debug::tokenize_formatted(tok, format);
+		actual = Toki::Debug::tokenize_formatted(tok, format);
 		BOOST_REQUIRE_EQUAL (actual, ss_expected.str());
 		tok.reset();
 		tok.setInputSource(us);
-		actual = Debug::tokenize_formatted(tok, format);
+		actual = Toki::Debug::tokenize_formatted(tok, format);
 		BOOST_REQUIRE_EQUAL (actual, ss_expected.str());
 	}
 }
@@ -116,15 +115,15 @@ void init_subdir(fs::path dir)
 		}
 	}
 	std::set<std::string>::iterator i = configs.find("main");
-	Config::Node* cfg = new Config::Node();
+	Toki::Config::Node* cfg = new Toki::Config::Node();
 	if (i != configs.end()) {
 		std::string p = (dir / "main.ini").string();
-		*cfg = Config::fromFile(p);
+		*cfg = Toki::Config::fromFile(p);
 	} else {
 		//check dir name, load special config if possible, else default
-		*cfg = Config::Default();
+		*cfg = Toki::Config::Default();
 	}
-	global_configs.push_back(boost::shared_ptr<Config::Node>(cfg));
+	global_configs.push_back(boost::shared_ptr<Toki::Config::Node>(cfg));
 	int count = 0;
 	BOOST_FOREACH(const std::string& s, tests_out) {
 		compare_item c;
