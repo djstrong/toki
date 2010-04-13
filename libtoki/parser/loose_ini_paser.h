@@ -9,8 +9,8 @@
 //
 // For more information, see www.boost.org
 // ----------------------------------------------------------------------------
-#ifndef LOOSE_INI_PARSER_H
-#define LOOSE_INI_PARSER_H
+#ifndef LIBTOKI_LOOSE_INI_PARSER_H
+#define LIBTOKI_LOOSE_INI_PARSER_H
 
 #include <boost/property_tree/ini_parser.hpp>
 

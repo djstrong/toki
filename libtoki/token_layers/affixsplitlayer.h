@@ -1,5 +1,5 @@
-#ifndef AFFIXSPLITLAYER_H
-#define AFFIXSPLITLAYER_H
+#ifndef LIBTOKI_AFFIXSPLITLAYER_H
+#define LIBTOKI_AFFIXSPLITLAYER_H
 
 #include "outputqueuelayer.h"
 
@@ -64,4 +64,4 @@ namespace Toki {
 
 } //end namespace Toki
 
-#endif // AFFIXSPLITLAYER_H
+#endif // LIBTOKI_AFFIXSPLITLAYER_H

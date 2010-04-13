@@ -1,5 +1,5 @@
-#ifndef ICUSTRINGSOURCE_H
-#define ICUSTRINGSOURCE_H
+#ifndef LIBTOKI_ICUSTRINGSOURCE_H
+#define LIBTOKI_ICUSTRINGSOURCE_H
 #include <unicode/unistr.h>
 #include <unicode/schriter.h>
 
@@ -41,4 +41,4 @@ namespace Toki {
 } /* end ns Toki */
 
 
-#endif // ICUSTRINGSOURCE_H
+#endif // LIBTOKI_ICUSTRINGSOURCE_H

@@ -1,5 +1,5 @@
-#ifndef OUTPUTQUEUELAYER_H
-#define OUTPUTQUEUELAYER_H
+#ifndef LIBTOKI_OUTPUTQUEUELAYER_H
+#define LIBTOKI_OUTPUTQUEUELAYER_H
 
 #include "tokenlayer.h"
 
@@ -74,4 +74,4 @@ namespace Toki {
 
 } //end namespace Toki
 
-#endif // OUTPUTQUEUELAYER_H
+#endif // LIBTOKI_OUTPUTQUEUELAYER_H

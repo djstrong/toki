@@ -1,5 +1,5 @@
-#ifndef TOKEN_H
-#define TOKEN_H
+#ifndef LIBTOKI_TOKEN_H
+#define LIBTOKI_TOKEN_H
 
 #include <unicode/unistr.h>
 #include <string>
@@ -109,4 +109,4 @@ namespace Toki {
 
 } /* end ns Toki */
 
-#endif // TOKEN_H
+#endif // LIBTOKI_TOKEN_H

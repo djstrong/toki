@@ -1,5 +1,5 @@
-#ifndef APPENDLAYER_H
-#define APPENDLAYER_H
+#ifndef LIBTOKI_APPENDLAYER_H
+#define LIBTOKI_APPENDLAYER_H
 
 #include "tokenlayer.h"
 #include <unicode/unistr.h>
@@ -36,4 +36,4 @@ namespace Toki {
 
 } //end namespace Toki
 
-#endif // APPENDLAYER_H
+#endif // LIBTOKI_APPENDLAYER_H

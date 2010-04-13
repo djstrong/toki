@@ -1,5 +1,5 @@
-#ifndef GROUPSPLITLAYER_H
-#define GROUPSPLITLAYER_H
+#ifndef LIBTOKI_GROUPSPLITLAYER_H
+#define LIBTOKI_GROUPSPLITLAYER_H
 
 #include "basicsplitlayer.h"
 
@@ -28,4 +28,4 @@ namespace Toki {
 
 } /* end ns Toki */
 
-#endif // GROUPSPLITLAYER_H
+#endif // LIBTOKI_GROUPSPLITLAYER_H

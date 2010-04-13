@@ -1,5 +1,5 @@
-#ifndef ICUSTREAMWRAPPER_H
-#define ICUSTREAMWRAPPER_H
+#ifndef LIBTOKI_ICUSTREAMWRAPPER_H
+#define LIBTOKI_ICUSTREAMWRAPPER_H
 
 #include "unicodesource.h"
 #include <istream>
@@ -100,4 +100,4 @@ namespace Toki {
 
 } /* end ns Toki */
 
-#endif // ICUSTREAMWRAPPER_H
+#endif // LIBTOKI_ICUSTREAMWRAPPER_H

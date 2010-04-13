@@ -1,5 +1,5 @@
-#ifndef LEXICONCLASSIFYLAYER_H
-#define LEXICONCLASSIFYLAYER_H
+#ifndef LIBTOKI_LEXICONCLASSIFYLAYER_H
+#define LIBTOKI_LEXICONCLASSIFYLAYER_H
 
 #include "tokenlayer.h"
 #include "token.h"
@@ -159,4 +159,4 @@ namespace Toki {
 
 } //end namespace Toki
 
-#endif // LEXICONCLASSIFYLAYER_H
+#endif // LIBTOKI_LEXICONCLASSIFYLAYER_H

@@ -1,5 +1,5 @@
-#ifndef UNICODESOURCE_H
-#define UNICODESOURCE_H
+#ifndef LIBTOKI_UNICODESOURCE_H
+#define LIBTOKI_UNICODESOURCE_H
 
 #include <unicode/utypes.h>
 
@@ -57,4 +57,4 @@ namespace Toki {
 
 } /* end ns Toki */
 
-#endif // UNICODESOURCE_H
+#endif // LIBTOKI_UNICODESOURCE_H

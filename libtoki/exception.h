@@ -1,5 +1,5 @@
-#ifndef EXCEPTION_H
-#define EXCEPTION_H
+#ifndef LIBTOKI_EXCEPTION_H
+#define LIBTOKI_EXCEPTION_H
 
 #include <stdexcept>
 
@@ -45,4 +45,4 @@ namespace Toki {
 
 } /* end ns Toki */
 
-#endif // EXCEPTION_H
+#endif // LIBTOKI_EXCEPTION_H

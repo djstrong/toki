@@ -1,5 +1,5 @@
-#ifndef REGEXPCLASSIFYLAYER_H
-#define REGEXPCLASSIFYLAYER_H
+#ifndef LIBTOKI_REGEXPCLASSIFYLAYER_H
+#define LIBTOKI_REGEXPCLASSIFYLAYER_H
 
 #include "tokenlayer.h"
 #include <unicode/regex.h>
@@ -45,4 +45,4 @@ namespace Toki {
 
 } //end namespace Toki
 
-#endif // REGEXPCLASSIFYLAYER_H
+#endif // LIBTOKI_REGEXPCLASSIFYLAYER_H

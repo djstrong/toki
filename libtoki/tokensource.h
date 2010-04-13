@@ -1,5 +1,5 @@
-#ifndef TOKENSOURCE_H
-#define TOKENSOURCE_H
+#ifndef LIBTOKI_TOKENSOURCE_H
+#define LIBTOKI_TOKENSOURCE_H
 
 #include <iosfwd>
 #include <boost/function.hpp>
@@ -37,4 +37,4 @@ namespace Toki {
 } /* end ns Toki */
 
 
-#endif // TOKENSOURCE_H
+#endif // LIBTOKI_TOKENSOURCE_H

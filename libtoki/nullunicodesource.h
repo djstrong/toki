@@ -1,5 +1,5 @@
-#ifndef NULLUNICODESOURCE_H
-#define NULLUNICODESOURCE_H
+#ifndef LIBTOKI_NULLUNICODESOURCE_H
+#define LIBTOKI_NULLUNICODESOURCE_H
 
 #include "unicodesource.h"
 
@@ -36,4 +36,4 @@ namespace Toki {
 
 } /* end ns Toki */
 
-#endif // NULLUNICODESOURCE_H
+#endif // LIBTOKI_NULLUNICODESOURCE_H

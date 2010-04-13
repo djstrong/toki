@@ -1,5 +1,5 @@
-#ifndef DEBUG_H
-#define DEBUG_H
+#ifndef LIBTOKI_DEBUG_H
+#define LIBTOKI_DEBUG_H
 
 #include <string>
 #include <iosfwd>
@@ -68,4 +68,4 @@ namespace Toki { namespace Debug {
 
 } /*end ns Debug */ } /* end ns Toki */
 
-#endif // DEBUG_H
+#endif // LIBTOKI_DEBUG_H

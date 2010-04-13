@@ -1,5 +1,5 @@
-#ifndef BASICSPLITLAYER_H
-#define BASICSPLITLAYER_H
+#ifndef LIBTOKI_BASICSPLITLAYER_H
+#define LIBTOKI_BASICSPLITLAYER_H
 
 #include "outputqueuelayer.h"
 #include <set>
@@ -58,4 +58,4 @@ namespace Toki {
 
 } //end namespace Toki
 
-#endif // BASICSPLITLAYER_H
+#endif // LIBTOKI_BASICSPLITLAYER_H

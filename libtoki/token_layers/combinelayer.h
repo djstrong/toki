@@ -1,5 +1,5 @@
-#ifndef COMBINELAYER_H
-#define COMBINELAYER_H
+#ifndef LIBTOKI_COMBINELAYER_H
+#define LIBTOKI_COMBINELAYER_H
 
 #include "outputqueuelayer.h"
 
@@ -19,4 +19,4 @@ namespace Toki {
 
 } //end namespace Toki
 
-#endif // COMBINELAYER_H
+#endif // LIBTOKI_COMBINELAYER_H

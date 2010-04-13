@@ -1,5 +1,5 @@
-#ifndef INPUTBUFFERLAYER_H
-#define INPUTBUFFERLAYER_H
+#ifndef LIBTOKI_INPUTBUFFERLAYER_H
+#define LIBTOKI_INPUTBUFFERLAYER_H
 
 #include "tokenlayer.h"
 #include <queue>
@@ -45,4 +45,4 @@ namespace Toki {
 
 } //end namespace Toki
 
-#endif // INPUTBUFFERLAYER_H
+#endif // LIBTOKI_INPUTBUFFERLAYER_H

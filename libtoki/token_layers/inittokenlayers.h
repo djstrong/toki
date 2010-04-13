@@ -1,5 +1,5 @@
-#ifndef INITTOKENLAYERS_H
-#define INITTOKENLAYERS_H
+#ifndef LIBTOKI_INITTOKENLAYERS_H
+#define LIBTOKI_INITTOKENLAYERS_H
 
 namespace Toki {
 
@@ -12,4 +12,4 @@ namespace Toki {
 
 } //end namespace Toki
 
-#endif // INITTOKENLAYERS_H
+#endif // LIBTOKI_INITTOKENLAYERS_H

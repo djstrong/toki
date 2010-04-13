@@ -1,5 +1,5 @@
-#ifndef WHITESPACETOKENIZER_H
-#define WHITESPACETOKENIZER_H
+#ifndef LIBTOKI_WHITESPACETOKENIZER_H
+#define LIBTOKI_WHITESPACETOKENIZER_H
 
 #include "unicodesource.h"
 #include "tokenizer.h"
@@ -59,4 +59,4 @@ namespace Toki {
 
 } //end namespace Toki
 
-#endif // WHITESPACETOKENIZER_H
+#endif // LIBTOKI_WHITESPACETOKENIZER_H

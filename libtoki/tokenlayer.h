@@ -1,5 +1,5 @@
-#ifndef TOKENLAYER_H
-#define TOKENLAYER_H
+#ifndef LIBTOKI_TOKENLAYER_H
+#define LIBTOKI_TOKENLAYER_H
 
 #include "tokensource.h"
 #include "config.h"
@@ -215,4 +215,4 @@ namespace Toki {
 
 } /* end ns Toki */
 
-#endif // TOKENLAYER_H
+#endif // LIBTOKI_TOKENLAYER_H

@@ -1,5 +1,5 @@
-#ifndef TOKENIZER_H
-#define TOKENIZER_H
+#ifndef LIBTOKI_TOKENIZER_H
+#define LIBTOKI_TOKENIZER_H
 
 #include "tokensource.h"
 #include "config.h"
@@ -137,4 +137,4 @@ namespace Toki {
 
 } /* end ns Toki */
 
-#endif // TOKENIZER_H
+#endif // LIBTOKI_TOKENIZER_H

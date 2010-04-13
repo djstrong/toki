@@ -1,5 +1,5 @@
-#ifndef UTIL_H
-#define UTIL_H
+#ifndef LIBTOKI_UTIL_H
+#define LIBTOKI_UTIL_H
 
 #include <string>
 #include <unicode/unistr.h>
@@ -32,4 +32,4 @@ namespace Toki { namespace Util {
 	std::string to_utf8(const UnicodeString& ustr);
 } /* end ns Util */ } /* end ns Toki */
 
-#endif // UTIL_H
+#endif // LIBTOKI_UTIL_H

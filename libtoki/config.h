@@ -1,5 +1,5 @@
-#ifndef CONFIG_H
-#define CONFIG_H
+#ifndef LIBTOKI_CONFIG_H
+#define LIBTOKI_CONFIG_H
 
 #include <map>
 #include <string>
@@ -68,4 +68,4 @@ namespace Toki { namespace Config {
 
 } /* end ns Config */ } /* end ns Toki */
 
-#endif // CONFIG_H
+#endif // LIBTOKI_CONFIG_H

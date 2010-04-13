@@ -1,5 +1,5 @@
-#ifndef LAYERTOKENIZER_H
-#define LAYERTOKENIZER_H
+#ifndef LIBTOKI_LAYERTOKENIZER_H
+#define LIBTOKI_LAYERTOKENIZER_H
 
 #include "tokenizer.h"
 
@@ -94,4 +94,4 @@ namespace Toki {
 
 } /* end ns Toki */
 
-#endif // LAYERTOKENIZER_H
+#endif // LIBTOKI_LAYERTOKENIZER_H
