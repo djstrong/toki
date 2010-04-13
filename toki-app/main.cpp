@@ -5,6 +5,7 @@
 #include "unicodeicustringwrapper.h"
 #include "util.h"
 #include "debug.h"
+#include "exception.h"
 
 #include <iostream>
 #include <sstream>
@@ -25,6 +26,7 @@ int main(int argc, char** argv)
 
 	std::string input_enc;
 	std::string config_file;
+	std::string config_path;
 	int bufsize;
 	bool orths;
 	bool verbose;
@@ -36,6 +38,8 @@ int main(int argc, char** argv)
 			 "Input encoding (ICU string identifier), for example UTF8, cp1250")
 			("config-file,c", value(&config_file)->default_value(""),
 			 "Config file to use, defaults to library-default config")
+			("config-path,C", value(&config_path)->default_value(""),
+			 "Override default config search path")
 			("buffer-size,b", value(&bufsize)->default_value(1),
 			 "Stream buffer size, set to 0 to convert the entire input "
 			 "in-memory before processing and disregard the encoding, assuming UTF-8.")
@@ -65,28 +69,40 @@ int main(int argc, char** argv)
 
 	if (bufsize < 0) return 3;
 
-	const Toki::Config::Node& conf = config_file.empty() ?
-		Toki::Config::Default() :
-		Toki::Config::fromFile(config_file);
-	Toki::LayerTokenizer tok(conf);
-	if (!quiet) {
-		std::cout << "Available layer types: "
-			<< boost::algorithm::join(Toki::TokenLayer::available_layer_types(), " ")
-			<< "\n";
-		if (verbose) {
-			std::cout << "Tokenizer layers:\n";
-			std::cout << tok.layers_long_info("\n");
-		} else {
-			std::cout << "Tokenizer: " << tok.layers_info() << "\n";
-		}
-		std::cout << "Tokenizer started. C-d or C-c to exit.\n";
+	if (!config_path.empty()) {
+		Toki::Config::set_library_config_path(config_path);
 	}
-	tok.setInputSource(std::cin, bufsize);
-	if (orths) {
-		Toki::Debug::tokenize_orths_newline(tok, std::cout);
-	} else {
-		std::string format = conf.get("debug.format", "[$orth]-$type-$ws-\n");
-		format = Toki::Util::unescape_utf8(format);
-		Toki::Debug::tokenize_formatted(tok, format, std::cout);
+	if (verbose) {
+		std::cout << "Config search path: "
+			<< boost::algorithm::join(Toki::Config::get_library_config_path(), ";")
+			<< "\n";
+	}
+	try {
+		const Toki::Config::Node& conf = config_file.empty() ?
+			Toki::Config::Default() :
+			Toki::Config::fromFile(config_file);
+		Toki::LayerTokenizer tok(conf);
+		if (!quiet) {
+			std::cout << "Available layer types: "
+				<< boost::algorithm::join(Toki::TokenLayer::available_layer_types(), " ")
+				<< "\n";
+			if (verbose) {
+				std::cout << "Tokenizer layers:\n";
+				std::cout << tok.layers_long_info("\n");
+			} else {
+				std::cout << "Tokenizer: " << tok.layers_info() << "\n";
+			}
+			std::cout << "Tokenizer started. C-d or C-c to exit.\n";
+		}
+		tok.setInputSource(std::cin, bufsize);
+		if (orths) {
+			Toki::Debug::tokenize_orths_newline(tok, std::cout);
+		} else {
+			std::string format = conf.get("debug.format", "[$orth]-$type-$ws-\n");
+			format = Toki::Util::unescape_utf8(format);
+			Toki::Debug::tokenize_formatted(tok, format, std::cout);
+		}
+	} catch (Toki::TokenizerLibError& e) {
+		std::cerr << "Error: " << e.what() << "\n";
 	}
 }
