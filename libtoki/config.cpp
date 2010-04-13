@@ -31,7 +31,7 @@ namespace Toki { namespace Config {
 	{
 		Node p;
 		try {
-			boost::property_tree::ini_parser::read_ini(is, p);
+			loose_ini_parser::read_loose_ini(is, p);
 		} catch (boost::property_tree::file_parser_error& e) {
 			throw TokenizerLibError(e.what());
 		}
