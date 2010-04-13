@@ -26,6 +26,9 @@ namespace Toki {
 			, type_(type)
 			, preceeding_whitespace_(wa_before)
 	{
+#ifdef LIBTOKI_TRACK_TOKEN_CREATION
+		++instance_count_;
+#endif
 	}
 
 	Token::Token(const char* orth_utf8, const std::string& type, WhitespaceAmount wa_before)
@@ -33,7 +36,24 @@ namespace Toki {
 			, type_(type)
 			, preceeding_whitespace_(wa_before)
 	{
+#ifdef LIBTOKI_TRACK_TOKEN_CREATION
+		++instance_count_;
+#endif
 	}
+
+#ifdef LIBTOKI_TRACK_TOKEN_CREATION
+	Token::Token(const Token& other)
+		: orth_(other.orth_), type_(other_.type_),
+		preceeding_whitespace_(other.preceeding_whitespace_)
+	{
+		++instance_count_;
+	}
+
+	Token::~Token()
+	{
+		--instance_count_;
+	}
+#endif
 
 	std::string Token::orth_utf8() const
 	{
