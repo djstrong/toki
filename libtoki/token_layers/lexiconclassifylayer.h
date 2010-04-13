@@ -79,16 +79,17 @@ namespace Toki {
 		}
 		const std::string& file_string = props.get<std::string>("lexicon_file", "");
 		if (!file_string.empty()) {
-			std::ifstream ifs(file_string.c_str());
-			if (!ifs.good()) {
-				std::cerr << "Error opening file " << file_string << "\n";
-			}
-			while (ifs.good()) {
-				std::string s;
-				std::getline(ifs, s);
-				if (!s.empty()) {
-					lex_.insert(UnicodeString::fromUTF8(s).unescape());
+			std::ifstream ifs;
+			if (Config::open_file_from_search_path(file_string, ifs) && ifs.good()) {
+				while (ifs.good()) {
+					std::string s;
+					std::getline(ifs, s);
+					if (!s.empty()) {
+						lex_.insert(UnicodeString::fromUTF8(s).unescape());
+					}
 				}
+			} else {
+				std::cerr << "Error opening file " << file_string << "\n";
 			}
 		}
 	}

@@ -93,7 +93,7 @@ namespace Toki { namespace Config {
 		static Node cfg;
 		if (!initialized) {
 			try {
-				cfg = get_library_config("config.ini");
+				cfg = get_library_config("config");
 			} catch (TokenizerLibError& e) {
 				throw TokenizerLibError(std::string("Default config error! ") + e.what());
 			}
@@ -111,21 +111,40 @@ namespace Toki { namespace Config {
 		}
 	} // end anon namespace
 
-	Node get_library_config(const std::string &id)
+	std::string find_file_in_search_path(const std::string &filename)
 	{
 		namespace fs = boost::filesystem;
-		fs::path i(id);
+		fs::path i(filename);
 		BOOST_FOREACH (const std::string& s, library_config_path) {
-			fs::path p(s);
 			fs::path pi = s / i;
 			if (fs::exists(pi) && fs::is_regular(pi)) {
-				return fromFile(pi.string());
+				return pi.string();
 			}
 		}
-		std::stringstream ss;
-		ss << "Library config ``" << id << "'' not found in search path: ";
-		ss << get_library_config_path_string();
-		throw TokenizerLibError(ss.str());
+		return "";
+	}
+
+	bool open_file_from_search_path(const std::string &filename, std::ifstream &ifs)
+	{
+		std::string f = find_file_in_search_path(filename);
+		if (!f.empty()) {
+			ifs.open(f.c_str());
+			return true;
+		}
+		return false;
+	}
+
+	Node get_library_config(const std::string &id)
+	{
+		std::string fn = find_file_in_search_path(id + ".ini");
+		if (!fn.empty()) {
+			return fromFile(fn);
+		} else {
+			std::stringstream ss;
+			ss << "Library config ``" << id << "'' not found in search path: ";
+			ss << get_library_config_path_string();
+			throw TokenizerLibError(ss.str());
+		}
 	}
 
 	std::vector<std::string> get_library_config_path()

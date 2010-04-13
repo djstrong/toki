@@ -45,6 +45,17 @@ namespace Toki { namespace Config {
 	const Node& Default();
 
 	/**
+	 * Look for a filename under the search path and return a path to a file
+	 * that exists, or an empty string in case of failure
+	 */
+	std::string find_file_in_search_path(const std::string& filename);
+
+	/**
+	 * Open a file stream for a file in the library search path
+	 */
+	bool open_file_from_search_path(const std::string& filename, std::ifstream& ifs);
+
+	/**
 	 * Get a default config by name
 	 */
 	Node get_library_config(const std::string& id);
