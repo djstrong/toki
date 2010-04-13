@@ -12,3 +12,10 @@ include_directories(${ICU_INCLUDE_DIR})
 link_directories(${ICU_LIBRARY_DIRS})
 include_directories(${ICU_INCLUDE_DIR})
 link_directories(${ICU_LIBRARY_DIRS})
+
+if(UNIX)
+
+        install(TARGETS toki-app
+                RUNTIME DESTINATION bin)
+        
+endif(UNIX)

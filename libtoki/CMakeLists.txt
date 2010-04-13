@@ -2,6 +2,19 @@
 
 include_directories( ${CMAKE_SOURCE_DIR}/libtoki/ )
 
+set(LIBTOKI_INSTALL_DATA_DIR lib/toki/)
+
+add_definitions(-DLIBTOKI_DATA_DIR="${CMAKE_INSTALL_PREFIX}/${LIBTOKI_INSTALL_DATA_DIR}")
+
+FIND_PATH(LIBTOKI_SRC_DATA_DIR
+	config.ini
+	${CMAKE_SOURCE_DIR}/config
+)
+MARK_AS_ADVANCED(LIBTOKI_SRC_DATA_DIR)
+
+if(NOT LIBTOKI_SRC_DATA_DIR)
+	message(FATAL_ERROR "There is no data for libtoki")
+endif(NOT LIBTOKI_SRC_DATA_DIR)
 SET(libtoki_STAT_SRC
     config.cpp
     debug.cpp
@@ -28,4 +41,27 @@ SET(libtoki_STAT_SRC
     whitespacetokenizer.cpp
 )
 
-add_library(toki STATIC EXCLUDE_FROM_ALL ${libtoki_STAT_SRC})
+add_library(toki STATIC ${libtoki_STAT_SRC})
+
+if(UNIX)
+        install(TARGETS toki
+                ARCHIVE DESTINATION lib)
+        
+        install(
+                DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+                DESTINATION include
+                FILES_MATCHING PATTERN "*.h"
+                PATTERN ".svn" EXCLUDE
+                PATTERN "bin" EXCLUDE
+                PATTERN "build" EXCLUDE 
+                PATTERN "CMake*" EXCLUDE
+        )
+        
+        install(
+                DIRECTORY ${LIBTOKI_SRC_DATA_DIR}/
+                DESTINATION ${LIBTOKI_INSTALL_DATA_DIR}
+                FILES_MATCHING PATTERN "*.ini"
+                PATTERN ".svn" EXCLUDE
+        )
+endif(UNIX)
+

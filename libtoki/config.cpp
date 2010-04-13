@@ -148,8 +148,8 @@ namespace Toki { namespace Config {
 	namespace {
 		bool init_lcp()
 		{
-	#ifdef LIBTOKENIZER_CONFIG_PATH
-			set_library_config_path(LIBTOKENIZER_CONFIG_PATH);
+	#ifdef LIBTOKI_DATA_DIR
+			set_library_config_path(LIBTOKI_DATA_DIR);
 	#else
 			set_library_config_path("..");
 	#endif
