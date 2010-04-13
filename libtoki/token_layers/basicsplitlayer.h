@@ -33,8 +33,12 @@ namespace Toki {
 		std::string long_info() const;
 
 		/// getter for the separator type
-		std::string separator_type() const {
+		const std::string& separator_type() const {
 			return sep_type_;
+		}
+		/// getter for the separators set
+		const std::set<UChar>& separators() const {
+			return split_chars_;
 		}
 
 	protected:

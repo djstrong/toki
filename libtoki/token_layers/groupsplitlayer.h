@@ -15,6 +15,12 @@ namespace Toki {
 		 */
 		GroupSplitLayer(TokenSource* input, const Config::Node& props);
 
+		/// TokenLayer override
+		std::string info() const;
+
+		/// TokenLayer override
+		std::string long_info() const;
+
 	protected:
 		/// OutputQueueTokenLayer override
 		void prepareMoreTokens(Token* t);

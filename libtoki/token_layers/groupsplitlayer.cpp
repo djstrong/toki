@@ -8,6 +8,20 @@ namespace Toki {
 	{
 	}
 
+	std::string GroupSplitLayer::info() const
+	{
+		std::stringstream ss;
+		ss << "group_split{" << separator_type()
+			<< "|" << separators().size() << "}";
+		return ss.str();
+	}
+
+	std::string GroupSplitLayer::long_info() const
+	{
+		return BasicSplitLayer::long_info() + " (group)";
+	}
+
+
 	void GroupSplitLayer::prepareMoreTokens(Token *t)
 	{
 		const UnicodeString& orth = t->orth();

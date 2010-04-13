@@ -10,4 +10,11 @@ namespace Toki { namespace Util {
 		return out;
 	}
 
+	std::string to_utf8(const UnicodeString &ustr)
+	{
+		std::string s;
+		ustr.toUTF8String(s);
+		return s;
+	}
+
 } /* end namespace Util */ } /* end namespace Toki */

@@ -1,5 +1,6 @@
 #include "appendlayer.h"
 #include "token.h"
+#include "util.h"
 #include <boost/property_tree/ptree.hpp>
 
 namespace Toki {
@@ -17,7 +18,7 @@ namespace Toki {
 
 	std::string AppendLayer::long_info() const
 	{
-		return TokenLayer::long_info() + ", append: ";// + append_;
+		return TokenLayer::long_info() + ", append: " + Util::to_utf8(append_);
 	}
 
 	Token* AppendLayer::processToken(Token* t)
