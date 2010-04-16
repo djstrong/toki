@@ -20,7 +20,8 @@ namespace Toki { namespace Debug {
 	 * Tokenize the tokens from the TokenSource by passing all tokens through
 	 * the given functon and concatenating the output std::strings.
 	 */
-	std::string tokenize(TokenSource& tok, boost::function<std::string (const Token&)> func);
+	std::string tokenize(TokenSource& tok,
+		boost::function<std::string (const Token&)> func, int *count = NULL);
 
 	/**
 	 * Formatted token debug output. The following replacements will be done:
@@ -60,13 +61,15 @@ namespace Toki { namespace Debug {
 	 * Return a string with all tokens processed and printed according to the
 	 * given format string, @see token_format for format options.
 	 */
-	std::string tokenize_formatted(TokenSource& tok, const std::string& format);
+	std::string tokenize_formatted(TokenSource& tok, const std::string& format,
+		int *count = NULL);
 
 	/**
 	 * Output into the stream all tokens processed and printed according to the
 	 * given format string, @see token_format for format options.
 	 */
-	void tokenize_formatted(TokenSource& tok, const std::string& format, std::ostream& os);
+	void tokenize_formatted(TokenSource& tok, const std::string& format,
+		std::ostream& os, int *count = NULL);
 
 } /*end ns Debug */ } /* end ns Toki */
 

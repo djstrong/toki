@@ -34,7 +34,7 @@ namespace Toki {
 			, preceeding_whitespace_(wa_before)
 			, begins_sentence_(false)
 	{
-#ifdef LIBTOKI_TRACK_TOKEN_CREATION
+#ifndef LIBTOKI_NO_TRACK_TOKEN_CREATION
 		++instance_count_;
 		++creation_count_;
 #endif
@@ -46,7 +46,7 @@ namespace Toki {
 			, preceeding_whitespace_(wa_before)
 			, begins_sentence_(false)
 	{
-#ifdef LIBTOKI_TRACK_TOKEN_CREATION
+#ifndef LIBTOKI_NO_TRACK_TOKEN_CREATION
 		++instance_count_;
 		++creation_count_;
 #endif
@@ -77,9 +77,9 @@ namespace Toki {
 		begins_sentence_ = false;
 	}
 
-#ifdef LIBTOKI_TRACK_TOKEN_CREATION
+#ifndef LIBTOKI_NO_TRACK_TOKEN_CREATION
 	Token::Token(const Token& other)
-		: orth_(other.orth_), type_(other_.type_),
+		: orth_(other.orth_), type_(other.type_),
 		preceeding_whitespace_(other.preceeding_whitespace_),
 		begins_sentence_(other.begins_sentence_)
 	{
@@ -90,6 +90,9 @@ namespace Toki {
 	{
 		--instance_count_;
 	}
+
+	int Token::creation_count_ = 0;
+	int Token::instance_count_ = 0;
 #endif
 
 	std::string Token::orth_utf8() const

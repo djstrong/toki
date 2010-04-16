@@ -2,10 +2,12 @@
 #include "compare.h"
 #include "debug.h"
 #include "util.h"
+#include "token.h"
 
 #include <fstream>
 #include <boost/filesystem/fstream.hpp>
 #include <iostream>
+#include <iomanip>
 #include <map>
 #include <set>
 #include <sstream>
@@ -48,10 +50,14 @@ static std::vector< compare_item > global_compares;
 
 void test_one_item(const compare_item& c)
 {
-	std::vector<std::string> store_path = Toki::Config::get_library_config_path();
-	Toki::Config::set_library_config_path(data_dir);
+	int created_before = Toki::Token::creation_count();
+	int instances_before = Toki::Token::instance_count();
+	int tok_count = 0;
+	Toki::Config::LibraryConfigPathSetter path_setter(data_dir);
 	fs::path file_in = c.in_file;
 	fs::path file_out = c.out_file;
+	std::string rel_path = boost::algorithm::replace_first_copy(
+			file_out.string(), subdir_name, "");
 	BOOST_REQUIRE_MESSAGE(fs::exists(file_in), "Input file " << file_in << " not found!");
 	BOOST_REQUIRE_MESSAGE(fs::exists(file_out), "Expected output file " << file_out << " not found!");
 
@@ -71,7 +77,7 @@ void test_one_item(const compare_item& c)
 	std::string format = Toki::Util::unescape_utf8(cfg.get("debug.format", "[$orth]"));
 	std::stringstream ss_expected;
 	ss_expected << ifs_out.rdbuf();
-	std::string actual = Toki::Debug::tokenize_formatted(tok, format);
+	std::string actual = Toki::Debug::tokenize_formatted(tok, format, &tok_count);
 	BOOST_REQUIRE_EQUAL (actual, ss_expected.str());
 
 	ifs_in.close();
@@ -93,7 +99,14 @@ void test_one_item(const compare_item& c)
 		actual = Toki::Debug::tokenize_formatted(tok, format);
 		BOOST_REQUIRE_EQUAL (actual, ss_expected.str());
 	}
-	Toki::Config::set_library_config_path(store_path);
+	if (Toki::Token::creation_count() > 0) {
+		BOOST_CHECK_EQUAL (instances_before, Toki::Token::instance_count());
+		int created = Toki::Token::creation_count() - created_before;
+		BOOST_TEST_MESSAGE("Test case " << rel_path << ": "
+			<< (created/11) << " tokens per run with "
+			<< tok_count << " output, ratio "
+			<< std::setprecision(2) << (1.0*created/11/tok_count) << ")");
+	}
 }
 
 void subdir_exists()
@@ -106,6 +119,7 @@ void subdir_exists()
 
 void init_subdir(fs::path dir)
 {
+	Toki::Config::LibraryConfigPathSetter path_setter(data_dir);
 	fs::directory_iterator end_itr; // default construction yields past-the-end
 
 	std::set<std::string> tests_in;

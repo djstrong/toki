@@ -62,7 +62,7 @@ namespace Toki {
 		 */
 		void mark_as_cut();
 
-#ifdef LIBTOKI_TRACK_TOKEN_CREATION
+#ifndef LIBTOKI_TRACK_TOKEN_CREATION
 		/// Copy ctor
 		Token(const Token& other);
 
@@ -75,7 +75,7 @@ namespace Toki {
 		 * LIBTOKI_TRACK_TOKEN_CREATION symbol was not defined during compilation
 		 */
 		static int instance_count() {
-#ifdef LIBTOKI_TRACK_TOKEN_CREATION
+#ifndef LIBTOKI_NO_TRACK_TOKEN_CREATION
 			return instance_count_;
 #else
 			return -1;
@@ -87,7 +87,7 @@ namespace Toki {
 		 * LIBTOKI_TRACK_TOKEN_CREATION symbol was not defined during compilation
 		 */
 		static int creation_count() {
-#ifdef LIBTOKI_TRACK_TOKEN_CREATION
+#ifndef LIBTOKI_NO_TRACK_TOKEN_CREATION
 			return creation_count_;
 #else
 			return -1;
@@ -150,10 +150,10 @@ namespace Toki {
 		/// token-begins-sentence flag
 		bool begins_sentence_;
 
-#ifdef LIBTOKI_TRACK_TOKEN_CREATION
+#ifndef LIBTOKI_NO_TRACK_TOKEN_CREATION
 	private:
-		int instance_count_;
-		int creation_count_;
+		static int instance_count_;
+		static int creation_count_;
 #endif
 	};
 

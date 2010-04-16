@@ -16,10 +16,24 @@ namespace Toki { namespace Debug {
 		delete t;
 	}
 
-	std::string tokenize(TokenSource &tok, boost::function<std::string(const Token &)> func)
+	void sink_to_stream(boost::function<std::string (const Token&)> func,
+		std::ostream& os, Token* t, int & count)
+	{
+		os << func(*t);
+		++count;
+		delete t;
+	}
+
+	std::string tokenize(TokenSource &tok, boost::function<std::string(const Token &)> func, int * count)
 	{
 		std::stringstream ss;
-		tok.tokenize(boost::bind(&sink_to_stream, boost::ref(func), boost::ref(ss), _1));
+		if (count) {
+			tok.tokenize(boost::bind(&sink_to_stream,
+				boost::ref(func), boost::ref(ss), _1, boost::ref(*count)));
+		} else {
+			tok.tokenize(boost::bind(&sink_to_stream,
+				boost::ref(func), boost::ref(ss), _1));
+		}
 		return ss.str();
 	}
 
@@ -61,16 +75,26 @@ namespace Toki { namespace Debug {
 			"\n"));
 	}
 
-	std::string tokenize_formatted(TokenSource &tok, const std::string &format)
+	std::string tokenize_formatted(TokenSource &tok, const std::string &format,
+		int *count)
 	{
-		return tokenize(tok, boost::bind(&token_format, boost::ref(format), _1));
+		std::stringstream ss;
+		tokenize_formatted(tok, format, ss, count);
+		return ss.str();
 	}
 
-	void tokenize_formatted(TokenSource &tok, const std::string &format, std::ostream& os)
+	void tokenize_formatted(TokenSource &tok, const std::string &format,
+		std::ostream& os, int *count)
 	{
 		boost::function<std::string (const Token&)> ff;
 		ff = boost::bind(&token_format, boost::ref(format), _1);
-		tok.tokenize(boost::bind(&sink_to_stream, boost::ref(ff), boost::ref(os), _1));
+		if (count) {
+			tok.tokenize(boost::bind(&sink_to_stream,
+				boost::ref(ff), boost::ref(os), _1, boost::ref(*count)));
+		} else {
+			tok.tokenize(boost::bind(&sink_to_stream,
+				boost::ref(ff), boost::ref(os), _1));
+		}
 	}
 
 } /* end ns Debug */ } /* end namespace Toki */

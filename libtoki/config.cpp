@@ -178,4 +178,15 @@ namespace Toki { namespace Config {
 		static bool lcp_init = init_lcp();
 	} //end anon namespace
 
+	LibraryConfigPathSetter::LibraryConfigPathSetter(const std::string &new_path)
+		: old_path_(get_library_config_path())
+	{
+		set_library_config_path(new_path);
+	}
+
+	LibraryConfigPathSetter::~LibraryConfigPathSetter()
+	{
+		set_library_config_path(old_path_);
+	}
+
 } /* end ns Config */ } /* end namespace Toki */

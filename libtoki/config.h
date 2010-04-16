@@ -66,6 +66,23 @@ namespace Toki { namespace Config {
 
 	void set_library_config_path(const std::string &);
 
+	/**
+	 * Convenience class to set the library config path and hev it automatically
+	 * reset to the original value upon destruction
+	 */
+	class LibraryConfigPathSetter
+	{
+	public:
+		/// Constructor
+		LibraryConfigPathSetter(const std::string& new_path);
+
+		/// Destructor
+		~LibraryConfigPathSetter();
+	private:
+		/// Stored old path
+		std::vector<std::string> old_path_;
+	};
+
 } /* end ns Config */ } /* end ns Toki */
 
 #endif // LIBTOKI_CONFIG_H
