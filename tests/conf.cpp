@@ -18,6 +18,19 @@ BOOST_AUTO_TEST_CASE(test_default_config)
 	BOOST_CHECK(!n.empty());
 }
 
+BOOST_AUTO_TEST_CASE(test_default_config_fail)
+{
+	{
+		Toki::Config::LibraryConfigPathSetter l("nonexistant9427398yq564657^%&");
+		BOOST_CHECK_THROW(
+			Toki::Config::Node n = Toki::Config::Default(),
+			Toki::TokenizerLibError
+		);
+	}
+	Toki::Config::Node n = Toki::Config::Default();
+	BOOST_CHECK(!n.empty());
+}
+
 BOOST_AUTO_TEST_CASE(test_nonexistant_config)
 {
 	BOOST_CHECK_THROW(
@@ -25,8 +38,6 @@ BOOST_AUTO_TEST_CASE(test_nonexistant_config)
 		Toki::TokenizerLibError
 		);
 }
-
-
 
 struct Fc {
 	Fc()
