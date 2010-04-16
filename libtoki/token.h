@@ -17,10 +17,13 @@ namespace Toki {
 			WA_Space,
 			WA_ManySpaces,
 			WA_Newline,
-			WA_ManyNewlines
+			WA_ManyNewlines,
+			WA_PostLast // last item guard
 		};
 
 		static std::string WA_as_string(WhitespaceAmount wa);
+
+		static WhitespaceAmount WA_from_string(const std::string& s);
 
 		/**
 		 * Constructor.

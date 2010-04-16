@@ -3,7 +3,7 @@
 
 namespace Toki {
 
-	std::string Token::WA_as_string(WhitespaceAmount wa)
+	std::string Token::WA_as_string(Token::WhitespaceAmount wa)
 	{
 		switch (wa) {
 		case Token::WA_None:
@@ -19,6 +19,13 @@ namespace Toki {
 		default:
 			return "???";
 		}
+	}
+
+	Token::WhitespaceAmount Token::WA_from_string(const std::string &s)
+	{
+		int w = Token::WA_None;
+		while (w < Token::WA_PostLast && WA_as_string((Token::WhitespaceAmount)w) != s) ++w;
+		return (Token::WhitespaceAmount)w;
 	}
 
 	Token::Token(const UnicodeString& orth, const std::string& type, WhitespaceAmount wa_before)
