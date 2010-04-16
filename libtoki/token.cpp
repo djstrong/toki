@@ -32,6 +32,7 @@ namespace Toki {
 			: orth_(orth)
 			, type_(type)
 			, preceeding_whitespace_(wa_before)
+			, begins_sentence_(false)
 	{
 #ifdef LIBTOKI_TRACK_TOKEN_CREATION
 		++instance_count_;
@@ -42,6 +43,7 @@ namespace Toki {
 			: orth_(UnicodeString::fromUTF8(orth_utf8))
 			, type_(type)
 			, preceeding_whitespace_(wa_before)
+			, begins_sentence_(false)
 	{
 #ifdef LIBTOKI_TRACK_TOKEN_CREATION
 		++instance_count_;
@@ -51,7 +53,8 @@ namespace Toki {
 #ifdef LIBTOKI_TRACK_TOKEN_CREATION
 	Token::Token(const Token& other)
 		: orth_(other.orth_), type_(other_.type_),
-		preceeding_whitespace_(other.preceeding_whitespace_)
+		preceeding_whitespace_(other.preceeding_whitespace_),
+		begins_sentence_(other.begins_sentence_)
 	{
 		++instance_count_;
 	}

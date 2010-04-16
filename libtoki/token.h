@@ -94,6 +94,16 @@ namespace Toki {
 		/// orth as-utf8 convenience getter
 		std::string orth_utf8() const;
 
+		/// begins_sentence getter
+		bool begins_sentence() const {
+			return begins_sentence_;
+		}
+
+		/// begins_sentence setter
+		void set_begins_sentence(bool v) {
+			begins_sentence_ = v;
+		}
+
 	protected:
 		/// 'orth', the body of the token
 		UnicodeString orth_;
@@ -103,6 +113,9 @@ namespace Toki {
 
 		/// whitespace preceeding the token
 		WhitespaceAmount preceeding_whitespace_;
+
+		/// token-begins-sentence flag
+		bool begins_sentence_;
 
 #ifdef LIBTOKI_TRACK_TOKEN_CREATION
 	private:

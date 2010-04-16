@@ -65,6 +65,11 @@ namespace Toki {
 		 * Initial whitespace for the first token
 		 */
 		Token::WhitespaceAmount initial_wa_;
+
+		/**
+		 * Token begins_sentence flag
+		 */
+		bool begins_sentence_;
 	};
 
 } //end namespace Toki
