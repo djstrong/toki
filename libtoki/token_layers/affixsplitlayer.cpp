@@ -47,11 +47,16 @@ namespace Toki {
 			--body_end_index;
 		}
 		if (body_end_index > body_begin_index) {
-			UnicodeString body_orth;
-			t->orth().extractBetween(body_begin_index, body_end_index, body_orth);
-			Token* body = t->clone_changed(body_orth);
-			t->mark_as_cut();
-			enqueueOutputToken(body);
+			if (body_begin_index == 0 && body_end_index == t->orth().length()) {
+				enqueueOutputToken(t);
+				return;
+			} else {
+				UnicodeString body_orth;
+				t->orth().extractBetween(body_begin_index, body_end_index, body_orth);
+				Token* body = t->clone_changed(body_orth);
+				t->mark_as_cut();
+				enqueueOutputToken(body);
+			}
 		}
 		while (body_end_index < t->orth().length()) {
 			Token* post = t->clone_changed(
