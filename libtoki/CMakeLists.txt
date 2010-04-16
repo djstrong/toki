@@ -15,6 +15,7 @@ MARK_AS_ADVANCED(LIBTOKI_SRC_DATA_DIR)
 if(NOT LIBTOKI_SRC_DATA_DIR)
 	message(FATAL_ERROR "There is no data for libtoki")
 endif(NOT LIBTOKI_SRC_DATA_DIR)
+
 SET(libtoki_STAT_SRC
     config.cpp
     debug.cpp
@@ -41,12 +42,12 @@ SET(libtoki_STAT_SRC
     whitespacetokenizer.cpp
 )
 
-add_library(toki STATIC ${libtoki_STAT_SRC})
+add_library(toki SHARED ${libtoki_STAT_SRC})
 
 if(UNIX)
         install(TARGETS toki
-                ARCHIVE DESTINATION lib)
-        
+                LIBRARY DESTINATION lib)
+
         install(
                 DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
                 DESTINATION include

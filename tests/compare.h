@@ -4,6 +4,6 @@
 
 #include <boost/test/unit_test.hpp>
 
-void init_compare_suite(boost::unit_test::test_suite* ts);
+void init_compare_suite(boost::unit_test::test_suite* ts, const std::string& path);
 
 #endif // LIBTOKI_COMPARE_H

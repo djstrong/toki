@@ -19,8 +19,16 @@
 
 namespace fs = boost::filesystem;
 
+namespace {
 
-static const char subdir_name[] = "compare";
+#ifdef LIBTOKI_TEST_DATA_DIR
+	static std::string data_dir = LIBTOKI_TEST_DATA_DIR;
+#else
+	static std::string data_dir = "./";
+#endif
+
+	static std::string subdir_name = data_dir + "compare";
+}
 
 //BOOST_AUTO_TEST_SUITE( test_compare )
 struct compare_item
@@ -40,6 +48,8 @@ static std::vector< compare_item > global_compares;
 
 void test_one_item(const compare_item& c)
 {
+	std::vector<std::string> store_path = Toki::Config::get_library_config_path();
+	Toki::Config::set_library_config_path(data_dir);
 	fs::path file_in = c.in_file;
 	fs::path file_out = c.out_file;
 	BOOST_REQUIRE_MESSAGE(fs::exists(file_in), "Input file " << file_in << " not found!");
@@ -83,6 +93,7 @@ void test_one_item(const compare_item& c)
 		actual = Toki::Debug::tokenize_formatted(tok, format);
 		BOOST_REQUIRE_EQUAL (actual, ss_expected.str());
 	}
+	Toki::Config::set_library_config_path(store_path);
 }
 
 void subdir_exists()
@@ -154,8 +165,11 @@ void init_subdir(fs::path dir)
 }
 
 
-void init_compare_suite(boost::unit_test::test_suite *ts)
+void init_compare_suite(boost::unit_test::test_suite *ts, const std::string& path)
 {
+	if (!path.empty()) {
+		subdir_name = path;
+	}
 	ts->add(BOOST_TEST_CASE(&subdir_exists));
 	if (!fs::exists(subdir_name)) return;
 	init_subdir(subdir_name);
