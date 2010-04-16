@@ -142,7 +142,7 @@ namespace Toki {
 
 
 	template<>
-	std::string LexiconClassifyLayer<IcuStringCaselessCompare>::info() const
+	inline std::string LexiconClassifyLayer<IcuStringCaselessCompare>::info() const
 	{
 		std::stringstream ss;
 		ss << "lexicon_caseless{" << lex_.size() << "}";
@@ -150,7 +150,7 @@ namespace Toki {
 	}
 
 	template<>
-	std::string LexiconClassifyLayer<IcuStringCaselessCompare>::long_info() const
+	inline std::string LexiconClassifyLayer<IcuStringCaselessCompare>::long_info() const
 	{
 		std::stringstream ss;
 		ss << ", lexicon_caseless: " << lex_.size() << " words";
