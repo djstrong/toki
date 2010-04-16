@@ -41,6 +41,27 @@ namespace Toki {
 		 */
 		Token(const char* orth_utf8, const std::string& type, WhitespaceAmount wa_before);
 
+		/**
+		 * Token clone
+		 */
+		Token* clone() const;
+
+		/**
+		 * Clone this token, changing it's orth.
+		 */
+		Token* clone_changed(const UnicodeString& new_orth) const;
+
+		/**
+		 * Clone this token, changing it's orth and type.
+		 */
+		Token* clone_changed(const UnicodeString& new_orth, const std::string new_type) const;
+
+		/**
+		 * Convenience function to set status flags to assume token had non-ws
+		 * characters immediately preceding it (was 'cut' from another token).
+		 */
+		void mark_as_cut();
+
 #ifdef LIBTOKI_TRACK_TOKEN_CREATION
 		/// Copy ctor
 		Token(const Token& other);
@@ -56,6 +77,18 @@ namespace Toki {
 		static int instance_count() {
 #ifdef LIBTOKI_TRACK_TOKEN_CREATION
 			return instance_count_;
+#else
+			return -1;
+#endif
+		}
+
+		/**
+		 * Creation counter accesor, always returns -1 if the
+		 * LIBTOKI_TRACK_TOKEN_CREATION symbol was not defined during compilation
+		 */
+		static int creation_count() {
+#ifdef LIBTOKI_TRACK_TOKEN_CREATION
+			return creation_count_;
 #else
 			return -1;
 #endif
@@ -120,6 +153,7 @@ namespace Toki {
 #ifdef LIBTOKI_TRACK_TOKEN_CREATION
 	private:
 		int instance_count_;
+		int creation_count_;
 #endif
 	};
 

@@ -36,6 +36,7 @@ namespace Toki {
 	{
 #ifdef LIBTOKI_TRACK_TOKEN_CREATION
 		++instance_count_;
+		++creation_count_;
 #endif
 	}
 
@@ -47,7 +48,33 @@ namespace Toki {
 	{
 #ifdef LIBTOKI_TRACK_TOKEN_CREATION
 		++instance_count_;
+		++creation_count_;
 #endif
+	}
+
+	Token* Token::clone() const
+	{
+		return new Token(*this);
+	}
+
+	Token* Token::clone_changed(const UnicodeString &new_orth) const
+	{
+		Token* t = new Token(new_orth, type_, preceeding_whitespace_);
+		t->set_begins_sentence(begins_sentence_);
+		return t;
+	}
+
+	Token* Token::clone_changed(const UnicodeString &new_orth, std::string new_type) const
+	{
+		Token* t = new Token(new_orth, new_type, preceeding_whitespace_);
+		t->set_begins_sentence(begins_sentence_);
+		return t;
+	}
+
+	void Token::mark_as_cut()
+	{
+		preceeding_whitespace_ = WA_None;
+		begins_sentence_ = false;
 	}
 
 #ifdef LIBTOKI_TRACK_TOKEN_CREATION

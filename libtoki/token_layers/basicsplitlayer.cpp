@@ -30,18 +30,17 @@ namespace Toki {
 	{
 		const UnicodeString& orth = t->orth();
 		int splitfrom = 0;
-		Token::WhitespaceAmount wa = t->preceeding_whitespace();
 		for (int i = 0; i < orth.length(); ++i) {
 			if (isSplitChar(orth.charAt(i))) {
 				if (i > splitfrom) {
 					UnicodeString part;
 					orth.extractBetween(splitfrom, i, part);
-					Token* pre = new Token(part, t->type(), wa);
-					wa = Token::WA_None;
+					Token* pre = t->clone_changed(part);
+					t->mark_as_cut();
 					enqueueOutputToken(pre);
 				}
-				Token* sep = new Token(orth.charAt(i), sep_type_, wa);
-				wa = Token::WA_None;
+				Token* sep = t->clone_changed(orth.charAt(i), sep_type_);
+				t->mark_as_cut();
 				enqueueOutputToken(sep);
 				splitfrom = i + 1;
 			}
@@ -52,10 +51,11 @@ namespace Toki {
 			if (splitfrom < orth.length()) {
 				UnicodeString part;
 				orth.extractBetween(splitfrom, orth.length(), part);
-				Token* rest = new Token(part, t->type(), wa);
-				enqueueOutputToken(rest);
+				t->set_orth(part);
+				enqueueOutputToken(t);
+			} else {
+				delete t;
 			}
-			delete t;
 		}
 	}
 

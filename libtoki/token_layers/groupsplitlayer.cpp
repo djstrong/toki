@@ -25,7 +25,6 @@ namespace Toki {
 	void GroupSplitLayer::prepareMoreTokens(Token *t)
 	{
 		const UnicodeString& orth = t->orth();
-		Token::WhitespaceAmount wa = t->preceeding_whitespace();
 		int i = 0;
 
 		while (i < orth.length() && !isSplitChar(orth.charAt(i))) ++i;
@@ -35,8 +34,8 @@ namespace Toki {
 			if (i > 0) {
 				UnicodeString part;
 				orth.extractBetween(0, i, part);
-				Token* b = new Token(part, t->type(), wa);
-				wa = Token::WA_None;
+				Token* b = t->clone_changed(part);
+				t->mark_as_cut();
 				enqueueOutputToken(b);
 			}
 
@@ -47,8 +46,8 @@ namespace Toki {
 				while (i < orth.length() && isSplitChar(orth.charAt(i))) ++i;
 				UnicodeString part;
 				orth.extractBetween(split_begin, i, part);
-				Token* s = new Token(part, separator_type(), wa);
-				wa = Token::WA_None;
+				Token* s = t->clone_changed(part, separator_type());
+				t->mark_as_cut();
 				enqueueOutputToken(s);
 				split_end = i;
 				if (split_end < orth.length()) {
@@ -56,8 +55,8 @@ namespace Toki {
 					while (i < orth.length() && !isSplitChar(orth.charAt(i))) ++i;
 					UnicodeString part;
 					orth.extractBetween(split_end, i, part);
-					Token* b = new Token(part, t->type(), wa);
-					wa = Token::WA_None;
+					Token* b = t->clone_changed(part);
+					t->mark_as_cut();
 					enqueueOutputToken(b);
 					split_begin = i;
 				}
