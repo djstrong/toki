@@ -8,20 +8,36 @@
 namespace Toki {
 
 	WhitespaceTokenizer::WhitespaceTokenizer(const Config::Node &cfg)
-		: Tokenizer(cfg), wa_(Token::WA_None), token_type_()
+		: Tokenizer(cfg), wa_(Token::WA_None), token_type_(), initial_wa_(Token::WA_None)
 	{
-		token_type_ = cfg.get("token_type", "t");
+		process_config(cfg);
 	}
 
 	WhitespaceTokenizer::WhitespaceTokenizer(UnicodeSource* us, const Config::Node& cfg)
-		: Tokenizer(us, cfg), wa_(Token::WA_None)
+		: Tokenizer(us, cfg), wa_(Token::WA_None), token_type_(), initial_wa_(Token::WA_None)
+	{
+		process_config(cfg);
+	}
+
+	void WhitespaceTokenizer::process_config(const Config::Node &cfg)
 	{
 		token_type_ = cfg.get("token_type", "t");
+		std::string init_wa = cfg.get("initial_whitespace", "");
+		if (init_wa.empty()) {
+			initial_wa_ = Token::WA_None;
+		} else {
+			initial_wa_ = Token::WA_from_string(init_wa);
+			if (initial_wa_ == Token::WA_PostLast) {
+				std::cerr << "Bad initial whitespace value:" << init_wa << "\n";
+				initial_wa_ = Token::WA_None;
+			}
+		}
+		wa_ = initial_wa_;
 	}
 
 	void WhitespaceTokenizer::reset()
 	{
-		wa_ = Token::WA_None;
+		wa_ = initial_wa_;
 	}
 
 	void WhitespaceTokenizer::newInputSource()
@@ -38,7 +54,7 @@ namespace Toki {
 				break;
 			} else {
 				ws++;
-				if (u == 0xA) {
+				if (u == 0xA || u == 0x2029 || u == 0x2028) {
 					nl++;
 				}
 				input().getNextChar();
@@ -53,7 +69,7 @@ namespace Toki {
 		} else if (ws == 1) {
 			wa_ = Token::WA_Space;
 		} else {
-			wa_ = Token::WA_None;
+			wa_ = initial_wa_;
 		}
 	}
 

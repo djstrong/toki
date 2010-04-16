@@ -19,7 +19,9 @@ namespace Toki {
 		 *
 		 * Keys recognized in the configuration:
 		 * - token_type - Token type to set in created tokens, defaults to "t".
-		 *
+		 * - initial_whitespace - Whitespace to set in the first extracted
+		 *                        token, can be a descriptor or a string with
+		 *                        the actual whitespace, use \u0020 for a space.
 		 */
 		WhitespaceTokenizer(const Config::Node& cfg = Config::Default());
 
@@ -39,6 +41,9 @@ namespace Toki {
 		/// Tokenizer override
 		void newInputSource();
 
+		/// process configuration helper for the constructors
+		void process_config(const Config::Node& cfg);
+
 	private:
 		/**
 		 * Read characters from the input source until a non-white character is
@@ -55,6 +60,11 @@ namespace Toki {
 		 * The type of tokens to return
 		 */
 		std::string token_type_;
+
+		/**
+		 * Initial whitespace for the first token
+		 */
+		Token::WhitespaceAmount initial_wa_;
 	};
 
 } //end namespace Toki
