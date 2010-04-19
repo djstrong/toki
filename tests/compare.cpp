@@ -188,7 +188,9 @@ void init_compare_suite(boost::unit_test::test_suite *ts, const std::string& pat
 	if (!fs::exists(subdir_name)) return;
 	init_subdir(subdir_name);
 	BOOST_FOREACH (const compare_item& ci, global_compares) {
-		std::string name = "test_compare:" + ci.out_file.string();
+		std::string rel_path = boost::algorithm::replace_first_copy(
+				ci.out_file.string(), subdir_name, "");
+		std::string name = "test_compare:" + rel_path;
 		ts->add(boost::unit_test::make_test_case(
 				boost::bind(test_one_item, ci), name)
 				);
