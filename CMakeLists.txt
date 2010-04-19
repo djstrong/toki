@@ -1,9 +1,5 @@
 cmake_minimum_required(VERSION 2.6.0)
 
-ENABLE_TESTING()
-
-set(ENV{CTEST_OUTPUT_ON_FAILURE} 1)
-
 # use some of our own Find* scripts
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/CMakeScripts)
 
