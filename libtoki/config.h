@@ -17,12 +17,12 @@ namespace Toki { namespace Config {
 	/**
 	 * Load configuration from a file (may throw)
 	 */
-	Node fromFile(const std::string &filename);
+	Node from_file(const std::string &filename);
 
 	/**
 	 * Load configuration from a file (may throw)
 	 */
-	Node fromStream(std::istream& is);
+	Node from_stream(std::istream& is);
 
 	/**
 	 * Merge two config nodes and return a node with the merged contents
@@ -40,9 +40,9 @@ namespace Toki { namespace Config {
 	void write(const Node& c, const std::string& filename);
 
 	/**
-	 * The default configuration node
+	 * The default_config configuration node
 	 */
-	const Node& Default();
+	const Node& default_config();
 
 	/**
 	 * Look for a filename under the search path and return a path to a file
@@ -56,7 +56,7 @@ namespace Toki { namespace Config {
 	bool open_file_from_search_path(const std::string& filename, std::ifstream& ifs);
 
 	/**
-	 * Get a default config by name
+	 * Get a default_config config by name
 	 */
 	Node get_library_config(const std::string& id);
 

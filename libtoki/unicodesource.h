@@ -31,18 +31,18 @@ namespace Toki {
 		 * something available for returning, so it cannot be const.
 		 *
 		 * @return the next character to be returned, or 0x0 if there is none.
-		 *         Calling code should generally check hasMoreChars() first.
+		 *         Calling code should generally check has_more_chars() first.
 		 */
-		virtual UChar peekNextChar() = 0;
+		virtual UChar peek_next_char() = 0;
 
 		/**
-		 * Get the next character. Functionally similar to peekNextChar that
+		 * Get the next character. Functionally similar to peek_next_char that
 		 * advances internally to the next character.
 		 *
 		 * @return the next character to be returned, or 0x0 if there is none.
-		 *         Calling code should generally check hasMoreChars() first.
+		 *         Calling code should generally check has_more_chars() first.
 		 */
-		virtual UChar getNextChar() = 0;
+		virtual UChar get_next_char() = 0;
 
 		/**
 		 * Check if there will be more characters to return.
@@ -52,7 +52,7 @@ namespace Toki {
 		 *
 		 * @return true if there is something to return, false otherwise.
 		 */
-		virtual bool hasMoreChars() = 0;
+		virtual bool has_more_chars() = 0;
 	};
 
 } /* end ns Toki */

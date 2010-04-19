@@ -12,7 +12,7 @@ namespace Toki { namespace Util {
 	 * is performed and UChars are fed into the container.
 	 */
 	template <typename TContainer>
-	void utf8StringToUcharContainer(const std::string& s, TContainer& container)
+	void utf8_string_to_uchar_container(const std::string& s, TContainer& container)
 	{
 		UnicodeString pres = UnicodeString::fromUTF8(s).unescape();
 		for (int i = 0; i < pres.length(); ++i) {

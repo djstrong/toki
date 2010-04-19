@@ -11,17 +11,17 @@ namespace Toki {
 	{
 	}
 
-	UChar UnicodeIcuStringWrapper::peekNextChar()
+	UChar UnicodeIcuStringWrapper::peek_next_char()
 	{
 		return iter_.current();
 	}
 
-	UChar UnicodeIcuStringWrapper::getNextChar()
+	UChar UnicodeIcuStringWrapper::get_next_char()
 	{
 		return iter_.nextPostInc();
 	}
 
-	bool UnicodeIcuStringWrapper::hasMoreChars()
+	bool UnicodeIcuStringWrapper::has_more_chars()
 	{
 		return iter_.hasNext();
 	}

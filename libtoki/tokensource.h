@@ -25,7 +25,7 @@ namespace Toki {
 		 * Get the next token, or NULL if there are no more tokens.
 		 * Caller takes ownership of the token.
 		 */
-		virtual Token* getNextToken() = 0;
+		virtual Token* get_next_token() = 0;
 
 		/**
 		 * Tokenization helper. Tokenizes the entire input, calling the sink

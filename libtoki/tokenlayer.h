@@ -51,10 +51,10 @@ namespace Toki {
 		 * Keys recognized in the configuration:
 		 * - process_types - Space-separated list of token types to include in
 		 *                   processing. All tokens are considered if it is empty.
-		 *                   Defaults to empty.
+		 *                   default_configs to empty.
 		 * - ignore_types  - Space-separated list of token types to explicitly
 		 *                   ignore, even if they pass the process_types check.
-		 *                   Defaults to empty.
+		 *                   default_configs to empty.
 		 * - id            - Layer identifier (debugging mostly)
 		 */
 		TokenLayer(TokenSource* input, const Config::Node& props);
@@ -65,19 +65,19 @@ namespace Toki {
 		/**
 		 * Getter for the input source.
 		 */
-		TokenSource* getInput();
+		TokenSource* get_input();
 
 		/**
-		 * TokenSource override. Default implementation for layers that only work
+		 * TokenSource override. default_config implementation for layers that only work
 		 * by examining a single token and possibly modyfying it -- grabs a token
 		 * from the input, examines it for NULL and shouldProcessTokenType, calls
 		 * @c processToken and returns whatever that function returns.
 		 */
-		Token* getNextToken();
+		Token* get_next_token();
 
 		/**
-		 * Used by the default getNextToken implementation, should be overriden by
-		 * derived classes. Defaults to a no-op passthrough of the token.
+		 * Used by the default_config get_next_token implementation, should be overriden by
+		 * derived classes. default_configs to a no-op passthrough of the token.
 		 * @param t token to process. Guaranteed to be not-NULL.
 		 */
 		virtual Token* processToken(Token* t);
@@ -183,7 +183,7 @@ namespace Toki {
 			Loki::TL::MakeTypelist< TokenSource*, const Config::Node& >::Result
 			// TokenLayer constructor arguments' types specification
 		>,
-		Loki::CreateUsingNew, // Default, needed to change the item below
+		Loki::CreateUsingNew, // default_config, needed to change the item below
 		Loki::LongevityLifetime::DieAsSmallObjectChild // Required per libloki docs
 	>
 	TokenLayerFactory;
@@ -201,7 +201,7 @@ namespace Toki {
 	 */
 	template <typename T>
 	inline
-	T* LayerCreator(TokenSource* input, const Config::Node& props)
+	T* layer_creator(TokenSource* input, const Config::Node& props)
 	{
 		return new T(input, props);
 	}
@@ -209,7 +209,7 @@ namespace Toki {
 	template <typename T>
 	bool TokenLayer::register_layer(const std::string& class_id)
 	{
-		bool ret = TokenLayerFactory::Instance().Register(class_id, LayerCreator<T>);
+		bool ret = TokenLayerFactory::Instance().Register(class_id, layer_creator<T>);
 		return ret;
 	}
 

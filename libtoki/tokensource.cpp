@@ -15,7 +15,7 @@ namespace Toki {
 
 	void TokenSource::tokenize(boost::function<void(Token *)> sink)
 	{
-		while (Token* t = getNextToken()) {
+		while (Token* t = get_next_token()) {
 			sink(t);
 		}
 	}

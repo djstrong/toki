@@ -20,8 +20,8 @@ namespace Toki {
 		 *
 		 * Keys recognized in the configuration:
 		 * - separators - List of characters treated as spearators, treated as UTF-8
-		 *                and unescaped. Defaults to empty.
-		 * - separator_token_type - Type to set in the separator tokens. Defaults
+		 *                and unescaped. default_configs to empty.
+		 * - separator_token_type - Type to set in the separator tokens. default_configs
 		 *                          to "sep".
 		 */
 		BasicSplitLayer(TokenSource* input, const Config::Node& props);

@@ -69,7 +69,7 @@ void test_one_item(const compare_item& c)
 	}
 
 	BOOST_FOREACH (const fs::path& p, c.configs) {
-		Toki::Config::Node additional = Toki::Config::fromFile(p.string());
+		Toki::Config::Node additional = Toki::Config::from_file(p.string());
 		Toki::Config::merge_into(cfg, additional);
 	}
 
@@ -91,11 +91,11 @@ void test_one_item(const compare_item& c)
 		std::stringstream ss_in;
 		ss_in << ss.str();
 		tok.reset();
-		tok.setInputSource(ss_in, i + 1);
+		tok.set_input_source(ss_in, i + 1);
 		actual = Toki::Debug::tokenize_formatted(tok, format);
 		BOOST_REQUIRE_EQUAL (actual, ss_expected.str());
 		tok.reset();
-		tok.setInputSource(us);
+		tok.set_input_source(us);
 		actual = Toki::Debug::tokenize_formatted(tok, format);
 		BOOST_REQUIRE_EQUAL (actual, ss_expected.str());
 	}
@@ -120,7 +120,7 @@ void subdir_exists()
 void init_subdir(fs::path dir)
 {
 	Toki::Config::LibraryConfigPathSetter path_setter(data_dir);
-	fs::directory_iterator end_itr; // default construction yields past-the-end
+	fs::directory_iterator end_itr; // default_config construction yields past-the-end
 
 	std::set<std::string> tests_in;
 	std::set<std::string> tests_out;
@@ -143,10 +143,10 @@ void init_subdir(fs::path dir)
 	Toki::Config::Node* cfg = new Toki::Config::Node();
 	if (i != configs.end()) {
 		std::string p = (dir / "main.ini").string();
-		*cfg = Toki::Config::fromFile(p);
+		*cfg = Toki::Config::from_file(p);
 	} else {
-		//check dir name, load special config if possible, else default
-		*cfg = Toki::Config::Default();
+		//check dir name, load special config if possible, else default_config
+		*cfg = Toki::Config::default_config();
 	}
 	global_configs.push_back(boost::shared_ptr<Toki::Config::Node>(cfg));
 	int count = 0;

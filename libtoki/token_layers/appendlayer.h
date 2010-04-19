@@ -16,7 +16,7 @@ namespace Toki {
 		 * Constructor.
 		 *
 		 * Keys recognized in the configuration:
-		 * - append - Text to append, treated as UTF-8 and unescaped. Defaults to
+		 * - append - Text to append, treated as UTF-8 and unescaped. default_configs to
 		 *            an exlamation mark (!).
 		 */
 		AppendLayer(TokenSource* input, const Config::Node& props);

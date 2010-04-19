@@ -21,35 +21,35 @@ namespace Toki {
 		: Tokenizer(cfg), input_tokenizer_(new WhitespaceTokenizer(cfg.get_child("input", Config::Node())))
 	{
 		apply_configuration(cfg);
-		newInputSource();
+		new_input_source();
 	}
 
 	LayerTokenizer::LayerTokenizer(UnicodeSource *input, const Config::Node &cfg)
 		: Tokenizer(input, cfg), input_tokenizer_(new WhitespaceTokenizer(cfg.get_child("input", Config::Node())))
 	{
 		apply_configuration(cfg);
-		newInputSource();
+		new_input_source();
 	}
 
 	LayerTokenizer::LayerTokenizer(boost::shared_ptr<UnicodeSource> input, const Config::Node &cfg)
 		: Tokenizer(input, cfg), input_tokenizer_(new WhitespaceTokenizer(cfg.get_child("input", Config::Node())))
 	{
 		apply_configuration(cfg);
-		newInputSource();
+		new_input_source();
 	}
 
 	LayerTokenizer::LayerTokenizer(std::istream &is, const Config::Node &cfg)
 		: Tokenizer(is, cfg), input_tokenizer_(new WhitespaceTokenizer(cfg.get_child("input", Config::Node())))
 	{
 		apply_configuration(cfg);
-		newInputSource();
+		new_input_source();
 	}
 
 	LayerTokenizer::LayerTokenizer(const UnicodeString &s, const Config::Node &cfg)
 		: Tokenizer(s, cfg), input_tokenizer_(new WhitespaceTokenizer(cfg.get_child("input", Config::Node())))
 	{
 		apply_configuration(cfg);
-		newInputSource();
+		new_input_source();
 	}
 
 	LayerTokenizer::~LayerTokenizer()
@@ -78,9 +78,9 @@ namespace Toki {
 		return ss.str();
 	}
 
-	void LayerTokenizer::newInputSource()
+	void LayerTokenizer::new_input_source()
 	{
-		input_tokenizer_->setInputSource(input_);
+		input_tokenizer_->set_input_source(input_);
 	}
 
 
@@ -132,9 +132,9 @@ namespace Toki {
 		}
 	}
 
-	Token* LayerTokenizer::getNextToken()
+	Token* LayerTokenizer::get_next_token()
 	{
-		return layers_.back()->getNextToken();
+		return layers_.back()->get_next_token();
 	}
 
 	void LayerTokenizer::reset()

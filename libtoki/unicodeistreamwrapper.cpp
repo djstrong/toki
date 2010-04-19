@@ -25,29 +25,29 @@ namespace Toki {
 		ucnv_close(converter_);
 	}
 
-	UChar UnicodeIstreamWrapper::peekNextChar()
+	UChar UnicodeIstreamWrapper::peek_next_char()
 	{
 		ensure_more();
 		if (target_ > out_) {
 			return *out_;
 		} else {
-			std::cerr << "peekNextChar 0!\n";
+			std::cerr << "peek_next_char 0!\n";
 			return 0;
 		}
 	}
 
-	UChar UnicodeIstreamWrapper::getNextChar()
+	UChar UnicodeIstreamWrapper::get_next_char()
 	{
 		ensure_more();
 		if (target_ > out_) {
 			return *out_++;
 		} else {
-			std::cerr << "getNextChar 0!\n";
+			std::cerr << "get_next_char 0!\n";
 			return 0;
 		}
 	}
 
-	UnicodeString UnicodeIstreamWrapper::getBuffer()
+	UnicodeString UnicodeIstreamWrapper::get_buffer()
 	{
 		ensure_more();
 		UnicodeString ret(out_, target_ - out_);
@@ -55,7 +55,7 @@ namespace Toki {
 		return ret;
 	}
 
-	bool UnicodeIstreamWrapper::hasMoreChars()
+	bool UnicodeIstreamWrapper::has_more_chars()
 	{
 		ensure_more();
 		return target_ > out_;

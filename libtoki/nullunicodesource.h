@@ -17,19 +17,19 @@ namespace Toki {
 		NullUnicodeSource() {}
 
 		/// UnicodeSource override
-		UChar peekNextChar() {
-			throw TokenizerImpossibleError("NullUnicodeSource::peekNextChar called");
+		UChar peek_next_char() {
+			throw TokenizerImpossibleError("NullUnicodeSource::peek_next_char called");
 			return 0;
 		}
 
 		/// UnicodeSource override
-		UChar getNextChar() {
-			throw TokenizerImpossibleError("NullUnicodeSource::getNextChar called");
+		UChar get_next_char() {
+			throw TokenizerImpossibleError("NullUnicodeSource::get_next_char called");
 			return 0;
 		}
 
 		/// UnicodeSource override
-		bool hasMoreChars() {
+		bool has_more_chars() {
 			return false;
 		}
 	};

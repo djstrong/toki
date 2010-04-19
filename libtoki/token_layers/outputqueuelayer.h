@@ -28,7 +28,7 @@ namespace Toki {
 		 * @return a Token, or NULL if the queue was empty and prepareMoreTokens()
 		 *         did not call enqueueOutputToken() at least once.
 		 */
-		Token* getNextToken();
+		Token* get_next_token();
 
 		/**
 		 * TokenLayer override. Destroys the output token queue.
@@ -56,7 +56,7 @@ namespace Toki {
 		 * call getTokenFromInput to get more tokens if necessary (but should check
 		 * for NULL and shouldProcessTokenType() in that case).
 		 *
-		 * If enqueueOutputToken() is not called, getNextToken will end up returning
+		 * If enqueueOutputToken() is not called, get_next_token will end up returning
 		 * NULL which will signal an end of tokens to the client.
 		 * @param t token to process, guaranteed to be not NULL
 		 */
@@ -68,7 +68,7 @@ namespace Toki {
 		 */
 		void clear_queue();
 
-		/// The queue of tokens ready to be returned by getNextToken
+		/// The queue of tokens ready to be returned by get_next_token
 		std::queue<Token*> queue_;
 	};
 

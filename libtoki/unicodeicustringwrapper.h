@@ -25,13 +25,13 @@ namespace Toki {
 		~UnicodeIcuStringWrapper();
 
 		/// Override from UnicodeSource
-		UChar peekNextChar();
+		UChar peek_next_char();
 
 		/// Override from UnicodeSource
-		UChar getNextChar();
+		UChar get_next_char();
 
 		/// Override from UnicodeSource
-		bool hasMoreChars();
+		bool has_more_chars();
 
 	private:
 		/// The internal StringCharacterIterator object

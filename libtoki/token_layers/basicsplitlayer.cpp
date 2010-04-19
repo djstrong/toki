@@ -9,7 +9,7 @@ namespace Toki {
 	{
 		sep_type_ = props.get<std::string>("separator_token_type", "sep");
 		std::string separators = props.get("separators", "");
-		Util::utf8StringToUcharContainer(separators, split_chars_);
+		Util::utf8_string_to_uchar_container(separators, split_chars_);
 	}
 
 	std::string BasicSplitLayer::info() const

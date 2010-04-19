@@ -15,35 +15,35 @@ namespace Toki {
 	Tokenizer::Tokenizer(const Config::Node& cfg)
 		: TokenSource(), input_()
 	{
-		setNullInputSource();
+		set_null_input_source();
 		apply_configuration(cfg);
 	}
 
 	Tokenizer::Tokenizer(UnicodeSource *input, const Config::Node& cfg)
 		: TokenSource(), input_()
 	{
-		setInputSource(input);
+		set_input_source(input);
 		apply_configuration(cfg);
 	}
 
 	Tokenizer::Tokenizer(boost::shared_ptr<UnicodeSource> input, const Config::Node &cfg)
 		: TokenSource(), input_()
 	{
-		setInputSource(input);
+		set_input_source(input);
 		apply_configuration(cfg);
 	}
 
 	Tokenizer::Tokenizer(std::istream &is, const Config::Node &cfg)
 		: TokenSource(), input_()
 	{
-		setInputSource(is, cfg.get<int>("input_buffer_size", 200));
+		set_input_source(is, cfg.get<int>("input_buffer_size", 200));
 		apply_configuration(cfg);
 	}
 
 	Tokenizer::Tokenizer(const UnicodeString &s, const Config::Node &cfg)
 		: TokenSource(), input_()
 	{
-		setInputSource(s);
+		set_input_source(s);
 		apply_configuration(cfg);
 	}
 
@@ -51,31 +51,31 @@ namespace Toki {
 	{
 	}
 
-	void Tokenizer::setNullInputSource()
+	void Tokenizer::set_null_input_source()
 	{
-		setInputSource(new NullUnicodeSource());
+		set_input_source(new NullUnicodeSource());
 	}
 
-	void Tokenizer::setInputSource(UnicodeSource *us)
+	void Tokenizer::set_input_source(UnicodeSource *us)
 	{
 		input_.reset(us);
-		newInputSource();
+		new_input_source();
 	}
 
-	void Tokenizer::setInputSource(boost::shared_ptr<UnicodeSource> us)
+	void Tokenizer::set_input_source(boost::shared_ptr<UnicodeSource> us)
 	{
 		input_ = us;
-		newInputSource();
+		new_input_source();
 	}
 
-	void Tokenizer::setInputSource(std::istream &is, int bufsize)
+	void Tokenizer::set_input_source(std::istream &is, int bufsize)
 	{
-		setInputSource(new UnicodeIstreamWrapper(is, bufsize));
+		set_input_source(new UnicodeIstreamWrapper(is, bufsize));
 	}
 
-	void Tokenizer::setInputSource(const UnicodeString &s)
+	void Tokenizer::set_input_source(const UnicodeString &s)
 	{
-		setInputSource(new UnicodeIcuStringWrapper(s));
+		set_input_source(new UnicodeIcuStringWrapper(s));
 	}
 
 	void Tokenizer::reset()

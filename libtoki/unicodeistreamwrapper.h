@@ -35,30 +35,30 @@ namespace Toki {
 		~UnicodeIstreamWrapper();
 
 		/// Override from UnicodeSource
-		UChar peekNextChar();
+		UChar peek_next_char();
 
 		/// Override from UnicodeSource
-		UChar getNextChar();
+		UChar get_next_char();
 
 		/**
 		 * Get the UnicodeString constructed from the current buffer contents.
-		 * The buffer is marked as used up so the next call to getNextChar or
+		 * The buffer is marked as used up so the next call to get_next_char or
 		 * similar will have to read from the input stream.
 		 *
 		 * May return an empty string if there are no characters in the input stream
 		 * remaining.
 		 */
-		UnicodeString getBuffer();
+		UnicodeString get_buffer();
 
 		/// Override from UnicodeSource
-		bool hasMoreChars();
+		bool has_more_chars();
 
 	private:
 		/**
 		 * The main conversion function.
 		 *
 		 * Reads a batch of characters from the source stream, converts it and
-		 * stores in the target buffer so characters can be returned by getNextChar
+		 * stores in the target buffer so characters can be returned by get_next_char
 		 * or similar.
 		 *
 		 * @return the number of characters read from the input stream
@@ -94,7 +94,7 @@ namespace Toki {
 		UChar* target_;
 
 		/// State variable -- pointer into the taret buffer pointing to the next
-		/// Unicode character to be returned by getNextChar and similar
+		/// Unicode character to be returned by get_next_char and similar
 		UChar* out_;
 	};
 

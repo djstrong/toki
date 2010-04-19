@@ -15,7 +15,7 @@
 
 namespace Toki { namespace Config {
 
-	Node fromFile(const std::string &filename)
+	Node from_file(const std::string &filename)
 	{
 		Node p;
 		try {
@@ -27,7 +27,7 @@ namespace Toki { namespace Config {
 		return p;
 	}
 
-	Node fromStream(std::istream &is)
+	Node from_stream(std::istream &is)
 	{
 		Node p;
 		try {
@@ -87,7 +87,7 @@ namespace Toki { namespace Config {
 		}
 	}
 
-	const Node& Default()
+	const Node& default_config()
 	{
 		bool initialized = false;
 		static Node cfg;
@@ -95,7 +95,7 @@ namespace Toki { namespace Config {
 			try {
 				cfg = get_library_config("config");
 			} catch (TokenizerLibError& e) {
-				throw TokenizerLibError(std::string("Default config error! ") + e.what());
+				throw TokenizerLibError(std::string("default_config config error! ") + e.what());
 			}
 			initialized = true;
 		}
@@ -138,7 +138,7 @@ namespace Toki { namespace Config {
 	{
 		std::string fn = find_file_in_search_path(id + ".ini");
 		if (!fn.empty()) {
-			return fromFile(fn);
+			return from_file(fn);
 		} else {
 			std::stringstream ss;
 			ss << "Library config ``" << id << "'' not found in search path: ";

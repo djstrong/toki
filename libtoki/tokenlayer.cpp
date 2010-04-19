@@ -59,10 +59,10 @@ namespace Toki {
 
 	Token* TokenLayer::getTokenFromInput()
 	{
-		return input_->getNextToken();
+		return input_->get_next_token();
 	}
 
-	Token* TokenLayer::getNextToken()
+	Token* TokenLayer::get_next_token()
 	{
 		Token* t = getTokenFromInput();
 		if (t) {

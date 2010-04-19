@@ -9,7 +9,7 @@ namespace Toki {
 
 	/**
 	 * A simple tokenizer that takes a UnicodeSource (i.e. continous text) and
-	 * outputs (via getNextToken) tokens split according to whitespace in the text.
+	 * outputs (via get_next_token) tokens split according to whitespace in the text.
 	 */
 	class WhitespaceTokenizer : public Tokenizer
 	{
@@ -18,28 +18,28 @@ namespace Toki {
 		 * Constructor
 		 *
 		 * Keys recognized in the configuration:
-		 * - token_type - Token type to set in created tokens, defaults to "t".
+		 * - token_type - Token type to set in created tokens, default_configs to "t".
 		 * - initial_whitespace - Whitespace to set in the first extracted
 		 *                        token, can be a descriptor or a string with
 		 *                        the actual whitespace, use \u0020 for a space.
 		 */
-		WhitespaceTokenizer(const Config::Node& cfg = Config::Default());
+		WhitespaceTokenizer(const Config::Node& cfg = Config::default_config());
 
 		/**
 		 * Constructor shorthand
 		 * @see Tokenizer::Tokenizer
 		 */
-		WhitespaceTokenizer(UnicodeSource* us, const Config::Node& cfg = Config::Default());
+		WhitespaceTokenizer(UnicodeSource* us, const Config::Node& cfg = Config::default_config());
 
 		/// TokenSource override
-		Token* getNextToken();
+		Token* get_next_token();
 
 		/// Tokenizer override
 		void reset();
 
 	protected:
 		/// Tokenizer override
-		void newInputSource();
+		void new_input_source();
 
 		/// process configuration helper for the constructors
 		void process_config(const Config::Node& cfg);

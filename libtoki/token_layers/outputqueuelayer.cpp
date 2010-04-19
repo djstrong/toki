@@ -20,7 +20,7 @@ namespace Toki {
 		queue_.push(t);
 	}
 
-	Token* OutputQueueLayer::getNextToken()
+	Token* OutputQueueLayer::get_next_token()
 	{
 		if (queue_.empty()) {
 			Token* t = getTokenFromInput();

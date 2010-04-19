@@ -43,7 +43,7 @@ namespace Toki {
 		begins_sentence_ = true;
 	}
 
-	void WhitespaceTokenizer::newInputSource()
+	void WhitespaceTokenizer::new_input_source()
 	{
 	}
 
@@ -51,8 +51,8 @@ namespace Toki {
 	void WhitespaceTokenizer::eatWhitespace()
 	{
 		int ws = 0; int nl = 0;
-		while (input().hasMoreChars()) {
-			UChar u = input_->peekNextChar();
+		while (input().has_more_chars()) {
+			UChar u = input_->peek_next_char();
 			if (!u_isUWhiteSpace(u)) {
 				break;
 			} else {
@@ -60,7 +60,7 @@ namespace Toki {
 				if (u == 0xA || u == 0x2029 || u == 0x2028) {
 					nl++;
 				}
-				input().getNextChar();
+				input().get_next_char();
 			}
 		}
 		if (nl > 1) {
@@ -76,23 +76,23 @@ namespace Toki {
 		}
 	}
 
-	Token* WhitespaceTokenizer::getNextToken()
+	Token* WhitespaceTokenizer::get_next_token()
 	{
-		if (!input().hasMoreChars()) {
+		if (!input().has_more_chars()) {
 			return NULL;
 		}
 		eatWhitespace();
 		UnicodeString orth;
-		if (input().hasMoreChars()) {
-			UChar u = input().getNextChar();
+		if (input().has_more_chars()) {
+			UChar u = input().get_next_char();
 			orth = u;
-			while (input().hasMoreChars()) {
-				u = input().peekNextChar();
+			while (input().has_more_chars()) {
+				u = input().peek_next_char();
 				if (u_isUWhiteSpace(u)) {
 					break;
 				} else {
 					orth += u;
-					input().getNextChar();
+					input().get_next_char();
 				}
 			}
 			Token* t  = new Token(orth, token_type_, wa_);
