@@ -8,7 +8,8 @@
 namespace Toki {
 
 	TokenLayer::TokenLayer(TokenSource* input, const Config::Node& props)
-		: input_(input), process_token_types_(), do_not_process_token_types_(), id_()
+		: input_(input), process_token_types_(), do_not_process_token_types_(),
+		id_(), error_stream_(NULL)
 	{
 		std::vector<std::string> sv;
 		std::string data = props.get("process_types", "");
@@ -89,6 +90,11 @@ namespace Toki {
 				return process_token_types_.find(t) != process_token_types_.end();
 			}
 		}
+	}
+
+	void TokenLayer::set_error_stream(std::ostream *os)
+	{
+		error_stream_ = os;
 	}
 
 	static bool registered = init_token_layers();

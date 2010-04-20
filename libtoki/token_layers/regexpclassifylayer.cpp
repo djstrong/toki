@@ -17,8 +17,10 @@ namespace Toki {
 				if (U_SUCCESS(status)) {
 					classifiers_.push_back(std::make_pair(type, m));
 				} else {
-					std::cerr << "Error in regexp for type:" << type
-						<< " -- " << v.second.data() << "\n";
+					if (error_stream_) {
+						(*error_stream_) << "Error in regexp for type:" << type
+							<< " -- " << v.second.data() << "\n";
+					}
 					delete m;
 				}
 			}

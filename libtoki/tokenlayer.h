@@ -136,6 +136,12 @@ namespace Toki {
 		template <typename T>
 		static bool register_layer(const std::string& class_id);
 
+		/**
+		 * Set the error stream used by this layer, set to NULL to disable
+		 * error logging.
+		 */
+		void set_error_stream(std::ostream* os);
+
 	protected:
 		/**
 		 * Convenience helper to avoid having derived classes access the input
@@ -169,6 +175,11 @@ namespace Toki {
 		 * Layer identifier
 		 */
 		std::string id_;
+
+		/**
+		 * Error stream pointer, NULL disables logging
+		 */
+		std::ostream* error_stream_;
 	};
 
 	/**

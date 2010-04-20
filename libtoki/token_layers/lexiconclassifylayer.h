@@ -89,7 +89,9 @@ namespace Toki {
 					}
 				}
 			} else {
-				std::cerr << "Error opening file " << file_string << "\n";
+				if (error_stream_) {
+					(*error_stream_) << "Error opening file " << file_string << "\n";
+				}
 			}
 		}
 	}
