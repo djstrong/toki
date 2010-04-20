@@ -175,7 +175,7 @@ namespace Toki {
 		 * Layer identifier
 		 */
 		std::string id_;
-
+	protected:
 		/**
 		 * Error stream pointer, NULL disables logging
 		 */
