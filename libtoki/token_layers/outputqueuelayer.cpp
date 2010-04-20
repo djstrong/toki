@@ -14,7 +14,7 @@ namespace Toki {
 		clear_queue();
 	}
 
-	void OutputQueueLayer::enqueueOutputToken(Token *t)
+	void OutputQueueLayer::enqueue_output_token(Token *t)
 	{
 		assert(t);
 		queue_.push(t);
@@ -23,12 +23,12 @@ namespace Toki {
 	Token* OutputQueueLayer::get_next_token()
 	{
 		if (queue_.empty()) {
-			Token* t = getTokenFromInput();
+			Token* t = get_token_from_input();
 			if (t) {
-				if (shouldProcessTokenType(t->type())) {
-					prepareMoreTokens(t);
+				if (should_process_token_type(t->type())) {
+					prepare_more_tokens(t);
 				} else {
-					enqueueOutputToken(t);
+					enqueue_output_token(t);
 				}
 			}
 		}

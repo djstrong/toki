@@ -70,8 +70,8 @@ namespace Toki {
 		/**
 		 * TokenSource override. default_config implementation for layers that only work
 		 * by examining a single token and possibly modyfying it -- grabs a token
-		 * from the input, examines it for NULL and shouldProcessTokenType, calls
-		 * @c processToken and returns whatever that function returns.
+		 * from the input, examines it for NULL and should_process_token_type, calls
+		 * @c process_token and returns whatever that function returns.
 		 */
 		Token* get_next_token();
 
@@ -80,7 +80,7 @@ namespace Toki {
 		 * derived classes. default_configs to a no-op passthrough of the token.
 		 * @param t token to process. Guaranteed to be not-NULL.
 		 */
-		virtual Token* processToken(Token* t);
+		virtual Token* process_token(Token* t);
 
 		/**
 		 * Reset this layer's state so when a token is requested it will start over,
@@ -147,13 +147,13 @@ namespace Toki {
 		 * Convenience helper to avoid having derived classes access the input
 		 * source directly
 		 */
-		virtual Token* getTokenFromInput();
+		virtual Token* get_token_from_input();
 
 		/**
 		 * Determine if the given token type should be processed according to
 		 * process / ignore rules
 		 */
-		bool shouldProcessTokenType(const std::string& t);
+		bool should_process_token_type(const std::string& t);
 
 	private:
 		/**

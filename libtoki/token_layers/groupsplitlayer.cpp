@@ -22,42 +22,42 @@ namespace Toki {
 	}
 
 
-	void GroupSplitLayer::prepareMoreTokens(Token *t)
+	void GroupSplitLayer::prepare_more_tokens(Token *t)
 	{
 		const UnicodeString& orth = t->orth();
 		int i = 0;
 
-		while (i < orth.length() && !isSplitChar(orth.charAt(i))) ++i;
+		while (i < orth.length() && !is_split_char(orth.charAt(i))) ++i;
 		if (i == orth.length()) {
-			enqueueOutputToken(t);
+			enqueue_output_token(t);
 		} else {
 			if (i > 0) {
 				UnicodeString part;
 				orth.extractBetween(0, i, part);
 				Token* b = t->clone_changed(part);
 				t->mark_as_cut();
-				enqueueOutputToken(b);
+				enqueue_output_token(b);
 			}
 
 			int split_begin = i;
 			int split_end = i;
 			do {
 				++i;
-				while (i < orth.length() && isSplitChar(orth.charAt(i))) ++i;
+				while (i < orth.length() && is_split_char(orth.charAt(i))) ++i;
 				UnicodeString part;
 				orth.extractBetween(split_begin, i, part);
 				Token* s = t->clone_changed(part, separator_type());
 				t->mark_as_cut();
-				enqueueOutputToken(s);
+				enqueue_output_token(s);
 				split_end = i;
 				if (split_end < orth.length()) {
 					++i;
-					while (i < orth.length() && !isSplitChar(orth.charAt(i))) ++i;
+					while (i < orth.length() && !is_split_char(orth.charAt(i))) ++i;
 					UnicodeString part;
 					orth.extractBetween(split_end, i, part);
 					Token* b = t->clone_changed(part);
 					t->mark_as_cut();
-					enqueueOutputToken(b);
+					enqueue_output_token(b);
 					split_begin = i;
 				}
 			} while (i < orth.length());

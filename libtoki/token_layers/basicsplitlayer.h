@@ -43,10 +43,10 @@ namespace Toki {
 
 	protected:
 		/// OutputQueueTokenLayer override
-		void prepareMoreTokens(Token* t);
+		void prepare_more_tokens(Token* t);
 
 		/// test function for the split chars
-		bool isSplitChar(UChar c);
+		bool is_split_char(UChar c);
 
 	private:
 		/// the split characters

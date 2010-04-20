@@ -14,7 +14,7 @@ namespace Toki {
 		CombineLayer(TokenSource* input, const Config::Node& props);
 
 	protected:
-		void prepareMoreTokens(Token* t);
+		void prepare_more_tokens(Token* t);
 	};
 
 } //end namespace Toki

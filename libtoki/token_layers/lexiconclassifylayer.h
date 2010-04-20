@@ -44,7 +44,7 @@ namespace Toki {
 		~LexiconClassifyLayer();
 
 		/// TokenLayer override
-		Token* processToken(Token *t);
+		Token* process_token(Token *t);
 
 		/// TokenLayer override
 		virtual std::string info() const;
@@ -118,7 +118,7 @@ namespace Toki {
 	}
 
 	template<typename CMP>
-	Token* LexiconClassifyLayer<CMP>::processToken(Token *t)
+	Token* LexiconClassifyLayer<CMP>::process_token(Token *t)
 	{
 		if (lex_.find(t->orth()) != lex_.end()) {
 			t->set_type(token_type_);

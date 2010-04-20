@@ -23,7 +23,7 @@ namespace Toki {
 
 	protected:
 		/// OutputQueueTokenLayer override
-		void prepareMoreTokens(Token* t);
+		void prepare_more_tokens(Token* t);
 	};
 
 } /* end ns Toki */

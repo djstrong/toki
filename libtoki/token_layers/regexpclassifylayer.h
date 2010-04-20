@@ -30,7 +30,7 @@ namespace Toki {
 		~RegexpClassifyLayer();
 
 		/// TokenLayer override
-		Token* processToken(Token *t);
+		Token* process_token(Token *t);
 
 		/// TokenLayer override
 		virtual std::string info() const;

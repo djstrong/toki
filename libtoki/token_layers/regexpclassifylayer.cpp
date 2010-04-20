@@ -49,7 +49,7 @@ namespace Toki {
 		return TokenLayer::long_info() + ss.str();
 	}
 
-	Token* RegexpClassifyLayer::processToken(Token* t)
+	Token* RegexpClassifyLayer::process_token(Token* t)
 	{
 		for (size_t i = 0; i < classifiers_.size(); ++i) {
 			RegexMatcher& m = *classifiers_[i].second;

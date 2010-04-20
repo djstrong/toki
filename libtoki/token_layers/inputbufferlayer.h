@@ -31,12 +31,12 @@ namespace Toki {
 		/**
 		 * TokenLayer override that uses the buffer.
 		 */
-		Token* getTokenFromInput();
+		Token* get_token_from_input();
 
 		/**
 		 * Put back a received token into the buffer
 		 */
-		void putBackToken(Token* t);
+		void put_back_token(Token* t);
 
 	private:
 		/// The token buffer

@@ -22,7 +22,7 @@ namespace Toki {
 		AppendLayer(TokenSource* input, const Config::Node& props);
 
 		/// TokenLayer override
-		Token* processToken(Token *t);
+		Token* process_token(Token *t);
 
 		/// TokenLayer override
 		virtual std::string info() const;

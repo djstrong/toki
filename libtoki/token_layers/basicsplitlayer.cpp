@@ -26,40 +26,40 @@ namespace Toki {
 		return OutputQueueLayer::long_info() + ss.str();
 	}
 
-	void BasicSplitLayer::prepareMoreTokens(Token* t)
+	void BasicSplitLayer::prepare_more_tokens(Token* t)
 	{
 		const UnicodeString& orth = t->orth();
 		int splitfrom = 0;
 		for (int i = 0; i < orth.length(); ++i) {
-			if (isSplitChar(orth.charAt(i))) {
+			if (is_split_char(orth.charAt(i))) {
 				if (i > splitfrom) {
 					UnicodeString part;
 					orth.extractBetween(splitfrom, i, part);
 					Token* pre = t->clone_changed(part);
 					t->mark_as_cut();
-					enqueueOutputToken(pre);
+					enqueue_output_token(pre);
 				}
 				Token* sep = t->clone_changed(orth.charAt(i), sep_type_);
 				t->mark_as_cut();
-				enqueueOutputToken(sep);
+				enqueue_output_token(sep);
 				splitfrom = i + 1;
 			}
 		}
 		if (splitfrom == 0) {
-			enqueueOutputToken(t);
+			enqueue_output_token(t);
 		} else {
 			if (splitfrom < orth.length()) {
 				UnicodeString part;
 				orth.extractBetween(splitfrom, orth.length(), part);
 				t->set_orth(part);
-				enqueueOutputToken(t);
+				enqueue_output_token(t);
 			} else {
 				delete t;
 			}
 		}
 	}
 
-	bool BasicSplitLayer::isSplitChar(UChar c)
+	bool BasicSplitLayer::is_split_char(UChar c)
 	{
 		return split_chars_.find(c) != split_chars_.end();
 	}
