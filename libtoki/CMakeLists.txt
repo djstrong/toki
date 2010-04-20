@@ -27,6 +27,7 @@ SET(libtoki_STAT_SRC
     token_layers/affixsplitlayer.cpp
     token_layers/appendlayer.cpp
     token_layers/basicsplitlayer.cpp
+    token_layers/checklayer.cpp
     token_layers/combinelayer.cpp
     token_layers/groupsplitlayer.cpp
     token_layers/inittokenlayers.cpp
