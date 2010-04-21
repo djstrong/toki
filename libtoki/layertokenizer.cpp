@@ -90,7 +90,7 @@ namespace Toki {
 
 	void LayerTokenizer::new_input_source()
 	{
-		input_tokenizer_->set_input_source(input_);
+		input_tokenizer_->set_input_source(get_input_source());
 	}
 
 

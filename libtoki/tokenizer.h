@@ -105,6 +105,13 @@ namespace Toki {
 		 */
 		virtual void reset();
 
+		/**
+		 * Accessor for the used input source
+		 */
+		boost::shared_ptr<UnicodeSource> get_input_source() {
+			return input_;
+		}
+
 	protected:
 		/**
 		 * Shorthand to avoid derived classes having to explicitly use the pointer
@@ -128,7 +135,7 @@ namespace Toki {
 		 * cause an actual input source to be set.
 		 */
 		virtual void new_input_source() {}
-
+	private:
 		/**
 		 * The source of the text.
 		 */
