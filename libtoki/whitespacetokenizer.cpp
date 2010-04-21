@@ -52,7 +52,7 @@ namespace Toki {
 	{
 		int ws = 0; int nl = 0;
 		while (input().has_more_chars()) {
-			UChar u = input_->peek_next_char();
+			UChar u = input().peek_next_char();
 			if (!u_isUWhiteSpace(u)) {
 				break;
 			} else {
