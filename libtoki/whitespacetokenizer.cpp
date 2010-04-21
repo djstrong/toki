@@ -84,11 +84,15 @@ namespace Toki {
 		eatWhitespace();
 		UnicodeString orth;
 		if (input().has_more_chars()) {
+			bool next_token_begins_sentence = false;
 			UChar u = input().get_next_char();
 			orth = u;
 			while (input().has_more_chars()) {
 				u = input().peek_next_char();
 				if (u_isUWhiteSpace(u)) {
+					break;
+				} else if (input().peek_begins_sentence()) {
+					next_token_begins_sentence = true;
 					break;
 				} else {
 					orth += u;
@@ -97,7 +101,7 @@ namespace Toki {
 			}
 			Token* t  = new Token(orth, token_type_, wa_);
 			t->set_begins_sentence(begins_sentence_);
-			begins_sentence_ = false;
+			begins_sentence_ = next_token_begins_sentence;
 			return t;
 		} else {
 			return NULL;
