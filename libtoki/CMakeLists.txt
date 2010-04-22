@@ -14,10 +14,9 @@ link_directories(${ICU_LIBRARY_DIRS})
 
 include_directories( ${CMAKE_SOURCE_DIR}/libtoki/ )
 
-set(LIBTOKI_INSTALL_DATA_DIR lib/toki/)
-
-add_definitions(-DLIBTOKI_DATA_DIR="${CMAKE_INSTALL_PREFIX}/${LIBTOKI_INSTALL_DATA_DIR}")
-add_definitions(-DLIBTOKI_VERSION="${ver_major}.${ver_minor}")
+set(LIBTOKI_INSTALL_DATA_DIR lib/toki)
+set(LIBTOKI_DATA_DIR "${CMAKE_INSTALL_PREFIX}/${LIBTOKI_INSTALL_DATA_DIR}")
+set(LIBTOKI_VERSION "${ver_major}.${ver_minor}")
 
 FIND_PATH(LIBTOKI_SRC_DATA_DIR
     config.ini
@@ -26,8 +25,11 @@ FIND_PATH(LIBTOKI_SRC_DATA_DIR
 MARK_AS_ADVANCED(LIBTOKI_SRC_DATA_DIR)
 
 if(NOT LIBTOKI_SRC_DATA_DIR)
-	message(FATAL_ERROR "There is no data for libtoki")
+    message(FATAL_ERROR "There is no data for libtoki")
 endif(NOT LIBTOKI_SRC_DATA_DIR)
+
+configure_file(config_d.in include/config_d.h)
+include_directories( ${CMAKE_CURRENT_BINARY_DIR}/include/ )
 
 SET(libtoki_STAT_SRC
     config.cpp

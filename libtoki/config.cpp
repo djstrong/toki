@@ -1,5 +1,7 @@
 #include "config.h"
 
+#include "config_d.h"
+
 #include "parser/loose_ini_paser.h"
 
 #include <boost/algorithm/string.hpp>

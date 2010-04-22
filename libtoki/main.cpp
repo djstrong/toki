@@ -7,6 +7,7 @@ extern "C" const char my_interp[] __attribute__((section(".interp"))) = "/lib/ld
 extern "C" const char my_interp[] __attribute__((section(".interp"))) = "/lib/ld-linux.so.2";
 #endif
 
+#include "config_d.h"
 #include <cstdlib>
 #include <iostream>
 
@@ -17,6 +18,7 @@ extern "C" const char my_interp[] __attribute__((section(".interp"))) = "/lib/ld
 extern "C" int LIBTOKI_entry_()
 {
 	std::cout << "This is libtoki-" LIBTOKI_VERSION "\n";
+	std::cout << "Default config file path: " LIBTOKI_DATA_DIR "\n";
 	exit(0);
 }
 
