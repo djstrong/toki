@@ -39,10 +39,6 @@ endif(CMAKE_COMPILER_IS_GNUCXX)
 
 find_package(Boost 1.41 REQUIRED COMPONENTS program_options filesystem)
 
-find_package(ICU REQUIRED)
-
-find_package(Loki REQUIRED)
-
 add_subdirectory(libtoki)
 add_subdirectory(tests)
 add_subdirectory(toki-app)
