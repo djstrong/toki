@@ -62,15 +62,19 @@ SET(libtoki_STAT_SRC
 add_library(toki SHARED ${libtoki_STAT_SRC})
 target_link_libraries ( toki ${Boost_LIBRARIES} icuuc icuio loki)
 set_target_properties(toki PROPERTIES
-        LINK_FLAGS -Wl,-e,LIBTOKI_entry_
         VERSION "${ver_major}.${ver_minor}"
         SOVERSION ${ver_major})
 
+if(UNIX)
+    set_target_properties(toki PROPERTIES
+        LINK_FLAGS -Wl,-e,LIBTOKI_entry_)
+endif(UNIX)
 
 
 if(UNIX)
         install(TARGETS toki
-                LIBRARY DESTINATION lib)
+                LIBRARY DESTINATION lib
+                PERMISSIONS WORLD_EXECUTE)
 
         install(
                 DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
