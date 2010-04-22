@@ -27,7 +27,7 @@ namespace Toki {
 		 * - prefix_token_type  - Token type to set in the extracted prefixes.
 		 *                        default_configs to "pre".
 		 * - suffix_token_type - Token type to set in the extracted suffixes.
-		 *                        default_configs to "post".
+		 *                        default_configs to "suf".
 		 */
 
 		AffixSplitLayer(TokenSource* input, const Config::Node& props);

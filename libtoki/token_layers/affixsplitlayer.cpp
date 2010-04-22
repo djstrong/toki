@@ -8,7 +8,7 @@ namespace Toki {
 		: OutputQueueLayer(input, props)
 	{
 		prefix_type_ = props.get<std::string>("prefix_token_type", "pre");
-		suffix_type_ = props.get<std::string>("suffix_token_type", "post");
+		suffix_type_ = props.get<std::string>("suffix_token_type", "suf");
 		std::string prefixes = props.get("prefix_chars", "");
 		Util::utf8_string_to_uchar_container(prefixes, prefix_chars_);
 		std::string suffixes = props.get("suffix_chars", "");
