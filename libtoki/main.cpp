@@ -1,7 +1,7 @@
 /* Code to display version info and greeting message when the .so is run */
 
 #ifdef __GNUG__
-#ifndef _WIN32
+#ifdef __linux__
 
 #ifndef LIBTOKI_INTERP
 #ifdef __LP64__
@@ -16,7 +16,9 @@ extern "C"
 const char my_interp[] __attribute__((section(".interp"))) = LIBTOKI_INTERP;
 #endif
 
+#ifdef HAVE_CONFIG_D_H
 #include "config_d.h"
+#endif
 #include "tokenlayer.h"
 #include "token_layers/inittokenlayers.h"
 #include "layertokenizer.h"

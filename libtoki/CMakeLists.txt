@@ -3,7 +3,7 @@
 PROJECT(toki)
 
 set(ver_major "0")
-set(ver_minor "1")
+set(ver_minor "2")
 
 find_package(ICU REQUIRED)
 find_package(Loki REQUIRED)
@@ -30,6 +30,7 @@ endif(NOT LIBTOKI_SRC_DATA_DIR)
 
 configure_file(config_d.in include/config_d.h)
 include_directories( ${CMAKE_CURRENT_BINARY_DIR}/include/ )
+add_definitions(-DHAVE_CONFIG_D_H)
 
 SET(libtoki_STAT_SRC
     config.cpp

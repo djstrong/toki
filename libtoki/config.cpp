@@ -1,6 +1,8 @@
 #include "config.h"
 
+#ifdef HAVE_CONFIG_D_H
 #include "config_d.h"
+#endif
 
 #include "parser/loose_ini_paser.h"
 
