@@ -41,6 +41,7 @@ SET(libtoki_STAT_SRC
     token.cpp
     tokenizer.cpp
     tokenlayer.cpp
+    srx/srx.cpp
     token_layers/affixsplitlayer.cpp
     token_layers/appendlayer.cpp
     token_layers/basicsplitlayer.cpp
