@@ -6,9 +6,11 @@
 #include "util.h"
 #include "debug.h"
 #include "exception.h"
+#include "srx/srx.h"
 
 #include <iostream>
 #include <sstream>
+#include <fstream>
 #include <unicode/ustream.h>
 
 #include <boost/algorithm/string.hpp>
@@ -27,6 +29,7 @@ int main(int argc, char** argv)
 	std::string input_enc;
 	std::string config_file;
 	std::string config_path;
+	std::string srx;
 	int bufsize;
 	bool orths;
 	bool verbose;
@@ -50,6 +53,8 @@ int main(int argc, char** argv)
 			 "Verbose init info")
 			("quiet,q", value(&quiet)->default_value(false)->zero_tokens(),
 			 "Suppress info output")
+			("srx,S", value(&srx)->default_value(""),
+			 "Load SRX from file and exit")
 			("help,h", "Show help")
 			;
 	boost::program_options::variables_map vm;
@@ -65,6 +70,14 @@ int main(int argc, char** argv)
 	if (vm.count("help")) {
 		std::cout << desc << "\n";
 		return 1;
+	}
+
+	if (!srx.empty()) {
+		Toki::Srx::SrxDocument doc;
+		std::ifstream srx_ifs(srx.c_str());
+		doc.load(srx_ifs);
+		std::cout << doc.info() << "\n";
+		return 0;
 	}
 
 	if (bufsize < 0) return 3;
