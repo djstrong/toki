@@ -1,7 +1,6 @@
 PROJECT(toki-app)
 
 include_directories( ${CMAKE_SOURCE_DIR}/libtoki/ )
-link_directories( ${CMAKE_SOURCE_DIR}/libtoki/ )
 
 add_executable( toki-app main.cpp )
 
