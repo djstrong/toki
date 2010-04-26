@@ -27,7 +27,7 @@ namespace Toki {
 		 * - prefix_token_type  - Token type to set in the extracted prefixes.
 		 *                        default_configs to "pre".
 		 * - suffix_token_type - Token type to set in the extracted suffixes.
-		 *                        default_configs to "post".
+		 *                        default_configs to "suf".
 		 */
 
 		AffixSplitLayer(TokenSource* input, const Config::Node& props);
@@ -40,14 +40,14 @@ namespace Toki {
 
 	protected:
 		/// OutputQueueLayer override
-		void prepareMoreTokens(Token* t);
+		void prepare_more_tokens(Token* t);
 
 	private:
 		/// test function for prefix characters
-		bool isPrefixChar(UChar c);
+		bool is_prefix_char(UChar c);
 
 		/// test function for suffix characters
-		bool isPostfixChar(UChar c);
+		bool is_suffix_char(UChar c);
 
 		/// prefix characters
 		std::set<UChar> prefix_chars_;

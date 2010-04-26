@@ -17,8 +17,10 @@ namespace Toki {
 				if (U_SUCCESS(status)) {
 					classifiers_.push_back(std::make_pair(type, m));
 				} else {
-					std::cerr << "Error in regexp for type:" << type
-						<< " -- " << v.second.data() << "\n";
+					if (error_stream_) {
+						(*error_stream_) << "Error in regexp for type:" << type
+							<< " -- " << v.second.data() << "\n";
+					}
 					delete m;
 				}
 			}
@@ -47,7 +49,7 @@ namespace Toki {
 		return TokenLayer::long_info() + ss.str();
 	}
 
-	Token* RegexpClassifyLayer::processToken(Token* t)
+	Token* RegexpClassifyLayer::process_token(Token* t)
 	{
 		for (size_t i = 0; i < classifiers_.size(); ++i) {
 			RegexMatcher& m = *classifiers_[i].second;

@@ -77,7 +77,14 @@ namespace Toki {
 		/// Output a human-readable synopsis of the loaded layers
 		std::string layers_info() const;
 
+		/// Output a long human-readable synopsis of the loaded layers
 		std::string layers_long_info(const std::string& sep) const;
+
+		/**
+		 * Set the error stream used by teh tokenizer and layers, set to NULL
+		 * to disable error logging.
+		 */
+		void set_error_stream(std::ostream* os);
 
 	private:
 		/**
@@ -90,6 +97,9 @@ namespace Toki {
 
 		/// The token procesing layers
 		std::vector<TokenLayer*> layers_;
+
+		/// error stream object
+		std::ostream* error_stream_;
 	};
 
 } /* end ns Toki */

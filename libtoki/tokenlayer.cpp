@@ -8,7 +8,8 @@
 namespace Toki {
 
 	TokenLayer::TokenLayer(TokenSource* input, const Config::Node& props)
-		: input_(input), process_token_types_(), do_not_process_token_types_(), id_()
+		: input_(input), process_token_types_(), do_not_process_token_types_(),
+		id_(), error_stream_(NULL)
 	{
 		std::vector<std::string> sv;
 		std::string data = props.get("process_types", "");
@@ -57,28 +58,28 @@ namespace Toki {
 		return TokenLayerFactory::Instance().RegisteredIds();
 	}
 
-	Token* TokenLayer::getTokenFromInput()
+	Token* TokenLayer::get_token_from_input()
 	{
 		return input_->get_next_token();
 	}
 
 	Token* TokenLayer::get_next_token()
 	{
-		Token* t = getTokenFromInput();
+		Token* t = get_token_from_input();
 		if (t) {
-			if (shouldProcessTokenType(t->type())) {
-				t =  processToken(t);
+			if (should_process_token_type(t->type())) {
+				t =  process_token(t);
 			}
 		}
 		return t;
 	}
 
-	Token* TokenLayer::processToken(Token *t)
+	Token* TokenLayer::process_token(Token *t)
 	{
 		return t;
 	}
 
-	bool TokenLayer::shouldProcessTokenType(const std::string &t)
+	bool TokenLayer::should_process_token_type(const std::string &t)
 	{
 		if (do_not_process_token_types_.find(t) != do_not_process_token_types_.end()) {
 			return false;
@@ -89,6 +90,11 @@ namespace Toki {
 				return process_token_types_.find(t) != process_token_types_.end();
 			}
 		}
+	}
+
+	void TokenLayer::set_error_stream(std::ostream *os)
+	{
+		error_stream_ = os;
 	}
 
 	static bool registered = init_token_layers();

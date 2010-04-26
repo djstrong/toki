@@ -21,7 +21,7 @@ namespace Toki {
 		return TokenLayer::long_info() + ", append: " + Util::to_utf8(append_);
 	}
 
-	Token* AppendLayer::processToken(Token* t)
+	Token* AppendLayer::process_token(Token* t)
 	{
 		t->set_orth(t->orth() + append_);
 		return t;

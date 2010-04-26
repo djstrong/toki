@@ -28,10 +28,10 @@ namespace Toki {
 		return TokenLayer::long_info() + ss.str();
 	}
 
-	Token* InputBufferLayer::getTokenFromInput()
+	Token* InputBufferLayer::get_token_from_input()
 	{
 		if (buffer_.empty()) {
-			return TokenLayer::getTokenFromInput();
+			return TokenLayer::get_token_from_input();
 		} else {
 			Token* t = buffer_.front();
 			buffer_.pop();
@@ -39,7 +39,7 @@ namespace Toki {
 		}
 	}
 
-	void InputBufferLayer::putBackToken(Token *t)
+	void InputBufferLayer::put_back_token(Token *t)
 	{
 		buffer_.push(t);
 	}

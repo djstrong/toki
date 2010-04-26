@@ -8,14 +8,14 @@ namespace Toki {
 	{
 	}
 
-	void CombineLayer::prepareMoreTokens(Token* t)
+	void CombineLayer::prepare_more_tokens(Token* t)
 	{
-		Token* t2 = getTokenFromInput();
+		Token* t2 = get_token_from_input();
 		if (t2) {
 			t->set_orth(t->orth() + t2->orth());
 			delete t2;
 		}
-		enqueueOutputToken(t);
+		enqueue_output_token(t);
 	}
 
 } /* end namespace Toki */

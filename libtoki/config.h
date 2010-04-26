@@ -6,6 +6,7 @@
 #include <vector>
 #include <boost/property_tree/ptree.hpp>
 #include <unicode/unistr.h>
+#include <ostream>
 
 namespace Toki { namespace Config {
 
@@ -82,6 +83,17 @@ namespace Toki { namespace Config {
 		/// Stored old path
 		std::vector<std::string> old_path_;
 	};
+
+	/**
+	 * Get the default error stream used by the library to log errors
+	 */
+	std::ostream* get_default_error_stream();
+
+	/**
+	 * Set the default error stream used by the library to log errors.
+	 * NULL disables error logging.
+	 */
+	void set_default_error_stream(std::ostream* os);
 
 } /* end ns Config */ } /* end ns Toki */
 

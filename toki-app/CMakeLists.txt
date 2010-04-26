@@ -1,17 +1,14 @@
-include_directories( ${CMAKE_SOURCE_DIR}/libtoki/ )
+PROJECT(toki-app)
 
+include_directories( ${CMAKE_SOURCE_DIR}/libtoki/ )
 link_directories( ${CMAKE_SOURCE_DIR}/libtoki/ )
 
 add_executable( toki-app main.cpp )
 
-target_link_libraries ( toki-app toki ${Boost_LIBRARIES} icuuc icuio loki) 
+target_link_libraries ( toki-app toki ${Boost_LIBRARIES})
 
 include_directories(${Boost_INCLUDE_DIR})
 link_directories(${Boost_LIBRARY_DIRS})
-include_directories(${ICU_INCLUDE_DIR})
-link_directories(${ICU_LIBRARY_DIRS})
-include_directories(${ICU_INCLUDE_DIR})
-link_directories(${ICU_LIBRARY_DIRS})
 
 if(UNIX)
 

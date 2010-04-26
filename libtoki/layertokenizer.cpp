@@ -18,35 +18,45 @@
 namespace Toki {
 
 	LayerTokenizer::LayerTokenizer(const Config::Node &cfg)
-		: Tokenizer(cfg), input_tokenizer_(new WhitespaceTokenizer(cfg.get_child("input", Config::Node())))
+		: Tokenizer(cfg)
+		, input_tokenizer_(new WhitespaceTokenizer(cfg.get_child("input", Config::Node())))
+		, error_stream_(Toki::Config::get_default_error_stream())
 	{
 		apply_configuration(cfg);
 		new_input_source();
 	}
 
 	LayerTokenizer::LayerTokenizer(UnicodeSource *input, const Config::Node &cfg)
-		: Tokenizer(input, cfg), input_tokenizer_(new WhitespaceTokenizer(cfg.get_child("input", Config::Node())))
+		: Tokenizer(input, cfg)
+		, input_tokenizer_(new WhitespaceTokenizer(cfg.get_child("input", Config::Node())))
+		, error_stream_(Toki::Config::get_default_error_stream())
 	{
 		apply_configuration(cfg);
 		new_input_source();
 	}
 
 	LayerTokenizer::LayerTokenizer(boost::shared_ptr<UnicodeSource> input, const Config::Node &cfg)
-		: Tokenizer(input, cfg), input_tokenizer_(new WhitespaceTokenizer(cfg.get_child("input", Config::Node())))
+		: Tokenizer(input, cfg)
+		, input_tokenizer_(new WhitespaceTokenizer(cfg.get_child("input", Config::Node())))
+		, error_stream_(Toki::Config::get_default_error_stream())
 	{
 		apply_configuration(cfg);
 		new_input_source();
 	}
 
 	LayerTokenizer::LayerTokenizer(std::istream &is, const Config::Node &cfg)
-		: Tokenizer(is, cfg), input_tokenizer_(new WhitespaceTokenizer(cfg.get_child("input", Config::Node())))
+		: Tokenizer(is, cfg)
+		, input_tokenizer_(new WhitespaceTokenizer(cfg.get_child("input", Config::Node())))
+		, error_stream_(Toki::Config::get_default_error_stream())
 	{
 		apply_configuration(cfg);
 		new_input_source();
 	}
 
 	LayerTokenizer::LayerTokenizer(const UnicodeString &s, const Config::Node &cfg)
-		: Tokenizer(s, cfg), input_tokenizer_(new WhitespaceTokenizer(cfg.get_child("input", Config::Node())))
+		: Tokenizer(s, cfg)
+		, input_tokenizer_(new WhitespaceTokenizer(cfg.get_child("input", Config::Node())))
+		, error_stream_(Toki::Config::get_default_error_stream())
 	{
 		apply_configuration(cfg);
 		new_input_source();
@@ -117,12 +127,16 @@ namespace Toki {
 					previous = layer;
 					layers_.push_back(layer);
 				} catch (TokenLayerFactoryException) {
-					std::cerr << "Bad layer class ID " << layer_class
-						<< ". Layer with id " << id << " ignored.\n";
+					if (error_stream_) {
+						(*error_stream_) << "Bad layer class ID " << layer_class
+							<< ". Layer with id " << id << " ignored.\n";
+					}
 				}
 			} catch (boost::property_tree::ptree_error& e) {
-				std::cerr << "Error while processing configuration for layer with id "
+				if (error_stream_) {
+					(*error_stream_) << "Error while processing configuration for layer with id "
 					<< id << ". " << e.what() << "\n";
+				}
 			}
 		}
 
@@ -143,6 +157,14 @@ namespace Toki {
 			layers_[i]->reset();
 		}
 		input_tokenizer_->reset();
+	}
+
+	void LayerTokenizer::set_error_stream(std::ostream *os)
+	{
+		error_stream_ = os;
+		for (size_t i = 0; i < layers_.size(); ++i) {
+			layers_[i]->set_error_stream(os);
+		}
 	}
 
 } /* end namespace Toki */

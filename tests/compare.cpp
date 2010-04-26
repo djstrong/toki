@@ -76,9 +76,13 @@ void test_one_item(const compare_item& c)
 	Toki::LayerTokenizer tok(ifs_in, cfg);
 	std::string format = Toki::Util::unescape_utf8(cfg.get("debug.format", "[$orth]"));
 	std::stringstream ss_expected;
+	std::stringstream ss_actual;
+	if (cfg.get("debug.warning_dest", "") == "stdout") {
+		tok.set_error_stream(&ss_actual);
+	}
 	ss_expected << ifs_out.rdbuf();
-	std::string actual = Toki::Debug::tokenize_formatted(tok, format, &tok_count);
-	BOOST_REQUIRE_EQUAL (actual, ss_expected.str());
+	Toki::Debug::tokenize_formatted(tok, format, ss_actual, &tok_count);
+	BOOST_REQUIRE_EQUAL (ss_actual.str(), ss_expected.str());
 
 	ifs_in.close();
 	ifs_in.open(file_in);
@@ -92,12 +96,20 @@ void test_one_item(const compare_item& c)
 		ss_in << ss.str();
 		tok.reset();
 		tok.set_input_source(ss_in, i + 1);
-		actual = Toki::Debug::tokenize_formatted(tok, format);
-		BOOST_REQUIRE_EQUAL (actual, ss_expected.str());
+		std::stringstream ss_actual;
+		if (cfg.get("debug.warning_dest", "") == "stdout") {
+			tok.set_error_stream(&ss_actual);
+		}
+		Toki::Debug::tokenize_formatted(tok, format, ss_actual);
+		BOOST_REQUIRE_EQUAL (ss_actual.str(), ss_expected.str());
 		tok.reset();
 		tok.set_input_source(us);
-		actual = Toki::Debug::tokenize_formatted(tok, format);
-		BOOST_REQUIRE_EQUAL (actual, ss_expected.str());
+		std::stringstream ss_actual2;
+		if (cfg.get("debug.warning_dest", "") == "stdout") {
+			tok.set_error_stream(&ss_actual2);
+		}
+		Toki::Debug::tokenize_formatted(tok, format, ss_actual2);
+		BOOST_REQUIRE_EQUAL (ss_actual2.str(), ss_expected.str());
 	}
 	if (Toki::Token::creation_count() > 0) {
 		BOOST_CHECK_EQUAL (instances_before, Toki::Token::instance_count());

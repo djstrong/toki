@@ -1,5 +1,9 @@
 #include "config.h"
 
+#ifdef HAVE_CONFIG_D_H
+#include "config_d.h"
+#endif
+
 #include "parser/loose_ini_paser.h"
 
 #include <boost/algorithm/string.hpp>
@@ -187,6 +191,25 @@ namespace Toki { namespace Config {
 	LibraryConfigPathSetter::~LibraryConfigPathSetter()
 	{
 		set_library_config_path(old_path_);
+	}
+
+	namespace {
+		std::ostream* default_error_stream_ = NULL;
+		bool des_init_ = false;
+	} // end namespace
+
+	std::ostream* get_default_error_stream()
+	{
+		if (!des_init_) {
+			set_default_error_stream(&std::cerr);
+		}
+		return default_error_stream_;
+	}
+
+	void set_default_error_stream(std::ostream *os)
+	{
+		des_init_ = true;
+		default_error_stream_ = os;
 	}
 
 } /* end ns Config */ } /* end namespace Toki */
