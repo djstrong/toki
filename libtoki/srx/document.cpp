@@ -23,6 +23,17 @@ namespace {
 		}
 		return c;
 	}
+	
+	std::string get_child_text_or_empty(const xmlpp::Node* n, const char* name)
+	{
+		const xmlpp::Element* el = dynamic_cast<const xmlpp::Element*>(
+			get_child_or_null(n, name));
+		if (el) {
+			const xmlpp::TextNode* t = el->get_child_text();
+			if (t) return t->get_content();
+		}
+		return "";
+	}
 } /* end anon ns */
 
 namespace Toki { namespace Srx {
@@ -93,18 +104,8 @@ namespace Toki { namespace Srx {
 		} else {
 			throw ParseError("<rule> with invalid break attribute");
 		}
-		const xmlpp::Element* before_el = dynamic_cast<const xmlpp::Element*>(
-			get_child_or_null(n, "beforebreak"));
-		if (before_el) {
-			const xmlpp::TextNode* t = before_el->get_child_text();
-			if (t) rule.before = t->get_content();
-		}
-		const xmlpp::Element* after_el = dynamic_cast<const xmlpp::Element*>(
-			get_child_or_null(n, "afterbreak"));
-		if (after_el) {
-			const xmlpp::TextNode* t = after_el->get_child_text();
-			if (t) rule.after = t->get_content();
-		}
+		rule.before = get_child_text_or_empty(n, "beforebreak");
+		rule.after = get_child_text_or_empty(n, "afterbreak");
 		if (rule.before.empty() && rule.after.empty()) {
 			throw ParseError("<rule> with empty <beforebreak> and <afterbreak>");
 		}
