@@ -7,6 +7,7 @@
 #include <istream>
 
 #include "exception.h"
+#include "rule.h"
 
 // forward decl
 namespace xmlpp {
@@ -26,13 +27,6 @@ namespace Toki { namespace Srx {
 		~ParseError() throw()
 		{
 		}
-	};
-
-	struct Rule
-	{
-		std::string before;
-		std::string after;
-		bool breaks;
 	};
 
 	class Document {

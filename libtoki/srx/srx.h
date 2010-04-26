@@ -7,5 +7,4 @@ namespace Toki { namespace Srx {
 
 } /* end ns Srx */ } /* end ns Toki */
 
-
 #endif // LIBTOKI_SRX_SRX_H
