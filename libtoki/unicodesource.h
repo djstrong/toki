@@ -53,6 +53,14 @@ namespace Toki {
 		 * @return true if there is something to return, false otherwise.
 		 */
 		virtual bool has_more_chars() = 0;
+
+		/**
+		 * Return the begin_sentence flag for the character available
+		 * via peek_next_char. By default always returns false. Derived classes
+		 * might use this to do some character-level processing to discover
+		 * sentence breaks before tokenization.
+		 */
+		virtual bool peek_begins_sentence();
 	};
 
 } /* end ns Toki */
