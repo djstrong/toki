@@ -73,7 +73,7 @@ int main(int argc, char** argv)
 	}
 
 	if (!srx.empty()) {
-		Toki::Srx::SrxDocument doc;
+		Toki::Srx::Document doc;
 		std::ifstream srx_ifs(srx.c_str());
 		doc.load(srx_ifs);
 		std::cout << doc.info() << "\n";
