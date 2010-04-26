@@ -75,7 +75,8 @@ endif(UNIX)
 if(UNIX)
         install(TARGETS toki
                 LIBRARY DESTINATION lib
-                PERMISSIONS WORLD_EXECUTE)
+                PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE
+                GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
 
         install(
                 DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
