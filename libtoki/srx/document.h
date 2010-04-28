@@ -16,11 +16,11 @@ namespace xmlpp {
 
 namespace Toki { namespace Srx {
 
-	class ParseError : public TokenizerLibError
+	class ParseError : public Error
 	{
 	public:
 		ParseError(const std::string& what)
-			: TokenizerLibError("SRX Parse error: " + what)
+			: Error("Parse error: " + what)
 		{
 		}
 

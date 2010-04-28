@@ -3,7 +3,15 @@
 
 #include <string>
 
+#include <unicode/regex.h>
+
 namespace Toki { namespace Srx {
+
+	struct CompiledRule
+	{
+		RegexMatcher* matcher;
+		bool breaks;
+	};
 
 	struct Rule
 	{
@@ -12,7 +20,10 @@ namespace Toki { namespace Srx {
 		bool breaks;
 
 		std::string create_lookbehind_pattern() const;
+
+		CompiledRule compile(UErrorCode& ue) const;
 	};
+
 
 } /* end ns Srx */ } /* end ns Toki */
 
