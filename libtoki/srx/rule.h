@@ -10,6 +10,8 @@ namespace Toki { namespace Srx {
 		std::string before;
 		std::string after;
 		bool breaks;
+
+		std::string create_lookbehind_pattern() const;
 	};
 
 } /* end ns Srx */ } /* end ns Toki */
