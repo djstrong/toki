@@ -14,8 +14,10 @@ BOOST_AUTO_TEST_CASE(test_empty_config)
 
 BOOST_AUTO_TEST_CASE(test_default_config_config)
 {
-	Toki::Config::Node n = Toki::Config::default_config();
-	BOOST_CHECK(!n.empty());
+	BOOST_CHECK_NO_THROW(
+		Toki::Config::Node n = Toki::Config::default_config();
+		BOOST_CHECK(!n.empty());
+	);
 }
 
 BOOST_AUTO_TEST_CASE(test_default_config_config_fail)
@@ -27,8 +29,10 @@ BOOST_AUTO_TEST_CASE(test_default_config_config_fail)
 			Toki::TokenizerLibError
 		);
 	}
-	Toki::Config::Node n = Toki::Config::default_config();
-	BOOST_CHECK(!n.empty());
+	BOOST_CHECK_NO_THROW(
+		Toki::Config::Node n = Toki::Config::default_config();
+		BOOST_CHECK(!n.empty());
+	);
 }
 
 BOOST_AUTO_TEST_CASE(test_nonexistant_config)
