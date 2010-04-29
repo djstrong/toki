@@ -28,6 +28,7 @@ namespace Toki { namespace Debug {
 	 * - $orth   -> the token's orth
 	 * - $type   -> the token's type
 	 * - $bs_01  -> 1 if the token has the begins_senctence flag set, else 0
+	 * - $bs|    -> "|" if token begins sentence, empty string otherwise
 	 * - $bs     -> "bs" if token begins sentence, empty string otherwise
 	 * - $ws     -> the preceeding whitespace amount string representation
 	 *              e.g. "none". @see Token::WhitespaceAmount
