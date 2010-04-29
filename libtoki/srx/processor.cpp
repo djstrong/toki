@@ -56,7 +56,6 @@ namespace Toki { namespace Srx {
 		std::vector<bool> breaks(length_);
 		BOOST_FOREACH (break_map_t::value_type v, break_map_) {
 			breaks[v.first] = v.second;
-			std::cerr << v.first << ":" << v.second << " ";
 		}
 		return breaks;
 	}
