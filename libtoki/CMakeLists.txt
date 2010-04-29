@@ -5,12 +5,23 @@ PROJECT(toki)
 set(ver_major "0")
 set(ver_minor "2")
 
-find_package(ICU REQUIRED)
-find_package(Loki REQUIRED)
+set(LIBS "")
 
-link_directories(${Boost_LIBRARY_DIRS})
+find_package(ICU REQUIRED)
 include_directories(${ICU_INCLUDE_DIR})
 link_directories(${ICU_LIBRARY_DIRS})
+set(LIBS ${LIBS} icuuc icuio)
+
+find_package(Loki REQUIRED)
+set(LIBS ${LIBS} loki)
+
+find_package(LibXML++ REQUIRED)
+include_directories(${LibXML++_INCLUDE_DIRS})
+link_directories(${LibXML++_LIBRARY_DIRS})
+set(LIBS ${LIBS} ${LibXML++_LIBRARIES})
+
+link_directories(${Boost_LIBRARY_DIRS})
+set(LIBS ${LIBS} ${Boost_LIBRARIES})
 
 include_directories( ${CMAKE_SOURCE_DIR}/libtoki/ )
 
@@ -41,6 +52,11 @@ SET(libtoki_STAT_SRC
     token.cpp
     tokenizer.cpp
     tokenlayer.cpp
+    srx/document.cpp
+    srx/processor.cpp
+    srx/rule.cpp
+    srx/srx.cpp
+    srx/util.cpp
     token_layers/affixsplitlayer.cpp
     token_layers/appendlayer.cpp
     token_layers/basicsplitlayer.cpp
@@ -61,7 +77,7 @@ SET(libtoki_STAT_SRC
 )
 
 add_library(toki SHARED ${libtoki_STAT_SRC})
-target_link_libraries ( toki ${Boost_LIBRARIES} icuuc icuio loki)
+target_link_libraries ( toki ${LIBS} )
 set_target_properties(toki PROPERTIES
         VERSION "${ver_major}.${ver_minor}"
         SOVERSION ${ver_major})

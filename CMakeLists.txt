@@ -37,7 +37,7 @@ if(CMAKE_COMPILER_IS_GNUCXX)
 
 endif(CMAKE_COMPILER_IS_GNUCXX)
 
-find_package(Boost 1.41 REQUIRED COMPONENTS program_options filesystem)
+find_package(Boost 1.41 REQUIRED COMPONENTS program_options filesystem regex)
 
 add_subdirectory(libtoki)
 add_subdirectory(tests)

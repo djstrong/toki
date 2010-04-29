@@ -50,6 +50,7 @@ namespace Toki { namespace Debug {
 		boost::replace_first(out, "$orth", t.orth_utf8());
 		boost::replace_first(out, "$type", t.type());
 		boost::replace_first(out, "$bs_01", t.begins_sentence() ? "1" : "0");
+		boost::replace_first(out, "$bs|", t.begins_sentence() ? "|" : "");
 		boost::replace_first(out, "$bs", t.begins_sentence() ? "bs" : "");
 		boost::replace_first(out, "$ws_id",
 			boost::lexical_cast<std::string>(t.preceeding_whitespace()));

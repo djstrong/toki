@@ -1,22 +1,25 @@
 #include "whitespacetokenizer.h"
 #include "tokenizer.h"
+#include "srx/srx.h"
+#include "util.h"
 
 #include <unicode/ucnv.h>
 #include <unicode/uchar.h>
+#include <fstream>
 #include <iostream>
 
 namespace Toki {
 
 	WhitespaceTokenizer::WhitespaceTokenizer(const Config::Node &cfg)
 		: Tokenizer(cfg), wa_(Token::WA_None), token_type_(),
-		initial_wa_(Token::WA_None), begins_sentence_(true)
+		initial_wa_(Token::WA_None), begins_sentence_(true), srx_()
 	{
 		process_config(cfg);
 	}
 
 	WhitespaceTokenizer::WhitespaceTokenizer(UnicodeSource* us, const Config::Node& cfg)
 		: Tokenizer(us, cfg), wa_(Token::WA_None), token_type_(),
-		initial_wa_(Token::WA_None), begins_sentence_(true)
+		initial_wa_(Token::WA_None), begins_sentence_(true), srx_()
 	{
 		process_config(cfg);
 	}
@@ -34,6 +37,20 @@ namespace Toki {
 				initial_wa_ = Token::WA_None;
 			}
 		}
+		std::string srx = cfg.get("srx", "");
+		if (!srx.empty()) {
+			std::ifstream ifs;
+			Config::open_file_from_search_path(srx, ifs);
+			Srx::Document d;
+			d.load(ifs);
+			Srx::Processor p;
+			p.load_rules(d.get_all_rules());
+			boost::shared_ptr<Srx::SourceWrapper> u;
+			u.reset(new Srx::SourceWrapper(get_input_source(), p));
+			set_input_source(u);
+			srx_ = u;
+			std::cerr << "SRX " << srx_->get_processor().get_compiled_rules().size() << "\n";
+		}
 		wa_ = initial_wa_;
 	}
 
@@ -45,6 +62,10 @@ namespace Toki {
 
 	void WhitespaceTokenizer::new_input_source()
 	{
+		if (srx_) {
+			srx_->set_source(get_input_source());
+			input_ = srx_;
+		}
 	}
 
 
@@ -88,8 +109,13 @@ namespace Toki {
 			UChar u = input().get_next_char();
 			orth = u;
 			while (input().has_more_chars()) {
+				//std::string ou = Util::to_utf8(orth);
+				//std::cerr << ou;
 				u = input().peek_next_char();
 				if (u_isUWhiteSpace(u)) {
+					if (input().peek_begins_sentence()) {
+						next_token_begins_sentence = true;
+					}
 					break;
 				} else if (input().peek_begins_sentence()) {
 					next_token_begins_sentence = true;
