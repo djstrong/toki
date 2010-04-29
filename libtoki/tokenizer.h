@@ -135,7 +135,7 @@ namespace Toki {
 		 * cause an actual input source to be set.
 		 */
 		virtual void new_input_source() {}
-	private:
+	//private:
 		/**
 		 * The source of the text.
 		 */

@@ -5,6 +5,8 @@
 #include "tokenizer.h"
 #include "token.h"
 
+#include "srx/srx.h"
+
 namespace Toki {
 
 	/**
@@ -70,6 +72,8 @@ namespace Toki {
 		 * Token begins_sentence flag
 		 */
 		bool begins_sentence_;
+
+		boost::shared_ptr<Srx::SourceWrapper> srx_;
 	};
 
 } //end namespace Toki

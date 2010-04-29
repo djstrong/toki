@@ -1,6 +1,8 @@
 #include "srx.h"
 #include "processor.h"
 
+#include <iostream>
+
 namespace Toki { namespace Srx {
 
 	SourceWrapper::SourceWrapper(UnicodeSource *s, const Processor& p,
@@ -8,6 +10,7 @@ namespace Toki { namespace Srx {
 		: s_(s), proc_(p), window_size_(window), margin_size_(margin)
 		, buffer_(NULL), out_idx_(0), buffer_size_(0), breaks_(window_size_)
 	{
+		buffer_ = new UChar[window_size_ + margin_size_];
 	}
 
 	SourceWrapper::SourceWrapper(boost::shared_ptr<UnicodeSource>s,
@@ -15,6 +18,19 @@ namespace Toki { namespace Srx {
 		: s_(s), proc_(p), window_size_(window), margin_size_(margin)
 		, buffer_(NULL), out_idx_(0), buffer_size_(0), breaks_(window_size_)
 	{
+		buffer_ = new UChar[window_size_ + margin_size_];
+	}
+
+	SourceWrapper::~SourceWrapper()
+	{
+		delete buffer_;
+	}
+
+	void SourceWrapper::set_source(boost::shared_ptr<UnicodeSource>s)
+	{
+		s_ = s;
+		out_idx_ = 0;
+		buffer_size_ = 0;
 	}
 
 	UChar SourceWrapper::peek_next_char()
@@ -31,7 +47,7 @@ namespace Toki { namespace Srx {
 	{
 		ensure_more();
 		if (buffer_ok()) {
-			return buffer_[out_idx_];
+			return buffer_[out_idx_++];
 		} else {
 			return 0;
 		}
@@ -78,9 +94,8 @@ namespace Toki { namespace Srx {
 
 	void SourceWrapper::calculate_breaks()
 	{
-		Processor proc;
-		proc.compute_breaks(UnicodeString(false, buffer_, window_size_ + margin_size_), window_size_);
-		breaks_ = proc.get_break_mask();
+		proc_.compute_breaks(UnicodeString(false, buffer_, window_size_ + margin_size_), window_size_);
+		breaks_ = proc_.get_break_mask();
 	}
 
 } /* end ns Srx */ } /* end ns Toki */

@@ -14,6 +14,10 @@ namespace Toki { namespace Srx {
 
 		void load_rules(const std::vector<Rule>& rules);
 
+		const std::vector<CompiledRule>& get_compiled_rules() const {
+			return crules_;
+		}
+
 		void compute_breaks(const UnicodeString& str, int length);
 
 		std::vector<bool> get_break_mask() const;

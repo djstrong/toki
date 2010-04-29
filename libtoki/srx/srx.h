@@ -6,17 +6,20 @@
 #include "unicodesource.h"
 
 #include <boost/smart_ptr.hpp>
+#include <boost/utility.hpp>
 
 
 namespace Toki { namespace Srx {
 
-	class SourceWrapper : public UnicodeSource {
+	class SourceWrapper : public UnicodeSource, private boost::noncopyable {
 	public:
 		SourceWrapper(UnicodeSource* s, const Processor& p,
 				int window = 200, int margin = 100);
 
 		SourceWrapper(boost::shared_ptr<UnicodeSource> s, const Processor& p,
 				int window = 200, int margin = 100);
+
+		~SourceWrapper();
 
 		/// Override from UnicodeSource
 		UChar get_next_char();
@@ -29,6 +32,12 @@ namespace Toki { namespace Srx {
 
 		/// Override from UnicodeSource
 		bool peek_begins_sentence();
+
+		void set_source(boost::shared_ptr<UnicodeSource> s);
+
+		const Processor& get_processor() const {
+			return proc_;
+		}
 
 	private:
 		void init();
