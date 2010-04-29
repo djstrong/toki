@@ -1,8 +1,10 @@
 #include "whitespacetokenizer.h"
 #include "tokenizer.h"
+#include "srx/srx.h"
 
 #include <unicode/ucnv.h>
 #include <unicode/uchar.h>
+#include <fstream>
 #include <iostream>
 
 namespace Toki {
@@ -33,6 +35,18 @@ namespace Toki {
 				std::cerr << "Bad initial whitespace value:" << init_wa << "\n";
 				initial_wa_ = Token::WA_None;
 			}
+		}
+		std::string srx = cfg.get("srx", "");
+		if (!srx.empty()) {
+			std::ifstream ifs;
+			Config::open_file_from_search_path(srx, ifs);
+			Srx::Document d;
+			d.load(ifs);
+			Srx::Processor p;
+			p.load_rules(d.get_all_rules());
+			boost::shared_ptr<UnicodeSource> u;
+			u.reset(new Srx::SourceWrapper(get_input_source(), p));
+			set_input_source(u);
 		}
 		wa_ = initial_wa_;
 	}

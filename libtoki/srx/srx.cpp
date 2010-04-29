@@ -3,13 +3,17 @@
 
 namespace Toki { namespace Srx {
 
-	SourceWrapper::SourceWrapper(UnicodeSource *s, int window, int margin)
-		: s_(s), window_size_(window), margin_size_(margin), buffer_(NULL)
+	SourceWrapper::SourceWrapper(UnicodeSource *s, const Processor& p,
+			int window, int margin)
+		: s_(s), proc_(p), window_size_(window), margin_size_(margin)
+		, buffer_(NULL), out_idx_(0), buffer_size_(0), breaks_(window_size_)
 	{
 	}
 
-	SourceWrapper::SourceWrapper(boost::shared_ptr<UnicodeSource>s, int window, int margin)
-		: s_(s), window_size_(window), margin_size_(margin), buffer_(NULL)
+	SourceWrapper::SourceWrapper(boost::shared_ptr<UnicodeSource>s,
+			const Processor& p, int window, int margin)
+		: s_(s), proc_(p), window_size_(window), margin_size_(margin)
+		, buffer_(NULL), out_idx_(0), buffer_size_(0), breaks_(window_size_)
 	{
 	}
 
@@ -17,7 +21,7 @@ namespace Toki { namespace Srx {
 	{
 		ensure_more();
 		if (buffer_ok()) {
-			return *out_ptr_;
+			return buffer_[out_idx_];
 		} else {
 			return 0;
 		}
@@ -27,7 +31,7 @@ namespace Toki { namespace Srx {
 	{
 		ensure_more();
 		if (buffer_ok()) {
-			return *out_ptr_++;
+			return buffer_[out_idx_];
 		} else {
 			return 0;
 		}
@@ -43,7 +47,7 @@ namespace Toki { namespace Srx {
 	{
 		ensure_more();
 		if (buffer_ok()) {
-			return breaks_[out_ptr_ - buffer_];
+			return breaks_[out_idx_];
 		} else {
 			return false;
 		}
