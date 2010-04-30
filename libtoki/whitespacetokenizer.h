@@ -5,9 +5,11 @@
 #include "tokenizer.h"
 #include "token.h"
 
-#include "srx/srx.h"
-
 namespace Toki {
+
+	namespace Srx {
+		class SourceWrapper;
+	}
 
 	/**
 	 * A simple tokenizer that takes a UnicodeSource (i.e. continous text) and
