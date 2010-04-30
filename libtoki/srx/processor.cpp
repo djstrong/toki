@@ -36,8 +36,8 @@ namespace Toki { namespace Srx {
 
 	void Processor::compute_breaks(const UnicodeString& str, int from, int to)
 	{
-		std::cerr << "SRXP run from " << from << " to " << to
-				<< " on [" << Util::to_utf8(str) << "] :";
+		//std::cerr << "SRXP run from " << from << " to " << to
+		//		<< " on [" << Util::to_utf8(str) << "] :";
 		break_map_.clear();
 		to -= from;
 		length_ = to;
@@ -57,11 +57,11 @@ namespace Toki { namespace Srx {
 				}
 			}
 		}
-		std::vector<int> b = get_break_positions();
-		for (size_t i = 0; i < b.size(); ++i) {
-			std::cerr << b[i] << " ";
-		}
-		std::cerr << "\n";
+		//std::vector<int> b = get_break_positions();
+		//for (size_t i = 0; i < b.size(); ++i) {
+		//	std::cerr << b[i] << " ";
+		//}
+		//std::cerr << "\n";
 	}
 
 	std::vector<bool> Processor::get_break_mask() const {

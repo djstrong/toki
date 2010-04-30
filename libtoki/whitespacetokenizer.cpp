@@ -51,7 +51,6 @@ namespace Toki {
 			u.reset(new Srx::SourceWrapper(get_input_source(), p, window, margin));
 			set_input_source(u);
 			srx_ = u;
-			std::cerr << "SRX " << srx_->get_processor().get_compiled_rules().size() << "\n";
 		}
 		wa_ = initial_wa_;
 	}

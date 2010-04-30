@@ -83,11 +83,11 @@ namespace Toki { namespace Srx {
 
 	void SourceWrapper::ensure_more()
 	{
-		std::cerr << ".";
+		//std::cerr << ".";
 		if (!buffer_ok()) {
-			std::cerr << "ensure_more needs more " << out_idx_
-					<< " " << buffer_start_idx_
-					<< " " << buffer_end_idx_ << "\n";
+			//std::cerr << "ensure_more needs more " << out_idx_
+			//		<< " " << buffer_start_idx_
+			//		<< " " << buffer_end_idx_ << "\n";
 			move_buffer();
 			if (buffer_ok()) {
 				calculate_breaks();
@@ -101,13 +101,14 @@ namespace Toki { namespace Srx {
 			buffer_[buffer_end_idx_] = s_->get_next_char();
 			++buffer_end_idx_;
 		}
+		//std::cerr << "init buffer: " << Util::to_utf8(buffer_ + buffer_start_idx_)
+		//		<< " " << buffer_start_idx_ << "\n";
 		calculate_breaks();
-		std::cerr << "init buffer: " << Util::to_utf8(buffer_ + buffer_start_idx_) << "\n";
 	}
 
 	void SourceWrapper::move_buffer()
 	{
-		std::cerr << "B";
+		//std::cerr << "B";
 		int ii = window_size_;
 		int io = 0;
 		while (ii < buffer_end_idx_) {
@@ -128,7 +129,7 @@ namespace Toki { namespace Srx {
 	{
 		UChar* bbegin = buffer_ + buffer_start_idx_;
 		int blen = buffer_end_idx_ - buffer_start_idx_;
-		std::cerr << "ZZ" << buffer_start_idx_ << "-" << Util::to_utf8(bbegin) << "\n";
+		//std::cerr << "ZZ" << buffer_start_idx_ << "-" << Util::to_utf8(bbegin) << "\n";
 		int from = buffer_start_idx_ ? 0 : margin_size_;
 		int to = std::min(buffer_end_idx_, window_size_ + margin_size_);
 		proc_.compute_breaks(UnicodeString(false, bbegin, blen), from, to);
