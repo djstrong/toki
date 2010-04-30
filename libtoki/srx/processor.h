@@ -18,7 +18,7 @@ namespace Toki { namespace Srx {
 			return crules_;
 		}
 
-		void compute_breaks(const UnicodeString& str, int length);
+		void compute_breaks(const UnicodeString& str, int from, int to);
 
 		std::vector<bool> get_break_mask() const;
 

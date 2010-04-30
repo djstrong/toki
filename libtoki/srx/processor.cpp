@@ -1,5 +1,6 @@
 #include "exception.h"
 #include "processor.h"
+#include "../util.h"
 
 #include <boost/foreach.hpp>
 
@@ -33,23 +34,34 @@ namespace Toki { namespace Srx {
 		}
 	}
 
-	void Processor::compute_breaks(const UnicodeString& str, int length)
+	void Processor::compute_breaks(const UnicodeString& str, int from, int to)
 	{
+		std::cerr << "SRXP run from " << from << " to " << to
+				<< " on [" << Util::to_utf8(str) << "] :";
 		break_map_.clear();
-		length_ = length;
+		to -= from;
+		length_ = to;
 		BOOST_FOREACH (const CompiledRule& cr, crules_) {
 			cr.matcher->reset(str);
 			while (cr.matcher->find()) {
 				UErrorCode status = U_ZERO_ERROR;
 				int n = cr.matcher->end(1, status);
-				if (n < length) {
-					break_map_t::value_type v(n, cr.breaks);
-					break_map_.insert(v); //only insert if the index was not in the map
-				} else {
-					break;
+				n -= from;
+				if (n >= 0) {
+					if (n < to) {
+						break_map_t::value_type v(n, cr.breaks);
+						break_map_.insert(v); //only insert if the index was not in the map
+					} else {
+						break;
+					}
 				}
 			}
 		}
+		std::vector<int> b = get_break_positions();
+		for (size_t i = 0; i < b.size(); ++i) {
+			std::cerr << b[i] << " ";
+		}
+		std::cerr << "\n";
 	}
 
 	std::vector<bool> Processor::get_break_mask() const {
@@ -63,7 +75,6 @@ namespace Toki { namespace Srx {
 	std::vector<int> Processor::get_break_positions() const {
 		std::vector<int> breaks;
 		BOOST_FOREACH (break_map_t::value_type v, break_map_) {
-			std::cerr << v.first << ":" << v.second << " ";
 			if (v.second) {
 				breaks.push_back(v.first);
 			}

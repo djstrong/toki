@@ -43,8 +43,10 @@ namespace Toki { namespace Srx {
 		void init();
 
 		bool buffer_ok() {
-			return out_idx_ < buffer_size_ && out_idx_ < window_size_;
+			return (out_idx_ < buffer_end_idx_) && (out_idx_ < window_size_ + margin_size_);
 		}
+
+		void init_buffer();
 
 		void ensure_more();
 
@@ -56,9 +58,11 @@ namespace Toki { namespace Srx {
 		Processor proc_;
 		int window_size_;
 		int margin_size_;
+		int buffer_size_;
 		UChar* buffer_;
 		int out_idx_;
-		int buffer_size_;
+		int buffer_start_idx_;
+		int buffer_end_idx_;
 		std::vector<bool> breaks_;
 	};
 

@@ -45,8 +45,10 @@ namespace Toki {
 			d.load(ifs);
 			Srx::Processor p;
 			p.load_rules(d.get_all_rules());
+			int window = cfg.get("srx_window", 100);
+			int margin = cfg.get("srx_margin", 50);
 			boost::shared_ptr<Srx::SourceWrapper> u;
-			u.reset(new Srx::SourceWrapper(get_input_source(), p));
+			u.reset(new Srx::SourceWrapper(get_input_source(), p, window, margin));
 			set_input_source(u);
 			srx_ = u;
 			std::cerr << "SRX " << srx_->get_processor().get_compiled_rules().size() << "\n";
