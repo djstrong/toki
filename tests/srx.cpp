@@ -1,9 +1,12 @@
 #include "srx/util.h"
 #include "srx/document.h"
 #include "srx/processor.h"
+#include "srx/srx.h"
+#include "layertokenizer.h"
+#include "unicodeicustringwrapper.h"
 
 #include <fstream>
-
+#include <iostream>
 #include <boost/foreach.hpp>
 #include <boost/test/unit_test.hpp>
 
@@ -55,28 +58,80 @@ BOOST_AUTO_TEST_CASE( finitize )
 
 BOOST_AUTO_TEST_CASE( parse )
 {
-	return;
 	Toki::Srx::Document d;
 	std::string s = data_dir + "/one.srx";
 	std::ifstream ifs(s.c_str());
 	d.load(ifs);
 	std::vector<Toki::Srx::Rule> rules = d.get_all_rules();
 	BOOST_CHECK_EQUAL(rules.size(), 2);
+}
 
+namespace {
+	//                      0000000000111111111122222222223333333333444444444455555555556666666666
+	//                      0123456789012345678901234567890123456789012345678901234567890123456789
+	static std::string t = "Mr. Holmes is from the U.K. not from the U.S.A. Is Dr. Watson from there too?";
+	int tb[2] = {3, 54};
+	int* tbe = tb + 2;
+}
+
+
+BOOST_AUTO_TEST_CASE( simple )
+{
+	Toki::Srx::Document d;
+	std::string s = data_dir + "/one.srx";
+	std::ifstream ifs(s.c_str());
+	d.load(ifs);
 	Toki::Srx::Processor proc;
+	proc.load_rules(d.get_all_rules());
 
-	//               0000000000111111111122222222223333333333444444444455555555556666666666
-	//               0123456789012345678901234567890123456789012345678901234567890123456789
-	std::string t = "Mr. Holmes is from the U.K. not the U.S.A. Is Dr. Watson from there too?";
-	std::vector<int> b;
-	b.push_back(3);
-	b.push_back(49);
-
-	proc.load_rules(rules);
 	proc.compute_breaks(UnicodeString::fromUTF8(t), 0, t.size());
 	std::vector<int> breaks = proc.get_break_positions();
 
-	BOOST_CHECK_EQUAL_COLLECTIONS(b.begin(), b.end(), breaks.begin(), breaks.end());
+	BOOST_CHECK_EQUAL_COLLECTIONS(tb, tbe, breaks.begin(), breaks.end());
 }
+
+BOOST_AUTO_TEST_CASE( variable_window )
+{
+	Toki::Srx::Document d;
+	std::string s = data_dir + "/one.srx";
+	std::ifstream ifs(s.c_str());
+	d.load(ifs);
+	Toki::Srx::Processor proc;
+	proc.load_rules(d.get_all_rules());
+
+	UnicodeString us = UnicodeString::fromUTF8(t);
+	for (int m = 4; m < 15; ++m) {
+		for(int w = 40; w > 0; --w) {
+			Toki::UnicodeIcuStringWrapper *isw = new Toki::UnicodeIcuStringWrapper(us);
+			Toki::Srx::SourceWrapper srx(isw, proc, w, m);
+			std::vector<int> breaks;
+			int i = 0;
+			while (srx.has_more_chars()) {
+				if (srx.peek_begins_sentence()) {
+					breaks.push_back(i);
+				}
+				++i;
+				srx.get_next_char();
+			}
+			bool okay = true;
+			int* a = &breaks[0];
+			int* ae = a + breaks.size();
+			int* b = tb;
+			while (a < ae && b < tbe) {
+				if (*a++ != *b++) {
+					okay = false;
+				}
+			}
+			if (a != ae || b != tbe) {
+				okay = false;
+			}
+			BOOST_CHECK_MESSAGE(okay, "Mismatch for window " << w << " and margin " << m);
+			//BOOST_CHECK_EQUAL_COLLECTIONS(tb, tbe, breaks.begin(), breaks.end());
+		}
+	}
+
+}
+
+
 
 BOOST_AUTO_TEST_SUITE_END()
