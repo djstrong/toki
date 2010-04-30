@@ -96,12 +96,12 @@ void test_one_item(const compare_item& c)
 		ss_in << ss.str();
 		tok.reset();
 		tok.set_input_source(ss_in, i + 1);
-		std::stringstream ss_actual;
+		std::stringstream ss_actual_loop;
 		if (cfg.get("debug.warning_dest", "") == "stdout") {
-			tok.set_error_stream(&ss_actual);
+			tok.set_error_stream(&ss_actual_loop);
 		}
-		Toki::Debug::tokenize_formatted(tok, format, ss_actual);
-		BOOST_REQUIRE_EQUAL (ss_actual.str(), ss_expected.str());
+		Toki::Debug::tokenize_formatted(tok, format, ss_actual_loop);
+		BOOST_REQUIRE_EQUAL (ss_actual_loop.str(), ss_expected.str());
 		tok.reset();
 		tok.set_input_source(us);
 		std::stringstream ss_actual2;
