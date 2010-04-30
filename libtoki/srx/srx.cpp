@@ -13,7 +13,7 @@ namespace Toki { namespace Srx {
 		, buffer_size_(window_size_ + margin_size_ * 2)
 		, buffer_(new UChar[buffer_size_])
 		, out_idx_(margin_size_)
-		, buffer_start_idx_(0), buffer_end_idx_(0)
+		, buffer_start_idx_(margin_size_), buffer_end_idx_(margin_size_)
 		, breaks_(window_size_)
 	{
 		init_buffer();
