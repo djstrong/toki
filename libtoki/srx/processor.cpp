@@ -38,13 +38,16 @@ namespace Toki { namespace Srx {
 		break_map_.clear();
 		length_ = length;
 		BOOST_FOREACH (const CompiledRule& cr, crules_) {
+			UErrorCode ue = U_ZERO_ERROR;
+			int i = 0;
 			cr.matcher->reset(str);
-			while (cr.matcher->find()) {
+			while (cr.matcher->find(i, ue)) {
 				UErrorCode status = U_ZERO_ERROR;
 				int n = cr.matcher->end(1, status);
 				if (n < length) {
 					break_map_t::value_type v(n, cr.breaks);
 					break_map_.insert(v); //only insert if the index was not in the map
+					i = cr.matcher->start(status) + 1;
 				} else {
 					break;
 				}
