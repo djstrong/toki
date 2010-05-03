@@ -42,8 +42,10 @@ namespace Toki { namespace Srx {
 		to -= from;
 		length_ = to;
 		BOOST_FOREACH (const CompiledRule& cr, crules_) {
+			UErrorCode ue = U_ZERO_ERROR;
+			int i = 0;
 			cr.matcher->reset(str);
-			while (cr.matcher->find()) {
+			while (cr.matcher->find(i, ue)) {
 				UErrorCode status = U_ZERO_ERROR;
 				int n = cr.matcher->end(1, status);
 				n -= from;
@@ -55,6 +57,7 @@ namespace Toki { namespace Srx {
 						break;
 					}
 				}
+				i = cr.matcher->start(status) + 1;
 			}
 		}
 		//std::vector<int> b = get_break_positions();
