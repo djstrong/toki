@@ -121,7 +121,7 @@ namespace Toki {
 		}
 
 		/**
-		 * Apply the configuration -- helper o avoid repeating code in ctors
+		 * Apply the configuration -- helper to avoid repeating code in ctors
 		 */
 		void apply_configuration(const Config::Node& cfg);
 
