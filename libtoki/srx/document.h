@@ -59,6 +59,11 @@ namespace Toki { namespace Srx {
 
 		typedef std::map<std::string, std::vector<Rule> > language_rules_t;
 		language_rules_t language_rules_;
+
+		typedef std::vector< std::pair<RegexMatcher*, std::string> > language_map_t;
+		language_map_t language_map_;
+
+		bool cascade_;
 	};
 
 } /* end ns Srx */ } /* end ns Toki */

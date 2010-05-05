@@ -43,8 +43,15 @@ namespace Toki {
 			Config::open_file_from_search_path(srx, ifs);
 			Srx::Document d;
 			d.load(ifs);
+			std::string srx_lang = cfg.get("srx_language", "");
+			std::vector<Srx::Rule> rules;
+			if (srx_lang.empty()) {
+				rules = d.get_all_rules();
+			} else {
+				rules = d.get_rules_for_lang(lang);
+			}
 			Srx::Processor p;
-			p.load_rules(d.get_all_rules());
+			p.load_rules(rules);
 			int window = cfg.get("srx_window", 100);
 			int margin = cfg.get("srx_margin", 50);
 			boost::shared_ptr<Srx::SourceWrapper> u;

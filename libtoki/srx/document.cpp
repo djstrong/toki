@@ -74,9 +74,20 @@ namespace Toki { namespace Srx {
 		}
 	}
 
-	void Document::process_header_node(const xmlpp::Node */*n*/)
+	void Document::process_header_node(const xmlpp::Node *n)
 	{
-		//no action yet
+		const xmlpp::Element* el = dynamic_cast<const xmlpp::Element*>(n);
+		if (!el) throw ParseError("<header> not an Element");
+		std::string casc = el->get_attribute_value("cascade");
+		if (casc.empty() || casc == "yes") {
+			cascade_ = true;
+		} else if (casc == "no") {
+			cascade_ = false;
+		} else {
+			throw ParseError("<header> cascade attribute invalid");
+		}
+		// formathandle elements ignored, we assume no markup
+		// segmentsubflows attribute ignored, we assume no subflows
 	}
 
 	void Document::process_languagerule_node(const xmlpp::Node *n)
@@ -112,28 +123,55 @@ namespace Toki { namespace Srx {
 		language_rules_[language].push_back(rule);
 	}
 
-	void Document::process_languagemap_node(const xmlpp::Node */*n*/)
+	void Document::process_languagemap_node(const xmlpp::Node *n)
 	{
-		//TODO
+		const xmlpp::Element* el = dynamic_cast<const xmlpp::Element*>(n);
+		if (!el) throw ParseError("<languagemap> not an Element");
+		std::string pattern = el->get_attribute_value("languagepattern");
+		std::string name = el->get_attribute_value("languagerulename");
+		UnicodeString upattern = UnicodeString::fromUTF8(pattern);
+		UErrorCode status = U_ZERO_ERROR;
+		RegexMatcher* matcher = new RegexMatcher(upattern, 0, status);
+		if (!U_SUCCESS(status)) {
+			throw ParseError("<languagemap> pattern failed to compile");
+		}
+		language_map_.push_back(std::make_pair(matcher, name));
 	}
 
 	std::vector<Rule> Document::get_all_rules() const
 	{
-		std::vector<Rule> v;
+		std::vector<Rule> rules;
 		language_rules_t::const_iterator li = language_rules_.begin();
 		for (; li != language_rules_.end(); ++li) {
 			std::vector<Rule>::const_iterator i = li->second.begin();
 			for (; i != li->second.end(); ++i) {
-				v.push_back(*i);
+				rules.push_back(*i);
 			}
 		}
-		return v;
+		return rules;
 	}
 
-	std::vector<Rule> Document::get_rules_for_lang(const std::string &/*lang*/) const
+	std::vector<Rule> Document::get_rules_for_lang(const std::string &lang) const
 	{
-		// TODO make it real
-		return get_all_rules();
+		UnicodeString ulang = UnicodeString::fromUTF8(lang);
+		std::vector<Rule> rules;
+		BOOST_FOREACH(language_map_t::value_type v, language_map_) {
+			RegexMatcher& m = *v.first;
+			m.reset(ulang);
+			UErrorCode status = U_ZERO_ERROR;
+			if (m.matches(status)) {
+				language_rules_t::const_iterator ruleset = language_rules_.find(v.second);
+				if (ruleset != language_rules_.end()) {
+					std::vector<Rule>::const_iterator i = ruleset->second.begin();
+					std::vector<Rule>::const_iterator e = ruleset->second.end();
+					for (; i != e; ++i) {
+						rules.push_back(*i);
+					}
+				}
+				if (!cascade_) break;
+			}
+		}
+		return rules;
 	}
 
 	std::string Document::info() const
