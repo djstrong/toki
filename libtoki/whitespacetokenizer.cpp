@@ -48,7 +48,7 @@ namespace Toki {
 			if (srx_lang.empty()) {
 				rules = d.get_all_rules();
 			} else {
-				rules = d.get_rules_for_lang(lang);
+				rules = d.get_rules_for_lang(srx_lang);
 			}
 			Srx::Processor p;
 			p.load_rules(rules);
