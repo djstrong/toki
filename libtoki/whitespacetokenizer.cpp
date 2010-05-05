@@ -77,7 +77,7 @@ namespace Toki {
 	}
 
 
-	void WhitespaceTokenizer::eatWhitespace()
+	void WhitespaceTokenizer::eat_whitespace()
 	{
 		int ws = 0; int nl = 0;
 		while (input().has_more_chars()) {
@@ -110,7 +110,7 @@ namespace Toki {
 		if (!input().has_more_chars()) {
 			return NULL;
 		}
-		eatWhitespace();
+		eat_whitespace();
 		UnicodeString orth;
 		if (input().has_more_chars()) {
 			bool next_token_begins_sentence = false;

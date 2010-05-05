@@ -53,7 +53,7 @@ namespace Toki {
 		 * Read characters from the input source until a non-white character is
 		 * found, storing the amount/type of whitespace that was consumed.
 		 */
-		void eatWhitespace();
+		void eat_whitespace();
 
 		/**
 		 * Stored whitespace amount that preceeds the next token
