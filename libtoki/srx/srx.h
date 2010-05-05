@@ -11,6 +11,34 @@
 
 namespace Toki { namespace Srx {
 
+	/**
+	 * A SRX parser wrapping a UnicodeSource.
+	 *
+	 * Characters from the wrapped source are put in a buffer, treated as
+	 * a "window" with margins one each side (so the total size of the buffer
+	 * is window + margin * 2. SRX sentence breaks that happen to lay inside
+	 * the window are computed and later available through the UnicodeSource
+	 * overriden peek_begins_sentence().
+	 *
+	 * The buffer layout is: left_margin window right_margin
+	 *
+	 * Initially, the left buffer is empty.
+	 *
+	 * Note that this class does not understand SRX, it just takes a SRX
+	 * segmenter and runs it repeatedly on a buffer. Characters are always
+	 * returned from the window area of the buffer, advancing the internal
+	 * pointer. When the pointer starts pointing to the beginning of the right
+	 * margin, the buffer is moved so that the last margin_width characters of
+	 * the window form the new left margin, and new characters are streamed
+	 * from the wrapped source. SRX segment breaks are then computed again and
+	 * the internal pointer is reset to point at the beginning of the window.
+	 *
+	 * Larger windows should yield more performance, and large margin sizes will
+	 * result in preformance drop. However, the margin size must be large
+	 * enough to contain the longest regex match expected, otherwise results may
+	 * be off. Technically the restriction is slightly more loose, but the
+	 * aforementioned rule of thumb is reasonable anyway.
+	 */
 	class SourceWrapper : public UnicodeSource, private boost::noncopyable {
 	public:
 		SourceWrapper(UnicodeSource* s, const Processor& p,
