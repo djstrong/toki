@@ -4,6 +4,7 @@ Required libraries:
 * ICU 4.2
 * Boost 1.41
 * Loki
+* Libxml++ (for SRX processing)
 
 SRX suppert additionally requires libxml++2.6.
 
