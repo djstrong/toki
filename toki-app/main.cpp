@@ -17,6 +17,13 @@
 #include <boost/program_options.hpp>
 
 
+struct nullstream : std::ostream {
+	struct nullbuf : std::streambuf {
+		int overflow(int c) { return traits_type::not_eof(c); }
+	} m_sbuf;
+	nullstream(): std::ios(&m_sbuf), std::ostream(&m_sbuf) {}
+};
+
 int main(int argc, char** argv)
 {
 	/*
@@ -29,11 +36,13 @@ int main(int argc, char** argv)
 	std::string input_enc;
 	std::string config_file;
 	std::string config_path;
-	std::string srx;
+	std::string srx, srx_lang;
 	int bufsize;
 	bool orths;
 	bool verbose;
 	bool quiet;
+	bool stats;
+	bool no_output;
 	using boost::program_options::value;
 	boost::program_options::options_description desc("Allowed options");
 	desc.add_options()
@@ -54,7 +63,13 @@ int main(int argc, char** argv)
 			("quiet,q", value(&quiet)->default_value(false)->zero_tokens(),
 			 "Suppress info output")
 			("srx,S", value(&srx)->default_value(""),
-			 "Load SRX from file and exit")
+			 "Load SRX from file and only do SRX processing")
+			("srx-lang", value(&srx_lang)->default_value(""),
+			 "SRX language selection")
+			("stats,s", value(&stats)->default_value(false)->zero_tokens(),
+			 "Display tokenization stats (token count) at end")
+			("no-output", value(&no_output)->default_value(false)->zero_tokens(),
+			 "Disable tokenization output")
 			("help,h", "Show help")
 			;
 	boost::program_options::variables_map vm;
@@ -72,11 +87,28 @@ int main(int argc, char** argv)
 		return 1;
 	}
 
+	nullstream nullstr;
+	std::ostream& out = no_output ? nullstr : std::cout;
+
 	if (!srx.empty()) {
 		Toki::Srx::Document doc;
 		std::ifstream srx_ifs(srx.c_str());
 		doc.load(srx_ifs);
-		std::cout << doc.info() << "\n";
+		if (verbose) {
+			std::cout << doc.info() << "\n";
+		}
+		Toki::Srx::Processor p;
+		p.load_rules(doc.get_rules_for_lang(srx_lang));
+		Toki::Srx::SourceWrapper srx(new Toki::UnicodeIstreamWrapper(std::cin), p, 65536, 256);
+		int segments = 0;
+		while (srx.has_more_chars()) {
+			if (srx.peek_begins_sentence()) {
+				++segments;
+				out << "\n";
+			}
+			out << Toki::Util::to_utf8(srx.get_next_char());
+		}
+		std::cout << segments << "\n";
 		return 0;
 	}
 
@@ -90,6 +122,12 @@ int main(int argc, char** argv)
 			<< boost::algorithm::join(Toki::Config::get_library_config_path(), ";")
 			<< "\n";
 	}
+	int count;
+	int* cptr = 0;
+	if (stats) {
+		cptr = &count;
+	}
+
 	try {
 		const Toki::Config::Node& conf = config_file.empty() ?
 			Toki::Config::default_config() :
@@ -109,11 +147,14 @@ int main(int argc, char** argv)
 		}
 		tok.set_input_source(std::cin, bufsize);
 		if (orths) {
-			Toki::Debug::tokenize_orths_newline(tok, std::cout);
+			Toki::Debug::tokenize_orths_newline(tok, out, cptr);
 		} else {
 			std::string format = conf.get("debug.format", "[$orth]-$type-$ws-\n");
 			format = Toki::Util::unescape_utf8(format);
-			Toki::Debug::tokenize_formatted(tok, format, std::cout);
+			Toki::Debug::tokenize_formatted(tok, format, out, cptr);
+		}
+		if (stats) {
+			std::cout << count << "\n";
 		}
 	} catch (Toki::TokenizerLibError& e) {
 		std::cerr << "Error: " << e.what() << "\n";
