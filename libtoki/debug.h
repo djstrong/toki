@@ -48,15 +48,17 @@ namespace Toki { namespace Debug {
 
 	/**
 	 * "Standard" debug tokenization -- orths with newline, equivalent to a
-	 * $orth\n format.
+	 * $orth\n format. If count is not null it *count will be set to the number
+	 * of tokens read.
 	 */
 	std::string tokenize_orths_newline(TokenSource& ts);
 
 	/**
 	 * "Standard" debug tokenization -- orths with newline, equivalent to a
-	 * $orth\n format.
+	 * $orth\n format. If count is not null it *count will be set to the number
+	 * of tokens read.
 	 */
-	void tokenize_orths_newline(TokenSource& ts, std::ostream& os);
+	void tokenize_orths_newline(TokenSource& ts, std::ostream& os, int* count = NULL);
 
 	/**
 	 * Return a string with all tokens processed and printed according to the
