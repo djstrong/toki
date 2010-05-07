@@ -2,7 +2,7 @@
 #define LIBTOKI_SRX_SRX_H
 
 #include "document.h"
-#include "processor.h"
+#include "segmenter.h"
 #include "unicodesource.h"
 
 #include <boost/smart_ptr.hpp>
@@ -41,10 +41,10 @@ namespace Toki { namespace Srx {
 	 */
 	class SourceWrapper : public UnicodeSource, private boost::noncopyable {
 	public:
-		SourceWrapper(UnicodeSource* s, const Processor& p,
+		SourceWrapper(UnicodeSource* s, const Segmenter& p,
 				int window = 200, int margin = 100);
 
-		SourceWrapper(boost::shared_ptr<UnicodeSource> s, const Processor& p,
+		SourceWrapper(boost::shared_ptr<UnicodeSource> s, const Segmenter& p,
 				int window = 200, int margin = 100);
 
 		~SourceWrapper();
@@ -63,7 +63,7 @@ namespace Toki { namespace Srx {
 
 		void set_source(boost::shared_ptr<UnicodeSource> s);
 
-		const Processor& get_processor() const {
+		const Segmenter& get_segmenter() const {
 			return proc_;
 		}
 
@@ -83,7 +83,7 @@ namespace Toki { namespace Srx {
 		void calculate_breaks();
 
 		boost::shared_ptr<UnicodeSource> s_;
-		Processor proc_;
+		Segmenter proc_;
 		int window_size_;
 		int margin_size_;
 		int buffer_size_;

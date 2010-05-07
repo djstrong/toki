@@ -1,6 +1,6 @@
 #include "srx/util.h"
 #include "srx/document.h"
-#include "srx/processor.h"
+#include "srx/segmenter.h"
 #include "srx/srx.h"
 #include "layertokenizer.h"
 #include "unicodeicustringwrapper.h"
@@ -81,7 +81,7 @@ BOOST_AUTO_TEST_CASE( simple )
 	std::string s = data_dir + "/one.srx";
 	std::ifstream ifs(s.c_str());
 	d.load(ifs);
-	Toki::Srx::Processor proc;
+	Toki::Srx::Segmenter proc;
 	proc.load_rules(d.get_all_rules());
 
 	proc.compute_breaks(UnicodeString::fromUTF8(t), 0, t.size());
@@ -96,7 +96,7 @@ BOOST_AUTO_TEST_CASE( variable_window )
 	std::string s = data_dir + "/one.srx";
 	std::ifstream ifs(s.c_str());
 	d.load(ifs);
-	Toki::Srx::Processor proc;
+	Toki::Srx::Segmenter proc;
 	proc.load_rules(d.get_all_rules());
 
 	UnicodeString us = UnicodeString::fromUTF8(t);

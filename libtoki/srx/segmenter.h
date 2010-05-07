@@ -1,5 +1,5 @@
-#ifndef LIBTOKI_SRX_PROCESSOR_H
-#define LIBTOKI_SRX_PROCESSOR_H
+#ifndef LIBTOKI_SRX_SEGMENTER_H
+#define LIBTOKI_SRX_SEGMENTER_H
 
 #include "rule.h"
 #include <vector>
@@ -7,10 +7,10 @@
 
 namespace Toki { namespace Srx {
 
-	class Processor
+	class Segmenter
 	{
 	public:
-		Processor();
+		Segmenter();
 
 		void load_rules(const std::vector<Rule>& rules);
 
@@ -35,4 +35,4 @@ namespace Toki { namespace Srx {
 
 } /* end ns Srx */ } /* end ns Toki */
 
-#endif // LIBTOKI_SRX_PROCESSOR_H
+#endif // LIBTOKI_SRX_SEGMENTER_H

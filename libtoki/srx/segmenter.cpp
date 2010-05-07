@@ -1,5 +1,5 @@
 #include "exception.h"
-#include "processor.h"
+#include "segmenter.h"
 #include "../util.h"
 
 #include <boost/foreach.hpp>
@@ -14,11 +14,11 @@
 namespace Toki { namespace Srx {
 
 
-	Processor::Processor()
+	Segmenter::Segmenter()
 	{
 	}
 
-	void Processor::load_rules(const std::vector<Rule>& rules)
+	void Segmenter::load_rules(const std::vector<Rule>& rules)
 	{
 		std::vector<RegexMatcher*> r;
 		BOOST_FOREACH (const Rule& r, rules) {
@@ -34,7 +34,7 @@ namespace Toki { namespace Srx {
 		}
 	}
 
-	void Processor::compute_breaks(const UnicodeString& str, int from, int to)
+	void Segmenter::compute_breaks(const UnicodeString& str, int from, int to)
 	{
 		//std::cerr << "SRXP run from " << from << " to " << to
 		//		<< " on [" << Util::to_utf8(str) << "] :";
@@ -67,7 +67,7 @@ namespace Toki { namespace Srx {
 		//std::cerr << "\n";
 	}
 
-	std::vector<bool> Processor::get_break_mask() const {
+	std::vector<bool> Segmenter::get_break_mask() const {
 		std::vector<bool> breaks(length_);
 		BOOST_FOREACH (break_map_t::value_type v, break_map_) {
 			breaks[v.first] = v.second;
@@ -75,7 +75,7 @@ namespace Toki { namespace Srx {
 		return breaks;
 	}
 
-	std::vector<int> Processor::get_break_positions() const {
+	std::vector<int> Segmenter::get_break_positions() const {
 		std::vector<int> breaks;
 		BOOST_FOREACH (break_map_t::value_type v, break_map_) {
 			if (v.second) {

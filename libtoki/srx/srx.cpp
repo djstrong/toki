@@ -1,12 +1,12 @@
 #include "srx.h"
-#include "processor.h"
+#include "segmenter.h"
 #include "../util.h"
 
 #include <iostream>
 
 namespace Toki { namespace Srx {
 
-	SourceWrapper::SourceWrapper(UnicodeSource *s, const Processor& p,
+	SourceWrapper::SourceWrapper(UnicodeSource *s, const Segmenter& p,
 			int window, int margin)
 		: s_(s), proc_(p)
 		, window_size_(window), margin_size_(margin)
@@ -20,7 +20,7 @@ namespace Toki { namespace Srx {
 	}
 
 	SourceWrapper::SourceWrapper(boost::shared_ptr<UnicodeSource>s,
-			const Processor& p, int window, int margin)
+			const Segmenter& p, int window, int margin)
 		: s_(s), proc_(p)
 		, window_size_(window), margin_size_(margin)
 		, buffer_size_(window_size_ + margin_size_ * 2)

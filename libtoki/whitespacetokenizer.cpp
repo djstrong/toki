@@ -50,7 +50,7 @@ namespace Toki {
 			} else {
 				rules = d.get_rules_for_lang(srx_lang);
 			}
-			Srx::Processor p;
+			Srx::Segmenter p;
 			p.load_rules(rules);
 			int window = cfg.get("srx_window", 100);
 			int margin = cfg.get("srx_margin", 50);

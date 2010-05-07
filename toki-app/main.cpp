@@ -97,7 +97,7 @@ int main(int argc, char** argv)
 		if (verbose) {
 			std::cout << doc.info() << "\n";
 		}
-		Toki::Srx::Processor p;
+		Toki::Srx::Segmenter p;
 		p.load_rules(doc.get_rules_for_lang(srx_lang));
 		Toki::Srx::SourceWrapper srx(new Toki::UnicodeIstreamWrapper(std::cin), p, 65536, 256);
 		int segments = 0;
