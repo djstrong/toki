@@ -6,8 +6,9 @@
 
 namespace Toki { namespace Srx {
 
-	SourceWrapper::SourceWrapper(UnicodeSource *s, int window, int margin)
-		: source_(s), segmenter_()
+	SourceWrapper::SourceWrapper(UnicodeSource *src, Segmenter* segm,
+			int window, int margin)
+		: source_(src), segmenter_(segm)
 		, window_size_(window), margin_size_(margin)
 		, buffer_size_(window_size_ + margin_size_ * 2)
 		, buffer_(new UChar[buffer_size_])
@@ -18,9 +19,9 @@ namespace Toki { namespace Srx {
 		init_buffer();
 	}
 
-	SourceWrapper::SourceWrapper(boost::shared_ptr<UnicodeSource> s,
-			int window, int margin)
-		: source_(s), segmenter_()
+	SourceWrapper::SourceWrapper(boost::shared_ptr<UnicodeSource> src,
+			boost::shared_ptr<Segmenter> segm, int window, int margin)
+		: source_(src), segmenter_(segm)
 		, window_size_(window), margin_size_(margin)
 		, buffer_size_(window_size_ + margin_size_ * 2)
 		, buffer_(new UChar[buffer_size_])
@@ -38,11 +39,13 @@ namespace Toki { namespace Srx {
 
 	void SourceWrapper::set_segmenter(Segmenter *s)
 	{
+		std::cerr << "set_segmenter(*)\n";
 		set_segmenter(boost::shared_ptr<Segmenter>(s));
 	}
 
 	void SourceWrapper::set_segmenter(boost::shared_ptr<Segmenter> s)
 	{
+		std::cerr << "set_segmenter(shared)\n";
 		segmenter_ = s;
 	}
 
@@ -141,7 +144,10 @@ namespace Toki { namespace Srx {
 
 	void SourceWrapper::calculate_breaks()
 	{
-		if (!segmenter_) return;
+		if (!segmenter_) {
+			std::cerr << "No segmenter in srx source wrapper\n";
+			return;
+		}
 		UChar* bbegin = buffer_ + buffer_start_idx_;
 		int blen = buffer_end_idx_ - buffer_start_idx_;
 		//std::cerr << "ZZ" << buffer_start_idx_ << "-" << Util::to_utf8(bbegin) << "\n";

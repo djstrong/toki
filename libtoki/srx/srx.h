@@ -43,11 +43,14 @@ namespace Toki { namespace Srx {
 	public:
 		/**
 		 * Constructor for the SRX UnicodeSource wrapper.
-		 * Takes ownerhip of the wrapped source (through a shared pointer)
+		 * Takes ownerhip of the wrapped source and the segmenter
+		 * (through a shared pointer)
 		 */
-		SourceWrapper(UnicodeSource* s, int window = 200, int margin = 100);
+		SourceWrapper(UnicodeSource* src, Segmenter* segm,
+				int window = 200, int margin = 100);
 
-		SourceWrapper(boost::shared_ptr<UnicodeSource> s,
+		SourceWrapper(boost::shared_ptr<UnicodeSource> src,
+				boost::shared_ptr<Segmenter> segm,
 				int window = 200, int margin = 100);
 
 		~SourceWrapper();
