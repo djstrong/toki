@@ -21,6 +21,8 @@ namespace Toki { namespace Srx {
 
 		std::string create_lookbehind_pattern() const;
 
+		UnicodeString create_pattern() const;
+
 		CompiledRule compile(UErrorCode& ue) const;
 	};
 
