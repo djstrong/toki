@@ -61,11 +61,17 @@ namespace Toki { namespace Debug {
 		return out;
 	}
 
-	void tokenize_orths_newline(TokenSource& ts, std::ostream& os)
+	void tokenize_orths_newline(TokenSource& ts, std::ostream& os, int* count)
 	{
 		boost::function<std::string (const Token&)> ff;
 		ff = boost::bind(std::plus<std::string>(), boost::bind(&Token::orth_utf8, _1), "\n");
-		ts.tokenize(boost::bind(&sink_to_stream, boost::ref(ff), boost::ref(os), _1));
+		if (count) {
+			ts.tokenize(boost::bind(&sink_to_stream,
+				boost::ref(ff), boost::ref(os), _1, boost::ref(*count)));
+		} else {
+			ts.tokenize(boost::bind(&sink_to_stream,
+				boost::ref(ff), boost::ref(os), _1));
+		}
 	}
 
 	std::string tokenize_orths_newline(TokenSource& ts)

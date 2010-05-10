@@ -20,16 +20,16 @@ namespace Toki { namespace Srx {
 
 	void Processor::load_rules(const std::vector<Rule>& rules)
 	{
-		std::stringstream ss;
 		std::vector<RegexMatcher*> r;
 		BOOST_FOREACH (const Rule& r, rules) {
-			std::stringstream ss;
 			UErrorCode status = U_ZERO_ERROR;
 			CompiledRule cr = r.compile(status);
 			if (U_SUCCESS(status)) {
 				crules_.push_back(cr);
 			} else {
-				throw Error("Rule failed to compile");
+				std::stringstream ss;
+				ss << r.before << " : " << r.after;
+				throw Error("Rule failed to compile: " + ss.str());
 			}
 		}
 	}
