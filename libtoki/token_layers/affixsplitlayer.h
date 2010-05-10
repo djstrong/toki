@@ -21,13 +21,13 @@ namespace Toki {
 		 *
 		 * Keys recognized in the configuration:
 		 * - prefix_chars  - List of prefix characters, treated as UTF-8 and
-		 *                   unescaped. default_configs to empty.
+		 *                   unescaped. Defaults to empty.
 		 * - suffix_chars - List of suffix characters, treated as UTF-8 and
-		 *                   unescaped. default_configs to empty.
+		 *                   unescaped. Defaults to empty.
 		 * - prefix_token_type  - Token type to set in the extracted prefixes.
-		 *                        default_configs to "pre".
+		 *                        Defaults to "pre".
 		 * - suffix_token_type - Token type to set in the extracted suffixes.
-		 *                        default_configs to "suf".
+		 *                        Defaults to "suf".
 		 */
 
 		AffixSplitLayer(TokenSource* input, const Config::Node& props);
