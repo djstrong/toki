@@ -5,6 +5,7 @@
 #include "checklayer.h"
 #include "combinelayer.h"
 #include "groupsplitlayer.h"
+#include "groupaffixsplitlayer.h"
 #include "regexpclassifylayer.h"
 #include "lexiconclassifylayer.h"
 
@@ -19,6 +20,7 @@ namespace Toki {
 		TokenLayer::register_layer<AppendLayer>("append");
 		TokenLayer::register_layer<BasicSplitLayer>("split");
 		TokenLayer::register_layer<GroupSplitLayer>("group_split");
+		TokenLayer::register_layer<GroupAffixSplitLayer>("group_affix_split");
 		TokenLayer::register_layer<CheckLayer>("check");
 		TokenLayer::register_layer<CombineLayer>("combine");
 		TokenLayer::register_layer<RegexpClassifyLayer>("regexp");
