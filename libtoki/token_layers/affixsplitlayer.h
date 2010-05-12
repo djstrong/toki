@@ -21,9 +21,13 @@ namespace Toki {
 		 *
 		 * Keys recognized in the configuration:
 		 * - prefix_chars  - List of prefix characters, treated as UTF-8 and
-		 *                   unescaped. Defaults to empty.
-		 * - suffix_chars - List of suffix characters, treated as UTF-8 and
-		 *                   unescaped. Defaults to empty.
+		 *                   unescaped. If it starts with [ and ends with ],
+		 *                   it is instead treated as a regex-like unicode set,
+		 *                   e.g. [a-zA-Z_]. Defaults to empty.
+		 * - suffix_chars -  List of suffix characters, treated as UTF-8 and
+		 *                   unescaped. If it starts with [ and ends with ],
+		 *                   it is instead treated as a regex-like unicode set,
+		 *                   e.g. [a-zA-Z_]. Defaults to empty.
 		 * - prefix_token_type  - Token type to set in the extracted prefixes.
 		 *                        Defaults to "pre".
 		 * - suffix_token_type - Token type to set in the extracted suffixes.

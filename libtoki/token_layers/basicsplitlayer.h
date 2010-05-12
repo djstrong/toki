@@ -20,7 +20,9 @@ namespace Toki {
 		 *
 		 * Keys recognized in the configuration:
 		 * - separators - List of characters treated as spearators, treated as UTF-8
-		 *                and unescaped. default_configs to empty.
+		 *                and unescaped. If it starts with [ and ends with ],
+		 *                it is instead treated as a regex-like unicode set,
+		 *                e.g. [a-zA-Z_]. Defaults to empty.
 		 * - separator_token_type - Type to set in the separator tokens. Defaults
 		 *                          to "sep".
 		 */
