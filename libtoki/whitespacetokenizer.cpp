@@ -50,12 +50,12 @@ namespace Toki {
 			} else {
 				rules = d.get_rules_for_lang(srx_lang);
 			}
-			Srx::Processor p;
-			p.load_rules(rules);
+			boost::shared_ptr<Srx::Segmenter> segm(new Srx::NaiveIcuSegmenter());
+			segm->load_rules(rules);
 			int window = cfg.get("srx_window", 100);
 			int margin = cfg.get("srx_margin", 50);
 			boost::shared_ptr<Srx::SourceWrapper> u;
-			u.reset(new Srx::SourceWrapper(get_input_source(), p, window, margin));
+			u.reset(new Srx::SourceWrapper(get_input_source(), segm, window, margin));
 			set_input_source(u);
 			srx_ = u;
 		}

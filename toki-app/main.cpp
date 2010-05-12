@@ -97,9 +97,10 @@ int main(int argc, char** argv)
 		if (verbose) {
 			std::cout << doc.info() << "\n";
 		}
-		Toki::Srx::Processor p;
-		p.load_rules(doc.get_rules_for_lang(srx_lang));
-		Toki::Srx::SourceWrapper srx(new Toki::UnicodeIstreamWrapper(std::cin), p, 65536, 256);
+		Toki::Srx::Segmenter* segm;
+		segm = new Toki::Srx::NaiveIcuSegmenter;
+		segm->load_rules(doc.get_rules_for_lang(srx_lang));
+		Toki::Srx::SourceWrapper srx(new Toki::UnicodeIstreamWrapper(std::cin), segm, 65536, 256);
 		int segments = 0;
 		while (srx.has_more_chars()) {
 			if (srx.peek_begins_sentence()) {

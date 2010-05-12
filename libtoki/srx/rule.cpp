@@ -10,12 +10,17 @@ namespace Toki { namespace Srx {
 		return ss.str();
 	}
 
-	CompiledRule Rule::compile(UErrorCode& ue) const
+	UnicodeString Rule::create_pattern() const
 	{
 		std::stringstream ss;
 		ss << "(" << before << ")(" << after << ")";
+		return UnicodeString::fromUTF8(ss.str());
+	}
+
+	CompiledRule Rule::compile(UErrorCode& ue) const
+	{
 		CompiledRule cr;
-		cr.matcher = new RegexMatcher(UnicodeString::fromUTF8(ss.str()), 0, ue);
+		cr.matcher = new RegexMatcher(create_pattern(), 0, ue);
 		cr.breaks = breaks;
 		return cr;
 	}

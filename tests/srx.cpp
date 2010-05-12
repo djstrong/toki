@@ -1,6 +1,6 @@
 #include "srx/util.h"
 #include "srx/document.h"
-#include "srx/processor.h"
+#include "srx/segmenter.h"
 #include "srx/srx.h"
 #include "layertokenizer.h"
 #include "unicodeicustringwrapper.h"
@@ -81,7 +81,7 @@ BOOST_AUTO_TEST_CASE( simple )
 	std::string s = data_dir + "/one.srx";
 	std::ifstream ifs(s.c_str());
 	d.load(ifs);
-	Toki::Srx::Processor proc;
+	Toki::Srx::NaiveIcuSegmenter proc;
 	proc.load_rules(d.get_all_rules());
 
 	proc.compute_breaks(UnicodeString::fromUTF8(t), 0, t.size());
@@ -96,14 +96,17 @@ BOOST_AUTO_TEST_CASE( variable_window )
 	std::string s = data_dir + "/one.srx";
 	std::ifstream ifs(s.c_str());
 	d.load(ifs);
-	Toki::Srx::Processor proc;
-	proc.load_rules(d.get_all_rules());
+	boost::shared_ptr<Toki::Srx::Segmenter> segm(new Toki::Srx::NaiveIcuSegmenter);
+	segm->load_rules(d.get_all_rules());
+
+	BOOST_MESSAGE("Running " << (15 - 4) * 40 << " variable_window srx tests");
 
 	UnicodeString us = UnicodeString::fromUTF8(t);
 	for (int m = 4; m < 15; ++m) {
 		for(int w = 40; w > 0; --w) {
-			Toki::UnicodeIcuStringWrapper *isw = new Toki::UnicodeIcuStringWrapper(us);
-			Toki::Srx::SourceWrapper srx(isw, proc, w, m);
+			boost::shared_ptr<Toki::UnicodeIcuStringWrapper> isw;
+			isw.reset(new Toki::UnicodeIcuStringWrapper(us));
+			Toki::Srx::SourceWrapper srx(isw, segm, w, m);
 			std::vector<int> breaks;
 			int i = 0;
 			while (srx.has_more_chars()) {
@@ -126,7 +129,7 @@ BOOST_AUTO_TEST_CASE( variable_window )
 				okay = false;
 			}
 			BOOST_CHECK_MESSAGE(okay, "Mismatch for window " << w << " and margin " << m);
-			//BOOST_CHECK_EQUAL_COLLECTIONS(tb, tbe, breaks.begin(), breaks.end());
+			//BOOST_REQUIRE_EQUAL_COLLECTIONS(tb, tbe, breaks.begin(), breaks.end());
 		}
 	}
 

@@ -2,7 +2,7 @@
 #define LIBTOKI_SRX_SRX_H
 
 #include "document.h"
-#include "processor.h"
+#include "segmenter.h"
 #include "unicodesource.h"
 
 #include <boost/smart_ptr.hpp>
@@ -41,10 +41,16 @@ namespace Toki { namespace Srx {
 	 */
 	class SourceWrapper : public UnicodeSource, private boost::noncopyable {
 	public:
-		SourceWrapper(UnicodeSource* s, const Processor& p,
+		/**
+		 * Constructor for the SRX UnicodeSource wrapper.
+		 * Takes ownerhip of the wrapped source and the segmenter
+		 * (through a shared pointer)
+		 */
+		SourceWrapper(UnicodeSource* src, Segmenter* segm,
 				int window = 200, int margin = 100);
 
-		SourceWrapper(boost::shared_ptr<UnicodeSource> s, const Processor& p,
+		SourceWrapper(boost::shared_ptr<UnicodeSource> src,
+				boost::shared_ptr<Segmenter> segm,
 				int window = 200, int margin = 100);
 
 		~SourceWrapper();
@@ -61,10 +67,30 @@ namespace Toki { namespace Srx {
 		/// Override from UnicodeSource
 		bool peek_begins_sentence();
 
+		/**
+		 * Setter for the SRX segmenter object -- raw pointer version.
+		 * Takes ownership of the segmenter.
+		 */
+		void set_segmenter(Segmenter* s);
+
+		/**
+		 * Setter for the SRX segmenter object -- shared pointer version.
+		 */
+		void set_segmenter(boost::shared_ptr<Segmenter> s);
+
+		/**
+		 * Setter for the wrapped source object -- raw pointer version.
+		 * Takes ownership of the source.
+		 */
+		void set_source(UnicodeSource* s);
+
+		/**
+		 * Setter for the wrapped source object -- shared pointer version.
+		 */
 		void set_source(boost::shared_ptr<UnicodeSource> s);
 
-		const Processor& get_processor() const {
-			return proc_;
+		boost::shared_ptr<Segmenter> get_segmenter() const {
+			return segmenter_;
 		}
 
 	private:
@@ -82,8 +108,8 @@ namespace Toki { namespace Srx {
 
 		void calculate_breaks();
 
-		boost::shared_ptr<UnicodeSource> s_;
-		Processor proc_;
+		boost::shared_ptr<UnicodeSource> source_;
+		boost::shared_ptr<Segmenter> segmenter_;
 		int window_size_;
 		int margin_size_;
 		int buffer_size_;

@@ -53,8 +53,8 @@ SET(libtoki_STAT_SRC
     tokenizer.cpp
     tokenlayer.cpp
     srx/document.cpp
-    srx/processor.cpp
     srx/rule.cpp
+    srx/segmenter.cpp
     srx/srx.cpp
     srx/util.cpp
     token_layers/affixsplitlayer.cpp
