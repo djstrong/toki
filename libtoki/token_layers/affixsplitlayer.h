@@ -42,17 +42,37 @@ namespace Toki {
 		/// TokenLayer override
 		std::string long_info() const;
 
+		/// getter for the type of the extracted prefix tokens
+		const std::string& prefix_type() const {
+			return prefix_type_;
+		}
+
+		/// getter for the type of the extracted suffix tokens
+		const std::string& suffix_type() const {
+			return suffix_type_;
+		}
+
+		/// prefix characters set accesor
+		const std::set<UChar>& prefix_chars() const {
+			return prefix_chars_;
+		}
+
+		/// suffix characters set accesor
+		const std::set<UChar>& suffix_chars() const {
+			return suffix_chars_;
+		}
+
 	protected:
 		/// OutputQueueLayer override
 		void prepare_more_tokens(Token* t);
 
-	private:
 		/// test function for prefix characters
 		bool is_prefix_char(UChar c);
 
 		/// test function for suffix characters
 		bool is_suffix_char(UChar c);
 
+	private:
 		/// prefix characters
 		std::set<UChar> prefix_chars_;
 
