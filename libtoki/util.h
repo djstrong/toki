@@ -41,7 +41,6 @@ namespace Toki { namespace Util {
 			} else {
 				for (int i = 0; i < uset.size(); ++i) {
 					container.insert(uset.charAt(i));
-					std::cerr << to_utf8(UnicodeString(uset.charAt(i)));
 				}
 			}
 		} else {
