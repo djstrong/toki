@@ -7,6 +7,7 @@
 #include "groupsplitlayer.h"
 #include "groupaffixsplitlayer.h"
 #include "regexpclassifylayer.h"
+#include "regexmatchsplitlayer.h"
 #include "lexiconclassifylayer.h"
 
 namespace Toki {
@@ -26,7 +27,7 @@ namespace Toki {
 		TokenLayer::register_layer<RegexpClassifyLayer>("regexp");
 		TokenLayer::register_layer<CaseLexiconClassifyLayer>("lexicon");
 		TokenLayer::register_layer<CaselessLexiconClassifyLayer>("lexicon_caseless");
-
+		TokenLayer::register_layer<RegexMatchSplitLayer>("regex_match_split");
 		init_done = true;
 		return true;
 	}

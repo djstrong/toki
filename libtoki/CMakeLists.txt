@@ -69,6 +69,7 @@ SET(libtoki_STAT_SRC
     token_layers/lexiconclassifylayer.cpp
     token_layers/outputqueuelayer.cpp
     token_layers/regexpclassifylayer.cpp
+    token_layers/regexmatchsplitlayer.cpp
     tokensource.cpp
     unicodeicustringwrapper.cpp
     unicodeistreamwrapper.cpp
