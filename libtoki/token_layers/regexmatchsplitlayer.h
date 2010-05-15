@@ -24,6 +24,9 @@ public:
 	 */
 	RegexMatchSplitLayer(TokenSource* input, const Config::Node& props);
 
+	/// Destructor
+	~RegexMatchSplitLayer();
+
 	/// TokenLayer override
 	virtual std::string info() const;
 

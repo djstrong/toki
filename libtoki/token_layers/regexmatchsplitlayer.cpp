@@ -17,6 +17,11 @@ namespace Toki {
 		sep_type_ = props.get<std::string>("separator_token_type", "sep");
 	}
 
+	RegexMatchSplitLayer::~RegexMatchSplitLayer()
+	{
+		delete regex_;
+	}
+
 	std::string RegexMatchSplitLayer::info() const
 	{
 		std::stringstream ss;
