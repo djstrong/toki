@@ -34,7 +34,7 @@ namespace Toki { namespace Srx {
 
 	SourceWrapper::~SourceWrapper()
 	{
-		delete buffer_;
+		delete [] buffer_;
 	}
 
 	void SourceWrapper::set_segmenter(Segmenter *s)
