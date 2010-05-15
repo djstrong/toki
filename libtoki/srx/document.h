@@ -33,6 +33,8 @@ namespace Toki { namespace Srx {
 	public:
 		Document();
 
+		~Document();
+
 		void load(std::istream &is);
 
 		/**

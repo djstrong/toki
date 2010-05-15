@@ -42,6 +42,13 @@ namespace Toki { namespace Srx {
 	{
 	}
 
+	Document::~Document()
+	{
+		BOOST_FOREACH(language_map_t::value_type v, language_map_) {
+			delete v.first;
+		}
+	}
+
 	void Document::load(std::istream &is)
 	{
 		xmlpp::DomParser dom;
