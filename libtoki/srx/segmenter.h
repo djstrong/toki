@@ -39,6 +39,8 @@ namespace Toki { namespace Srx {
 	public:
 		NaiveIcuSegmenter();
 
+		~NaiveIcuSegmenter();
+
 		void load_rules(const std::vector<Rule>& rules);
 
 		virtual void compute_breaks(const UnicodeString& str, int from, int to);

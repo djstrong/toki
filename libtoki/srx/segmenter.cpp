@@ -42,6 +42,13 @@ namespace Toki { namespace Srx {
 	{
 	}
 
+	NaiveIcuSegmenter::~NaiveIcuSegmenter()
+	{
+		BOOST_FOREACH (const CompiledRule& cr, crules_) {
+			delete cr.matcher;
+		}
+	}
+
 	void NaiveIcuSegmenter::load_rules(const std::vector<Rule>& rules)
 	{
 		BOOST_FOREACH (const Rule& r, rules) {
