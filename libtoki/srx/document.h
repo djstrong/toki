@@ -8,6 +8,7 @@
 
 #include "exception.h"
 #include "rule.h"
+#include "boost/utility.hpp"
 
 // forward decl
 namespace xmlpp {
@@ -29,7 +30,7 @@ namespace Toki { namespace Srx {
 		}
 	};
 
-	class Document {
+	class Document : private boost::noncopyable
 	public:
 		Document();
 
