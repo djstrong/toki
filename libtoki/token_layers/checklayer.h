@@ -5,6 +5,10 @@
 
 namespace Toki {
 
+	/**
+	 * A sanity-check layer that can be configured to output warning messages
+	 * when vary long tokens or very long sentences are noticed.
+	 */
 	class CheckLayer : public TokenLayer
 	{
 	public:
@@ -41,6 +45,7 @@ namespace Toki {
 		void reset();
 
 	private:
+		/// helper function for actual warning output
 		bool warn(const std::string& msg);
 
 		/// behavior flags
@@ -53,7 +58,9 @@ namespace Toki {
 		bool emit_0_on_no_warnings_;
 		bool emit_1_on_warnings_;
 
+		/// Token counter to keep track of which tokens trigger warnings
 		int token_counter_;
+		/// Sentence size counter
 		int sentence_size_counter_;
 	};
 

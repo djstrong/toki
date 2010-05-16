@@ -11,9 +11,15 @@ namespace Toki {
 	class CombineLayer : public OutputQueueLayer
 	{
 	public:
+		/**
+		 * Constructor.
+		 *
+		 * No new configuration keys processed. See parent class.
+		 */
 		CombineLayer(TokenSource* input, const Config::Node& props);
 
 	protected:
+		/// OutputQueueLayer override
 		void prepare_more_tokens(Token* t);
 	};
 

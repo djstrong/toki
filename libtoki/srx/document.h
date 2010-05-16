@@ -17,6 +17,9 @@ namespace xmlpp {
 
 namespace Toki { namespace Srx {
 
+	/**
+	 * Exception class for Srx parse errors
+	 */
 	class ParseError : public Error
 	{
 	public:
@@ -30,12 +33,26 @@ namespace Toki { namespace Srx {
 		}
 	};
 
+	/**
+	 * A class to parse and hold a SRX document
+	 * Language rules are processed, but not everything from the SRX standard
+	 * is. In particular, the header format tags are ignored.
+	 */
 	class Document : private boost::noncopyable
+	{
 	public:
+		/**
+		 * Constructor. Creates an empty document.
+		 */
 		Document();
 
+		/// Destructor
 		~Document();
 
+		/**
+		 * Load a SRX document from the given stream.
+		 * May throw Srx:::ParseError if the document id not valid.
+		 */
 		void load(std::istream &is);
 
 		/**
@@ -44,8 +61,8 @@ namespace Toki { namespace Srx {
 		std::vector<Rule> get_all_rules() const;
 
 		/**
-		 * Get the rules for a given language code
-		 * TODO make it work
+		 * Get the rules for a given language code, according to the rules
+		 * in the SRX document.
 		 */
 		std::vector<Rule> get_rules_for_lang(const std::string& lang) const;
 
@@ -55,17 +72,33 @@ namespace Toki { namespace Srx {
 		std::string info() const;
 
 	private:
+		/// internal helper for processing the header
 		void process_header_node(const xmlpp::Node* n);
+
+		/// internal helper for processing the languagerule node
 		void process_languagerule_node(const xmlpp::Node* n);
+
+		/// internal helper for processing a single rule
 		void process_rule_node(const std::string& language, const xmlpp::Node* n);
+
+		/// internal helper for processing the language map
 		void process_languagemap_node(const xmlpp::Node* n);
 
+		/// typedef for the rules storage
 		typedef std::map<std::string, std::vector<Rule> > language_rules_t;
+
+		/// the available rules
 		language_rules_t language_rules_;
 
+		/// typedef for the language mappings
 		typedef std::vector< std::pair<RegexMatcher*, std::string> > language_map_t;
+
+		/// the language mappings
 		language_map_t language_map_;
 
+
+		/// the SRX "cascade" parameter -- if true, return all rules matching
+		/// a given language instead of just the first group.
 		bool cascade_;
 	};
 

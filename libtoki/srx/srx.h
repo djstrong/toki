@@ -89,34 +89,66 @@ namespace Toki { namespace Srx {
 		 */
 		void set_source(boost::shared_ptr<UnicodeSource> s);
 
+		/**
+		 * Getter for the used segmenter
+		 */
 		boost::shared_ptr<Segmenter> get_segmenter() const {
 			return segmenter_;
 		}
 
 	private:
+		/// helper initialisation function
 		void init();
 
+		/// check function for the output index position, inlined for performace
 		bool buffer_ok() {
 			return (out_idx_ < buffer_end_idx_) && (out_idx_ < window_size_ + margin_size_);
 		}
 
+		/// buffer initialisation
 		void init_buffer();
 
+		/// helper function used wherever it is possible thatthe buffer will not
+		/// be valid, makes the buffer valid if possible. If the buffer is still
+		/// invalid ater a call to ensure_more, there are no more characters
 		void ensure_more();
 
+		/// move the buffer area so that new data can be processed
 		void move_buffer();
 
+		/// calculate breaks in the window area of the buffer
 		void calculate_breaks();
 
+		/// the wrapper source
 		boost::shared_ptr<UnicodeSource> source_;
+
+		/// the segmenter
 		boost::shared_ptr<Segmenter> segmenter_;
+
+		/// window size
 		int window_size_;
+
+		/// margin size
 		int margin_size_;
+
+		/// buffer size, equal to window_size_ + 2 * margin_size
 		int buffer_size_;
+
+		/// the buffer
 		UChar* buffer_;
+
+		/// the output index
 		int out_idx_;
+
+		/// index of the start of actual data in the buffer
+		/// apart from the very beginning, when there is no left margin data,
+		/// this will be always zero
 		int buffer_start_idx_;
+
+		/// index beyond the end of actual data in the buffer
 		int buffer_end_idx_;
+
+		/// the computed breaks in the window area
 		std::vector<bool> breaks_;
 	};
 
