@@ -104,4 +104,19 @@ namespace Toki { namespace Debug {
 		}
 	}
 
+	void tokenize_progress(TokenSource &tok, std::ostream &os, int step, int *count)
+	{
+		int i = step;
+		while(Token* t = tok.get_next_token()) {
+			--i;
+			if (i == 0) {
+				os << "*";
+			}
+			if (count) {
+				*count++;
+			}
+			delete t;
+		}
+	}
+
 } /* end ns Debug */ } /* end namespace Toki */

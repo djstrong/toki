@@ -74,6 +74,12 @@ namespace Toki { namespace Debug {
 	void tokenize_formatted(TokenSource& tok, const std::string& format,
 		std::ostream& os, int *count = NULL);
 
+	/**
+	 * Ignore the tokens but keep track of how many there are and show a
+	 * progress indicator
+	 */
+	void tokenize_progress(TokenSource& tok, std::ostream& os, int step, int *count = NULL);
+
 } /*end ns Debug */ } /* end ns Toki */
 
 #endif // LIBTOKI_DEBUG_H
