@@ -37,6 +37,14 @@ namespace Toki { namespace Srx {
 		return breaks;
 	}
 
+	Segmenter* Segmenter::get_segmenter_by_name(const std::string &name)
+	{
+		if (name == "icu") return new NaiveIcuSegmenter;
+		if (name == "boost") return new NaiveBoostSegmenter;
+		if (name == "icu-hxo") return new HxoIcuSegmenter;
+		return NULL;
+	}
+
 	NaiveIcuSegmenter::NaiveIcuSegmenter()
 	{
 	}
@@ -95,6 +103,112 @@ namespace Toki { namespace Srx {
 		//}
 		//std::cerr << "\n";
 	}
+
+
+	HxoIcuSegmenter::HxoIcuSegmenter()
+	{
+	}
+
+	HxoIcuSegmenter::~HxoIcuSegmenter()
+	{
+	}
+
+	void HxoIcuSegmenter::load_rules(const std::vector<Rule> &rules)
+	{
+		foreach (const Rule& r, rules) {
+			if (r.breaks) {
+				UErrorCode status = U_ZERO_ERROR;
+				CompiledRule cr = r.compile(status);
+				if (U_SUCCESS(status)) {
+					crules_break_.push_back(cr);
+					break_exception_idx_.push_back(nobreak_back_.size());
+				} else {
+					std::stringstream ss;
+					ss << r.before << " : " << r.after;
+					throw Error("Rule failed to compile: " + ss.str());
+				}
+			} else {
+				UErrorCode status = U_ZERO_ERROR;
+				RegexMatcher *b, *a;
+				std::string mod_before = r.before + "$";
+				b = new RegexMatcher(UnicodeString::fromUTF8(mod_before), 0, status);
+				if (!U_SUCCESS(status)) {
+					throw Error("BeforeRule failed to compile: " + mod_before);
+				}
+				std::cerr << "XXX" << r.after << "\n";
+				if (r.after.empty()) {
+					a = NULL;
+				} else {
+					a = new RegexMatcher(UnicodeString::fromUTF8(r.after), 0, status);
+					if (!U_SUCCESS(status)) {
+						throw Error("AfterRule failed to compile: " + r.after);
+					}
+				}
+				nobreak_back_.push_back(b);
+				nobreak_fwd_.push_back(a);
+			}
+
+		}
+	}
+
+	void HxoIcuSegmenter::compute_breaks(const UnicodeString &str, int from, int to)
+	{
+		break_map_.clear();
+		to -= from;
+		length_ = to;
+		for (size_t bri = 0; bri < crules_break_.size(); ++bri) {
+			CompiledRule& cr = crules_break_[bri];
+			UErrorCode ue = U_ZERO_ERROR;
+			int i = 0;
+			cr.matcher->reset(str);
+			while (cr.matcher->find(i, ue)) {
+				UErrorCode status = U_ZERO_ERROR;
+				int n = cr.matcher->end(1, status);
+				// n is where we found the break position
+				std::cerr << "Break match at " << n << "\n";
+				int n_out = n - from;
+				if (n_out >= 0 && n_out < to) {
+					// check if anything matched there already
+					if (break_map_.find(n_out) == break_map_.end()) {
+						std::cerr << "Break match promising\n";
+						// now we need to check if there are any nobreak rules
+						// that match here and appear earlier
+						UnicodeString h(false, str.getBuffer(), n);
+						bool nobreak_matched = false;
+						for (size_t ri = 0; ri < break_exception_idx_[bri]; ++ri) {
+							std::cerr << "Checking nobreak rule " << ri << "\n";
+							std::cerr << "'" << Util::to_utf8(h) << "'\n";
+							std::cerr << "'" << Util::to_utf8(UnicodeString(str.getBuffer()+n)) << "'\n";
+							// check the "after" pattern
+							RegexMatcher* arm = nobreak_fwd_[ri];
+							if (arm) {
+								arm->reset(str);
+							}
+							if (!arm || (arm->find(n, status) && arm->start(status) == n)) {
+								std::cerr << "After pattern match\n";
+								// after pattern matches
+								// need to check the before pattern
+								RegexMatcher& brm = *nobreak_back_[ri];
+								brm.reset(h);
+								if (brm.find()) {
+									std::cerr << "Before pattern match\n";
+									//nobreak rule matched fully
+									nobreak_matched = true;
+									break;
+								}
+							}
+						}
+						std::cerr << "Inserting break at " << n << " " << !nobreak_matched << "\n";
+						break_map_t::value_type v(n_out, !nobreak_matched);
+						break_map_.insert(v); //only insert if the index was not in the map
+					}
+				}
+				i = cr.matcher->start(status) + 1;
+			}
+		}
+	}
+
+
 
 	NaiveBoostSegmenter::NaiveBoostSegmenter()
 	{

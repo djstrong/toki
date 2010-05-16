@@ -66,6 +66,11 @@ namespace Toki { namespace Srx {
 		 */
 		std::vector<int> get_break_positions() const;
 
+		/**
+		 * Factory for getting segmenters in a general way
+		 */
+		static Segmenter* get_segmenter_by_name(const std::string& name);
+
 	protected:
 		/// typedef for the internal break map
 		typedef std::map<int, bool> break_map_t;
@@ -106,6 +111,27 @@ namespace Toki { namespace Srx {
 	private:
 		/// the compiled rules
 		std::vector<CompiledRule> crules_;
+	};
+
+	class HxoIcuSegmenter : public Segmenter
+	{
+	public:
+		/// Constructor
+		HxoIcuSegmenter();
+
+		/// Destructor
+		~HxoIcuSegmenter();
+
+		/// Segmenter override.
+		void load_rules(const std::vector<Rule>& rules);
+
+		/// Segmenter override.
+		virtual void compute_breaks(const UnicodeString& str, int from, int to);
+	private:
+		std::vector<CompiledRule> crules_break_;
+		std::vector<size_t> break_exception_idx_;
+		std::vector<RegexMatcher*> nobreak_fwd_;
+		std::vector<RegexMatcher*> nobreak_back_;
 	};
 
 	/**
