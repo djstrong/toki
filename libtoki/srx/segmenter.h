@@ -7,10 +7,11 @@
 
 #include <unicode/regex.h>
 #include <boost/regex/icu.hpp>
+#include <boost/utility.hpp>
 
 namespace Toki { namespace Srx {
 
-	class Segmenter
+	class Segmenter : private boost::noncopyable
 	{
 	public:
 		Segmenter();
