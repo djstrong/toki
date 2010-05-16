@@ -4,6 +4,8 @@
 #include "config_d.h"
 #endif
 
+#include "foreach.h"
+
 #include "parser/loose_ini_paser.h"
 
 #include <boost/algorithm/string.hpp>
@@ -46,7 +48,7 @@ namespace Toki { namespace Config {
 	{
 		accu.data() = other.data();
 		using boost::property_tree::ptree;
-		BOOST_FOREACH (const ptree::value_type& in_other, other) {
+		foreach (const ptree::value_type& in_other, other) {
 			boost::optional< ptree& > in_one;
 			if ((in_one = accu.get_child_optional(in_other.first))) {
 				if (in_other.second.get("_merge", "") == "override") {
@@ -119,7 +121,7 @@ namespace Toki { namespace Config {
 	{
 		namespace fs = boost::filesystem;
 		fs::path i(filename);
-		BOOST_FOREACH (const std::string& s, library_config_path) {
+		foreach (const std::string& s, library_config_path) {
 			fs::path pi = s / i;
 			if (fs::exists(pi) && fs::is_regular(pi)) {
 				return pi.string();

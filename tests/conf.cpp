@@ -1,6 +1,6 @@
 #include "config.h"
 #include "exception.h"
-
+#include "foreach.h"
 #include <boost/test/unit_test.hpp>
 #include <boost/foreach.hpp>
 
@@ -107,7 +107,7 @@ template<typename T>
 std::vector<T> all_values(const Toki::Config::Node& c, const std::string& key)
 {
 	std::vector<T> vec;
-	BOOST_FOREACH (const Toki::Config::Node::value_type &v, c) {
+	foreach (const Toki::Config::Node::value_type &v, c) {
 		if (v.first == key) {
 			vec.push_back(v.second.get_value<T>());
 		}

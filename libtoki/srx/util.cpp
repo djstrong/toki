@@ -1,4 +1,5 @@
 #include "util.h"
+#include "foreach.h"
 #include "../util.h"
 #include <sstream>
 #include <boost/foreach.hpp>
@@ -13,7 +14,7 @@ namespace Toki { namespace Srx { namespace Util {
 		std::stringstream ss;
 		bool backslash = false;
 		bool quoting = false;
-		BOOST_FOREACH (char c, re) {
+		foreach (char c, re) {
 			if (backslash) {
 				if (c == 'Q' && !quoting) {
 					quoting = true;
@@ -75,7 +76,7 @@ namespace Toki { namespace Srx { namespace Util {
 		UnicodeString reu = UnicodeString::fromUTF8(unquote_regex(re));
 		std::stringstream ss;
 
-		UErrorCode e = U_ZERO_ERROR;
+		//UErrorCode e = U_ZERO_ERROR;
 
 		ss << "{0," << max_lookbehind << "}";
 		//pat_star.reset(reu);

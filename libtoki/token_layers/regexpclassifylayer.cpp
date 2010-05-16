@@ -1,4 +1,5 @@
 #include "regexpclassifylayer.h"
+#include "foreach.h"
 #include "token.h"
 #include <boost/property_tree/ptree.hpp>
 #include <boost/algorithm/string.hpp>
@@ -9,7 +10,7 @@ namespace Toki {
 	RegexpClassifyLayer::RegexpClassifyLayer(TokenSource* input, const Config::Node& props)
 		: TokenLayer(input, props)
 	{
-		BOOST_FOREACH (const Config::Node::value_type &v, props) {
+		foreach (const Config::Node::value_type &v, props) {
 			if (boost::algorithm::starts_with(v.first, "type:")) {
 				std::string type = v.first.substr(5); //length of "type:"
 				UErrorCode status = U_ZERO_ERROR;
@@ -30,7 +31,7 @@ namespace Toki {
 	RegexpClassifyLayer::~RegexpClassifyLayer()
 	{
 		typedef std::pair<std::string, RegexMatcher*> vt;
-		BOOST_FOREACH (const vt &v, classifiers_) {
+		foreach (const vt &v, classifiers_) {
 			delete v.second;
 		}
 	}

@@ -1,4 +1,5 @@
 #include "layertokenizer.h"
+#include "foreach.h"
 #include "token.h"
 #include "whitespacetokenizer.h"
 #include "tokenlayer.h"
@@ -108,14 +109,14 @@ namespace Toki {
 
 		std::vector<std::string> layer_ids;
 
-		BOOST_FOREACH (const Config::Node::value_type &v, layers_tree) {
+		foreach (const Config::Node::value_type &v, layers_tree) {
 			if (v.first == "layer") {
 				layer_ids.push_back(v.second.data());
 			}
 		}
 
 		TokenSource* previous = input_tokenizer_.get();
-		BOOST_FOREACH (const std::string& id, layer_ids) {
+		foreach (const std::string& id, layer_ids) {
 			try {
 				std::string layer_class;
 				layer_class = cfg.get("layer:" + id + ".class", "");

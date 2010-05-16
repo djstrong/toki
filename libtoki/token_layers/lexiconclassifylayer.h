@@ -3,6 +3,7 @@
 
 #include "tokenlayer.h"
 #include "token.h"
+#include "foreach.h"
 
 #include <unicode/unistr.h>
 
@@ -72,7 +73,7 @@ namespace Toki {
 		std::string sep(", ");
 		const std::string& sepstring = props.get<std::string>("lexicon", "");
 		boost::algorithm::split(v, sepstring, boost::is_any_of(sep));
-		BOOST_FOREACH (const std::string& s, v) {
+		foreach (const std::string& s, v) {
 			if (!s.empty()) {
 				lex_.insert(UnicodeString::fromUTF8(s).unescape());
 			}

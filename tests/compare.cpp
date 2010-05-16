@@ -3,6 +3,7 @@
 #include "debug.h"
 #include "util.h"
 #include "token.h"
+#include "foreach.h"
 
 #include <fstream>
 #include <boost/filesystem/fstream.hpp>
@@ -68,7 +69,7 @@ void test_one_item(const compare_item& c)
 		cfg = *(c.base_config);
 	}
 
-	BOOST_FOREACH (const fs::path& p, c.configs) {
+	foreach (const fs::path& p, c.configs) {
 		Toki::Config::Node additional = Toki::Config::from_file(p.string());
 		Toki::Config::merge_into(cfg, additional);
 	}
@@ -162,7 +163,7 @@ void init_subdir(fs::path dir)
 	}
 	global_configs.push_back(boost::shared_ptr<Toki::Config::Node>(cfg));
 	int count = 0;
-	BOOST_FOREACH(const std::string& s, tests_out) {
+	foreach (const std::string& s, tests_out) {
 		compare_item c;
 		if (tests_in.find(s) == tests_in.end()) {
 			if (tests_in.find("main") == tests_in.end()) {
@@ -185,7 +186,7 @@ void init_subdir(fs::path dir)
 	BOOST_TEST_MESSAGE("Found " << count << " valid compare test case"
 		<< (count > 1 ? "s" : "")
 		<< " in " << dir);
-	BOOST_FOREACH(const fs::path& s, subdirs) {
+	foreach (const fs::path& s, subdirs) {
 		init_subdir(s);
 	}
 }
@@ -199,7 +200,7 @@ void init_compare_suite(boost::unit_test::test_suite *ts, const std::string& pat
 	ts->add(BOOST_TEST_CASE(&subdir_exists));
 	if (!fs::exists(subdir_name)) return;
 	init_subdir(subdir_name);
-	BOOST_FOREACH (const compare_item& ci, global_compares) {
+	foreach (const compare_item& ci, global_compares) {
 		std::string rel_path = boost::algorithm::replace_first_copy(
 				ci.out_file.string(), subdir_name, "");
 		std::string name = "test_compare:" + rel_path;

@@ -1,4 +1,5 @@
 #include "document.h"
+#include "foreach.h"
 #include <libxml++/libxml++.h>
 #include <libxml++/nodes/node.h>
 #include <libxml++/nodes/element.h>
@@ -44,7 +45,7 @@ namespace Toki { namespace Srx {
 
 	Document::~Document()
 	{
-		BOOST_FOREACH(language_map_t::value_type v, language_map_) {
+		foreach (language_map_t::value_type v, language_map_) {
 			delete v.first;
 		}
 	}
@@ -66,13 +67,13 @@ namespace Toki { namespace Srx {
 			const xmlpp::Node* languagerules = get_child_or_throw(body, "languagerules");
 			const xmlpp::Node::NodeList lrl = languagerules->get_children("languagerule");
 			if (lrl.empty()) throw ParseError("no <languagerule>");
-			BOOST_FOREACH (const xmlpp::Node* n, lrl) {
+			foreach (const xmlpp::Node* n, lrl) {
 				process_languagerule_node(n);
 			}
 			const xmlpp::Node* maprules = get_child_or_throw(body, "maprules");
 			const xmlpp::Node::NodeList mrl = maprules->get_children("languagemap");
 			if (mrl.empty()) throw ParseError("no <languagemap>");
-			BOOST_FOREACH (const xmlpp::Node* n, mrl) {
+			foreach (const xmlpp::Node* n, mrl) {
 				process_languagemap_node(n);
 			}
 
@@ -104,7 +105,7 @@ namespace Toki { namespace Srx {
 		std::string name = el->get_attribute_value("languagerulename");
 		if (name.empty()) throw ParseError("<languagerule> with empty languagerulename attribute");
 		const xmlpp::Node::NodeList lr = n->get_children("rule");
-		BOOST_FOREACH (const xmlpp::Node* n, lr) {
+		foreach (const xmlpp::Node* n, lr) {
 			process_rule_node(name, n);
 		}
 	}
@@ -162,7 +163,7 @@ namespace Toki { namespace Srx {
 	{
 		UnicodeString ulang = UnicodeString::fromUTF8(lang);
 		std::vector<Rule> rules;
-		BOOST_FOREACH(language_map_t::value_type v, language_map_) {
+		foreach (language_map_t::value_type v, language_map_) {
 			RegexMatcher& m = *v.first;
 			m.reset(ulang);
 			UErrorCode status = U_ZERO_ERROR;

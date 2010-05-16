@@ -1,8 +1,7 @@
 #include "exception.h"
 #include "segmenter.h"
 #include "../util.h"
-
-#include <boost/foreach.hpp>
+#include "foreach.h"
 
 #include <map>
 #include <iostream>
@@ -22,7 +21,7 @@ namespace Toki { namespace Srx {
 
 	std::vector<bool> Segmenter::get_break_mask() const {
 		std::vector<bool> breaks(length_);
-		BOOST_FOREACH (break_map_t::value_type v, break_map_) {
+		foreach (break_map_t::value_type v, break_map_) {
 			breaks[v.first] = v.second;
 		}
 		return breaks;
@@ -30,7 +29,7 @@ namespace Toki { namespace Srx {
 
 	std::vector<int> Segmenter::get_break_positions() const {
 		std::vector<int> breaks;
-		BOOST_FOREACH (break_map_t::value_type v, break_map_) {
+		foreach (break_map_t::value_type v, break_map_) {
 			if (v.second) {
 				breaks.push_back(v.first);
 			}
@@ -44,14 +43,14 @@ namespace Toki { namespace Srx {
 
 	NaiveIcuSegmenter::~NaiveIcuSegmenter()
 	{
-		BOOST_FOREACH (const CompiledRule& cr, crules_) {
+		foreach (const CompiledRule& cr, crules_) {
 			delete cr.matcher;
 		}
 	}
 
 	void NaiveIcuSegmenter::load_rules(const std::vector<Rule>& rules)
 	{
-		BOOST_FOREACH (const Rule& r, rules) {
+		foreach (const Rule& r, rules) {
 			UErrorCode status = U_ZERO_ERROR;
 			CompiledRule cr = r.compile(status);
 			if (U_SUCCESS(status)) {
@@ -71,7 +70,7 @@ namespace Toki { namespace Srx {
 		break_map_.clear();
 		to -= from;
 		length_ = to;
-		BOOST_FOREACH (const CompiledRule& cr, crules_) {
+		foreach (const CompiledRule& cr, crules_) {
 			UErrorCode ue = U_ZERO_ERROR;
 			int i = 0;
 			cr.matcher->reset(str);
@@ -104,7 +103,7 @@ namespace Toki { namespace Srx {
 	void NaiveBoostSegmenter::load_rules(const std::vector<Rule>& rules)
 	{
 		std::pair<boost::u32regex, bool> cr;
-		BOOST_FOREACH (const Rule& r, rules) {
+		foreach (const Rule& r, rules) {
 			cr.first = boost::make_u32regex(r.create_pattern());
 			cr.second = r.breaks;
 			crules_.push_back(cr);
@@ -120,11 +119,10 @@ namespace Toki { namespace Srx {
 		length_ = to;
 
 		typedef std::pair<boost::u32regex, bool> cr_t;
-		BOOST_FOREACH (const cr_t& cr, crules_) {
+		foreach (const cr_t& cr, crules_) {
 			boost::match_results<const UChar*> what;
 			const UChar* start = str.getBuffer();
 			const UChar* end = start + str.length();
-			int ln = -1;
 			boost::match_flag_type flags = boost::match_default;
 			while (boost::u32regex_search(start, end, what, cr.first, flags)) {
 				int n = what[1].second - str.getBuffer();
