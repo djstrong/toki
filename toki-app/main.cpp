@@ -36,7 +36,7 @@ int main(int argc, char** argv)
 	std::string input_enc;
 	std::string config_file;
 	std::string config_path;
-	std::string srx, srx_lang;
+	std::string srx, srx_lang, srx_mark_start, srx_mark_end;
 	int bufsize;
 	bool orths;
 	bool verbose;
@@ -70,6 +70,10 @@ int main(int argc, char** argv)
 			 "Display tokenization stats (token count) at end")
 			("no-output", value(&no_output)->default_value(false)->zero_tokens(),
 			 "Disable tokenization output")
+			("srx-begin-marker", value(&srx_mark_start)->default_value(""),
+			 "SRX segment begin marker")
+			("srx-end-marker", value(&srx_mark_end)->default_value("\n"),
+			 "SRX segment end marker")
 			("help,h", "Show help")
 			;
 	boost::program_options::variables_map vm;
@@ -102,13 +106,16 @@ int main(int argc, char** argv)
 		segm->load_rules(doc.get_rules_for_lang(srx_lang));
 		Toki::Srx::SourceWrapper srx(new Toki::UnicodeIstreamWrapper(std::cin), segm, 65536, 256);
 		int segments = 0;
+		out << srx_mark_start;
 		while (srx.has_more_chars()) {
 			if (srx.peek_begins_sentence()) {
 				++segments;
-				out << "\n";
+				out << srx_mark_end;
+				out << srx_mark_start;
 			}
 			out << Toki::Util::to_utf8(srx.get_next_char());
 		}
+		out << srx_mark_end;
 		std::cout << segments << "\n";
 		return 0;
 	}
