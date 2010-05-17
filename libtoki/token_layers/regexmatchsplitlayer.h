@@ -18,7 +18,7 @@ public:
 	 * Constructor.
 	 *
 	 * Keys recognized in the configuration:
-	 * - regexseparators - The regular expression to use.
+	 * - regex                - The regular expression to use.
 	 * - separator_token_type - Type to set in the extracted tokens. Defaults
 	 *                          to "sep".
 	 */

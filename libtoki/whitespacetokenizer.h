@@ -26,6 +26,16 @@ namespace Toki {
 		 * - initial_whitespace - Whitespace to set in the first extracted
 		 *                        token, can be a descriptor or a string with
 		 *                        the actual whitespace, use \u0020 for a space.
+		 * - srx - SRX file to load and use as a sentence break detector. The
+		 *         segmenter is preserved even if the source of this tokenizer
+		 *         is changed. BY default SRX is not used.
+		 * - srx_language - language to use with the SRX, determines which rules
+		 *                  will be used. The default empty value is likely not
+		 *                  going to work well.
+		 * - srx_window - SRX performance tuning parameter, segmentation wrapper
+		 *                "window" parameter, see Srx::SourceWrapper
+		 * - srx_margin - SRX performance tuning parameter, segmentation wrapper
+		 *                "margin" parameter, see Srx::SourceWrapper
 		 */
 		WhitespaceTokenizer(const Config::Node& cfg = Config::default_config());
 
