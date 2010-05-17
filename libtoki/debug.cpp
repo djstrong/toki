@@ -111,6 +111,7 @@ namespace Toki { namespace Debug {
 			--i;
 			if (i == 0) {
 				os << "*";
+				i = step;
 			}
 			if (count) {
 				*count++;
