@@ -43,6 +43,7 @@ int main(int argc, char** argv)
 	bool quiet;
 	bool stats;
 	bool no_output;
+	int progress;
 	using boost::program_options::value;
 	boost::program_options::options_description desc("Allowed options");
 	desc.add_options()
@@ -74,6 +75,8 @@ int main(int argc, char** argv)
 			 "SRX segment begin marker")
 			("srx-end-marker", value(&srx_mark_end)->default_value("\n"),
 			 "SRX segment end marker")
+			("progress-only", value(&progress)->default_value(0),
+			 "No output, progress display every N tokens")
 			("help,h", "Show help")
 			;
 	boost::program_options::variables_map vm;
@@ -154,7 +157,9 @@ int main(int argc, char** argv)
 			std::cout << "Tokenizer started. C-d or C-c to exit.\n";
 		}
 		tok.set_input_source(std::cin, bufsize);
-		if (orths) {
+		if (progress) {
+			Toki::Debug::tokenize_progress(tok, std::cerr, progress, cptr);
+		} else if (orths) {
 			Toki::Debug::tokenize_orths_newline(tok, out, cptr);
 		} else {
 			std::string format = conf.get("debug.format", "[$orth]-$type-$ws-\n");
