@@ -88,6 +88,22 @@ BOOST_AUTO_TEST_CASE( simple )
 	std::vector<int> breaks = proc.get_break_positions();
 
 	BOOST_CHECK_EQUAL_COLLECTIONS(tb, tbe, breaks.begin(), breaks.end());
+
+	Toki::Srx::NaiveBoostSegmenter boo;
+	boo.load_rules(d.get_all_rules());
+
+	boo.compute_breaks(UnicodeString::fromUTF8(t), 0, t.size());
+	breaks = boo.get_break_positions();
+
+	BOOST_CHECK_EQUAL_COLLECTIONS(tb, tbe, breaks.begin(), breaks.end());
+
+	Toki::Srx::HxoIcuSegmenter hxo;
+	hxo.load_rules(d.get_all_rules());
+
+	hxo.compute_breaks(UnicodeString::fromUTF8(t), 0, t.size());
+	breaks = hxo.get_break_positions();
+
+	BOOST_CHECK_EQUAL_COLLECTIONS(tb, tbe, breaks.begin(), breaks.end());
 }
 
 BOOST_AUTO_TEST_CASE( variable_window )
@@ -129,7 +145,7 @@ BOOST_AUTO_TEST_CASE( variable_window )
 				okay = false;
 			}
 			BOOST_CHECK_MESSAGE(okay, "Mismatch for window " << w << " and margin " << m);
-			//BOOST_REQUIRE_EQUAL_COLLECTIONS(tb, tbe, breaks.begin(), breaks.end());
+			BOOST_REQUIRE_EQUAL_COLLECTIONS(tb, tbe, breaks.begin(), breaks.end());
 		}
 	}
 

@@ -36,7 +36,7 @@ int main(int argc, char** argv)
 	std::string input_enc;
 	std::string config_file;
 	std::string config_path;
-	std::string srx, srx_lang, srx_mark_start, srx_mark_end;
+	std::string srx, srx_lang, srx_mode, srx_mark_start, srx_mark_end;
 	int bufsize;
 	bool orths;
 	bool verbose;
@@ -65,8 +65,10 @@ int main(int argc, char** argv)
 			 "Suppress info output")
 			("srx,S", value(&srx)->default_value(""),
 			 "Load SRX from file and only do SRX processing")
-			("srx-lang", value(&srx_lang)->default_value(""),
+			("lang,l", value(&srx_lang)->default_value("pl"),
 			 "SRX language selection")
+			("srx-mode", value(&srx_mode)->default_value("icu"),
+			 "SRX mode selection")
 			("stats,s", value(&stats)->default_value(false)->zero_tokens(),
 			 "Display tokenization stats (token count) at end")
 			("no-output", value(&no_output)->default_value(false)->zero_tokens(),
@@ -105,7 +107,8 @@ int main(int argc, char** argv)
 			std::cout << doc.info() << "\n";
 		}
 		Toki::Srx::Segmenter* segm;
-		segm = new Toki::Srx::NaiveIcuSegmenter;
+		segm = Toki::Srx::Segmenter::get_segmenter_by_name(srx_mode);
+		if (!segm) return 5;
 		segm->load_rules(doc.get_rules_for_lang(srx_lang));
 		Toki::Srx::SourceWrapper srx(new Toki::UnicodeIstreamWrapper(std::cin), segm, 65536, 256);
 		int segments = 0;
