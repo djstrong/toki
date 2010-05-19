@@ -111,6 +111,15 @@ namespace Toki { namespace Srx {
 
 	HxoIcuSegmenter::~HxoIcuSegmenter()
 	{
+		foreach (RegexMatcher* r, nobreak_back_) {
+			delete r;
+		}
+		foreach (RegexMatcher* r, nobreak_fwd_) {
+			delete r;
+		}
+		foreach (CompiledRule& r, crules_break_) {
+			delete r.matcher;
+		}
 	}
 
 	void HxoIcuSegmenter::load_rules(const std::vector<Rule> &rules)
