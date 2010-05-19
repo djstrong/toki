@@ -144,7 +144,7 @@ namespace Toki { namespace Srx {
 				if (!U_SUCCESS(status)) {
 					throw Error("BeforeRule failed to compile: " + mod_before);
 				}
-				std::cerr << "XXX" << r.after << "\n";
+				//std::cerr << "XXX" << r.after << "\n";
 				if (r.after.empty()) {
 					a = NULL;
 				} else {
@@ -174,40 +174,40 @@ namespace Toki { namespace Srx {
 				UErrorCode status = U_ZERO_ERROR;
 				int n = cr.matcher->end(1, status);
 				// n is where we found the break position
-				std::cerr << "Break match at " << n << "\n";
+				//std::cerr << "Break match at " << n << "\n";
 				int n_out = n - from;
 				if (n_out >= 0 && n_out < to) {
 					// check if anything matched there already
 					if (break_map_.find(n_out) == break_map_.end()) {
-						std::cerr << "Break match promising\n";
+						//std::cerr << "Break match promising\n";
 						// now we need to check if there are any nobreak rules
 						// that match here and appear earlier
 						UnicodeString h(false, str.getBuffer(), n);
 						bool nobreak_matched = false;
 						for (size_t ri = 0; ri < break_exception_idx_[bri]; ++ri) {
-							std::cerr << "Checking nobreak rule " << ri << "\n";
-							std::cerr << "'" << Util::to_utf8(h) << "'\n";
-							std::cerr << "'" << Util::to_utf8(UnicodeString(str.getBuffer()+n)) << "'\n";
+							//std::cerr << "Checking nobreak rule " << ri << "\n";
+							//std::cerr << "'" << Util::to_utf8(h) << "'\n";
+							//std::cerr << "'" << Util::to_utf8(UnicodeString(str.getBuffer()+n)) << "'\n";
 							// check the "after" pattern
 							RegexMatcher* arm = nobreak_fwd_[ri];
 							if (arm) {
 								arm->reset(str);
 							}
 							if (!arm || (arm->find(n, status) && arm->start(status) == n)) {
-								std::cerr << "After pattern match\n";
+								//std::cerr << "After pattern match\n";
 								// after pattern matches
 								// need to check the before pattern
 								RegexMatcher& brm = *nobreak_back_[ri];
 								brm.reset(h);
 								if (brm.find()) {
-									std::cerr << "Before pattern match\n";
+									//std::cerr << "Before pattern match\n";
 									//nobreak rule matched fully
 									nobreak_matched = true;
 									break;
 								}
 							}
 						}
-						std::cerr << "Inserting break at " << n << " " << !nobreak_matched << "\n";
+						//std::cerr << "Inserting break at " << n << " " << !nobreak_matched << "\n";
 						break_map_t::value_type v(n_out, !nobreak_matched);
 						break_map_.insert(v); //only insert if the index was not in the map
 					}
