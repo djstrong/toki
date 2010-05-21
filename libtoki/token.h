@@ -9,7 +9,14 @@
 namespace Toki {
 
 	/**
-	 * A single token being processed. The orth is stored as an ICU UnicodeString.
+	 * A single token being processed.
+	 *
+	 * Token is described by:
+	 * - orth, token string as encountered in running text (stored internally
+	 *   as an ICU UnicodeString),
+	 * - the type and amount of whitespace that came before this token,
+	 * - whether this token starts a new sentence,
+	 * - token type mnemonic (its interpretation is up to the user).
 	 */
 	class Token
 	{
@@ -31,23 +38,29 @@ namespace Toki {
 		Token(const char* orth_utf8, const std::string& type, Whitespace::Enum wa_before);
 
 		/**
-		 * Token clone
+		 * Clone this token.
+		 *
+		 * The caller is responsible for releasing the cloned object.
 		 */
 		Token* clone() const;
 
 		/**
 		 * Clone this token, changing it's orth.
+		 *
+		 * The caller is responsible for releasing the cloned object.
 		 */
 		Token* clone_changed(const UnicodeString& new_orth) const;
 
 		/**
 		 * Clone this token, changing it's orth and type.
+		 *
+		 * The caller is responsible for releasing the cloned object.
 		 */
 		Token* clone_changed(const UnicodeString& new_orth, const std::string new_type) const;
 
 		/**
-		 * Convenience function to set status flags to assume token had non-ws
-		 * characters immediately preceding it (was 'cut' from another token).
+		 * Convenience function, sets the flags as if this token came after no
+		 * spaces (was cut out from another token). 
 		 */
 		void mark_as_cut();
 
