@@ -3,32 +3,9 @@
 
 namespace Toki {
 
-	std::string Token::WA_as_string(Token::WhitespaceAmount wa)
-	{
-		switch (wa) {
-		case Token::WA_None:
-			return "none";
-		case Token::WA_Space:
-			return "space";
-		case Token::WA_ManySpaces:
-			return "spaces";
-		case Token::WA_Newline:
-			return "newline";
-		case Token::WA_ManyNewlines:
-			return "newlines";
-		default:
-			return "???";
-		}
-	}
 
-	Token::WhitespaceAmount Token::WA_from_string(const std::string &s)
-	{
-		int w = Token::WA_None;
-		while (w < Token::WA_PostLast && WA_as_string((Token::WhitespaceAmount)w) != s) ++w;
-		return (Token::WhitespaceAmount)w;
-	}
 
-	Token::Token(const UnicodeString& orth, const std::string& type, WhitespaceAmount wa_before)
+	Token::Token(const UnicodeString& orth, const std::string& type, Whitespace::Enum wa_before)
 			: orth_(orth)
 			, type_(type)
 			, preceeding_whitespace_(wa_before)
@@ -40,7 +17,7 @@ namespace Toki {
 #endif
 	}
 
-	Token::Token(const char* orth_utf8, const std::string& type, WhitespaceAmount wa_before)
+	Token::Token(const char* orth_utf8, const std::string& type, Whitespace::Enum wa_before)
 			: orth_(UnicodeString::fromUTF8(orth_utf8))
 			, type_(type)
 			, preceeding_whitespace_(wa_before)
@@ -73,7 +50,7 @@ namespace Toki {
 
 	void Token::mark_as_cut()
 	{
-		preceeding_whitespace_ = WA_None;
+		preceeding_whitespace_ = Whitespace::None;
 		begins_sentence_ = false;
 	}
 

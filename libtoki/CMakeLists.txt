@@ -75,6 +75,7 @@ SET(libtoki_STAT_SRC
     unicodeistreamwrapper.cpp
     unicodesource.cpp
     util.cpp
+    whitespace.cpp
     whitespacetokenizer.cpp
 )
 

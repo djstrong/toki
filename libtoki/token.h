@@ -4,6 +4,8 @@
 #include <unicode/unistr.h>
 #include <string>
 
+#include "whitespace.h"
+
 namespace Toki {
 
 	/**
@@ -12,26 +14,13 @@ namespace Toki {
 	class Token
 	{
 	public:
-		enum WhitespaceAmount {
-			WA_None,
-			WA_Space,
-			WA_ManySpaces,
-			WA_Newline,
-			WA_ManyNewlines,
-			WA_PostLast // last item guard
-		};
-
-		static std::string WA_as_string(WhitespaceAmount wa);
-
-		static WhitespaceAmount WA_from_string(const std::string& s);
-
 		/**
 		 * Constructor.
 		 * @param orth      the token orth
 		 * @param type      the token type
 		 * @param wa_before preceeding whitespace amount indicator
 		 */
-		Token(const UnicodeString& orth, const std::string& type, WhitespaceAmount wa_before);
+		Token(const UnicodeString& orth, const std::string& type, Whitespace::Enum wa_before);
 
 		/**
 		 * Constructor.
@@ -39,7 +28,7 @@ namespace Toki {
 		 * @param type      the token type
 		 * @param wa_before preceeding whitespace amount indicator
 		 */
-		Token(const char* orth_utf8, const std::string& type, WhitespaceAmount wa_before);
+		Token(const char* orth_utf8, const std::string& type, Whitespace::Enum wa_before);
 
 		/**
 		 * Token clone
@@ -115,12 +104,12 @@ namespace Toki {
 		}
 
 		/// wa getter
-		WhitespaceAmount preceeding_whitespace() const {
+		Whitespace::Enum preceeding_whitespace() const {
 			return preceeding_whitespace_;
 		}
 
 		/// wa setter
-		void set_preceeding_whitespace(WhitespaceAmount new_wa) {
+		void set_preceeding_whitespace(Whitespace::Enum new_wa) {
 			preceeding_whitespace_ = new_wa;
 		}
 
@@ -145,7 +134,7 @@ namespace Toki {
 		std::string type_;
 
 		/// whitespace preceeding the token
-		WhitespaceAmount preceeding_whitespace_;
+		Whitespace::Enum preceeding_whitespace_;
 
 		/// token-begins-sentence flag
 		bool begins_sentence_;

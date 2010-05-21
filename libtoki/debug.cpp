@@ -55,9 +55,9 @@ namespace Toki { namespace Debug {
 		boost::replace_first(out, "$ws_id",
 			boost::lexical_cast<std::string>(t.preceeding_whitespace()));
 		boost::replace_first(out, "$ws_any",
-			t.preceeding_whitespace() == Token::WA_None ? "0" : "1");
+			t.preceeding_whitespace() == Whitespace::None ? "0" : "1");
 		boost::replace_first(out, "$ws",
-			Token::WA_as_string(t.preceeding_whitespace()));
+			Whitespace::to_string(t.preceeding_whitespace()));
 		return out;
 	}
 

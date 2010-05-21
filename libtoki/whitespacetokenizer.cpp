@@ -11,15 +11,15 @@
 namespace Toki {
 
 	WhitespaceTokenizer::WhitespaceTokenizer(const Config::Node &cfg)
-		: Tokenizer(cfg), wa_(Token::WA_None), token_type_(),
-		initial_wa_(Token::WA_None), begins_sentence_(true), srx_()
+		: Tokenizer(cfg), wa_(Whitespace::None), token_type_(),
+		initial_wa_(Whitespace::None), begins_sentence_(true), srx_()
 	{
 		process_config(cfg);
 	}
 
 	WhitespaceTokenizer::WhitespaceTokenizer(UnicodeSource* us, const Config::Node& cfg)
-		: Tokenizer(us, cfg), wa_(Token::WA_None), token_type_(),
-		initial_wa_(Token::WA_None), begins_sentence_(true), srx_()
+		: Tokenizer(us, cfg), wa_(Whitespace::None), token_type_(),
+		initial_wa_(Whitespace::None), begins_sentence_(true), srx_()
 	{
 		process_config(cfg);
 	}
@@ -29,12 +29,12 @@ namespace Toki {
 		token_type_ = cfg.get("token_type", "t");
 		std::string init_wa = cfg.get("initial_whitespace", "");
 		if (init_wa.empty()) {
-			initial_wa_ = Token::WA_None;
+			initial_wa_ = Whitespace::None;
 		} else {
-			initial_wa_ = Token::WA_from_string(init_wa);
-			if (initial_wa_ == Token::WA_PostLast) {
+			initial_wa_ = Whitespace::from_string(init_wa);
+			if (initial_wa_ == Whitespace::PostLast) {
 				std::cerr << "Bad initial whitespace value:" << init_wa << "\n";
-				initial_wa_ = Token::WA_None;
+				initial_wa_ = Whitespace::None;
 			}
 		}
 		std::string srx = cfg.get("srx", "");
@@ -93,13 +93,13 @@ namespace Toki {
 			}
 		}
 		if (nl > 1) {
-			wa_ = Token::WA_ManyNewlines;
+			wa_ = Whitespace::ManyNewlines;
 		} else if (nl == 1) {
-			wa_ = Token::WA_Newline;
+			wa_ = Whitespace::Newline;
 		} else if (ws > 1) {
-			wa_ = Token::WA_ManySpaces;
+			wa_ = Whitespace::ManySpaces;
 		} else if (ws == 1) {
-			wa_ = Token::WA_Space;
+			wa_ = Whitespace::Space;
 		} else {
 			wa_ = initial_wa_;
 		}

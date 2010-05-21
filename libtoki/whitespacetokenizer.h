@@ -68,7 +68,7 @@ namespace Toki {
 		/**
 		 * Stored whitespace amount that preceeds the next token
 		 */
-		Token::WhitespaceAmount wa_;
+		Whitespace::Enum wa_;
 
 		/**
 		 * The type of tokens to return
@@ -78,7 +78,7 @@ namespace Toki {
 		/**
 		 * Initial whitespace for the first token
 		 */
-		Token::WhitespaceAmount initial_wa_;
+		Whitespace::Enum initial_wa_;
 
 		/**
 		 * Token begins_sentence flag
