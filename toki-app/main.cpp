@@ -136,7 +136,7 @@ int main(int argc, char** argv)
 			<< boost::algorithm::join(Toki::Config::get_library_config_path(), ";")
 			<< "\n";
 	}
-	int count;
+	int count = 0;
 	int* cptr = 0;
 	if (stats) {
 		cptr = &count;
