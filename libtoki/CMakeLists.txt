@@ -111,6 +111,10 @@ if(UNIX)
                 DIRECTORY ${LIBTOKI_SRC_DATA_DIR}/
                 DESTINATION ${LIBTOKI_INSTALL_DATA_DIR}
                 FILES_MATCHING PATTERN "*.ini"
+                 PATTERN "*.srx"
+                 PATTERN "*.lex"
+                 PATTERN "*.xml"
+                 PATTERN "*.txt"
                 PATTERN ".svn" EXCLUDE
         )
 endif(UNIX)
