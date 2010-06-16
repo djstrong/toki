@@ -1,5 +1,5 @@
-#include "groupsplitlayer.h"
-#include "token.h"
+#include <libtoki/token_layers/groupsplitlayer.h>
+#include <libtoki/token.h>
 
 namespace Toki {
 

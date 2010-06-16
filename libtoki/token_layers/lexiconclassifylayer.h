@@ -1,9 +1,9 @@
 #ifndef LIBTOKI_LEXICONCLASSIFYLAYER_H
 #define LIBTOKI_LEXICONCLASSIFYLAYER_H
 
-#include "tokenlayer.h"
-#include "token.h"
-#include "foreach.h"
+#include <libtoki/tokenlayer.h>
+#include <libtoki/token.h>
+#include <libtoki/foreach.h>
 
 #include <unicode/unistr.h>
 

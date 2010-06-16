@@ -1,4 +1,4 @@
-#include "rule.h"
+#include <libtoki/srx/rule.h>
 
 #include <sstream>
 #include <unicode/regex.h>

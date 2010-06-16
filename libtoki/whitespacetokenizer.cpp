@@ -1,7 +1,7 @@
-#include "whitespacetokenizer.h"
-#include "tokenizer.h"
-#include "srx/srx.h"
-#include "util.h"
+#include <libtoki/whitespacetokenizer.h>
+#include <libtoki/tokenizer.h>
+#include <libtoki/srx/srx.h>
+#include <libtoki/util.h>
 
 #include <unicode/ucnv.h>
 #include <unicode/uchar.h>

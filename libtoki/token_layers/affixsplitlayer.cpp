@@ -1,6 +1,6 @@
-#include "affixsplitlayer.h"
-#include "token.h"
-#include "util.h"
+#include <libtoki/token_layers/affixsplitlayer.h>
+#include <libtoki/token.h>
+#include <libtoki/util.h>
 
 namespace Toki {
 

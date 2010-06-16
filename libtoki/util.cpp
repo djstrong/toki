@@ -1,4 +1,4 @@
-#include "util.h"
+#include <libtoki/util.h>
 
 namespace Toki { namespace Util {
 

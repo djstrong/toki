@@ -1,6 +1,6 @@
-#include "basicsplitlayer.h"
-#include "token.h"
-#include "util.h"
+#include <libtoki/token_layers/basicsplitlayer.h>
+#include <libtoki/token.h>
+#include <libtoki/util.h>
 
 namespace Toki {
 

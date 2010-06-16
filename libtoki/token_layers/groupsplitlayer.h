@@ -1,7 +1,7 @@
 #ifndef LIBTOKI_GROUPSPLITLAYER_H
 #define LIBTOKI_GROUPSPLITLAYER_H
 
-#include "basicsplitlayer.h"
+#include <libtoki/token_layers/basicsplitlayer.h>
 
 namespace Toki {
 

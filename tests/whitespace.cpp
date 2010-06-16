@@ -1,5 +1,5 @@
-#include "whitespacetokenizer.h"
-#include "debug.h"
+#include <libtoki/whitespacetokenizer.h>
+#include <libtoki/debug.h>
 
 #include <boost/test/unit_test.hpp>
 

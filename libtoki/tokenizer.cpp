@@ -1,9 +1,9 @@
-#include "tokenizer.h"
-#include "token.h"
-#include "nullunicodesource.h"
+#include <libtoki/tokenizer.h>
+#include <libtoki/token.h>
+#include <libtoki/nullunicodesource.h>
 
-#include "unicodeicustringwrapper.h"
-#include "unicodeistreamwrapper.h"
+#include <libtoki/unicodeicustringwrapper.h>
+#include <libtoki/unicodeistreamwrapper.h>
 
 #include <ostream>
 

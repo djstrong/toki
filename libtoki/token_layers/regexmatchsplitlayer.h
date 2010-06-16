@@ -1,7 +1,7 @@
 #ifndef LIBTOKI_REGEXMATCHSPLITLAYER_H
 #define LIBTOKI_REGEXMATCHSPLITLAYER_H
 
-#include "outputqueuelayer.h"
+#include <libtoki/token_layers/outputqueuelayer.h>
 #include <unicode/regex.h>
 
 namespace Toki {

@@ -1,7 +1,7 @@
 #ifndef LIBTOKI_LAYERTOKENIZER_H
 #define LIBTOKI_LAYERTOKENIZER_H
 
-#include "tokenizer.h"
+#include <libtoki/tokenizer.h>
 
 
 #include <boost/scoped_ptr.hpp>

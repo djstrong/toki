@@ -1,7 +1,7 @@
 #ifndef LIBTOKI_COMBINELAYER_H
 #define LIBTOKI_COMBINELAYER_H
 
-#include "outputqueuelayer.h"
+#include <libtoki/token_layers/outputqueuelayer.h>
 
 namespace Toki {
 

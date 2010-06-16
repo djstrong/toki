@@ -1,14 +1,14 @@
-#include "inittokenlayers.h"
-#include "affixsplitlayer.h"
-#include "appendlayer.h"
-#include "basicsplitlayer.h"
-#include "checklayer.h"
-#include "combinelayer.h"
-#include "groupsplitlayer.h"
-#include "groupaffixsplitlayer.h"
-#include "regexpclassifylayer.h"
-#include "regexmatchsplitlayer.h"
-#include "lexiconclassifylayer.h"
+#include <libtoki/token_layers/inittokenlayers.h>
+#include <libtoki/token_layers/affixsplitlayer.h>
+#include <libtoki/token_layers/appendlayer.h>
+#include <libtoki/token_layers/basicsplitlayer.h>
+#include <libtoki/token_layers/checklayer.h>
+#include <libtoki/token_layers/combinelayer.h>
+#include <libtoki/token_layers/groupsplitlayer.h>
+#include <libtoki/token_layers/groupaffixsplitlayer.h>
+#include <libtoki/token_layers/regexpclassifylayer.h>
+#include <libtoki/token_layers/regexmatchsplitlayer.h>
+#include <libtoki/token_layers/lexiconclassifylayer.h>
 
 namespace Toki {
 

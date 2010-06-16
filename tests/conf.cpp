@@ -1,6 +1,6 @@
-#include "config.h"
-#include "exception.h"
-#include "foreach.h"
+#include <libtoki/config.h>
+#include <libtoki/exception.h>
+#include <libtoki/foreach.h>
 #include <boost/test/unit_test.hpp>
 #include <boost/foreach.hpp>
 

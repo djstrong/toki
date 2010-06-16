@@ -1,6 +1,6 @@
-#include "debug.h"
-#include "token.h"
-#include "tokensource.h"
+#include <libtoki/debug.h>
+#include <libtoki/token.h>
+#include <libtoki/tokensource.h>
 #include <ostream>
 #include <sstream>
 #include <functional>

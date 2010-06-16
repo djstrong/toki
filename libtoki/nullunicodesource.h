@@ -1,9 +1,8 @@
 #ifndef LIBTOKI_NULLUNICODESOURCE_H
 #define LIBTOKI_NULLUNICODESOURCE_H
 
-#include "unicodesource.h"
-
-#include "exception.h"
+#include <libtoki/unicodesource.h>
+#include <libtoki/exception.h>
 
 namespace Toki {
 	/**

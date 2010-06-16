@@ -1,9 +1,9 @@
 #ifndef LIBTOKI_SRX_SRX_H
 #define LIBTOKI_SRX_SRX_H
 
-#include "document.h"
-#include "segmenter.h"
-#include "unicodesource.h"
+#include <libtoki/srx/document.h>
+#include <libtoki/srx/segmenter.h>
+#include <libtoki/unicodesource.h>
 
 #include <boost/smart_ptr.hpp>
 #include <boost/utility.hpp>

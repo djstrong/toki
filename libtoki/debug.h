@@ -6,7 +6,7 @@
 class Token;
 class TokenSource;
 
-#include "tokensource.h"
+#include <libtoki/tokensource.h>
 
 namespace Toki { namespace Debug {
 

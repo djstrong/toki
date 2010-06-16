@@ -1,9 +1,9 @@
-#include "layertokenizer.h"
+#include <libtoki/layertokenizer.h>
 #include "compare.h"
-#include "debug.h"
-#include "util.h"
-#include "token.h"
-#include "foreach.h"
+#include <libtoki/debug.h>
+#include <libtoki/util.h>
+#include <libtoki/token.h>
+#include <libtoki/foreach.h>
 
 #include <fstream>
 #include <boost/filesystem/fstream.hpp>

@@ -1,8 +1,8 @@
-#include "layertokenizer.h"
-#include "foreach.h"
-#include "token.h"
-#include "whitespacetokenizer.h"
-#include "tokenlayer.h"
+#include <libtoki/layertokenizer.h>
+#include <libtoki/foreach.h>
+#include <libtoki/token.h>
+#include <libtoki/whitespacetokenizer.h>
+#include <libtoki/tokenlayer.h>
 
 #include <boost/property_tree/ptree.hpp>
 #include <boost/foreach.hpp>
@@ -14,7 +14,7 @@
 #include <iostream>
 #include <sstream>
 
-#include "exception.h"
+#include <libtoki/exception.h>
 
 namespace Toki {
 

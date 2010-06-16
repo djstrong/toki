@@ -1,6 +1,6 @@
-#include "regexpclassifylayer.h"
-#include "foreach.h"
-#include "token.h"
+#include <libtoki/token_layers/regexpclassifylayer.h>
+#include <libtoki/foreach.h>
+#include <libtoki/token.h>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/algorithm/string.hpp>
 #include <boost/foreach.hpp>

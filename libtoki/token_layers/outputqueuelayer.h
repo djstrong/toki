@@ -1,7 +1,7 @@
 #ifndef LIBTOKI_OUTPUTQUEUELAYER_H
 #define LIBTOKI_OUTPUTQUEUELAYER_H
 
-#include "tokenlayer.h"
+#include <libtoki/tokenlayer.h>
 
 #include <queue>
 

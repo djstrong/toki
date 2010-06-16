@@ -1,13 +1,13 @@
 #ifndef LIBTOKI_CHECKLAYER_H
 #define LIBTOKI_CHECKLAYER_H
 
-#include "tokenlayer.h"
+#include <libtoki/tokenlayer.h>
 
 namespace Toki {
 
 	/**
 	 * A sanity-check layer that can be configured to output warning messages
-	 * when vary long tokens or very long sentences are noticed.
+	 * when very long tokens or very long sentences are noticed.
 	 */
 	class CheckLayer : public TokenLayer
 	{

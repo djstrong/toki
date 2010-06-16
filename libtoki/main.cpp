@@ -17,11 +17,11 @@ const char my_interp[] __attribute__((section(".interp"))) = LIBTOKI_INTERP;
 #endif
 
 #ifdef HAVE_CONFIG_D_H
-#include "config_d.h"
+#include <libtoki/config_d.h>
 #endif
-#include "tokenlayer.h"
-#include "token_layers/inittokenlayers.h"
-#include "layertokenizer.h"
+#include <libtoki/tokenlayer.h>
+#include <libtoki/token_layers/inittokenlayers.h>
+#include <libtoki/layertokenizer.h>
 #include <cstdlib>
 #include <iostream>
 #include <boost/algorithm/string.hpp>

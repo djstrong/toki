@@ -1,7 +1,7 @@
 #ifndef LIBTOKI_INPUTBUFFERLAYER_H
 #define LIBTOKI_INPUTBUFFERLAYER_H
 
-#include "tokenlayer.h"
+#include <libtoki/tokenlayer.h>
 #include <queue>
 
 namespace Toki {

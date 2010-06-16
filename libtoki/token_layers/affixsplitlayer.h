@@ -1,7 +1,7 @@
 #ifndef LIBTOKI_AFFIXSPLITLAYER_H
 #define LIBTOKI_AFFIXSPLITLAYER_H
 
-#include "outputqueuelayer.h"
+#include <libtoki/token_layers/outputqueuelayer.h>
 
 #include <set>
 

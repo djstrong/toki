@@ -1,5 +1,5 @@
-#include "combinelayer.h"
-#include "token.h"
+#include <libtoki/token_layers/combinelayer.h>
+#include <libtoki/token.h>
 
 namespace Toki {
 

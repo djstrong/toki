@@ -1,6 +1,6 @@
 PROJECT( test )
 
-include_directories( ${CMAKE_SOURCE_DIR}/libtoki/ )
+include_directories( ${CMAKE_SOURCE_DIR} )
 
 add_definitions(-DLIBTOKI_TEST_DATA_DIR="${PROJECT_SOURCE_DIR}/")
 

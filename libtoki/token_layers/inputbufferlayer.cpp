@@ -1,5 +1,5 @@
-#include "inputbufferlayer.h"
-#include "token.h"
+#include <libtoki/token_layers/inputbufferlayer.h>
+#include <libtoki/token.h>
 
 namespace Toki {
 

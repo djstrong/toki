@@ -1,7 +1,7 @@
-#include "foreach.h"
-#include "tokenlayer.h"
-#include "token_layers/inittokenlayers.h"
-#include "token.h"
+#include <libtoki/foreach.h>
+#include <libtoki/tokenlayer.h>
+#include <libtoki/token_layers/inittokenlayers.h>
+#include <libtoki/token.h>
 #include <boost/algorithm/string.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/foreach.hpp>

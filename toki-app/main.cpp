@@ -1,12 +1,12 @@
-#include "layertokenizer.h"
-#include "tokenlayer.h"
-#include "token.h"
-#include "unicodeistreamwrapper.h"
-#include "unicodeicustringwrapper.h"
-#include "util.h"
-#include "debug.h"
-#include "exception.h"
-#include "srx/srx.h"
+#include <libtoki/layertokenizer.h>
+#include <libtoki/tokenlayer.h>
+#include <libtoki/token.h>
+#include <libtoki/unicodeistreamwrapper.h>
+#include <libtoki/unicodeicustringwrapper.h>
+#include <libtoki/util.h>
+#include <libtoki/debug.h>
+#include <libtoki/exception.h>
+#include <libtoki/srx/srx.h>
 
 #include <iostream>
 #include <sstream>

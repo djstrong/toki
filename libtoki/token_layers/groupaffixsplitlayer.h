@@ -1,7 +1,7 @@
 #ifndef LIBTOKI_GROUPAFFIXSPLITLAYER_H
 #define LIBTOKI_GROUPAFFIXSPLITLAYER_H
 
-#include "affixsplitlayer.h"
+#include <libtoki/token_layers/affixsplitlayer.h>
 
 namespace Toki {
 

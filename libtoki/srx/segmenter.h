@@ -1,7 +1,7 @@
 #ifndef LIBTOKI_SRX_SEGMENTER_H
 #define LIBTOKI_SRX_SEGMENTER_H
 
-#include "rule.h"
+#include <libtoki/srx/rule.h>
 #include <vector>
 #include <map>
 

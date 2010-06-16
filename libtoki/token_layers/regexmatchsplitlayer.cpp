@@ -1,5 +1,5 @@
-#include "regexmatchsplitlayer.h"
-#include "token.h"
+#include <libtoki/token_layers/regexmatchsplitlayer.h>
+#include <libtoki/token.h>
 
 namespace Toki {
 

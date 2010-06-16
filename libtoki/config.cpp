@@ -1,12 +1,12 @@
-#include "config.h"
+#include <libtoki/config.h>
 
 #ifdef HAVE_CONFIG_D_H
-#include "config_d.h"
+#include <libtoki/config_d.h>
 #endif
 
-#include "foreach.h"
+#include <libtoki/foreach.h>
 
-#include "parser/loose_ini_paser.h"
+#include <libtoki/parser/loose_ini_paser.h>
 
 #include <boost/algorithm/string.hpp>
 #include <boost/foreach.hpp>
@@ -17,7 +17,7 @@
 
 #include <iostream>
 
-#include "exception.h"
+#include <libtoki/exception.h>
 
 namespace Toki { namespace Config {
 

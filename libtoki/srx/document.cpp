@@ -1,5 +1,5 @@
-#include "document.h"
-#include "foreach.h"
+#include <libtoki/srx/document.h>
+#include <libtoki/foreach.h>
 #include <libxml++/libxml++.h>
 #include <libxml++/nodes/node.h>
 #include <libxml++/nodes/element.h>

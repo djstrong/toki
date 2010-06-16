@@ -1,7 +1,7 @@
 #ifndef LIBTOKI_REGEXPCLASSIFYLAYER_H
 #define LIBTOKI_REGEXPCLASSIFYLAYER_H
 
-#include "tokenlayer.h"
+#include <libtoki/tokenlayer.h>
 #include <unicode/regex.h>
 
 namespace Toki {

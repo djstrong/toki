@@ -1,5 +1,5 @@
-#include "checklayer.h"
-#include "token.h"
+#include <libtoki/token_layers/checklayer.h>
+#include <libtoki/token.h>
 
 namespace Toki {
 

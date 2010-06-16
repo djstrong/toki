@@ -1,7 +1,7 @@
 #ifndef LIBTOKI_ICUSTREAMWRAPPER_H
 #define LIBTOKI_ICUSTREAMWRAPPER_H
 
-#include "unicodesource.h"
+#include <libtoki/unicodesource.h>
 #include <istream>
 #include <unicode/unistr.h>
 #include <unicode/ucnv.h>

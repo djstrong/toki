@@ -1,6 +1,6 @@
-#include "appendlayer.h"
-#include "token.h"
-#include "util.h"
+#include <libtoki/token_layers/appendlayer.h>
+#include <libtoki/token.h>
+#include <libtoki/util.h>
 #include <boost/property_tree/ptree.hpp>
 
 namespace Toki {

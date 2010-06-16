@@ -1,4 +1,4 @@
-#include "token.h"
+#include <libtoki/token.h>
 #include <sstream>
 
 namespace Toki {

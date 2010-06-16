@@ -1,5 +1,5 @@
-#include "groupaffixsplitlayer.h"
-#include "token.h"
+#include <libtoki/token_layers/groupaffixsplitlayer.h>
+#include <libtoki/token.h>
 
 namespace Toki {
 

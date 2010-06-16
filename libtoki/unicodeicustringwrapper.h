@@ -3,7 +3,7 @@
 #include <unicode/unistr.h>
 #include <unicode/schriter.h>
 
-#include "unicodesource.h"
+#include <libtoki/unicodesource.h>
 
 namespace Toki {
 

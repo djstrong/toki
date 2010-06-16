@@ -1,7 +1,7 @@
 #ifndef LIBTOKI_APPENDLAYER_H
 #define LIBTOKI_APPENDLAYER_H
 
-#include "tokenlayer.h"
+#include <libtoki/tokenlayer.h>
 #include <unicode/unistr.h>
 
 namespace Toki {

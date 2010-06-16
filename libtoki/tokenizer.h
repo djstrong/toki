@@ -1,9 +1,9 @@
 #ifndef LIBTOKI_TOKENIZER_H
 #define LIBTOKI_TOKENIZER_H
 
-#include "tokensource.h"
-#include "config.h"
-#include "unicodesource.h"
+#include <libtoki/tokensource.h>
+#include <libtoki/config.h>
+#include <libtoki/unicodesource.h>
 
 #include <vector>
 #include <iosfwd>

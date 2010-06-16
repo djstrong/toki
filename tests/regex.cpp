@@ -1,6 +1,6 @@
-#include "srx/util.h"
-#include "srx/document.h"
-#include "srx/segmenter.h"
+#include <libtoki/srx/util.h>
+#include <libtoki/srx/document.h>
+#include <libtoki/srx/segmenter.h>
 
 #include <fstream>
 #include <iostream>

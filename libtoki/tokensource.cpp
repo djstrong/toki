@@ -1,5 +1,5 @@
-#include "tokensource.h"
-#include "token.h"
+#include <libtoki/tokensource.h>
+#include <libtoki/token.h>
 #include <ostream>
 #include <sstream>
 

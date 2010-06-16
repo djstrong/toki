@@ -1,9 +1,9 @@
 #ifndef LIBTOKI_WHITESPACETOKENIZER_H
 #define LIBTOKI_WHITESPACETOKENIZER_H
 
-#include "unicodesource.h"
-#include "tokenizer.h"
-#include "token.h"
+#include <libtoki/unicodesource.h>
+#include <libtoki/tokenizer.h>
+#include <libtoki/token.h>
 
 namespace Toki {
 

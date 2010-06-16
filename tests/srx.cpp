@@ -1,9 +1,9 @@
-#include "srx/util.h"
-#include "srx/document.h"
-#include "srx/segmenter.h"
-#include "srx/srx.h"
-#include "layertokenizer.h"
-#include "unicodeicustringwrapper.h"
+#include <libtoki/srx/util.h>
+#include <libtoki/srx/document.h>
+#include <libtoki/srx/segmenter.h>
+#include <libtoki/srx/srx.h>
+#include <libtoki/layertokenizer.h>
+#include <libtoki/unicodeicustringwrapper.h>
 
 #include <fstream>
 #include <iostream>

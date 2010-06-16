@@ -1,6 +1,6 @@
-#include "util.h"
-#include "foreach.h"
-#include "../util.h"
+#include <libtoki/srx/util.h>
+#include <libtoki/foreach.h>
+#include <libtoki/util.h>
 #include <sstream>
 #include <boost/foreach.hpp>
 #include <unicode/regex.h>

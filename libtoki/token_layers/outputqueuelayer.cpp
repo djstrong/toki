@@ -1,5 +1,5 @@
-#include "outputqueuelayer.h"
-#include "token.h"
+#include <libtoki/token_layers/outputqueuelayer.h>
+#include <libtoki/token.h>
 #include <cassert>
 
 namespace Toki {

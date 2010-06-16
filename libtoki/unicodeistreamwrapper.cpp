@@ -1,4 +1,4 @@
-#include "unicodeistreamwrapper.h"
+#include <libtoki/unicodeistreamwrapper.h>
 #include <iostream>
 
 namespace Toki {

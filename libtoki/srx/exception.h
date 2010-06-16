@@ -1,7 +1,7 @@
 #ifndef LIBTOKI_SRX_EXCEPTION_H
 #define LIBTOKI_SRX_EXCEPTION_H
 
-#include "../exception.h"
+#include <libtoki/exception.h>
 
 namespace Toki { namespace Srx {
 

@@ -7,6 +7,8 @@ set(ver_minor "2")
 
 set(LIBS "")
 
+include_directories( ${CMAKE_SOURCE_DIR} )
+
 find_package(ICU REQUIRED)
 include_directories(${ICU_INCLUDE_DIR})
 link_directories(${ICU_LIBRARY_DIRS})
@@ -23,7 +25,6 @@ set(LIBS ${LIBS} ${LibXML++_LIBRARIES})
 link_directories(${Boost_LIBRARY_DIRS})
 set(LIBS ${LIBS} ${Boost_LIBRARIES})
 
-include_directories( ${CMAKE_SOURCE_DIR}/libtoki/ )
 
 set(LIBTOKI_INSTALL_DATA_DIR lib/toki)
 set(LIBTOKI_DATA_DIR "${CMAKE_INSTALL_PREFIX}/${LIBTOKI_INSTALL_DATA_DIR};.")
@@ -39,7 +40,7 @@ if(NOT LIBTOKI_SRC_DATA_DIR)
     message(FATAL_ERROR "There is no data for libtoki")
 endif(NOT LIBTOKI_SRC_DATA_DIR)
 
-configure_file(config_d.in include/config_d.h)
+configure_file(config_d.in include/libtoki/config_d.h)
 include_directories( ${CMAKE_CURRENT_BINARY_DIR}/include/ )
 add_definitions(-DHAVE_CONFIG_D_H)
 

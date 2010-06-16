@@ -6,9 +6,9 @@
 #include <vector>
 #include <istream>
 
-#include "exception.h"
-#include "rule.h"
-#include "boost/utility.hpp"
+#include <libtoki/srx/exception.h>
+#include <libtoki/srx/rule.h>
+#include <boost/utility.hpp>
 
 // forward decl
 namespace xmlpp {

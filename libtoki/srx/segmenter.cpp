@@ -1,7 +1,7 @@
-#include "exception.h"
-#include "segmenter.h"
-#include "../util.h"
-#include "foreach.h"
+#include <libtoki/srx/exception.h>
+#include <libtoki/srx/segmenter.h>
+#include <libtoki/util.h>
+#include <libtoki/foreach.h>
 
 #include <map>
 #include <iostream>
