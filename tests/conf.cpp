@@ -1,4 +1,4 @@
-#include <libtoki/config.h>
+#include <libtoki/settings.h>
 #include <libtoki/exception.h>
 #include <libtoki/foreach.h>
 #include <boost/test/unit_test.hpp>

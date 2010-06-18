@@ -2,7 +2,7 @@
 #define LIBTOKI_TOKENLAYER_H
 
 #include <libtoki/tokensource.h>
-#include <libtoki/config.h>
+#include <libtoki/settings.h>
 
 #include <boost/utility.hpp>
 #include <loki/Factory.h>

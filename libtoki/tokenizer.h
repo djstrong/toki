@@ -2,7 +2,7 @@
 #define LIBTOKI_TOKENIZER_H
 
 #include <libtoki/tokensource.h>
-#include <libtoki/config.h>
+#include <libtoki/settings.h>
 #include <libtoki/unicodesource.h>
 
 #include <vector>

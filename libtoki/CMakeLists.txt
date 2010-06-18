@@ -45,11 +45,12 @@ include_directories( ${CMAKE_CURRENT_BINARY_DIR}/include/ )
 add_definitions(-DHAVE_CONFIG_D_H)
 
 SET(libtoki_STAT_SRC
-    config.cpp
+    confignode.cpp
     debug.cpp
     layertokenizer.cpp
     main.cpp
     nullunicodesource.cpp
+    settings.cpp
     token.cpp
     tokenizer.cpp
     tokenlayer.cpp
