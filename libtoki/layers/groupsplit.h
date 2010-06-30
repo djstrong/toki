@@ -17,7 +17,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #ifndef LIBTOKI_GROUPSPLITLAYER_H
 #define LIBTOKI_GROUPSPLITLAYER_H
 
-#include <libtoki/token_layers/basicsplitlayer.h>
+#include <libtoki/layers/basicsplit.h>
 
 namespace Toki {
 

@@ -14,33 +14,24 @@ or FITNESS FOR A PARTICULAR PURPOSE.
     See the LICENSE and COPYING files for more details.
 */
 
-#include <libtoki/token_layers/appendlayer.h>
+#include <libtoki/layers/combine.h>
 #include <libtoki/token.h>
-#include <libtoki/util.h>
-#include <boost/property_tree/ptree.hpp>
 
 namespace Toki {
 
-	AppendLayer::AppendLayer(TokenSource *input, const Config::Node &props)
-		: TokenLayer(input, props), append_()
+	CombineLayer::CombineLayer(TokenSource* input, const Config::Node& props)
+		: OutputQueueLayer(input, props)
 	{
-		append_ = UnicodeString::fromUTF8(props.get("append", "!")).unescape();
 	}
 
-	std::string AppendLayer::info() const
+	void CombineLayer::prepare_more_tokens(Token* t)
 	{
-		return "append";
-	}
-
-	std::string AppendLayer::long_info() const
-	{
-		return TokenLayer::long_info() + ", append: " + Util::to_utf8(append_);
-	}
-
-	Token* AppendLayer::process_token(Token* t)
-	{
-		t->set_orth(t->orth() + append_);
-		return t;
+		Token* t2 = get_token_from_input();
+		if (t2) {
+			t->set_orth(t->orth() + t2->orth());
+			delete t2;
+		}
+		enqueue_output_token(t);
 	}
 
 } /* end namespace Toki */

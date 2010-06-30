@@ -17,7 +17,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #ifndef LIBTOKI_BASICSPLITLAYER_H
 #define LIBTOKI_BASICSPLITLAYER_H
 
-#include <libtoki/token_layers/outputqueuelayer.h>
+#include <libtoki/layers/outputqueue.h>
 #include <set>
 #include <unicode/utypes.h>
 

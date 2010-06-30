@@ -14,7 +14,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
     See the LICENSE and COPYING files for more details.
 */
 
-#include <libtoki/token_layers/regexmatchsplitlayer.h>
+#include <libtoki/layers/regexmatchsplit.h>
 #include <libtoki/token.h>
 
 namespace Toki {

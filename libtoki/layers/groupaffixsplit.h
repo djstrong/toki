@@ -17,7 +17,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #ifndef LIBTOKI_GROUPAFFIXSPLITLAYER_H
 #define LIBTOKI_GROUPAFFIXSPLITLAYER_H
 
-#include <libtoki/token_layers/affixsplitlayer.h>
+#include <libtoki/layers/affixsplit.h>
 
 namespace Toki {
 

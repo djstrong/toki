@@ -15,16 +15,16 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 */
 
 #include <libtoki/token_layers/inittokenlayers.h>
-#include <libtoki/token_layers/affixsplitlayer.h>
-#include <libtoki/token_layers/appendlayer.h>
-#include <libtoki/token_layers/basicsplitlayer.h>
-#include <libtoki/token_layers/checklayer.h>
-#include <libtoki/token_layers/combinelayer.h>
-#include <libtoki/token_layers/groupsplitlayer.h>
-#include <libtoki/token_layers/groupaffixsplitlayer.h>
-#include <libtoki/token_layers/regexpclassifylayer.h>
-#include <libtoki/token_layers/regexmatchsplitlayer.h>
-#include <libtoki/token_layers/lexiconclassifylayer.h>
+#include <libtoki/layers/affixsplit.h>
+#include <libtoki/layers/append.h>
+#include <libtoki/layers/basicsplit.h>
+#include <libtoki/layers/check.h>
+#include <libtoki/layers/combine.h>
+#include <libtoki/layers/groupsplit.h>
+#include <libtoki/layers/groupaffixsplit.h>
+#include <libtoki/layers/regexpclassify.h>
+#include <libtoki/layers/regexmatchsplit.h>
+#include <libtoki/layers/lexiconclassify.h>
 
 namespace Toki {
 

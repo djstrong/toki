@@ -59,19 +59,19 @@ SET(libtoki_STAT_SRC
     srx/segmenter.cpp
     srx/srx.cpp
     srx/util.cpp
-    token_layers/affixsplitlayer.cpp
-    token_layers/appendlayer.cpp
-    token_layers/basicsplitlayer.cpp
-    token_layers/checklayer.cpp
-    token_layers/combinelayer.cpp
-    token_layers/groupaffixsplitlayer.cpp
-    token_layers/groupsplitlayer.cpp
-    token_layers/inittokenlayers.cpp
-    token_layers/inputbufferlayer.cpp
-    token_layers/lexiconclassifylayer.cpp
-    token_layers/outputqueuelayer.cpp
-    token_layers/regexpclassifylayer.cpp
-    token_layers/regexmatchsplitlayer.cpp
+    layers/affixsplit.cpp
+    layers/append.cpp
+    layers/basicsplit.cpp
+    layers/check.cpp
+    layers/combine.cpp
+    layers/groupaffixsplit.cpp
+    layers/groupsplit.cpp
+    layers/init.cpp
+    layers/inputbuffer.cpp
+    layers/lexiconclassify.cpp
+    layers/outputqueue.cpp
+    layers/regexpclassify.cpp
+    layers/regexmatchsplit.cpp
     tokensource.cpp
     unicodeicustringwrapper.cpp
     unicodeistreamwrapper.cpp

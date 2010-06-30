@@ -17,7 +17,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #ifndef LIBTOKI_AFFIXSPLITLAYER_H
 #define LIBTOKI_AFFIXSPLITLAYER_H
 
-#include <libtoki/token_layers/outputqueuelayer.h>
+#include <libtoki/layers/outputqueue.h>
 
 #include <set>
 

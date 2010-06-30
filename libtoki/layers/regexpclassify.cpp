@@ -14,7 +14,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
     See the LICENSE and COPYING files for more details.
 */
 
-#include <libtoki/token_layers/regexpclassifylayer.h>
+#include <libtoki/layers/regexpclassify.h>
 #include <libtoki/foreach.h>
 #include <libtoki/token.h>
 #include <boost/property_tree/ptree.hpp>
