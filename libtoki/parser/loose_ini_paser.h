@@ -73,9 +73,6 @@ namespace loose_ini_parser
                             "unmatched '['", "", line_no));
                     Str key = property_tree::detail::trim(
                         line.substr(1, end - 1), stream.getloc());
-                    if (local.find(key) != local.not_found())
-                        BOOST_PROPERTY_TREE_THROW(ini_parser_error(
-                            "duplicate section name", "", line_no));
                     section = &local.push_back(
                         std::make_pair(key, Ptree()))->second;
                 }
