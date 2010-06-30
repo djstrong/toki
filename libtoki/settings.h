@@ -55,7 +55,7 @@ namespace Toki { namespace Config {
 	void set_library_config_path(const std::string &);
 
 	/**
-	 * Convenience class to set the library config path and hev it automatically
+	 * Convenience class to set the library config path and have it automatically
 	 * reset to the original value upon destruction
 	 */
 	class LibraryConfigPathSetter

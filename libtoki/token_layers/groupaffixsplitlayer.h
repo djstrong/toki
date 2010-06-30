@@ -26,7 +26,7 @@ namespace Toki {
 	 * All prefix characters are extracted as one token, then the unrecognized
 	 * part is output as the body token (with the type unmodified), and then the
 	 * suffix characters are output as the suffix token. This layer works a lot
-	 * like AffisSpliLayer with the difference being that the extracted pre- and
+	 * like AffixSpliLayer with the difference being that the extracted pre- and
 	 * suffixes are not split into one-letter tokens. Also see GroupSplitLayer.
 	 */
 	class GroupAffixSplitLayer : public AffixSplitLayer

@@ -22,7 +22,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 namespace Toki {
 
 	/**
-	 * A single token being processed. The orth is stored as an ICU UnicodeString.
+	 * A whitespace amount enumeration.
 	 */
 	namespace Whitespace
 	{

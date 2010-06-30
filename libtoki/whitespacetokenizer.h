@@ -41,7 +41,7 @@ namespace Toki {
 		 * - token_type - Token type to set in created tokens, default_configs to "t".
 		 * - initial_whitespace - Whitespace to set in the first extracted
 		 *                        token, can be a descriptor or a string with
-		 *                        the actual whitespace, use \u0020 for a space.
+		 *                        the actual whitespace, use \\u0020 for a space.
 		 * - srx - SRX file to load and use as a sentence break detector. The
 		 *         segmenter is preserved even if the source of this tokenizer
 		 *         is changed. BY default SRX is not used.
