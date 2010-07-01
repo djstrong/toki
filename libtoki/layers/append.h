@@ -18,6 +18,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #define LIBTOKI_APPENDLAYER_H
 
 #include <libtoki/tokenlayer.h>
+
 #include <unicode/unistr.h>
 
 namespace Toki {

@@ -16,8 +16,9 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 
 #include <libtoki/srx/rule.h>
 
-#include <sstream>
 #include <unicode/regex.h>
+
+#include <sstream>
 
 namespace Toki { namespace Srx {
 

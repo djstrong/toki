@@ -17,12 +17,14 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #include <libtoki/debug.h>
 #include <libtoki/token.h>
 #include <libtoki/tokensource.h>
+
+#include <boost/algorithm/string.hpp>
+#include <boost/bind.hpp>
+#include <boost/lexical_cast.hpp>
+
+#include <functional>
 #include <ostream>
 #include <sstream>
-#include <functional>
-#include <boost/bind.hpp>
-#include <boost/algorithm/string.hpp>
-#include <boost/lexical_cast.hpp>
 
 namespace Toki { namespace Debug {
 

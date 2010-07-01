@@ -17,8 +17,9 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #ifndef LIBTOKI_TOKENSOURCE_H
 #define LIBTOKI_TOKENSOURCE_H
 
-#include <iosfwd>
 #include <boost/function.hpp>
+
+#include <iosfwd>
 
 namespace Toki {
 

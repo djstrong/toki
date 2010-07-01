@@ -17,14 +17,16 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #ifndef LIBTOKI_SRX_DOCUMENT_H
 #define LIBTOKI_SRX_DOCUMENT_H
 
-#include <string>
-#include <map>
-#include <vector>
-#include <istream>
 
 #include <libtoki/srx/exception.h>
 #include <libtoki/srx/rule.h>
+
 #include <boost/utility.hpp>
+
+#include <istream>
+#include <map>
+#include <string>
+#include <vector>
 
 // forward decl
 namespace xmlpp {

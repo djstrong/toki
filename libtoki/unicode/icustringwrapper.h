@@ -16,10 +16,11 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 
 #ifndef LIBTOKI_ICUSTRINGSOURCE_H
 #define LIBTOKI_ICUSTRINGSOURCE_H
-#include <unicode/unistr.h>
-#include <unicode/schriter.h>
 
 #include <libtoki/unicode/source.h>
+
+#include <unicode/schriter.h>
+#include <unicode/unistr.h>
 
 namespace Toki {
 

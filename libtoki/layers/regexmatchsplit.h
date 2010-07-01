@@ -18,6 +18,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #define LIBTOKI_REGEXMATCHSPLITLAYER_H
 
 #include <libtoki/layers/outputqueue.h>
+
 #include <unicode/regex.h>
 
 namespace Toki {

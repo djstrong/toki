@@ -14,26 +14,23 @@ or FITNESS FOR A PARTICULAR PURPOSE.
     See the LICENSE and COPYING files for more details.
 */
 
-#include <libtoki/confignode.h>
-
 #ifdef HAVE_CONFIG_D_H
 #include <libtoki/config_d.h>
 #endif
 
+#include <libtoki/confignode.h>
+#include <libtoki/exception.h>
 #include <libtoki/foreach.h>
-
 #include <libtoki/parser/loose_ini_paser.h>
 
 #include <boost/algorithm/string.hpp>
-#include <boost/foreach.hpp>
 #include <boost/filesystem.hpp>
+#include <boost/foreach.hpp>
 #include <boost/property_tree/ini_parser.hpp>
 #include <boost/property_tree/xml_parser.hpp>
 #include <boost/property_tree/json_parser.hpp>
 
 #include <iostream>
-
-#include <libtoki/exception.h>
 
 namespace Toki { namespace Config {
 

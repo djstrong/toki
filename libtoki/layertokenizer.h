@@ -19,7 +19,6 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 
 #include <libtoki/tokenizer.h>
 
-
 #include <boost/scoped_ptr.hpp>
 
 namespace Toki {

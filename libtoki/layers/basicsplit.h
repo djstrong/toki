@@ -18,8 +18,10 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #define LIBTOKI_BASICSPLITLAYER_H
 
 #include <libtoki/layers/outputqueue.h>
-#include <set>
+
 #include <unicode/utypes.h>
+
+#include <set>
 
 namespace Toki {
 

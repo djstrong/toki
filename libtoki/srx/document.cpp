@@ -14,13 +14,14 @@ or FITNESS FOR A PARTICULAR PURPOSE.
     See the LICENSE and COPYING files for more details.
 */
 
-#include <libtoki/srx/document.h>
 #include <libtoki/foreach.h>
+#include <libtoki/srx/document.h>
+
 #include <libxml++/libxml++.h>
 #include <libxml++/nodes/node.h>
 #include <libxml++/nodes/element.h>
-#include <boost/foreach.hpp>
 
+#include <boost/foreach.hpp>
 
 namespace {
 	const xmlpp::Node* get_child_or_null(const xmlpp::Node* n, const char* name)

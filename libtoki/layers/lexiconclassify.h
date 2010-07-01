@@ -17,12 +17,11 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #ifndef LIBTOKI_LEXICONCLASSIFYLAYER_H
 #define LIBTOKI_LEXICONCLASSIFYLAYER_H
 
+#include <libtoki/foreach.h>
 #include <libtoki/tokenlayer.h>
 #include <libtoki/token.h>
-#include <libtoki/foreach.h>
 
 #include <unicode/unistr.h>
-
 
 #include <boost/algorithm/string.hpp>
 #include <boost/foreach.hpp>

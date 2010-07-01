@@ -17,10 +17,11 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #ifndef LIBTOKI_TOKENLAYER_H
 #define LIBTOKI_TOKENLAYER_H
 
-#include <libtoki/tokensource.h>
 #include <libtoki/settings.h>
+#include <libtoki/tokensource.h>
 
 #include <boost/utility.hpp>
+
 #include <loki/Factory.h>
 #include <loki/Singleton.h>
 

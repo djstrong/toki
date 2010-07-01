@@ -21,12 +21,12 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #include <libtoki/settings.h>
 #include <libtoki/unicode/source.h>
 
-#include <vector>
-#include <iosfwd>
-
 #include <unicode/unistr.h>
 
 #include <boost/shared_ptr.hpp>
+
+#include <iosfwd>
+#include <vector>
 
 namespace Toki {
 

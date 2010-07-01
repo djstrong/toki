@@ -17,6 +17,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #include <libtoki/layers/append.h>
 #include <libtoki/token.h>
 #include <libtoki/util.h>
+
 #include <boost/property_tree/ptree.hpp>
 
 namespace Toki {

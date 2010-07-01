@@ -14,18 +14,16 @@ or FITNESS FOR A PARTICULAR PURPOSE.
     See the LICENSE and COPYING files for more details.
 */
 
+#include <libtoki/foreach.h>
 #include <libtoki/srx/exception.h>
 #include <libtoki/srx/segmenter.h>
 #include <libtoki/util.h>
-#include <libtoki/foreach.h>
 
 #include <map>
 #include <iostream>
 #include <sstream>
 
-
 namespace Toki { namespace Srx {
-
 
 	Segmenter::Segmenter()
 	{

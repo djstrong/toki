@@ -18,12 +18,14 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #define LIBTOKI_SRX_SEGMENTER_H
 
 #include <libtoki/srx/rule.h>
-#include <vector>
-#include <map>
 
-#include <unicode/regex.h>
 #include <boost/regex/icu.hpp>
 #include <boost/utility.hpp>
+
+#include <unicode/regex.h>
+
+#include <map>
+#include <vector>
 
 namespace Toki { namespace Srx {
 

@@ -17,10 +17,12 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #ifndef LIBTOKI_TOKEN_H
 #define LIBTOKI_TOKEN_H
 
+#include <libtoki/whitespace.h>
+
 #include <unicode/unistr.h>
+
 #include <string>
 
-#include <libtoki/whitespace.h>
 
 namespace Toki {
 

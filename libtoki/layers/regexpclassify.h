@@ -18,6 +18,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #define LIBTOKI_REGEXPCLASSIFYLAYER_H
 
 #include <libtoki/tokenlayer.h>
+
 #include <unicode/regex.h>
 
 namespace Toki {

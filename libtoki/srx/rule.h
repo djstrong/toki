@@ -17,9 +17,9 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #ifndef LIBTOKI_SRX_RULE_H
 #define LIBTOKI_SRX_RULE_H
 
-#include <string>
-
 #include <unicode/regex.h>
+
+#include <string>
 
 namespace Toki { namespace Srx {
 

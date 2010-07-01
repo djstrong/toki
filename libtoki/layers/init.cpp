@@ -22,9 +22,9 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #include <libtoki/layers/combine.h>
 #include <libtoki/layers/groupsplit.h>
 #include <libtoki/layers/groupaffixsplit.h>
+#include <libtoki/layers/lexiconclassify.h>
 #include <libtoki/layers/regexpclassify.h>
 #include <libtoki/layers/regexmatchsplit.h>
-#include <libtoki/layers/lexiconclassify.h>
 
 namespace Toki {
 

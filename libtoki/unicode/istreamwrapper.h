@@ -18,9 +18,11 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #define LIBTOKI_ICUSTREAMWRAPPER_H
 
 #include <libtoki/unicode/source.h>
-#include <istream>
+
 #include <unicode/unistr.h>
 #include <unicode/ucnv.h>
+
+#include <istream>
 
 namespace Toki {
 

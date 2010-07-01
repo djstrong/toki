@@ -24,7 +24,6 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #include <boost/smart_ptr.hpp>
 #include <boost/utility.hpp>
 
-
 namespace Toki { namespace Srx {
 
 	/**

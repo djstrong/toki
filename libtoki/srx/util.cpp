@@ -14,14 +14,16 @@ or FITNESS FOR A PARTICULAR PURPOSE.
     See the LICENSE and COPYING files for more details.
 */
 
-#include <libtoki/srx/util.h>
 #include <libtoki/foreach.h>
+#include <libtoki/srx/util.h>
 #include <libtoki/util.h>
-#include <sstream>
+
 #include <boost/foreach.hpp>
-#include <unicode/regex.h>
 #include <boost/regex/icu.hpp>
 
+#include <unicode/regex.h>
+
+#include <sstream>
 
 namespace Toki { namespace Srx { namespace Util {
 

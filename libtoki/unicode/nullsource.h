@@ -17,8 +17,8 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #ifndef LIBTOKI_NULLUNICODESOURCE_H
 #define LIBTOKI_NULLUNICODESOURCE_H
 
-#include <libtoki/unicode/source.h>
 #include <libtoki/exception.h>
+#include <libtoki/unicode/source.h>
 
 namespace Toki {
 	/**

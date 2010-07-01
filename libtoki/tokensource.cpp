@@ -14,8 +14,9 @@ or FITNESS FOR A PARTICULAR PURPOSE.
     See the LICENSE and COPYING files for more details.
 */
 
-#include <libtoki/tokensource.h>
 #include <libtoki/token.h>
+#include <libtoki/tokensource.h>
+
 #include <ostream>
 #include <sstream>
 

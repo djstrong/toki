@@ -17,10 +17,11 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #ifndef LIBTOKI_UTIL_H
 #define LIBTOKI_UTIL_H
 
-#include <string>
-#include <unicode/unistr.h>
 #include <unicode/uniset.h>
+#include <unicode/unistr.h>
+
 #include <iostream>
+#include <string>
 
 namespace Toki { namespace Util {
 

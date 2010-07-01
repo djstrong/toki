@@ -15,11 +15,10 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 */
 
 #include <libtoki/token.h>
+
 #include <sstream>
 
 namespace Toki {
-
-
 
 	Token::Token(const UnicodeString& orth, const std::string& type, Whitespace::Enum wa_before)
 			: orth_(orth)

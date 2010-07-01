@@ -18,12 +18,15 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #define LIBTOKI_SETTINGS_H
 
 #include <libtoki/confignode.h>
+
+#include <unicode/unistr.h>
+
+#include <boost/property_tree/ptree.hpp>
+
 #include <map>
+#include <ostream>
 #include <string>
 #include <vector>
-#include <boost/property_tree/ptree.hpp>
-#include <unicode/unistr.h>
-#include <ostream>
 
 namespace Toki { namespace Config {
 

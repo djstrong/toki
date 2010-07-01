@@ -20,8 +20,8 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #include <libtoki/config_d.h>
 #endif
 
+#include <libtoki/exception.h>
 #include <libtoki/foreach.h>
-
 #include <libtoki/parser/loose_ini_paser.h>
 
 #include <boost/algorithm/string.hpp>
@@ -32,8 +32,6 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #include <boost/property_tree/json_parser.hpp>
 
 #include <iostream>
-
-#include <libtoki/exception.h>
 
 namespace Toki { namespace Config {
 

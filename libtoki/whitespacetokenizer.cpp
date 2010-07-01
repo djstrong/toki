@@ -14,13 +14,14 @@ or FITNESS FOR A PARTICULAR PURPOSE.
     See the LICENSE and COPYING files for more details.
 */
 
-#include <libtoki/whitespacetokenizer.h>
-#include <libtoki/tokenizer.h>
 #include <libtoki/srx/srx.h>
+#include <libtoki/tokenizer.h>
 #include <libtoki/util.h>
+#include <libtoki/whitespacetokenizer.h>
 
-#include <unicode/ucnv.h>
 #include <unicode/uchar.h>
+#include <unicode/ucnv.h>
+
 #include <fstream>
 #include <iostream>
 

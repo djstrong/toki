@@ -14,17 +14,16 @@ or FITNESS FOR A PARTICULAR PURPOSE.
     See the LICENSE and COPYING files for more details.
 */
 
-#include <libtoki/tokenizer.h>
 #include <libtoki/token.h>
+#include <libtoki/tokenizer.h>
 #include <libtoki/unicode/nullsource.h>
-
 #include <libtoki/unicode/icustringwrapper.h>
 #include <libtoki/unicode/istreamwrapper.h>
 
-#include <ostream>
-
 #include <boost/algorithm/string.hpp>
 #include <boost/lexical_cast.hpp>
+
+#include <ostream>
 
 namespace Toki {
 

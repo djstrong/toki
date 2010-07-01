@@ -14,23 +14,22 @@ or FITNESS FOR A PARTICULAR PURPOSE.
     See the LICENSE and COPYING files for more details.
 */
 
+#include <libtoki/exception.h>
 #include <libtoki/layertokenizer.h>
 #include <libtoki/foreach.h>
 #include <libtoki/token.h>
-#include <libtoki/whitespacetokenizer.h>
 #include <libtoki/tokenlayer.h>
+#include <libtoki/whitespacetokenizer.h>
 
 #include <boost/property_tree/ptree.hpp>
 #include <boost/foreach.hpp>
 
-#include <unicode/ucnv.h>
 #include <unicode/uchar.h>
+#include <unicode/ucnv.h>
 
 #include <fstream>
 #include <iostream>
 #include <sstream>
-
-#include <libtoki/exception.h>
 
 namespace Toki {
 

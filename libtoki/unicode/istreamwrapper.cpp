@@ -15,6 +15,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 */
 
 #include <libtoki/unicode/istreamwrapper.h>
+
 #include <iostream>
 
 namespace Toki {

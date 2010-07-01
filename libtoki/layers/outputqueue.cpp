@@ -16,6 +16,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 
 #include <libtoki/layers/outputqueue.h>
 #include <libtoki/token.h>
+
 #include <cassert>
 
 namespace Toki {

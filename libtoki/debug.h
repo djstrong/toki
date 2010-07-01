@@ -17,12 +17,10 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #ifndef LIBTOKI_DEBUG_H
 #define LIBTOKI_DEBUG_H
 
-#include <string>
-#include <iosfwd>
-class Token;
-class TokenSource;
-
 #include <libtoki/tokensource.h>
+
+#include <iosfwd>
+#include <string>
 
 namespace Toki { namespace Debug {
 

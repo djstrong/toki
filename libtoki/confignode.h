@@ -17,12 +17,14 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #ifndef LIBTOKI_CONFIGNODE_H
 #define LIBTOKI_CONFIGNODE_H
 
+#include <boost/property_tree/ptree.hpp>
+
+#include <unicode/unistr.h>
+
 #include <map>
+#include <ostream>
 #include <string>
 #include <vector>
-#include <boost/property_tree/ptree.hpp>
-#include <unicode/unistr.h>
-#include <ostream>
 
 namespace Toki { namespace Config {
 

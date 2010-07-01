@@ -35,12 +35,16 @@ const char my_interp[] __attribute__((section(".interp"))) = LIBTOKI_INTERP;
 #ifdef HAVE_CONFIG_D_H
 #include <libtoki/config_d.h>
 #endif
+
 #include <libtoki/tokenlayer.h>
 #include <libtoki/layers/init.h>
 #include <libtoki/layertokenizer.h>
+
+#include <boost/algorithm/string.hpp>
+
 #include <cstdlib>
 #include <iostream>
-#include <boost/algorithm/string.hpp>
+
 
 #ifndef LIBTOKI_VERSION
 #define LIBTOKI_VERSION "?"
