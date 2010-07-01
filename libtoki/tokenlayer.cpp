@@ -16,7 +16,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 
 #include <libtoki/foreach.h>
 #include <libtoki/tokenlayer.h>
-#include <libtoki/token_layers/inittokenlayers.h>
+#include <libtoki/layers/init.h>
 #include <libtoki/token.h>
 #include <boost/algorithm/string.hpp>
 #include <boost/property_tree/ptree.hpp>

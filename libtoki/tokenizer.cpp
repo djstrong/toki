@@ -16,10 +16,10 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 
 #include <libtoki/tokenizer.h>
 #include <libtoki/token.h>
-#include <libtoki/nullunicodesource.h>
+#include <libtoki/unicode/nullsource.h>
 
-#include <libtoki/unicodeicustringwrapper.h>
-#include <libtoki/unicodeistreamwrapper.h>
+#include <libtoki/unicode/icustringwrapper.h>
+#include <libtoki/unicode/istreamwrapper.h>
 
 #include <ostream>
 

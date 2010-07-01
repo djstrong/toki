@@ -49,7 +49,6 @@ SET(libtoki_STAT_SRC
     debug.cpp
     layertokenizer.cpp
     main.cpp
-    nullunicodesource.cpp
     settings.cpp
     token.cpp
     tokenizer.cpp
@@ -73,9 +72,10 @@ SET(libtoki_STAT_SRC
     layers/regexpclassify.cpp
     layers/regexmatchsplit.cpp
     tokensource.cpp
-    unicodeicustringwrapper.cpp
-    unicodeistreamwrapper.cpp
-    unicodesource.cpp
+    unicode/icustringwrapper.cpp
+    unicode/istreamwrapper.cpp
+    unicode/nullsource.cpp
+    unicode/source.cpp
     util.cpp
     whitespace.cpp
     whitespacetokenizer.cpp

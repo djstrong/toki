@@ -17,7 +17,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #ifndef LIBTOKI_ICUSTREAMWRAPPER_H
 #define LIBTOKI_ICUSTREAMWRAPPER_H
 
-#include <libtoki/unicodesource.h>
+#include <libtoki/unicode/source.h>
 #include <istream>
 #include <unicode/unistr.h>
 #include <unicode/ucnv.h>

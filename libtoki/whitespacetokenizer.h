@@ -17,7 +17,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #ifndef LIBTOKI_WHITESPACETOKENIZER_H
 #define LIBTOKI_WHITESPACETOKENIZER_H
 
-#include <libtoki/unicodesource.h>
+#include <libtoki/unicode/source.h>
 #include <libtoki/tokenizer.h>
 #include <libtoki/token.h>
 

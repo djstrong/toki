@@ -19,7 +19,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #include <libtoki/srx/segmenter.h>
 #include <libtoki/srx/srx.h>
 #include <libtoki/layertokenizer.h>
-#include <libtoki/unicodeicustringwrapper.h>
+#include <libtoki/unicode/icustringwrapper.h>
 
 #include <fstream>
 #include <iostream>

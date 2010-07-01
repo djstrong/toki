@@ -19,7 +19,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 
 #include <libtoki/tokensource.h>
 #include <libtoki/settings.h>
-#include <libtoki/unicodesource.h>
+#include <libtoki/unicode/source.h>
 
 #include <vector>
 #include <iosfwd>

@@ -14,7 +14,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
     See the LICENSE and COPYING files for more details.
 */
 
-#include <libtoki/unicodeistreamwrapper.h>
+#include <libtoki/unicode/istreamwrapper.h>
 #include <iostream>
 
 namespace Toki {

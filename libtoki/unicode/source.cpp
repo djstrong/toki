@@ -14,7 +14,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
     See the LICENSE and COPYING files for more details.
 */
 
-#include <libtoki/unicodesource.h>
+#include <libtoki/unicode/source.h>
 
 namespace Toki {
 

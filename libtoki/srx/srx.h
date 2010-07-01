@@ -19,7 +19,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 
 #include <libtoki/srx/document.h>
 #include <libtoki/srx/segmenter.h>
-#include <libtoki/unicodesource.h>
+#include <libtoki/unicode/source.h>
 
 #include <boost/smart_ptr.hpp>
 #include <boost/utility.hpp>

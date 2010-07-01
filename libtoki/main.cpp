@@ -36,7 +36,7 @@ const char my_interp[] __attribute__((section(".interp"))) = LIBTOKI_INTERP;
 #include <libtoki/config_d.h>
 #endif
 #include <libtoki/tokenlayer.h>
-#include <libtoki/token_layers/inittokenlayers.h>
+#include <libtoki/layers/init.h>
 #include <libtoki/layertokenizer.h>
 #include <cstdlib>
 #include <iostream>

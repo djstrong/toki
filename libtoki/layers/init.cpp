@@ -14,7 +14,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
     See the LICENSE and COPYING files for more details.
 */
 
-#include <libtoki/token_layers/inittokenlayers.h>
+#include <libtoki/layers/init.h>
 #include <libtoki/layers/affixsplit.h>
 #include <libtoki/layers/append.h>
 #include <libtoki/layers/basicsplit.h>

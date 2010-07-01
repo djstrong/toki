@@ -19,7 +19,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #include <unicode/unistr.h>
 #include <unicode/schriter.h>
 
-#include <libtoki/unicodesource.h>
+#include <libtoki/unicode/source.h>
 
 namespace Toki {
 
