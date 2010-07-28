@@ -115,7 +115,7 @@ namespace Toki { namespace Srx {
 		//for (size_t i = 0; i < b.size(); ++i) {
 		//	std::cerr << b[i] << " ";
 		//}
-		//std::cerr << "\n";
+		//std::cerr << " <-- \n";
 	}
 
 

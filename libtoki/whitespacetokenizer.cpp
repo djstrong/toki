@@ -67,6 +67,7 @@ namespace Toki {
 			} else {
 				rules = d.get_rules_for_lang(srx_lang);
 			}
+			//std::cerr << "SRX: " << rules.size() << " rules active\n";
 			boost::shared_ptr<Srx::Segmenter> segm(new Srx::NaiveIcuSegmenter());
 			segm->load_rules(rules);
 			int window = cfg.get("srx_window", 10000);
@@ -143,7 +144,10 @@ namespace Toki {
 			orth = u;
 			while (input().has_more_chars()) {
 				//std::string ou = Util::to_utf8(orth);
-				//std::cerr << ou;
+				//std::cerr << ">> " << ou << " "
+				//		<< begins_sentence_ << " "
+				//		<< input().peek_begins_sentence() << " "
+				//		<< next_token_begins_sentence << "\n";
 				u = input().peek_next_char();
 				if (u_isUWhiteSpace(u)) {
 					if (input().peek_begins_sentence()) {
