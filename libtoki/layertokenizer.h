@@ -24,6 +24,8 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 namespace Toki {
 	class TokenLayer;
 
+	class WhitespaceTokenizer;
+
 	class LayerTokenizer : public Tokenizer
 	{
 	public:
@@ -108,7 +110,7 @@ namespace Toki {
 		void apply_configuration(const Config::Node& cfg);
 
 		/// The underlying input token source for the first layer
-		boost::scoped_ptr<Tokenizer> input_tokenizer_;
+		boost::scoped_ptr<WhitespaceTokenizer> input_tokenizer_;
 
 		/// The token procesing layers
 		std::vector<TokenLayer*> layers_;

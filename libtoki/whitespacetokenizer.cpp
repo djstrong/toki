@@ -85,6 +85,11 @@ namespace Toki {
 		begins_sentence_ = true;
 	}
 
+	bool WhitespaceTokenizer::has_srx() const
+	{
+		return !!srx_;
+	}
+
 	void WhitespaceTokenizer::new_input_source()
 	{
 		if (srx_) {

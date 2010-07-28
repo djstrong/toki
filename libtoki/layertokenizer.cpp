@@ -92,6 +92,9 @@ namespace Toki {
 		for (size_t i = 0; i < layers_.size(); ++i) {
 			ss << layers_[i]->info() << " ";
 		}
+		if (input_tokenizer_->has_srx()) {
+			ss << "[SRX]";
+		}
 		return ss.str();
 	}
 

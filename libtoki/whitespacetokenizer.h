@@ -67,6 +67,9 @@ namespace Toki {
 		/// Tokenizer override
 		void reset();
 
+		/// SRX state accesor
+		bool has_srx() const;
+
 	protected:
 		/// Tokenizer override
 		void new_input_source();
