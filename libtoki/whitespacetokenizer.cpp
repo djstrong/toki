@@ -105,6 +105,9 @@ namespace Toki {
 		while (input().has_more_chars()) {
 			UChar u = input().peek_next_char();
 			if (!u_isUWhiteSpace(u)) {
+				if (input().peek_begins_sentence()) {
+					begins_sentence_ = true;
+				}
 				break;
 			} else {
 				ws++;
