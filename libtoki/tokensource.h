@@ -18,8 +18,10 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #define LIBTOKI_TOKENSOURCE_H
 
 #include <boost/function.hpp>
+#include <boost/range.hpp>
 
 #include <iosfwd>
+#include <vector>
 
 namespace Toki {
 
@@ -51,6 +53,51 @@ namespace Toki {
 		void tokenize(boost::function<void (Token*)> sink);
 	};
 
+	/**
+	 * Generic TokenSource wrapper for containers of tagger Token pointers,
+	 * e.g. a std::vector<Token*> or a boost::range of Token* iterators.
+	 *
+	 * The container should not be modified as long as it is being accesed
+	 * by a RangeSource wrapper.
+	 */
+	template<typename T>
+	class RangeSource : public TokenSource
+	{
+	public:
+		typedef typename T::const_iterator const_iterator;
+
+		RangeSource(const T& range)
+			: end_(range.end()), ptr_(range.begin())
+		{
+		}
+
+		Token* get_next_token()
+		{
+			if (ptr_ != end_) {
+				return *ptr_++;
+			} else {
+				return NULL;
+			}
+		}
+
+	private:
+		const_iterator end_;
+
+		const_iterator ptr_;
+	};
+
+	template<class T>
+	RangeSource<T>* make_range_source(const T& range)
+	{
+		return new RangeSource<T>(range);
+	}
+
+	template<class T>
+	RangeSource<boost::iterator_range<T> >* make_range_source(const T& b, const T& e)
+	{
+		boost::iterator_range<T> range(b, e);
+		return new RangeSource< boost::iterator_range<T> >(range);
+	}
 } /* end ns Toki */
 
 

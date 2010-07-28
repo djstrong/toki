@@ -49,6 +49,7 @@ SET(libtoki_STAT_SRC
     debug.cpp
     layertokenizer.cpp
     main.cpp
+    sentencesplitter.cpp
     settings.cpp
     token.cpp
     tokenizer.cpp

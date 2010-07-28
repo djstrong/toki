@@ -19,6 +19,8 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #include <libtoki/srx/segmenter.h>
 #include <libtoki/srx/srx.h>
 #include <libtoki/layertokenizer.h>
+#include <libtoki/sentencesplitter.h>
+#include <libtoki/token.h>
 #include <libtoki/unicode/icustringwrapper.h>
 
 #include <fstream>
@@ -167,6 +169,38 @@ BOOST_AUTO_TEST_CASE( variable_window )
 
 }
 
+
+BOOST_AUTO_TEST_CASE( sentence )
+{
+	std::vector<Toki::Token*> v;
+	v.push_back(new Toki::Token("a", "1", Toki::Whitespace::Space));
+	v[0]->set_begins_sentence(true);
+	v.push_back(new Toki::Token("b", "2", Toki::Whitespace::Space));
+	v.push_back(new Toki::Token("c", "3", Toki::Whitespace::Space));
+	v.push_back(new Toki::Token("d", "4", Toki::Whitespace::Space));
+	v[3]->set_begins_sentence(true);
+	v.push_back(new Toki::Token("e", "5", Toki::Whitespace::Space));
+	v[4]->set_begins_sentence(true);
+	v.push_back(new Toki::Token("f", "6", Toki::Whitespace::Space));
+	v.push_back(new Toki::Token("g", "7", Toki::Whitespace::Space));
+	v[6]->set_begins_sentence(true);
+	Toki::TokenSource* src = Toki::make_range_source(v);
+
+	Toki::SentenceSplitter s(*src);
+	std::vector<Toki::Token*> o;
+
+	o = s.get_next_sentence();
+	BOOST_REQUIRE_EQUAL(o.size(), 3);
+	o = s.get_next_sentence();
+	BOOST_REQUIRE_EQUAL(o.size(), 1);
+	BOOST_REQUIRE_EQUAL(o[0]->orth_utf8(), "d");
+	o = s.get_next_sentence();
+	BOOST_REQUIRE_EQUAL(o.size(), 2);
+	o = s.get_next_sentence();
+	BOOST_REQUIRE_EQUAL(o.size(), 1);
+	BOOST_REQUIRE_EQUAL(o[0]->orth_utf8(), "g");
+	delete src;
+}
 
 
 BOOST_AUTO_TEST_SUITE_END()
