@@ -49,7 +49,7 @@ int main(int argc, char** argv)
 	TokenizerConfig::write(global, "combined");
 	*/
 
-	std::string input_enc;
+	std::string input_enc, format;
 	std::string config_file;
 	std::string config_path;
 	std::string srx, srx_lang, srx_mode, srx_mark_start, srx_mark_end;
@@ -72,6 +72,8 @@ int main(int argc, char** argv)
 			("buffer-size,b", value(&bufsize)->default_value(1),
 			 "Stream buffer size, set to 0 to convert the entire input "
 			 "in-memory before processing and disregard the encoding, assuming UTF-8.")
+			("format,f", value(&format),
+			 "Output format override")
 			("orths,o", value(&orths)->default_value(false)->zero_tokens(),
 			 "Only output orths, not entire token descriptions "
 			 "(ignore debug.format in config file)")
@@ -181,7 +183,9 @@ int main(int argc, char** argv)
 		} else if (orths) {
 			Toki::Debug::tokenize_orths_newline(tok, out, cptr);
 		} else {
-			std::string format = conf.get("debug.format", "[$orth]-$type-$ws-\n");
+			if (format.empty()) {
+				format = conf.get("debug.format", "[$orth]-$type-$ws-\n");
+			}
 			format = Toki::Util::unescape_utf8(format);
 			Toki::Debug::tokenize_formatted(tok, format, out, cptr);
 		}
