@@ -45,6 +45,7 @@ include_directories( ${CMAKE_CURRENT_BINARY_DIR}/include/ )
 add_definitions(-DHAVE_CONFIG_D_H)
 
 SET(libtoki_STAT_SRC
+    chunk.cpp
     confignode.cpp
     debug.cpp
     layertokenizer.cpp
