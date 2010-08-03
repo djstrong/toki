@@ -140,8 +140,8 @@ namespace Toki {
 		 * @param props the configuration to pass to the layer's constructor
 		 */
 		static TokenLayer* create(const std::string class_id,
-								  TokenSource* input,
-								  const Config::Node& props);
+				TokenSource* input,
+				const Config::Node& props);
 
 		/**
 		 * Debug function to get a vector of available layer type strings.
