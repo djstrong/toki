@@ -46,7 +46,7 @@ namespace Toki {
 		token_type_ = cfg.get("token_type", "t");
 		std::string init_wa = cfg.get("initial_whitespace", "");
 		if (init_wa.empty()) {
-			initial_wa_ = Whitespace::None;
+			initial_wa_ = Whitespace::Newline;
 		} else {
 			initial_wa_ = Whitespace::from_string(init_wa);
 			if (initial_wa_ == Whitespace::PostLast) {
