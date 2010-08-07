@@ -55,7 +55,7 @@ namespace Toki { namespace Config {
 
 		std::string get_library_config_path_string()
 		{
-			return boost::algorithm::join(library_config_path, std::string(";"));
+			return boost::algorithm::join(library_config_path, std::string(LIBTOKI_PATH_SEPARATOR));
 		}
 	} // end anon namespace
 
@@ -86,6 +86,7 @@ namespace Toki { namespace Config {
 	{
 		std::string fn = find_file_in_search_path(id + ".ini");
 		if (!fn.empty()) {
+			std::cerr << "Loading tokenizer configuration from " << fn << "\n";
 			return from_file(fn);
 		} else {
 			std::stringstream ss;
@@ -108,7 +109,7 @@ namespace Toki { namespace Config {
 	void set_library_config_path(const std::string &s)
 	{
 		std::vector<std::string> v;
-		boost::algorithm::split(v, s, std::bind1st(std::equal_to<char>(), ';'));
+		boost::algorithm::split(v, s, std::bind1st(std::equal_to<char>(), LIBTOKI_PATH_SEPARATOR[0]));
 		set_library_config_path(v);
 	}
 
@@ -118,7 +119,7 @@ namespace Toki { namespace Config {
 	#ifdef LIBTOKI_DATA_DIR
 			set_library_config_path(LIBTOKI_DATA_DIR);
 	#else
-			set_library_config_path("..");
+			set_library_config_path(".");
 	#endif
 			return !library_config_path.empty();
 		}
