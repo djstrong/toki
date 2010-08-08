@@ -81,6 +81,7 @@ SET(libtoki_STAT_SRC
     util.cpp
     whitespace.cpp
     whitespacetokenizer.cpp
+    xmlutil.cpp
 )
 
 add_library(toki SHARED ${libtoki_STAT_SRC})

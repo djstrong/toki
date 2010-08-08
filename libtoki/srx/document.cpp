@@ -15,46 +15,22 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 */
 
 #include <libtoki/foreach.h>
+#include <libtoki/xmlutil.h>
 #include <libtoki/srx/document.h>
 
 #include <libxml++/libxml++.h>
 #include <libxml++/nodes/node.h>
 #include <libxml++/nodes/element.h>
 
-#include <boost/foreach.hpp>
-
-namespace {
-	const xmlpp::Node* get_child_or_null(const xmlpp::Node* n, const char* name)
-	{
-		const xmlpp::Node::NodeList list = n->get_children(name);
-		if (list.empty()) return NULL;
-		return list.front();
-	}
-
-	const xmlpp::Node* get_child_or_throw(const xmlpp::Node* n, const char* name)
-	{
-		const xmlpp::Node* c = get_child_or_null(n, name);
-		if (!c) {
-			std::stringstream ss;
-			ss << "no " << "<" << name << ">";
-			throw Toki::Srx::ParseError(ss.str());
-		}
-		return c;
-	}
-	
-	std::string get_child_text_or_empty(const xmlpp::Node* n, const char* name)
-	{
-		const xmlpp::Element* el = dynamic_cast<const xmlpp::Element*>(
-			get_child_or_null(n, name));
-		if (el) {
-			const xmlpp::TextNode* t = el->get_child_text();
-			if (t) return t->get_content();
-		}
-		return "";
-	}
-} /* end anon ns */
-
 namespace Toki { namespace Srx {
+
+	using XmlUtil::get_child_or_null;
+	using XmlUtil::get_child_text_or_empty;
+	namespace {
+		const xmlpp::Node* get_child_or_throw(const xmlpp::Node* n, const char* name) {
+			return XmlUtil::get_child_or_throw<Toki::Srx::ParseError>(n, name);
+		}
+	}
 
 	Document::Document()
 	{
