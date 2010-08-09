@@ -17,7 +17,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #ifndef LIBTOKI_APPENDLAYER_H
 #define LIBTOKI_APPENDLAYER_H
 
-#include <libtoki/tokenlayer.h>
+#include <libtoki/layers/tokenlayer.h>
 
 #include <unicode/unistr.h>
 

@@ -17,7 +17,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #ifndef LIBTOKI_LAYERTOKENIZER_H
 #define LIBTOKI_LAYERTOKENIZER_H
 
-#include <libtoki/tokenizer.h>
+#include <libtoki/tokenizer/tokenizer.h>
 
 #include <boost/scoped_ptr.hpp>
 

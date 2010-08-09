@@ -14,9 +14,9 @@ or FITNESS FOR A PARTICULAR PURPOSE.
     See the LICENSE and COPYING files for more details.
 */
 
-#include <libtoki/foreach.h>
+#include <libtoki/util/foreach.h>
 #include <libtoki/layers/init.h>
-#include <libtoki/tokenlayer.h>
+#include <libtoki/layers/tokenlayer.h>
 #include <libtoki/token.h>
 
 #include <boost/algorithm/string.hpp>

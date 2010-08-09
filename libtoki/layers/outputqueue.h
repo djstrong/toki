@@ -17,7 +17,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #ifndef LIBTOKI_OUTPUTQUEUELAYER_H
 #define LIBTOKI_OUTPUTQUEUELAYER_H
 
-#include <libtoki/tokenlayer.h>
+#include <libtoki/layers/tokenlayer.h>
 
 #include <queue>
 

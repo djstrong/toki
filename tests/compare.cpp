@@ -14,12 +14,12 @@ or FITNESS FOR A PARTICULAR PURPOSE.
     See the LICENSE and COPYING files for more details.
 */
 
-#include <libtoki/layertokenizer.h>
+#include <libtoki/tokenizer/layertokenizer.h>
 #include "compare.h"
-#include <libtoki/debug.h>
-#include <libtoki/util.h>
+#include <libtoki/util/debug.h>
+#include <libtoki/util/util.h>
 #include <libtoki/token.h>
-#include <libtoki/foreach.h>
+#include <libtoki/util/foreach.h>
 
 #include <fstream>
 #include <boost/filesystem/fstream.hpp>

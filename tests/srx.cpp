@@ -18,7 +18,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #include <libtoki/srx/document.h>
 #include <libtoki/srx/segmenter.h>
 #include <libtoki/srx/srx.h>
-#include <libtoki/layertokenizer.h>
+#include <libtoki/tokenizer/layertokenizer.h>
 #include <libtoki/sentencesplitter.h>
 #include <libtoki/token.h>
 #include <libtoki/unicode/icustringwrapper.h>

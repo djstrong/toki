@@ -17,7 +17,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #ifndef LIBTOKI_SETTINGS_H
 #define LIBTOKI_SETTINGS_H
 
-#include <libtoki/confignode.h>
+#include <libtoki/util/confignode.h>
 
 #include <unicode/unistr.h>
 

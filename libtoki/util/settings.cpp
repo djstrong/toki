@@ -14,14 +14,14 @@ or FITNESS FOR A PARTICULAR PURPOSE.
     See the LICENSE and COPYING files for more details.
 */
 
-#include <libtoki/settings.h>
+#include <libtoki/util/settings.h>
 
 #ifdef HAVE_CONFIG_D_H
 #include <libtoki/config_d.h>
 #endif
 
 #include <libtoki/exception.h>
-#include <libtoki/foreach.h>
+#include <libtoki/util/foreach.h>
 #include <libtoki/parser/loose_ini_paser.h>
 
 #include <boost/algorithm/string.hpp>

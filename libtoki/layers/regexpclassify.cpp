@@ -14,7 +14,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
     See the LICENSE and COPYING files for more details.
 */
 
-#include <libtoki/foreach.h>
+#include <libtoki/util/foreach.h>
 #include <libtoki/layers/regexpclassify.h>
 #include <libtoki/token.h>
 

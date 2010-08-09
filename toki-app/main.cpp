@@ -14,13 +14,13 @@ or FITNESS FOR A PARTICULAR PURPOSE.
     See the LICENSE and COPYING files for more details.
 */
 
-#include <libtoki/layertokenizer.h>
-#include <libtoki/tokenlayer.h>
+#include <libtoki/tokenizer/layertokenizer.h>
+#include <libtoki/layers/tokenlayer.h>
 #include <libtoki/token.h>
 #include <libtoki/unicode/istreamwrapper.h>
 #include <libtoki/unicode/icustringwrapper.h>
-#include <libtoki/util.h>
-#include <libtoki/debug.h>
+#include <libtoki/util/util.h>
+#include <libtoki/util/debug.h>
 #include <libtoki/exception.h>
 #include <libtoki/srx/srx.h>
 

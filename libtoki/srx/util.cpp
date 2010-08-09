@@ -14,9 +14,9 @@ or FITNESS FOR A PARTICULAR PURPOSE.
     See the LICENSE and COPYING files for more details.
 */
 
-#include <libtoki/foreach.h>
+#include <libtoki/util/foreach.h>
 #include <libtoki/srx/util.h>
-#include <libtoki/util.h>
+#include <libtoki/util/util.h>
 
 #include <boost/foreach.hpp>
 #include <boost/regex/icu.hpp>

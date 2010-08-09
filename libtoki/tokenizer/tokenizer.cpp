@@ -15,7 +15,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 */
 
 #include <libtoki/token.h>
-#include <libtoki/tokenizer.h>
+#include <libtoki/tokenizer/tokenizer.h>
 #include <libtoki/unicode/nullsource.h>
 #include <libtoki/unicode/icustringwrapper.h>
 #include <libtoki/unicode/istreamwrapper.h>

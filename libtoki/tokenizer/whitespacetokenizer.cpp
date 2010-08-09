@@ -15,9 +15,9 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 */
 
 #include <libtoki/srx/srx.h>
-#include <libtoki/tokenizer.h>
-#include <libtoki/util.h>
-#include <libtoki/whitespacetokenizer.h>
+#include <libtoki/tokenizer/tokenizer.h>
+#include <libtoki/tokenizer/whitespacetokenizer.h>
+#include <libtoki/util/util.h>
 
 #include <unicode/uchar.h>
 #include <unicode/ucnv.h>

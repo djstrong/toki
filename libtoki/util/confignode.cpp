@@ -18,9 +18,9 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #include <libtoki/config_d.h>
 #endif
 
-#include <libtoki/confignode.h>
+#include <libtoki/util/confignode.h>
 #include <libtoki/exception.h>
-#include <libtoki/foreach.h>
+#include <libtoki/util/foreach.h>
 #include <libtoki/parser/loose_ini_paser.h>
 
 #include <boost/algorithm/string.hpp>

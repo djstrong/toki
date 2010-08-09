@@ -14,7 +14,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
     See the LICENSE and COPYING files for more details.
 */
 
-#include <libtoki/debug.h>
+#include <libtoki/util/debug.h>
 #include <libtoki/token.h>
 #include <libtoki/tokensource.h>
 

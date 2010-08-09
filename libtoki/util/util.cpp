@@ -14,7 +14,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
     See the LICENSE and COPYING files for more details.
 */
 
-#include <libtoki/util.h>
+#include <libtoki/util/util.h>
 
 namespace Toki { namespace Util {
 

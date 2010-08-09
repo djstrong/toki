@@ -17,7 +17,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #ifndef LIBTOKI_INPUTBUFFERLAYER_H
 #define LIBTOKI_INPUTBUFFERLAYER_H
 
-#include <libtoki/tokenlayer.h>
+#include <libtoki/layers/tokenlayer.h>
 #include <queue>
 
 namespace Toki {

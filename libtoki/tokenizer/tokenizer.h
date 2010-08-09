@@ -18,7 +18,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #define LIBTOKI_TOKENIZER_H
 
 #include <libtoki/tokensource.h>
-#include <libtoki/settings.h>
+#include <libtoki/util/settings.h>
 #include <libtoki/unicode/source.h>
 
 #include <unicode/unistr.h>

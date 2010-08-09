@@ -16,7 +16,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 
 #include <libtoki/layers/basicsplit.h>
 #include <libtoki/token.h>
-#include <libtoki/util.h>
+#include <libtoki/util/util.h>
 
 namespace Toki {
 

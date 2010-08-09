@@ -14,9 +14,9 @@ or FITNESS FOR A PARTICULAR PURPOSE.
     See the LICENSE and COPYING files for more details.
 */
 
-#include <libtoki/settings.h>
+#include <libtoki/util/settings.h>
 #include <libtoki/exception.h>
-#include <libtoki/foreach.h>
+#include <libtoki/util/foreach.h>
 #include <boost/test/unit_test.hpp>
 #include <boost/foreach.hpp>
 

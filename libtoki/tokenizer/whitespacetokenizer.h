@@ -18,7 +18,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #define LIBTOKI_WHITESPACETOKENIZER_H
 
 #include <libtoki/token.h>
-#include <libtoki/tokenizer.h>
+#include <libtoki/tokenizer/tokenizer.h>
 #include <libtoki/unicode/source.h>
 
 namespace Toki {

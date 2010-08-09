@@ -14,8 +14,8 @@ or FITNESS FOR A PARTICULAR PURPOSE.
     See the LICENSE and COPYING files for more details.
 */
 
-#ifndef XMLUTIL_H
-#define XMLUTIL_H
+#ifndef LIBTOKI_XMLUTIL_H
+#define LIBTOKI_XMLUTIL_H
 
 #include <libxml++/nodes/node.h>
 

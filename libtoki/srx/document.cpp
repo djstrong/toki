@@ -14,8 +14,8 @@ or FITNESS FOR A PARTICULAR PURPOSE.
     See the LICENSE and COPYING files for more details.
 */
 
-#include <libtoki/foreach.h>
-#include <libtoki/xmlutil.h>
+#include <libtoki/util/foreach.h>
+#include <libtoki/util/xmlutil.h>
 #include <libtoki/srx/document.h>
 
 #include <libxml++/libxml++.h>

@@ -15,11 +15,11 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 */
 
 #include <libtoki/exception.h>
-#include <libtoki/layertokenizer.h>
-#include <libtoki/foreach.h>
 #include <libtoki/token.h>
-#include <libtoki/tokenlayer.h>
-#include <libtoki/whitespacetokenizer.h>
+#include <libtoki/layers/tokenlayer.h>
+#include <libtoki/tokenizer/layertokenizer.h>
+#include <libtoki/tokenizer/whitespacetokenizer.h>
+#include <libtoki/util/foreach.h>
 
 #include <boost/property_tree/ptree.hpp>
 #include <boost/foreach.hpp>

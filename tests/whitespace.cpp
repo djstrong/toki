@@ -14,8 +14,8 @@ or FITNESS FOR A PARTICULAR PURPOSE.
     See the LICENSE and COPYING files for more details.
 */
 
-#include <libtoki/whitespacetokenizer.h>
-#include <libtoki/debug.h>
+#include <libtoki/tokenizer/whitespacetokenizer.h>
+#include <libtoki/util/debug.h>
 
 #include <boost/test/unit_test.hpp>
 

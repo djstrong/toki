@@ -46,15 +46,11 @@ add_definitions(-DHAVE_CONFIG_D_H)
 
 SET(libtoki_STAT_SRC
     chunk.cpp
-    confignode.cpp
-    debug.cpp
-    layertokenizer.cpp
     main.cpp
     sentencesplitter.cpp
-    settings.cpp
     token.cpp
-    tokenizer.cpp
-    tokenlayer.cpp
+    tokensource.cpp
+    whitespace.cpp
     srx/document.cpp
     srx/rule.cpp
     srx/segmenter.cpp
@@ -73,15 +69,19 @@ SET(libtoki_STAT_SRC
     layers/outputqueue.cpp
     layers/regexpclassify.cpp
     layers/regexmatchsplit.cpp
-    tokensource.cpp
+    layers/tokenlayer.cpp
+    tokenizer/layertokenizer.cpp
+    tokenizer/tokenizer.cpp
+    tokenizer/whitespacetokenizer.cpp
     unicode/icustringwrapper.cpp
     unicode/istreamwrapper.cpp
     unicode/nullsource.cpp
     unicode/source.cpp
-    util.cpp
-    whitespace.cpp
-    whitespacetokenizer.cpp
-    xmlutil.cpp
+    util/confignode.cpp
+    util/debug.cpp
+    util/settings.cpp
+    util/util.cpp
+    util/xmlutil.cpp
 )
 
 add_library(toki SHARED ${libtoki_STAT_SRC})

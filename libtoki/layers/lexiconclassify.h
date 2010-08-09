@@ -17,8 +17,8 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #ifndef LIBTOKI_LEXICONCLASSIFYLAYER_H
 #define LIBTOKI_LEXICONCLASSIFYLAYER_H
 
-#include <libtoki/foreach.h>
-#include <libtoki/tokenlayer.h>
+#include <libtoki/util/foreach.h>
+#include <libtoki/layers/tokenlayer.h>
 #include <libtoki/token.h>
 
 #include <unicode/unistr.h>

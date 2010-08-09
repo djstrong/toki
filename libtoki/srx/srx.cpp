@@ -16,7 +16,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 
 #include <libtoki/srx/srx.h>
 #include <libtoki/srx/segmenter.h>
-#include <libtoki/util.h>
+#include <libtoki/util/util.h>
 
 #include <iostream>
 

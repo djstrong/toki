@@ -14,7 +14,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
     See the LICENSE and COPYING files for more details.
 */
 
-#include <libtoki/xmlutil.h>
+#include <libtoki/util/xmlutil.h>
 
 #include <libxml++/nodes/element.h>
 #include <libxml++/nodes/textnode.h>

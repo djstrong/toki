@@ -17,7 +17,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #ifndef LIBTOKI_TOKENLAYER_H
 #define LIBTOKI_TOKENLAYER_H
 
-#include <libtoki/settings.h>
+#include <libtoki/util/settings.h>
 #include <libtoki/tokensource.h>
 
 #include <boost/utility.hpp>

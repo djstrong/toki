@@ -17,7 +17,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #ifndef LIBTOKI_CHECKLAYER_H
 #define LIBTOKI_CHECKLAYER_H
 
-#include <libtoki/tokenlayer.h>
+#include <libtoki/layers/tokenlayer.h>
 
 namespace Toki {
 

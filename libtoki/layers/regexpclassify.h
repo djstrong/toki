@@ -17,7 +17,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #ifndef LIBTOKI_REGEXPCLASSIFYLAYER_H
 #define LIBTOKI_REGEXPCLASSIFYLAYER_H
 
-#include <libtoki/tokenlayer.h>
+#include <libtoki/layers/tokenlayer.h>
 
 #include <unicode/regex.h>
 
