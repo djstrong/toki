@@ -53,13 +53,19 @@ namespace Toki { namespace Util {
 		if (pres.length() > 2 && pres.startsWith("[") && pres.endsWith("]")) {
 			UErrorCode status = U_ZERO_ERROR;
 			UnicodeSet uset(pres, status);
+			//std::cerr << "-----UNICODE SET FOR  " << s << "\n";
 			if (!U_SUCCESS(status)) {
 				std::cerr << "Unicode character set invalid: " << s << " \n";
 			} else {
 				for (int i = 0; i < uset.size(); ++i) {
-					container.insert(uset.charAt(i));
+					UChar32 c = uset.charAt(i);
+					if (U_IS_BMP(c)) {
+						container.insert(c);
+						//std::cerr << to_utf8(UnicodeString((UChar)uset.charAt((i))));
+					}
 				}
 			}
+			//std::cerr << "\n----END UNICODE SET FOR  " << s << "\n";
 		} else {
 			pres = pres.unescape();
 			for (int i = 0; i < pres.length(); ++i) {
