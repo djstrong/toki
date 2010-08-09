@@ -25,9 +25,9 @@ set(LIBS ${LIBS} ${LibXML++_LIBRARIES})
 link_directories(${Boost_LIBRARY_DIRS})
 set(LIBS ${LIBS} ${Boost_LIBRARIES})
 
-
 set(LIBTOKI_INSTALL_DATA_DIR lib/toki)
-set(LIBTOKI_DATA_DIR "${CMAKE_INSTALL_PREFIX}/${LIBTOKI_INSTALL_DATA_DIR};.")
+set(LIBTOKI_PATH_SEPARATOR ";")
+set(LIBTOKI_DATA_DIR ".;${CMAKE_INSTALL_PREFIX}/${LIBTOKI_INSTALL_DATA_DIR}")
 set(LIBTOKI_VERSION "${ver_major}.${ver_minor}")
 
 FIND_PATH(LIBTOKI_SRC_DATA_DIR
@@ -81,6 +81,7 @@ SET(libtoki_STAT_SRC
     util.cpp
     whitespace.cpp
     whitespacetokenizer.cpp
+    xmlutil.cpp
 )
 
 add_library(toki SHARED ${libtoki_STAT_SRC})
