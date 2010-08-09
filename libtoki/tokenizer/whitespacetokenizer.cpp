@@ -29,14 +29,14 @@ namespace Toki {
 
 	WhitespaceTokenizer::WhitespaceTokenizer(const Config::Node &cfg)
 		: Tokenizer(cfg), wa_(Whitespace::None), token_type_(),
-		initial_wa_(Whitespace::None), begins_sentence_(true), srx_()
+		initial_wa_(Whitespace::None), first_(true), begins_sentence_(true), srx_()
 	{
 		process_config(cfg);
 	}
 
 	WhitespaceTokenizer::WhitespaceTokenizer(UnicodeSource* us, const Config::Node& cfg)
 		: Tokenizer(us, cfg), wa_(Whitespace::None), token_type_(),
-		initial_wa_(Whitespace::None), begins_sentence_(true), srx_()
+		initial_wa_(Whitespace::None), first_(true), begins_sentence_(true), srx_()
 	{
 		process_config(cfg);
 	}
@@ -84,6 +84,7 @@ namespace Toki {
 	{
 		wa_ = initial_wa_;
 		begins_sentence_ = true;
+		first_ = true;
 	}
 
 	bool WhitespaceTokenizer::has_srx() const
@@ -127,7 +128,13 @@ namespace Toki {
 		} else if (ws == 1) {
 			wa_ = Whitespace::Space;
 		} else {
-			wa_ = initial_wa_;
+			wa_ = Whitespace::None;
+		}
+		if (first_) {
+			if (wa_ < initial_wa_) {
+				wa_ = initial_wa_;
+			}
+			first_ = false;
 		}
 	}
 

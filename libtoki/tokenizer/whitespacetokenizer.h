@@ -99,6 +99,12 @@ namespace Toki {
 		 */
 		Whitespace::Enum initial_wa_;
 
+
+		/**
+		 * First token flag
+		 */
+		bool first_;
+
 		/**
 		 * Token begins_sentence flag
 		 */
