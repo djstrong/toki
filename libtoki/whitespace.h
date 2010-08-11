@@ -37,6 +37,8 @@ namespace Toki {
 
 		std::string to_string(Enum wa);
 
+		const char* to_whitespace(Enum wa);
+
 		Enum from_string(const std::string& s);
 	} /* end ns Toki */
 

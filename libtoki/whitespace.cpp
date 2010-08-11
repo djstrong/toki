@@ -36,6 +36,24 @@ namespace Toki {
 		}
 	}
 
+	const char* Whitespace::to_whitespace(Whitespace::Enum wa)
+	{
+		switch (wa) {
+		case Whitespace::None:
+			return "";
+		case Whitespace::Space:
+			return " ";
+		case Whitespace::ManySpaces:
+			return "  ";
+		case Whitespace::Newline:
+			return "\n";
+		case Whitespace::ManyNewlines:
+			return "\n\n";
+		default:
+			return "???";
+		}
+	}
+
 	Whitespace::Enum Whitespace::from_string(const std::string &s)
 	{
 		int w = Whitespace::None;
