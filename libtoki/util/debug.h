@@ -44,10 +44,12 @@ namespace Toki { namespace Debug {
 	 * - $bs_01  -> 1 if the token has the begins_senctence flag set, else 0
 	 * - $bs|    -> "|" if token begins sentence, empty string otherwise
 	 * - $bs     -> "bs" if token begins sentence, empty string otherwise
-	 * - $ws     -> the preceeding whitespace amount string representation
-	 *              e.g. "none". @see Token::WhitespaceAmount
+	 * - $ws     -> the preceeding whitespace amount string name, e.g. "none"
+	 *              "space" or "newline". @see Token::WhitespaceAmount
 	 * - $ws_id  -> the preceeding whitespace numeric code, 0 for no whitespace
 	 * - $ws_any -> 0 if there was any whitespace preceeding the token, else 1
+	 * - $ws_ws  -> the approximate whitespace characters that were preceeding
+	 *              the token (actual spaces / newlines)
 	 *
 	 * The format string will usually be unescaped before getting here, so
 	 * e.g. backslash-n is usually a valid way of putting a newline into the
