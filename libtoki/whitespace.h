@@ -40,6 +40,8 @@ namespace Toki {
 		const char* to_whitespace(Enum wa);
 
 		Enum from_string(const std::string& s);
+
+		bool is_valid(Enum w);
 	} /* end ns Toki */
 
 }

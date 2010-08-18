@@ -61,4 +61,8 @@ namespace Toki {
 		return (Whitespace::Enum)w;
 	}
 
+	bool Whitespace::is_valid(Whitespace::Enum w) {
+		return w >= 0 && w < Whitespace::PostLast;
+	}
+
 } /* end namespace Toki */
