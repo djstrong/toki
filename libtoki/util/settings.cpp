@@ -53,11 +53,18 @@ namespace Toki { namespace Config {
 	namespace {
 		static std::vector<std::string> library_config_path;
 
-		std::string get_library_config_path_string()
-		{
-			return boost::algorithm::join(library_config_path, std::string(LIBTOKI_PATH_SEPARATOR));
-		}
+		static std::string separator_string = LIBTOKI_PATH_SEPARATOR;
 	} // end anon namespace
+
+	std::string get_library_config_path_string()
+	{
+		return boost::algorithm::join(library_config_path, separator_string);
+	}
+
+	const std::string& get_path_separator()
+	{
+		return separator_string;
+	}
 
 	std::string find_file_in_search_path(const std::string &filename)
 	{

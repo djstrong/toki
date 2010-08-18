@@ -53,9 +53,13 @@ namespace Toki { namespace Config {
 
 	std::vector<std::string> get_library_config_path();
 
+	std::string get_library_config_path_string();
+
 	void set_library_config_path(const std::vector<std::string> &);
 
 	void set_library_config_path(const std::string &);
+
+	const std::string& get_path_separator();
 
 	/**
 	 * Convenience class to set the library config path and have it automatically
