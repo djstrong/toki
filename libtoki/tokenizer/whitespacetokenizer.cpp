@@ -80,6 +80,11 @@ namespace Toki {
 		wa_ = initial_wa_;
 	}
 
+	void WhitespaceTokenizer::set_initial_whitespace(Whitespace::Enum wa)
+	{
+		initial_wa_ = wa_ = wa;
+	}
+
 	void WhitespaceTokenizer::reset()
 	{
 		wa_ = initial_wa_;

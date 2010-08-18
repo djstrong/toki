@@ -70,6 +70,9 @@ namespace Toki {
 		/// SRX state accesor
 		bool has_srx() const;
 
+		/// Initial whitespace setter
+		void set_initial_whitespace(Whitespace::Enum wa);
+
 	protected:
 		/// Tokenizer override
 		void new_input_source();
