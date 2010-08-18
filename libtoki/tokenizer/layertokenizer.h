@@ -17,14 +17,12 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #ifndef LIBTOKI_LAYERTOKENIZER_H
 #define LIBTOKI_LAYERTOKENIZER_H
 
-#include <libtoki/tokenizer/tokenizer.h>
+#include <libtoki/tokenizer/whitespacetokenizer.h>
 
 #include <boost/scoped_ptr.hpp>
 
 namespace Toki {
 	class TokenLayer;
-
-	class WhitespaceTokenizer;
 
 	class LayerTokenizer : public Tokenizer
 	{
@@ -102,6 +100,16 @@ namespace Toki {
 		 * to disable error logging.
 		 */
 		void set_error_stream(std::ostream* os);
+
+		/// input tokenizer non-const accesor
+		WhitespaceTokenizer& input_tokenizer() {
+			return *input_tokenizer_;
+		}
+
+		/// input tokenizer const accesor
+		const WhitespaceTokenizer& input_tokenizer() const {
+			return *input_tokenizer_;
+		}
 
 	private:
 		/**
