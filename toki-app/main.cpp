@@ -53,6 +53,8 @@ int main(int argc, char** argv)
 	std::string config_file;
 	std::string config_path;
 	std::string srx, srx_lang, srx_mode, srx_mark_start, srx_mark_end;
+	std::string initial_wa_override;
+	bool end_newline;
 	int bufsize;
 	bool orths;
 	bool verbose;
@@ -77,6 +79,10 @@ int main(int argc, char** argv)
 			("orths,o", value(&orths)->default_value(false)->zero_tokens(),
 			 "Only output orths, not entire token descriptions "
 			 "(ignore debug.format in config file)")
+			("initial-wa-override,i", value(&initial_wa_override),
+			 "Initial whitespace (overrides config file)")
+			("newline,n", value(&end_newline)->default_value(false)->zero_tokens(),
+			 "Ensure tokenization output ends with a newline")
 			("verbose,v", value(&verbose)->default_value(false)->zero_tokens(),
 			 "Verbose init info")
 			("quiet,q", value(&quiet)->default_value(false)->zero_tokens(),
@@ -110,7 +116,7 @@ int main(int argc, char** argv)
 	boost::program_options::notify(vm);
 
 	if (vm.count("help")) {
-		std::cout << desc << "\n";
+		std::cerr << desc << "\n";
 		return 1;
 	}
 
@@ -122,7 +128,7 @@ int main(int argc, char** argv)
 		std::ifstream srx_ifs(srx.c_str());
 		doc.load(srx_ifs);
 		if (verbose) {
-			std::cout << doc.info() << "\n";
+			std::cerr << doc.info() << "\n";
 		}
 		Toki::Srx::Segmenter* segm;
 		segm = Toki::Srx::Segmenter::get_segmenter_by_name(srx_mode);
@@ -140,7 +146,7 @@ int main(int argc, char** argv)
 			out << Toki::Util::to_utf8(srx.get_next_char());
 		}
 		out << srx_mark_end;
-		std::cout << segments << "\n";
+		std::cerr << segments << "\n";
 		return 0;
 	}
 
@@ -150,8 +156,7 @@ int main(int argc, char** argv)
 		Toki::Config::set_library_config_path(config_path);
 	}
 	if (verbose) {
-		std::cout << "Config search path: "
-			<< boost::algorithm::join(Toki::Config::get_library_config_path(), ";")
+		std::cerr << "Config search path: " << Toki::Config::get_library_config_path_string()
 			<< "\n";
 	}
 	int count = 0;
@@ -166,18 +171,26 @@ int main(int argc, char** argv)
 			Toki::Config::from_file(config_file);
 		Toki::LayerTokenizer tok(conf);
 		if (!quiet) {
-			std::cout << "Available layer types: "
+			std::cerr << "Available layer types: "
 				<< boost::algorithm::join(Toki::TokenLayer::available_layer_types(), " ")
 				<< "\n";
 			if (verbose) {
-				std::cout << "Tokenizer layers:\n";
-				std::cout << tok.layers_long_info("\n");
+				std::cerr << "Tokenizer layers:\n";
+				std::cerr << tok.layers_long_info("\n");
 			} else {
-				std::cout << "Tokenizer: " << tok.layers_info() << "\n";
+				std::cerr << "Tokenizer: " << tok.layers_info() << "\n";
 			}
-			std::cout << "Tokenizer started. C-d or C-c to exit.\n";
+			std::cerr << "Tokenizer started. C-d or C-c to exit.\n";
 		}
 		tok.set_input_source(std::cin, bufsize);
+		if (!initial_wa_override.empty()) {
+			Toki::Whitespace::Enum wa = Toki::Whitespace::from_string(initial_wa_override);
+			if (Toki::Whitespace::is_valid(wa)) {
+				tok.input_tokenizer().set_initial_whitespace(wa);
+			} else {
+				std::cerr << "Invalid initial whitespace: " << initial_wa_override << "\n";
+			}
+		}
 		if (progress) {
 			Toki::Debug::tokenize_progress(tok, std::cerr, progress, cptr);
 		} else if (orths) {
@@ -188,9 +201,12 @@ int main(int argc, char** argv)
 			}
 			format = Toki::Util::unescape_utf8(format);
 			Toki::Debug::tokenize_formatted(tok, format, out, cptr);
+			if (end_newline) {
+				std::cout << std::endl;
+			}
 		}
 		if (stats) {
-			std::cout << count << "\n";
+			std::cerr << count << "\n";
 		}
 	} catch (Toki::TokenizerLibError& e) {
 		std::cerr << "Error: " << e.what() << "\n";
