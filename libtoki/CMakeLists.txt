@@ -41,8 +41,10 @@ if(NOT LIBTOKI_SRC_DATA_DIR)
 endif(NOT LIBTOKI_SRC_DATA_DIR)
 
 configure_file(config_d.in include/libtoki/config_d.h)
+configure_file(version.in include/libtoki/version.h)
 include_directories( ${CMAKE_CURRENT_BINARY_DIR}/include/ )
 add_definitions(-DHAVE_CONFIG_D_H)
+add_definitions(-DHAVE_VERSION_H)
 
 SET(libtoki_STAT_SRC
     chunk.cpp
@@ -111,7 +113,11 @@ if(UNIX)
                 PATTERN "build" EXCLUDE 
                 PATTERN "CMake*" EXCLUDE
         )
-        
+        install(
+                DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/include/
+                DESTINATION include
+                FILES_MATCHING PATTERN "version.h"
+        )
         install(
                 DIRECTORY ${LIBTOKI_SRC_DATA_DIR}/
                 DESTINATION ${LIBTOKI_INSTALL_DATA_DIR}
