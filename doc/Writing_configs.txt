@@ -1,0 +1,112 @@
+Toki — a configurable tokeniser.
+© 2010, Tomasz Śniatowski and Adam Radziszewski
+
+This document explains how to write config files describing tokenisers and sentence splitters. Each config file defines a particular tokenisation strategy with possible reference to sentence-splitting rules (in SRX format).
+
+Toki first applies sentence-splitting rules (if set in the config). These sentences (or plain text) is then divided into tokens by white spaces. These tokens are assigned some initial token labels (token types). Then a sequence of processing layers perform further division and possible relabelling depending on the strings of the tokens.
+
+1. Configuration search path
+
+The installed configuration files are stored within the system library directory (LIB/toki). They should have .ini extension. The toki application (toki-app) as well as the underlying library looks for the configs first in the current directory and then within the installation site. The same goes for other files referenced by a config file.
+
+TODO: mention the API part to instantiate a working tokeniser using given config name.
+
+2. Configuration file syntax
+
+The syntax roughly follows the commonly accepted INI file format. A notable exception is that keys may be duplicated and the order of entries is significant. E.g. the following section describes an ordering of layers (excerpt taken from the default config):
+
+[layers]
+	layer=exc_0
+	layer=suff_safe
+	layer=a_lexicon
+	layer=a_classify
+
+The file may contain the following sections:
+• [input] — defines the initial splitting of running text into tokens,
+• [layer:name] — defines a processing layer,
+• [layers] — defines the ordering of layers,
+• [debug] — currently the format string for toki-app (see toki/libtoki/util/debug.h for format string syntax).
+
+3. Input properties
+
+• token_type — label that is assigned to all the tokens in the first phase of tokenisation (splitting by whitespaces)
+• srx — (optional) name of file with SRX rules of sentence segmentation
+• srx_language — (optional) language code to select which rules will be loaded from the SRX file (the rules will be selected by matching regular expressions against this code)
+• srx_window — (optional, default is reasonable) the size in bytes of the window to fire SRX rules (see libtoki/srx/srx.h)
+• srx_margin — (optional, default is reasonable) the size in bytes of the margin to hold the longest expected regex match (see libtoki/srx/srx.h)
+• initial_whitespace — each token is assigned a qualitative description of whitespaces that came before it; this defines which one should be used for the first token (values: none, space, spaces, newline, newlines; default: newline).
+
+4. Layers
+
+There are several classes of layers available. The class is selected by the class key as in the following snippet:
+
+[layer:a_lexicon]
+; recognise abbrevs listed in the lexicon
+	class=lexicon_caseless
+	process_types=t
+	token_type=a
+	lexicon_file=abbrevs.txt
+
+By default, a layer processes all the tokens. It may be altered by specifying constraints on the labels (token types) that will be affected by its layer. Such constraints my be introduced by two keys: process_types and ignore_types. If present, these keys should be paired with a space-separated list of labels. If both are present, ingore_types surpresses the types listed in process types.
+
+The following layer classes are available:
+
+• split — carves up one-character tokens satisfying given character set (separators=charset_def), labelling them as separator_token_type
+• group_split — as above, but continuous sequences of such characters are kept together
+• affix_split – splits up (possibly many) one-character tokens from beginning and end of a token (keys: prefix_chars, suffix_chars, prefix_token_type, suffix_token_type)
+• group_affix_split — as above, but continous sequences of such characters are kept together
+
+• regex_match_split — carves up sequences of characters based on regex match (most general but slower), parametrised with regex and separator_token_type
+• lexicon_caseless — looks up the form in a lexicon (case-insensitive), parametrised with token_type (label to set when found), lexicon (comma separated list of forms) or lexicon_file (filename with each entry in a new line, UTF-8)
+• lexicon — as above, yet case-sensitive
+
+• regexp — fires a series of regexen and the first matched is used to relabel the token; the rules are specified as type:label=regex (see config.ini for examples)
+
+• check — warns when a very long token or a very long sentence is encountered (for keys, see toki/libtoki/layers/check.h)
+
+• passthrough — no operation
+• combine — (pretty useless, for debugging) combines each pair of tokens
+• append — (pretty useless, for debugging) appends the given string to each token orth
+
+NOTE: the most detailed and up-to-date descriptions of layer operation and their parameters are contained within toki/libtoki/layers/*.h files.
+
+
+#=======================================================================#
+   TODO: the rest is copied from pltagger; adapt it to toki 
+#=======================================================================#
+
+5. Writing rules
+
+The following snippet (taken from morfeusz-ipi.ini) defines two rules. First rule assigns just one analyser (defined by [ma:interp] section which must be contained within the config) to tokens bearing ‘p’ label. The second rule works for tokens labelled ‘th’, firing a sequence of three analysers. Note that interp, morfeusz, etc. are just names which must be present as [ma:name].
+
+[rule]
+	toki_type=p
+	ma=interp
+
+[rule]
+	toki_type=th
+	ma=morfeusz
+	ma=acro_suffix
+	ma=unknown
+
+[default]
+	ma=patch
+	ma=morfeusz
+	ma=acro_stem
+	ma=unknown
+
+4. Available analysers
+
+4.1. Const analyser (class=const) assigns just one specified tag to any token (tag=the_tag). The token's orth will be taken as lemma.
+
+TODO: add lower-lemma option
+
+4.2. Map analysers (class=map, map-case, hashmap, hashmap-case) uses an implementation of map and assigns the tags and lemmas loaded from a text file (defined by data=filename.txt). The -case variants are case-sensitive. The files are stored in a simple whitespace-delimited format, where three columns define form, lemma and tags. The same form may be repeated with different lemmas or tags. One form may be assigned more than one tag my using the plus character (+, no spaces surrounding). Several tag attribute values may also be specified using dot character (.) or underscore (_). Examples of such data may be found in the .txt files within the data dir. For more details consult a section on input file format in SFST-Howto.txt.
+
+4.3. SFST analyser — working as map analyser, yet using data compiled into a transducer in the SFST format (Stuttgart Finite State Transducer Toolkit). This is the recommended format for keeping morphological data: it's compact and therefore doesn't require loads of memory when reading. For details, see SFST-Howto.txt.
+
+4.4. Morfeusz is a wrapper for Morfeusz, a morphological analyser for Polish. Note that Morfeusz is non-free and the availability of its support depends on compilation-time options.
+
+This wrapper has been tested on Morfeusz SIAT, yet it should also work with Morfeusz SGJP. The wrapper may perform tagset conversion. The tagset of the component should be set to the desired tagset of the whole analyser. Another obligatory argument specifies the used converter (converter=name.conv). The tagset of the material directly output by Morfeusz library must be correctly set within the converter config file (.conv).
+
+For a list of available converters as well as working configs using Morfeusz, see INFO.txt in the data dir. For details on tagset conversion, see Tagsets.txt.
