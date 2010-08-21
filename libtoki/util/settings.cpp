@@ -22,23 +22,20 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 
 #include <libtoki/exception.h>
 #include <libtoki/util/foreach.h>
-#include <libtoki/parser/loose_ini_paser.h>
 
-#include <boost/algorithm/string.hpp>
-#include <boost/foreach.hpp>
-#include <boost/filesystem.hpp>
-#include <boost/property_tree/ini_parser.hpp>
-#include <boost/property_tree/xml_parser.hpp>
-#include <boost/property_tree/json_parser.hpp>
 
 #include <iostream>
 
 namespace Toki {
 
 	TokiPathSearcher::TokiPathSearcher()
-		: PathSearcher(LIBTOKI_PATH_SEPARATOR)
+		: PathSearcher<FileNotFound>(LIBTOKI_PATH_SEPARATOR)
 	{
+#ifdef LIBTOKI_DATA_DIR
 		set_search_path(LIBTOKI_DATA_DIR);
+#else
+		set_search_path(".");
+#endif
 	}
 
 	const Config::Node& default_config()

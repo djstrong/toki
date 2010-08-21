@@ -28,7 +28,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 
 namespace Toki {
 
-	PathSearcher::PathSearcher(const std::string& separator)
+	PathSearcherBase::PathSearcherBase(const std::string& separator)
 		: paths_(), separator_(separator)
 	{
 		if (separator.empty()) {
@@ -39,38 +39,38 @@ namespace Toki {
 		}
 	}
 
-	PathSearcher::~PathSearcher()
+	PathSearcherBase::~PathSearcherBase()
 	{
 	}
 
-	const std::vector<std::string>& PathSearcher::get_search_path() const
+	const std::vector<std::string>& PathSearcherBase::get_search_path() const
 	{
 		return paths_;
 	}
 
-	std::string PathSearcher::get_search_path_string() const
+	std::string PathSearcherBase::get_search_path_string() const
 	{
 		return boost::algorithm::join(paths_, separator_);
 	}
 
-	void PathSearcher::set_search_path(const std::vector<std::string> &paths)
+	void PathSearcherBase::set_search_path(const std::vector<std::string> &paths)
 	{
 		paths_ = paths;
 	}
 
-	void PathSearcher::set_search_path(const std::string &paths)
+	void PathSearcherBase::set_search_path(const std::string &paths)
 	{
 		paths_.clear();
 		boost::algorithm::split(paths_, paths,
 			std::bind1st(std::equal_to<char>(), separator_[0]));
 	}
 
-	const std::string& PathSearcher::get_path_separator() const
+	const std::string& PathSearcherBase::get_path_separator() const
 	{
 		return separator_;
 	}
 
-	std::string PathSearcher::find_file(const std::string& filename)
+	std::string PathSearcherBase::find_file(const std::string& filename)
 	{
 		boost::filesystem::path i(filename);
 		foreach (const std::string& s, paths_) {
@@ -82,7 +82,7 @@ namespace Toki {
 		return "";
 	}
 
-	bool PathSearcher::open_stream(const std::string& filename, std::ifstream& ifs)
+	bool PathSearcherBase::open_stream(const std::string& filename, std::ifstream& ifs)
 	{
 		std::string f = find_file(filename);
 		if (!f.empty()) {
@@ -92,7 +92,8 @@ namespace Toki {
 		return false;
 	}
 
-	ConfigPathSetter::ConfigPathSetter(PathSearcher& ps, const std::string &new_path)
+
+	ConfigPathSetter::ConfigPathSetter(PathSearcherBase& ps, const std::string &new_path)
 		: ps_(ps), old_path_(ps.get_search_path())
 	{
 		ps_.set_search_path(new_path);

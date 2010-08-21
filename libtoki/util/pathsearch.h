@@ -28,17 +28,21 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 
 namespace Toki {
 
-	class PathSearcher
+	/**
+	 * A class to find files in a given search path.
+	 *
+	 */
+	class PathSearcherBase
 	{
 	public:
 		/**
 		 * Create a new PathSearcher with a separator and no paths.
 		 * Note: the separator MUST be a single character.
 		 */
-		PathSearcher(const std::string& separator);
+		PathSearcherBase(const std::string& separator);
 
 		/// Destructor
-		virtual ~PathSearcher();
+		virtual ~PathSearcherBase();
 
 		/// Search path vector accesor
 		const std::vector<std::string>& get_search_path() const;
@@ -61,34 +65,11 @@ namespace Toki {
 		 */
 		std::string find_file(const std::string& filename);
 
-		/**
-		 * Convenience template wrapper around find_file to throw an exception
-		 * when the file is not found.
-		 *
-		 * The passed exception class' constructor should take three parameters:
-		 * the filename, the current search path string and the circumstance
-		 * string (where).
-		 */
-		template<typename E>
-		std::string find_file_throw(const std::string& filename,
-				const std::string& where);
 
 		/**
 		 * Open a file stream for a file in the library search path
 		 */
 		bool open_stream(const std::string& filename, std::ifstream& ifs);
-
-		/**
-		 * Convenience template wrapper around open_stream to throw an exception
-		 * when the file is not found.
-		 *
-		 * The passed exception class' constructor should take three parameters:
-		 * the filename, the current search path string and the circumstance
-		 * string (where).
-		 */
-		template<typename E>
-		void open_stream_throw(const std::string& filename, std::ifstream& ifs,
-				const std::string& where);
 
 	private:
 		/// The search paths
@@ -99,6 +80,38 @@ namespace Toki {
 	};
 
 	/**
+	 * The templated bit of the path search utility.
+	 *
+	 * The passed exception class' constructor should take three parameters:
+	 * the filename, the current search path string and the circumstance
+	 * string (where).
+	 */
+	template<typename E>
+	class PathSearcher : public PathSearcherBase
+	{
+	public:
+		PathSearcher(const std::string& separator)
+			: PathSearcherBase(separator)
+		{
+		}
+
+		/**
+		 * Convenience wrapper around find_file to throw an exception
+		 * when the file is not found.
+		 */
+		std::string find_file_or_throw(const std::string& filename,
+				const std::string& where);
+
+		/**
+		 * Convenience template wrapper around open_stream to throw an exception
+		 * when the file is not found.
+		 */
+		void open_stream_or_throw(const std::string& filename, std::ifstream& ifs,
+				const std::string& where);
+
+	};
+
+	/**
 	 * Convenience class to set the library config path and have it automatically
 	 * reset to the original value upon destruction
 	 */
@@ -106,21 +119,23 @@ namespace Toki {
 	{
 	public:
 		/// Constructor
-		ConfigPathSetter(PathSearcher& ps, const std::string& new_path);
+		ConfigPathSetter(PathSearcherBase& ps, const std::string& new_path);
 
 		/// Destructor
 		~ConfigPathSetter();
 	private:
 		/// The affected PathSearcher
-		PathSearcher& ps_;
+		PathSearcherBase& ps_;
 
 		/// Stored old path
 		std::vector<std::string> old_path_;
 	};
 
-	/* Implementation */
-	template<typename E>
-	inline std::string PathSearcher::find_file_throw(const std::string& filename,
+
+/* Implementation */
+
+	template<class E>
+	std::string PathSearcher<E>::find_file_or_throw(const std::string& filename,
 			const std::string& where)
 	{
 		std::string fn = find_file(filename);
@@ -130,15 +145,14 @@ namespace Toki {
 		return fn;
 	}
 
-	template<typename E>
-	inline void PathSearcher::open_stream_throw(const std::string& filename,
+	template<class E>
+	void PathSearcher<E>::open_stream_or_throw(const std::string& filename,
 			std::ifstream& ifs, const std::string& where)
 	{
 		if (!open_stream(filename, ifs)) {
 			throw E(filename, get_search_path_string(), where);
 		}
 	}
-
 } /* end ns Toki */
 
 #endif // LIBTOKI_SETTINGS_H
