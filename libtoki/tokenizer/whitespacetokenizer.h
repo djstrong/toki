@@ -53,13 +53,13 @@ namespace Toki {
 		 * - srx_margin - SRX performance tuning parameter, segmentation wrapper
 		 *                "margin" parameter, see Srx::SourceWrapper
 		 */
-		WhitespaceTokenizer(const Config::Node& cfg = Config::default_config());
+		WhitespaceTokenizer(const Config::Node& cfg = default_config());
 
 		/**
 		 * Constructor shorthand
 		 * @see Tokenizer::Tokenizer
 		 */
-		WhitespaceTokenizer(UnicodeSource* us, const Config::Node& cfg = Config::default_config());
+		WhitespaceTokenizer(UnicodeSource* us, const Config::Node& cfg = default_config());
 
 		/// TokenSource override
 		Token* get_next_token();

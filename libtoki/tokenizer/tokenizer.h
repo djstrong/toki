@@ -42,35 +42,35 @@ namespace Toki {
 		 * will always claim there are no more characters, so get_next_token() will
 		 * just return null.
 		 */
-		Tokenizer(const Config::Node& cfg = Config::default_config());
+		Tokenizer(const Config::Node& cfg = default_config());
 
 		/**
 		 * Constructor shorthand -- start with the given UnicodeSource, and take
 		 * ownership (through a shared pointer).
 		 * @see set_input_source
 		 */
-		Tokenizer(UnicodeSource* input, const Config::Node& cfg = Config::default_config());
+		Tokenizer(UnicodeSource* input, const Config::Node& cfg = default_config());
 
 		/**
 		 * Constructor shorthand -- start with the given UnicodeSource as a shared
 		 * pointer
 		 * @see set_input_source
 		 */
-		Tokenizer(boost::shared_ptr<UnicodeSource> input, const Config::Node& cfg = Config::default_config());
+		Tokenizer(boost::shared_ptr<UnicodeSource> input, const Config::Node& cfg = default_config());
 
 		/**
 		 * Constructor shorthand -- start with the given std::istream. Note no
 		 * ownership is taken and the stream must live long enough.
 		 * @see set_input_source
 		 */
-		Tokenizer(std::istream& is, const Config::Node& cfg = Config::default_config());
+		Tokenizer(std::istream& is, const Config::Node& cfg = default_config());
 
 		/**
 		 * Constructor shorthand -- start with the given UnicodeString, which is
 		 * copied.
 		 * @see set_input_source
 		 */
-		Tokenizer(const UnicodeString& s, const Config::Node& cfg = Config::default_config());
+		Tokenizer(const UnicodeString& s, const Config::Node& cfg = default_config());
 
 		/**
 		 * Destructor

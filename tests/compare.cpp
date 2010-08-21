@@ -70,7 +70,7 @@ void test_one_item(const compare_item& c)
 	int created_before = Toki::Token::creation_count();
 	int instances_before = Toki::Token::instance_count();
 	int tok_count = 0;
-	Toki::Config::LibraryConfigPathSetter path_setter(data_dir);
+	Toki::ConfigPathSetter path_setter(Toki::Path::Instance(), data_dir);
 	fs::path file_in = c.in_file;
 	fs::path file_out = c.out_file;
 	std::string rel_path = boost::algorithm::replace_first_copy(
@@ -148,7 +148,7 @@ void subdir_exists()
 
 void init_subdir(fs::path dir)
 {
-	Toki::Config::LibraryConfigPathSetter path_setter(data_dir);
+	Toki::ConfigPathSetter path_setter(Toki::Path::Instance(), data_dir);
 	fs::directory_iterator end_itr; // default_config construction yields past-the-end
 
 	std::set<std::string> tests_in;
@@ -175,7 +175,7 @@ void init_subdir(fs::path dir)
 		*cfg = Toki::Config::from_file(p);
 	} else {
 		//check dir name, load special config if possible, else default_config
-		*cfg = Toki::Config::default_config();
+		*cfg = Toki::default_config();
 	}
 	global_configs.push_back(boost::shared_ptr<Toki::Config::Node>(cfg));
 	int count = 0;

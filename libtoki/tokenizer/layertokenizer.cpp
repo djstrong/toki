@@ -36,7 +36,7 @@ namespace Toki {
 	LayerTokenizer::LayerTokenizer(const Config::Node &cfg)
 		: Tokenizer(cfg)
 		, input_tokenizer_(new WhitespaceTokenizer(cfg.get_child("input", Config::Node())))
-		, error_stream_(Toki::Config::get_default_error_stream())
+		, error_stream_(Toki::get_default_error_stream())
 	{
 		apply_configuration(cfg);
 		new_input_source();
@@ -45,7 +45,7 @@ namespace Toki {
 	LayerTokenizer::LayerTokenizer(UnicodeSource *input, const Config::Node &cfg)
 		: Tokenizer(input, cfg)
 		, input_tokenizer_(new WhitespaceTokenizer(cfg.get_child("input", Config::Node())))
-		, error_stream_(Toki::Config::get_default_error_stream())
+		, error_stream_(Toki::get_default_error_stream())
 	{
 		apply_configuration(cfg);
 		new_input_source();
@@ -54,7 +54,7 @@ namespace Toki {
 	LayerTokenizer::LayerTokenizer(boost::shared_ptr<UnicodeSource> input, const Config::Node &cfg)
 		: Tokenizer(input, cfg)
 		, input_tokenizer_(new WhitespaceTokenizer(cfg.get_child("input", Config::Node())))
-		, error_stream_(Toki::Config::get_default_error_stream())
+		, error_stream_(Toki::get_default_error_stream())
 	{
 		apply_configuration(cfg);
 		new_input_source();
@@ -63,7 +63,7 @@ namespace Toki {
 	LayerTokenizer::LayerTokenizer(std::istream &is, const Config::Node &cfg)
 		: Tokenizer(is, cfg)
 		, input_tokenizer_(new WhitespaceTokenizer(cfg.get_child("input", Config::Node())))
-		, error_stream_(Toki::Config::get_default_error_stream())
+		, error_stream_(Toki::get_default_error_stream())
 	{
 		apply_configuration(cfg);
 		new_input_source();
@@ -72,7 +72,7 @@ namespace Toki {
 	LayerTokenizer::LayerTokenizer(const UnicodeString &s, const Config::Node &cfg)
 		: Tokenizer(s, cfg)
 		, input_tokenizer_(new WhitespaceTokenizer(cfg.get_child("input", Config::Node())))
-		, error_stream_(Toki::Config::get_default_error_stream())
+		, error_stream_(Toki::get_default_error_stream())
 	{
 		apply_configuration(cfg);
 		new_input_source();

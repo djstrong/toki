@@ -18,6 +18,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #define LIBTOKI_SETTINGS_H
 
 #include <libtoki/util/confignode.h>
+#include <libtoki/util/pathsearch.h>
 
 #include <unicode/unistr.h>
 
@@ -28,55 +29,28 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #include <string>
 #include <vector>
 
-namespace Toki { namespace Config {
+#include <loki/Singleton.h>
+
+namespace Toki {
+
+	class TokiPathSearcher : public PathSearcher
+	{
+	public:
+		TokiPathSearcher();
+	};
+
+	typedef Loki::SingletonHolder<TokiPathSearcher> Path;
+
 
 	/**
 	 * The default_config configuration node
 	 */
-	const Node& default_config();
-
-	/**
-	 * Look for a filename under the search path and return a path to a file
-	 * that exists, or an empty string in case of failure
-	 */
-	std::string find_file_in_search_path(const std::string& filename);
-
-	/**
-	 * Open a file stream for a file in the library search path
-	 */
-	bool open_file_from_search_path(const std::string& filename, std::ifstream& ifs);
+	const Config::Node& default_config();
 
 	/**
 	 * Get a default_config config by name
 	 */
-	Node get_library_config(const std::string& id);
-
-	std::vector<std::string> get_library_config_path();
-
-	std::string get_library_config_path_string();
-
-	void set_library_config_path(const std::vector<std::string> &);
-
-	void set_library_config_path(const std::string &);
-
-	const std::string& get_path_separator();
-
-	/**
-	 * Convenience class to set the library config path and have it automatically
-	 * reset to the original value upon destruction
-	 */
-	class LibraryConfigPathSetter
-	{
-	public:
-		/// Constructor
-		LibraryConfigPathSetter(const std::string& new_path);
-
-		/// Destructor
-		~LibraryConfigPathSetter();
-	private:
-		/// Stored old path
-		std::vector<std::string> old_path_;
-	};
+	Config::Node get_named_config(const std::string& id);
 
 	/**
 	 * Get the default error stream used by the library to log errors
@@ -89,6 +63,7 @@ namespace Toki { namespace Config {
 	 */
 	void set_default_error_stream(std::ostream* os);
 
-} /* end ns Config */ } /* end ns Toki */
+
+} /* end ns Toki */
 
 #endif // LIBTOKI_SETTINGS_H

@@ -3,7 +3,7 @@
 PROJECT(toki)
 
 set(ver_major "0")
-set(ver_minor "2")
+set(ver_minor "3")
 
 set(LIBS "")
 
@@ -81,6 +81,7 @@ SET(libtoki_STAT_SRC
     unicode/source.cpp
     util/confignode.cpp
     util/debug.cpp
+    util/pathsearch.cpp
     util/settings.cpp
     util/util.cpp
     util/xmlutil.cpp

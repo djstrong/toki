@@ -45,35 +45,35 @@ namespace Toki {
 		 *
 		 * @see Tokenizer::Tokenizer
 		 */
-		LayerTokenizer(const Config::Node& cfg = Config::default_config());
+		LayerTokenizer(const Config::Node& cfg = default_config());
 
 		/**
 		 * Constructor shorthand -- start with the given UnicodeSource, and take
 		 * ownership
 		 * @see Tokenizer::Tokenizer
 		 */
-		LayerTokenizer(UnicodeSource* input, const Config::Node& cfg = Config::default_config());
+		LayerTokenizer(UnicodeSource* input, const Config::Node& cfg = default_config());
 
 		/**
 		 * Constructor shorthand -- start with the given UnicodeSource as a shared
 		 * pointer.
 		 * @see Tokenizer::Tokenizer
 		 */
-		LayerTokenizer(boost::shared_ptr<UnicodeSource> input, const Config::Node& cfg = Config::default_config());
+		LayerTokenizer(boost::shared_ptr<UnicodeSource> input, const Config::Node& cfg = default_config());
 
 		/**
 		 * Constructor shorthand -- start with the given std::istream. Note no
 		 * ownership is taken and the stream must live long enough.
 		 * @see Tokenizer::Tokenizer
 		 */
-		LayerTokenizer(std::istream& is, const Config::Node& cfg = Config::default_config());
+		LayerTokenizer(std::istream& is, const Config::Node& cfg = default_config());
 
 		/**
 		 * Constructor shorthand -- start with the given UnicodeString, which is
 		 * copied.
 		 * @see Tokenizer::Tokenizer
 		 */
-		LayerTokenizer(const UnicodeString& s, const Config::Node& cfg = Config::default_config());
+		LayerTokenizer(const UnicodeString& s, const Config::Node& cfg = default_config());
 
 		/**
 		 * Destructor

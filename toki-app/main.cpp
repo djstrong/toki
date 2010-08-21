@@ -153,10 +153,10 @@ int main(int argc, char** argv)
 	if (bufsize < 0) return 3;
 
 	if (!config_path.empty()) {
-		Toki::Config::set_library_config_path(config_path);
+		Toki::Path::Instance().set_search_path(config_path);
 	}
 	if (verbose) {
-		std::cerr << "Config search path: " << Toki::Config::get_library_config_path_string()
+		std::cerr << "Config search path: " << Toki::Path::Instance().get_search_path_string()
 			<< "\n";
 	}
 	int count = 0;
@@ -167,7 +167,7 @@ int main(int argc, char** argv)
 
 	try {
 		const Toki::Config::Node& conf = config_file.empty() ?
-			Toki::Config::default_config() :
+			Toki::default_config() :
 			Toki::Config::from_file(config_file);
 		Toki::LayerTokenizer tok(conf);
 		if (!quiet) {

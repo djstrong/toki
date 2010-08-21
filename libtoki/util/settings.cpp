@@ -33,15 +33,21 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 
 #include <iostream>
 
-namespace Toki { namespace Config {
+namespace Toki {
 
-	const Node& default_config()
+	TokiPathSearcher::TokiPathSearcher()
+		: PathSearcher(LIBTOKI_PATH_SEPARATOR)
+	{
+		set_search_path(LIBTOKI_DATA_DIR);
+	}
+
+	const Config::Node& default_config()
 	{
 		bool initialized = false;
-		static Node cfg;
+		static Config::Node cfg;
 		if (!initialized) {
 			try {
-				cfg = get_library_config("config");
+				cfg = get_named_config("config");
 			} catch (TokenizerLibError& e) {
 				throw TokenizerLibError(std::string("default_config config error! ") + e.what());
 			}
@@ -50,100 +56,20 @@ namespace Toki { namespace Config {
 		return cfg;
 	}
 
-	namespace {
-		static std::vector<std::string> library_config_path;
-
-		static std::string separator_string = LIBTOKI_PATH_SEPARATOR;
-	} // end anon namespace
-
-	std::string get_library_config_path_string()
+	Config::Node get_named_config(const std::string &id)
 	{
-		return boost::algorithm::join(library_config_path, separator_string);
-	}
-
-	const std::string& get_path_separator()
-	{
-		return separator_string;
-	}
-
-	std::string find_file_in_search_path(const std::string &filename)
-	{
-		namespace fs = boost::filesystem;
-		fs::path i(filename);
-		foreach (const std::string& s, library_config_path) {
-			fs::path pi = s / i;
-			if (fs::exists(pi) && fs::is_regular(pi)) {
-				return pi.string();
-			}
-		}
-		return "";
-	}
-
-	bool open_file_from_search_path(const std::string &filename, std::ifstream &ifs)
-	{
-		std::string f = find_file_in_search_path(filename);
-		if (!f.empty()) {
-			ifs.open(f.c_str());
-			return true;
-		}
-		return false;
-	}
-
-	Node get_library_config(const std::string &id)
-	{
-		std::string fn = find_file_in_search_path(id + ".ini");
+		std::string fn = Path::Instance().find_file(id + ".ini");
 		if (!fn.empty()) {
 			std::cerr << "Loading tokenizer configuration from " << fn << "\n";
-			return from_file(fn);
+			return Config::from_file(fn);
 		} else {
 			std::stringstream ss;
 			ss << "Library config ``" << id << "'' not found in search path: ";
-			ss << get_library_config_path_string();
+			ss << Path::Instance().get_search_path_string();
 			throw TokenizerLibError(ss.str());
 		}
 	}
 
-	std::vector<std::string> get_library_config_path()
-	{
-		return library_config_path;
-	}
-
-	void set_library_config_path(const std::vector<std::string> &vec)
-	{
-		library_config_path = vec;
-	}
-
-	void set_library_config_path(const std::string &s)
-	{
-		std::vector<std::string> v;
-		boost::algorithm::split(v, s, std::bind1st(std::equal_to<char>(), LIBTOKI_PATH_SEPARATOR[0]));
-		set_library_config_path(v);
-	}
-
-	namespace {
-		bool init_lcp()
-		{
-	#ifdef LIBTOKI_DATA_DIR
-			set_library_config_path(LIBTOKI_DATA_DIR);
-	#else
-			set_library_config_path(".");
-	#endif
-			return !library_config_path.empty();
-		}
-
-		static bool lcp_init = init_lcp();
-	} //end anon namespace
-
-	LibraryConfigPathSetter::LibraryConfigPathSetter(const std::string &new_path)
-		: old_path_(get_library_config_path())
-	{
-		set_library_config_path(new_path);
-	}
-
-	LibraryConfigPathSetter::~LibraryConfigPathSetter()
-	{
-		set_library_config_path(old_path_);
-	}
 
 	namespace {
 		std::ostream* default_error_stream_ = NULL;
@@ -164,4 +90,4 @@ namespace Toki { namespace Config {
 		default_error_stream_ = os;
 	}
 
-} /* end ns Config */ } /* end namespace Toki */
+} /* end namespace Toki */
