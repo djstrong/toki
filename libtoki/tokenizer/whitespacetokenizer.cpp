@@ -57,7 +57,7 @@ namespace Toki {
 		std::string srx = cfg.get("srx", "");
 		if (!srx.empty()) {
 			std::ifstream ifs;
-			Path::Instance().open_stream(srx, ifs);
+			Path::Instance().open_stream_or_throw(srx, ifs, "SRX");
 			Srx::Document d;
 			d.load(ifs);
 			std::string srx_lang = cfg.get("srx_language", "");
