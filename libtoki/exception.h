@@ -33,15 +33,13 @@ namespace Toki {
 		 * Instantiate a TokenizerLibError instance with the given message.
 		 * @param what The message to associate with this error.
 		 */
-		TokenizerLibError(const std::string &what)
-		 : std::runtime_error(what)
-		{
-		}
+		TokenizerLibError(const std::string &what);
 
-		~TokenizerLibError() throw()
-		{
-		}
+		~TokenizerLibError() throw();
+
+		virtual std::string info() const;
 	};
+
 
 	/**
 	 * Class to signify "can't happen" errors
@@ -57,6 +55,19 @@ namespace Toki {
 		~TokenizerImpossibleError() throw()
 		{
 		}
+	};
+
+	class FileNotFound : public TokenizerLibError
+	{
+	public:
+		FileNotFound(const std::string& filename, const std::string& paths,
+				const std::string& where);
+
+		~FileNotFound() throw();
+
+		std::string info() const;
+
+		std::string filename, paths, where;
 	};
 
 } /* end ns Toki */

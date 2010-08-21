@@ -48,6 +48,7 @@ add_definitions(-DHAVE_VERSION_H)
 
 SET(libtoki_STAT_SRC
     chunk.cpp
+    exception.cpp
     main.cpp
     sentencesplitter.cpp
     token.cpp
