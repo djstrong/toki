@@ -168,7 +168,7 @@ int main(int argc, char** argv)
 	try {
 		const Toki::Config::Node& conf = config_file.empty() ?
 			Toki::default_config() :
-			Toki::Config::from_file(config_file);
+			Toki::get_named_config(config_file);
 		Toki::LayerTokenizer tok(conf);
 		if (!quiet) {
 			std::cerr << "Available layer types: "
