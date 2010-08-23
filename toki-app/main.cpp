@@ -164,6 +164,7 @@ int main(int argc, char** argv)
 	if (stats) {
 		cptr = &count;
 	}
+	Toki::Path::Instance().set_verbose(!quiet);
 
 	try {
 		const Toki::Config::Node& conf = config_file.empty() ?

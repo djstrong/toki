@@ -55,8 +55,7 @@ namespace Toki {
 
 	Config::Node get_named_config(const std::string &id)
 	{
-		std::string fn = Path::Instance().find_file_or_throw(id + ".ini", "Tokenizer config");
-		std::cerr << "Loading tokenizer configuration from " << fn << "\n";
+		std::string fn = Path::Instance().find_file_or_throw(id + ".ini", "tokenizer config");
 		return Config::from_file(fn);
 	}
 

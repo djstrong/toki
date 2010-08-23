@@ -96,7 +96,7 @@ namespace Toki {
 		const std::string& file_string = props.get<std::string>("lexicon_file", "");
 		if (!file_string.empty()) {
 			std::ifstream ifs;
-			Path::Instance().open_stream_or_throw(file_string, ifs, "Lexicon");
+			Path::Instance().open_stream_or_throw(file_string, ifs, "lexicon");
 			while (ifs.good()) {
 				std::string s;
 				std::getline(ifs, s);

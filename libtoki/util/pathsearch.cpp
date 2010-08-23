@@ -29,7 +29,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 namespace Toki {
 
 	PathSearcherBase::PathSearcherBase(const std::string& separator)
-		: paths_(), separator_(separator)
+		: paths_(), separator_(separator), verbose_loading_(false)
 	{
 		if (separator.empty()) {
 			std::cerr << "No path separator! Defaulting to :\n";
@@ -70,21 +70,26 @@ namespace Toki {
 		return separator_;
 	}
 
-	std::string PathSearcherBase::find_file(const std::string& filename)
+	std::string PathSearcherBase::find_file(const std::string& filename,
+			const std::string& info)
 	{
 		boost::filesystem::path i(filename);
 		foreach (const std::string& s, paths_) {
 			boost::filesystem::path pi = s / i;
 			if (boost::filesystem::exists(pi) && boost::filesystem::is_regular(pi)) {
+				if (verbose_loading_) {
+					std::cerr << "Found " << info << " file: " << pi.string() << "\n";
+				}
 				return pi.string();
 			}
 		}
 		return "";
 	}
 
-	bool PathSearcherBase::open_stream(const std::string& filename, std::ifstream& ifs)
+	bool PathSearcherBase::open_stream(const std::string& filename,
+			std::ifstream& ifs, const std::string& info)
 	{
-		std::string f = find_file(filename);
+		std::string f = find_file(filename, info);
 		if (!f.empty()) {
 			ifs.open(f.c_str());
 			return true;
