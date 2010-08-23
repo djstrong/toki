@@ -11,7 +11,22 @@ The installed configuration files are stored within the system library directory
 
 To use a specific config file, run toki-app -c configname (without .ini).
 
-TODO: mention the API part to instantiate a working tokeniser using given config name.
+To load a config from within Toki API, use Toki::get_named_config, e.g.:
+
+#include <libtoki/tokenizer/layertokenizer.h>
+#include <libtoki/util/settings.h>
+#include <iostream>
+int main(int argc, char** argv)
+{
+	const std::string confname("general");
+	Toki::LayerTokenizer tokr(std::cin, Toki::get_named_config(confname));
+	Toki::Token *tok;
+	while((tok = tokr.get_next_token()) != NULL)
+	{
+		std::cout << tok->orth_utf8() << "\n";
+		delete tok;
+	}
+	return 0;
 
 2. Configuration file syntax
 
