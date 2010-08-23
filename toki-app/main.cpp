@@ -209,6 +209,6 @@ int main(int argc, char** argv)
 			std::cerr << count << "\n";
 		}
 	} catch (Toki::TokenizerLibError& e) {
-		std::cerr << "Error: " << e.what() << "\n";
+		std::cerr << "Error: " << e.info() << "\n";
 	}
 }
