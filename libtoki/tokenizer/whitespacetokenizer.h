@@ -38,7 +38,7 @@ namespace Toki {
 		 * Constructor
 		 *
 		 * Keys recognized in the configuration:
-		 * - token_type - Token type to set in created tokens, default_configs to "t".
+		 * - token_type - Token type to set in created tokens, defaults to "t".
 		 * - initial_whitespace - Whitespace to set in the first extracted
 		 *                        token, can be a descriptor or a string with
 		 *                        the actual whitespace, use \\u0020 for a space.

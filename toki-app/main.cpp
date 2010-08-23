@@ -68,9 +68,9 @@ int main(int argc, char** argv)
 			("input-encoding,e", value(&input_enc)->default_value("UTF8"),
 			 "Input encoding (ICU string identifier), for example UTF8, cp1250")
 			("config-file,c", value(&config_file)->default_value(""),
-			 "Config file to use, default_configs to library-default config")
+			 "Config file to use, defaults to library-default config")
 			("config-path,C", value(&config_path)->default_value(""),
-			 "Override default_config config search path")
+			 "Override config search path")
 			("buffer-size,b", value(&bufsize)->default_value(1),
 			 "Stream buffer size, set to 0 to convert the entire input "
 			 "in-memory before processing and disregard the encoding, assuming UTF-8.")

@@ -44,12 +44,12 @@ namespace Toki {
 
 
 	/**
-	 * The default_config configuration node
+	 * The default configuration node
 	 */
 	const Config::Node& default_config();
 
 	/**
-	 * Get a default_config config by name
+	 * Get a config from standard directories by name, shorthand function.
 	 */
 	Config::Node get_named_config(const std::string& id);
 

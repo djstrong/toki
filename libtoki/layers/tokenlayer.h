@@ -68,10 +68,10 @@ namespace Toki {
 		 * Keys recognized in the configuration:
 		 * - process_types - Space-separated list of token types to include in
 		 *                   processing. All tokens are considered if it is empty.
-		 *                   default_configs to empty.
+		 *                   defaults to empty.
 		 * - ignore_types  - Space-separated list of token types to explicitly
 		 *                   ignore, even if they pass the process_types check.
-		 *                   default_configs to empty.
+		 *                   defaults to empty.
 		 * - id            - Layer identifier (debugging mostly)
 		 */
 		TokenLayer(TokenSource* input, const Config::Node& props);
@@ -85,7 +85,7 @@ namespace Toki {
 		TokenSource* get_input();
 
 		/**
-		 * TokenSource override. default_config implementation for layers that only work
+		 * TokenSource override. Default implementation for layers that only work
 		 * by examining a single token and possibly modyfying it -- grabs a token
 		 * from the input, examines it for NULL and should_process_token_type, calls
 		 * @c process_token and returns whatever that function returns.
@@ -93,8 +93,8 @@ namespace Toki {
 		Token* get_next_token();
 
 		/**
-		 * Used by the default_config get_next_token implementation, should be overriden by
-		 * derived classes. default_configs to a no-op passthrough of the token.
+		 * Used by the default get_next_token implementation, should be overriden by
+		 * derived classes. Defaults to a no-op passthrough of the token.
 		 * @param t token to process. Guaranteed to be not-NULL.
 		 */
 		virtual Token* process_token(Token* t);
@@ -212,7 +212,7 @@ namespace Toki {
 			Loki::TL::MakeTypelist< TokenSource*, const Config::Node& >::Result
 			// TokenLayer constructor arguments' types specification
 		>,
-		Loki::CreateUsingNew, // default_config, needed to change the item below
+		Loki::CreateUsingNew, // default, needed to change the item below
 		Loki::LongevityLifetime::DieAsSmallObjectChild // Required per libloki docs
 	>
 	TokenLayerFactory;
