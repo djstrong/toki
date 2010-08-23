@@ -4,6 +4,7 @@ PROJECT(toki)
 
 set(ver_major "0")
 set(ver_minor "3")
+set(ver_patch "1")
 
 set(LIBS "")
 
@@ -28,7 +29,7 @@ set(LIBS ${LIBS} ${Boost_LIBRARIES})
 set(LIBTOKI_INSTALL_DATA_DIR lib/toki)
 set(LIBTOKI_PATH_SEPARATOR ";")
 set(LIBTOKI_DATA_DIR ".;${CMAKE_INSTALL_PREFIX}/${LIBTOKI_INSTALL_DATA_DIR}")
-set(LIBTOKI_VERSION "${ver_major}.${ver_minor}")
+set(LIBTOKI_VERSION "${ver_major}.${ver_minor}.${ver_patch}")
 
 FIND_PATH(LIBTOKI_SRC_DATA_DIR
     config.ini

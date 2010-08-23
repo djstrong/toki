@@ -3,6 +3,7 @@
 
 #define LIBTOKI_VERSION_MAJOR @ver_major@
 #define LIBTOKI_VERSION_MINOR @ver_minor@
+#define LIBTOKI_VERSION_PATCH @ver_patch@
 #define LIBTOKI_VERSION "@LIBTOKI_VERSION@"
 
 #endif

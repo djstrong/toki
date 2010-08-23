@@ -164,6 +164,7 @@ int main(int argc, char** argv)
 	if (stats) {
 		cptr = &count;
 	}
+	Toki::Path::Instance().set_verbose(!quiet);
 
 	try {
 		const Toki::Config::Node& conf = config_file.empty() ?
@@ -209,6 +210,6 @@ int main(int argc, char** argv)
 			std::cerr << count << "\n";
 		}
 	} catch (Toki::TokenizerLibError& e) {
-		std::cerr << "Error: " << e.what() << "\n";
+		std::cerr << "Error: " << e.info() << "\n";
 	}
 }

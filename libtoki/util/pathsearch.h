@@ -44,6 +44,14 @@ namespace Toki {
 		/// Destructor
 		virtual ~PathSearcherBase();
 
+		bool get_verbose() const {
+			return verbose_loading_;
+		}
+
+		void set_verbose(bool v) {
+			verbose_loading_ = v;
+		}
+
 		/// Search path vector accesor
 		const std::vector<std::string>& get_search_path() const;
 
@@ -62,14 +70,20 @@ namespace Toki {
 		/**
 		 * Look for a filename under the search path and return a path to a file
 		 * that exists, or an empty string in case of failure
+		 * @param filename the filename to look for
+		 * @param info info about the file to be displayed if verbose loading is
+		 *             on. Empty info string suppreses loading info.
 		 */
-		std::string find_file(const std::string& filename);
-
+		std::string find_file(const std::string& filename, const std::string& info = "");
 
 		/**
 		 * Open a file stream for a file in the library search path
+		 * @param filename the filename to look for
+		 * @param ifs the stream to use
+		 * @param info info about the file to be displayed if verbose loading is
+		 *             on. Empty info string suppreses loading info.
 		 */
-		bool open_stream(const std::string& filename, std::ifstream& ifs);
+		bool open_stream(const std::string& filename, std::ifstream& ifs, const std::string& info = "");
 
 	private:
 		/// The search paths
@@ -77,6 +91,9 @@ namespace Toki {
 
 		/// The path separator
 		std::string separator_;
+
+		/// Flag to control outputting actual loaded files
+		bool verbose_loading_;
 	};
 
 	/**
@@ -136,21 +153,21 @@ namespace Toki {
 
 	template<class E>
 	std::string PathSearcher<E>::find_file_or_throw(const std::string& filename,
-			const std::string& where)
+			const std::string& info)
 	{
-		std::string fn = find_file(filename);
+		std::string fn = find_file(filename, info);
 		if (fn.empty()) {
-			throw E(filename, get_search_path_string(), where);
+			throw E(filename, get_search_path_string(), info);
 		}
 		return fn;
 	}
 
 	template<class E>
 	void PathSearcher<E>::open_stream_or_throw(const std::string& filename,
-			std::ifstream& ifs, const std::string& where)
+			std::ifstream& ifs, const std::string& info)
 	{
-		if (!open_stream(filename, ifs)) {
-			throw E(filename, get_search_path_string(), where);
+		if (!open_stream(filename, ifs, info)) {
+			throw E(filename, get_search_path_string(), info);
 		}
 	}
 } /* end ns Toki */
