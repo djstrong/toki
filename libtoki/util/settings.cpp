@@ -46,7 +46,7 @@ namespace Toki {
 			try {
 				cfg = get_named_config("config");
 			} catch (TokenizerLibError& e) {
-				throw TokenizerLibError(std::string("default_config config error! ") + e.what());
+				throw TokenizerLibError(std::string("default config error! ") + e.what());
 			}
 			initialized = true;
 		}
