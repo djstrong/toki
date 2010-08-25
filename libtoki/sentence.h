@@ -43,6 +43,10 @@ namespace Toki {
 			}
 		}
 
+		bool empty() const {
+			return tokens_.empty();
+		}
+
 		/// Size accesor
 		size_t size() const {
 			return tokens_.size();
