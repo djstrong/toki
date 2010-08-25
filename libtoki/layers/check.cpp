@@ -17,6 +17,8 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #include <libtoki/layers/check.h>
 #include <libtoki/token.h>
 
+#include <unicode/uchar.h>
+
 namespace Toki {
 
 	CheckLayer::CheckLayer(TokenSource* input, const Config::Node& props)
@@ -26,6 +28,7 @@ namespace Toki {
 		, huge_token_warn_(props.get("huge_token_warn", true))
 		, huge_sentence_warn_(props.get("huge_sentence_warn", true))
 		, huge_sentence_split_(props.get("huge_sentence_split", false))
+		, check_spaces_(props.get("check_spaces", false))
 		, emit_0_on_no_warnings_(false)
 		, emit_1_on_warnings_(false)
 		, token_counter_(0)
@@ -67,6 +70,14 @@ namespace Toki {
 		}
 		if (t->orth().length() > max_token_size_) {
 			w = warn("Huge token");
+		}
+		if (check_spaces_) {
+			for (int i = 0; i < t->orth().length(); ++i) {
+				if (u_isUWhiteSpace(t->orth().charAt(i))) {
+					w = warn("Whitespace in orth");
+					break;
+				}
+			}
 		}
 		if (!w && emit_0_on_no_warnings_ && error_stream_) {
 			(*error_stream_) << '0';

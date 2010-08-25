@@ -39,6 +39,8 @@ namespace Toki {
 		 * - huge_token_warn     - set to 0 to disable huge token warnings
 		 * - huge_sentence_warn  - set to 0 to disable huge sentence warnings
 		 * - huge_sentence_split - set to 1 to force-split huge sentences
+		 * - check_spaces        - set to true to check for stray whitespace in
+		 *                         the tokens' orths
 		 * - warn_format         - either 1 for a '1' char for every warning,
 		 *                       - 01 to also emit '0' for tokens with no
 		 *                         warnings, and text for a text message.
@@ -70,6 +72,7 @@ namespace Toki {
 		bool huge_token_warn_;
 		bool huge_sentence_warn_;
 		bool huge_sentence_split_;
+		bool check_spaces_;
 
 		bool emit_0_on_no_warnings_;
 		bool emit_1_on_warnings_;
