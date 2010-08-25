@@ -47,17 +47,17 @@ namespace Toki {
 		return buf_ != NULL;
 	}
 
-	std::vector<Token*> SentenceSplitter::get_next_sentence()
+	Sentence* SentenceSplitter::get_next_sentence()
 	{
-		std::vector<Token*> sentence;
+		Sentence* sentence = new Sentence();
 		if (buf_ == NULL) {
 			buf_ = source().get_next_token();
 		}
 		if (buf_) {
-			sentence.push_back(buf_);
+			sentence->append(buf_);
 			buf_ = source().get_next_token();
 			while (buf_ != NULL && !buf_->begins_sentence()) {
-				sentence.push_back(buf_);
+				sentence->append(buf_);
 				buf_ = source().get_next_token();
 			}
 		}

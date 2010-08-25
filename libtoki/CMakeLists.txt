@@ -4,7 +4,7 @@ PROJECT(toki)
 
 set(ver_major "0")
 set(ver_minor "3")
-set(ver_patch "1")
+set(ver_patch "2")
 
 set(LIBS "")
 
@@ -48,9 +48,9 @@ add_definitions(-DHAVE_CONFIG_D_H)
 add_definitions(-DHAVE_VERSION_H)
 
 SET(libtoki_STAT_SRC
-    chunk.cpp
     exception.cpp
     main.cpp
+    sentence.cpp
     sentencesplitter.cpp
     token.cpp
     tokensource.cpp

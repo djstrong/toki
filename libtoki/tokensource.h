@@ -29,29 +29,58 @@ namespace Toki {
 
 	/**
 	 * A simple interface for classes that can be used as token sources, for example
-	 * token processing layers.
+	 * token processing layers. This is actually a template since it might be used with
+	 * different  types, not just Toki Tokens, and avoiding code duplication is good.
 	 */
-	class TokenSource
+	template<typename T>
+	class TokenSourceTemplate
 	{
 	public:
 		/// Constructor
-		TokenSource();
+		TokenSourceTemplate()
+		{
+		}
 
 		/// Destructor
-		virtual ~TokenSource();
+		virtual ~TokenSourceTemplate()
+		{
+		}
 
 		/**
 		 * Get the next token, or NULL if there are no more tokens.
 		 * Caller takes ownership of the token.
 		 */
-		virtual Token* get_next_token() = 0;
+		virtual T* get_next_token() = 0;
 
 		/**
 		 * Tokenization helper. Tokenizes the entire input, calling the sink
 		 * functor or each token. The sink takes ownership of the token.
 		 */
-		void tokenize(boost::function<void (Token*)> sink);
+		void tokenize(boost::function<void (T*)> sink) {
+			while (Token* t = get_next_token()) {
+				sink(t);
+			}
+		}
 	};
+
+	/// Typedef for a Toki TokenSource
+	typedef TokenSourceTemplate<Token> TokenSource;
+
+	namespace detail {
+		// Helper template class to get type T when all we have is a type T*/
+		// This bit does nothing by default...
+		template<typename T>
+		struct deptr
+		{
+		};
+
+		// ...and this bit has a typedef for T when the template is used with T*
+		template<typename T>
+		struct deptr<T*>
+		{
+			typedef T type;
+		};
+	} /* end ns detail */
 
 	/**
 	 * Generic TokenSource wrapper for containers of tagger Token pointers,
@@ -59,19 +88,27 @@ namespace Toki {
 	 *
 	 * The container should not be modified as long as it is being accesed
 	 * by a RangeSource wrapper.
+	 *
+	 * There is some mild template magic here to make it work with the templated
+	 * TokenSource.
 	 */
 	template<typename T>
-	class RangeSource : public TokenSource
+	class RangeSource : public TokenSourceTemplate<typename detail::deptr<typename T::value_type>::type>
 	{
 	public:
+		/// convenience typedef
 		typedef typename T::const_iterator const_iterator;
 
+		/// Constructor from a range of type T, where T is iterable
+		/// (i.e. has const_iterator and value_type typedefs and begin / end
+		/// member functions.
 		RangeSource(const T& range)
 			: end_(range.end()), ptr_(range.begin())
 		{
 		}
 
-		Token* get_next_token()
+		/// TokenSource override
+		typename T::value_type get_next_token()
 		{
 			if (ptr_ != end_) {
 				return *ptr_++;
@@ -81,17 +118,23 @@ namespace Toki {
 		}
 
 	private:
+		/// The end iterator
 		const_iterator end_;
 
+		/// Cuurrent position iterator
 		const_iterator ptr_;
 	};
 
+	/// Helper function to make a RangeSource from a range,
+	/// avoiding lenghty template instantiation
 	template<class T>
 	RangeSource<T>* make_range_source(const T& range)
 	{
 		return new RangeSource<T>(range);
 	}
 
+	/// Helper function to make a RangeSource from two iterators,
+	/// avoiding lenghty template instantiation
 	template<class T>
 	RangeSource<boost::iterator_range<T> >* make_range_source(const T& b, const T& e)
 	{

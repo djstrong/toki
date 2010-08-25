@@ -18,7 +18,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #define SENTENCESPLITTER_H
 
 #include <libtoki/tokensource.h>
-#include <libtoki/token.h>
+#include <libtoki/sentence.h>
 
 #include <vector>
 
@@ -60,7 +60,7 @@ namespace Toki {
 		 * Returns the next sentence, or an empty vector if the source has been
 		 * exhausted.
 		 */
-		std::vector<Token*> get_next_sentence();
+		Sentence* get_next_sentence();
 
 		/// Buffer accesor
 		Token* get_buf();

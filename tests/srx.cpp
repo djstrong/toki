@@ -187,19 +187,21 @@ BOOST_AUTO_TEST_CASE( sentence )
 	Toki::TokenSource* src = Toki::make_range_source(v);
 
 	Toki::SentenceSplitter s(*src);
-	std::vector<Toki::Token*> o;
+	Toki::Sentence* o;
 
 	o = s.get_next_sentence();
-	BOOST_REQUIRE_EQUAL(o.size(), 3);
+	BOOST_REQUIRE_EQUAL(o->size(), 3);
+	delete o;
 	o = s.get_next_sentence();
-	BOOST_REQUIRE_EQUAL(o.size(), 1);
-	BOOST_REQUIRE_EQUAL(o[0]->orth_utf8(), "d");
+	BOOST_REQUIRE_EQUAL(o->size(), 1);
+	BOOST_REQUIRE_EQUAL((*o)[0]->orth_utf8(), "d");
+	delete o;
 	o = s.get_next_sentence();
-	BOOST_REQUIRE_EQUAL(o.size(), 2);
+	BOOST_REQUIRE_EQUAL(o->size(), 2);
+	delete o;
 	o = s.get_next_sentence();
-	BOOST_REQUIRE_EQUAL(o.size(), 1);
-	BOOST_REQUIRE_EQUAL(o[0]->orth_utf8(), "g");
-	delete src;
+	BOOST_REQUIRE_EQUAL(o->size(), 1);
+	BOOST_REQUIRE_EQUAL((*o)[0]->orth_utf8(), "g");
 }
 
 
