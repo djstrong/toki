@@ -90,7 +90,8 @@ namespace Toki {
 	 * by a RangeSource wrapper.
 	 *
 	 * There is some mild template magic here to make it work with the templated
-	 * TokenSource.
+	 * TokenSource. Basically when given a container of some Token*, we want to
+	 * end up with a TokenSource<Token>, hence the deptr.
 	 */
 	template<typename T>
 	class RangeSource : public TokenSourceTemplate<typename detail::deptr<typename T::value_type>::type>
