@@ -35,6 +35,8 @@ namespace Toki {
 			std::copy(range.begin(), range.end(), std::back_inserter(tokens_));
 		}
 
+		SentenceTemplate* clone() const;
+
 		/// Destructor
 		~SentenceTemplate()
 		{
@@ -81,6 +83,16 @@ namespace Toki {
 		/// The tokens this sentence contains and owns
 		std::vector<TT*> tokens_;
 	};
+
+	template<class TT>
+	SentenceTemplate<TT>* SentenceTemplate<TT>::clone() const
+	{
+		SentenceTemplate<TT>* s = new SentenceTemplate<TT>;
+		foreach (const TT* t, tokens_) {
+			s->append(t->clone());
+		}
+		return s;
+	}
 
 	/// typedef for a sentence of Toki tokens
 	typedef SentenceTemplate<Token> Sentence;
