@@ -27,6 +27,7 @@ int main(int argc, char** argv)
 		delete tok;
 	}
 	return 0;
+}
 
 2. Configuration file syntax
 

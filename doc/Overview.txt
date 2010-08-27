@@ -1,0 +1,17 @@
+Toki — a configurable tokeniser.
+© 2010, Tomasz Śniatowski and Adam Radziszewski
+Wrocław University of Technology
+
+This is free software, see LICENSE.
+
+
+Toki is a software package performing segmentation of running text into tokens and (optionally) sentences. The tokeniser is targeted at European languages, especially at Polish (the default configuration is for Polish).
+
+Most important features:
+1. Configurability. The behaviour of a working tokeniser is defined by a configuration file. The file specifies the rules of tokenisation (as defined by processing layers) and labelling of tokens as well as may point to a file with sentence splitting rules.
+2. The output tokens are labelled. It allows to re-use some of the information that was needed to make decisions on segmentation. For instance, knowing that a token is punctuation may be useful for next stages of processing (e.g. morphological analysis). The labels are also useful internally — they allow to define more sophisticated processing rules.
+3. Support for SRX standard for sentence splitting. The advantage is working segmentation rules are available for many languages. To the best of our knowledge, this is the first open source C++ implementation of SRX. 
+4. Unicode support. ICU library is used for this purpose.
+5. Library with simple interface. Toki has been implemented as a C++ library which facilitates linking with different languages. The API has been kept simple to allow for easy linkage.
+6. Simple command-line util to tokenise text and debug configs (toki-app).
+
