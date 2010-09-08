@@ -41,6 +41,7 @@ namespace Toki {
 	 *  - CaseLexiconClassifyLayer, for case-sensitive lexicons -- "lexicon" key
 	 *  - CaselessLexiconClassifyLayer, for case-insensitive lexicons
 	 *    -- "lexicon_caseless" key.
+         * @todo use a hash set
 	 */
 	template <typename CMP>
 	class LexiconClassifyLayer : public TokenLayer
