@@ -23,6 +23,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 
 #include <boost/property_tree/ptree.hpp>
 #include <boost/foreach.hpp>
+#include <boost/make_shared.hpp>
 
 #include <unicode/uchar.h>
 #include <unicode/ucnv.h>
@@ -40,6 +41,13 @@ namespace Toki {
 	{
 		apply_configuration(cfg);
 		new_input_source();
+	}
+	
+	boost::shared_ptr<LayerTokenizer> LayerTokenizer::create_from_named_config(const std::string& config_name)
+	{
+		const Config::Node& cfg = config_name.empty() ?
+				default_config() : get_named_config(config_name);
+		return boost::make_shared<LayerTokenizer>(cfg);
 	}
 
 	LayerTokenizer::LayerTokenizer(UnicodeSource *input, const Config::Node &cfg)

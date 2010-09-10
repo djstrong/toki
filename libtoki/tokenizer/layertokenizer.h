@@ -45,7 +45,12 @@ namespace Toki {
 		 *
 		 * @see Tokenizer::Tokenizer
 		 */
-		LayerTokenizer(const Config::Node& cfg = default_config());
+		explicit LayerTokenizer(const Config::Node& cfg = default_config());
+
+		/**
+		 * Convenience creator using a named config
+		 */
+		static boost::shared_ptr<LayerTokenizer> create_from_named_config(const std::string& config_name);
 
 		/**
 		 * Constructor shorthand -- start with the given UnicodeSource, and take
