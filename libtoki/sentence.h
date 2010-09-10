@@ -79,6 +79,12 @@ namespace Toki {
 			tokens_.push_back(t);
 		}
 
+		/// convenience first token accesor
+		const Token* first_token() const {
+			assert(!tokens_.empty());
+			return tokens_[0];
+		}
+
 	private:
 		/// The tokens this sentence contains and owns
 		std::vector<TT*> tokens_;
