@@ -80,7 +80,7 @@ namespace Toki {
 		 */
 		~LayerTokenizer();
 
-		/// TokenSource override
+		/// UnicodeSink override
 		void new_input_source();
 
 		/// TokenSource override
@@ -96,7 +96,7 @@ namespace Toki {
 		std::string layers_long_info(const std::string& sep) const;
 
 		/**
-		 * Set the error stream used by teh tokenizer and layers, set to NULL
+		 * Set the error stream used by the tokenizer and layers, set to NULL
 		 * to disable error logging.
 		 */
 		void set_error_stream(std::ostream* os);

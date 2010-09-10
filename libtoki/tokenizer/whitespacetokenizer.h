@@ -74,7 +74,7 @@ namespace Toki {
 		void set_initial_whitespace(Whitespace::Enum wa);
 
 	protected:
-		/// Tokenizer override
+		/// UnicodeSink override
 		void new_input_source();
 
 		/// process configuration helper for the constructors
