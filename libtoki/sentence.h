@@ -80,7 +80,7 @@ namespace Toki {
 		}
 
 		/// convenience first token accesor
-		const Token* first_token() const {
+		const TT* first_token() const {
 			assert(!tokens_.empty());
 			return tokens_[0];
 		}
