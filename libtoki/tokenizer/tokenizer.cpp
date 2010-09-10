@@ -16,9 +16,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 
 #include <libtoki/token.h>
 #include <libtoki/tokenizer/tokenizer.h>
-#include <libtoki/unicode/nullsource.h>
-#include <libtoki/unicode/icustringwrapper.h>
-#include <libtoki/unicode/istreamwrapper.h>
+
 
 #include <boost/algorithm/string.hpp>
 #include <boost/lexical_cast.hpp>
@@ -28,37 +26,32 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 namespace Toki {
 
 	Tokenizer::Tokenizer(const Config::Node& cfg)
-		: TokenSource(), input_()
+		: TokenSource(), UnicodeSink()
 	{
-		set_null_input_source();
 		apply_configuration(cfg);
 	}
 
 	Tokenizer::Tokenizer(UnicodeSource *input, const Config::Node& cfg)
-		: TokenSource(), input_()
+		: TokenSource(), UnicodeSink(input)
 	{
-		set_input_source(input);
 		apply_configuration(cfg);
 	}
 
 	Tokenizer::Tokenizer(boost::shared_ptr<UnicodeSource> input, const Config::Node &cfg)
-		: TokenSource(), input_()
+		: TokenSource(), UnicodeSink(input)
 	{
-		set_input_source(input);
 		apply_configuration(cfg);
 	}
 
 	Tokenizer::Tokenizer(std::istream &is, const Config::Node &cfg)
-		: TokenSource(), input_()
+		: TokenSource(), UnicodeSink(is, cfg.get<int>("input_buffer_size", 1000))
 	{
-		set_input_source(is, cfg.get<int>("input_buffer_size", 200));
 		apply_configuration(cfg);
 	}
 
 	Tokenizer::Tokenizer(const UnicodeString &s, const Config::Node &cfg)
-		: TokenSource(), input_()
+		: TokenSource(), UnicodeSink(s)
 	{
-		set_input_source(s);
 		apply_configuration(cfg);
 	}
 
@@ -66,32 +59,6 @@ namespace Toki {
 	{
 	}
 
-	void Tokenizer::set_null_input_source()
-	{
-		set_input_source(new NullUnicodeSource());
-	}
-
-	void Tokenizer::set_input_source(UnicodeSource *us)
-	{
-		input_.reset(us);
-		new_input_source();
-	}
-
-	void Tokenizer::set_input_source(boost::shared_ptr<UnicodeSource> us)
-	{
-		input_ = us;
-		new_input_source();
-	}
-
-	void Tokenizer::set_input_source(std::istream &is, int bufsize)
-	{
-		set_input_source(new UnicodeIstreamWrapper(is, bufsize));
-	}
-
-	void Tokenizer::set_input_source(const UnicodeString &s)
-	{
-		set_input_source(new UnicodeIcuStringWrapper(s));
-	}
 
 	void Tokenizer::reset()
 	{

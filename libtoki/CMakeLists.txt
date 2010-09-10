@@ -3,8 +3,8 @@
 PROJECT(toki)
 
 set(ver_major "0")
-set(ver_minor "3")
-set(ver_patch "2")
+set(ver_minor "4")
+set(ver_patch "0")
 
 set(LIBS "")
 
@@ -80,6 +80,7 @@ SET(libtoki_STAT_SRC
     unicode/icustringwrapper.cpp
     unicode/istreamwrapper.cpp
     unicode/nullsource.cpp
+    unicode/sink.cpp
     unicode/source.cpp
     util/confignode.cpp
     util/debug.cpp
