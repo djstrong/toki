@@ -35,8 +35,8 @@ namespace Toki { namespace Srx {
 		init_buffer();
 	}
 
-	SourceWrapper::SourceWrapper(boost::shared_ptr<UnicodeSource> src,
-			boost::shared_ptr<Segmenter> segm, int window, int margin)
+	SourceWrapper::SourceWrapper(const boost::shared_ptr<UnicodeSource>& src,
+			const boost::shared_ptr<Segmenter>& segm, int window, int margin)
 		: source_(src), segmenter_(segm)
 		, window_size_(window), margin_size_(margin)
 		, buffer_size_(window_size_ + margin_size_ * 2)
@@ -59,7 +59,7 @@ namespace Toki { namespace Srx {
 		set_segmenter(boost::shared_ptr<Segmenter>(s));
 	}
 
-	void SourceWrapper::set_segmenter(boost::shared_ptr<Segmenter> s)
+	void SourceWrapper::set_segmenter(const boost::shared_ptr<Segmenter>& s)
 	{
 		std::cerr << "set_segmenter(shared)\n";
 		segmenter_ = s;
@@ -70,7 +70,7 @@ namespace Toki { namespace Srx {
 		set_source(boost::shared_ptr<UnicodeSource>(s));
 	}
 
-	void SourceWrapper::set_source(boost::shared_ptr<UnicodeSource> s)
+	void SourceWrapper::set_source(const boost::shared_ptr<UnicodeSource>& s)
 	{
 		source_ = s;
 		out_idx_ = margin_size_;

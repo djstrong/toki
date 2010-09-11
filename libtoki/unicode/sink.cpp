@@ -35,7 +35,7 @@ namespace Toki {
 		set_input_source(input);
 	}
 
-	UnicodeSink::UnicodeSink(boost::shared_ptr<UnicodeSource> input)
+	UnicodeSink::UnicodeSink(const boost::shared_ptr<UnicodeSource>& input)
 		: input_()
 	{
 		set_input_source(input);
@@ -68,7 +68,7 @@ namespace Toki {
 		new_input_source();
 	}
 
-	void UnicodeSink::set_input_source(boost::shared_ptr<UnicodeSource> us)
+	void UnicodeSink::set_input_source(const boost::shared_ptr<UnicodeSource>& us)
 	{
 		input_ = us;
 		new_input_source();

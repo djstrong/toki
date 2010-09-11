@@ -36,28 +36,28 @@ namespace Toki {
 		 * Construct a sink with no input source (a null object that
 		 * will always claim there are no more characters)
 		 */
-		UnicodeSink();
+		explicit UnicodeSink();
 
 		/**
 		 * Constructor shorthand -- start with the given UnicodeSource, and take
 		 * ownership (through a shared pointer).
 		 * @see UnicodeSink::set_input_source
 		 */
-		UnicodeSink(UnicodeSource* input);
+		explicit UnicodeSink(UnicodeSource* input);
 
 		/**
 		 * Constructor shorthand -- start with the given UnicodeSource as a shared
 		 * pointer
 		 * @see UnicodeSink::set_input_source
 		 */
-		UnicodeSink(boost::shared_ptr<UnicodeSource> input);
+		explicit UnicodeSink(const boost::shared_ptr<UnicodeSource>& input);
 
 		/**
 		 * Constructor shorthand -- start with the given std::istream. Note no
 		 * ownership is taken and the stream must live long enough.
 		 * @see UnicodeSink::set_input_source
 		 */
-		UnicodeSink(std::istream& is, int bufsize = 1000);
+		explicit UnicodeSink(std::istream& is, int bufsize = 1000);
 
 		/**
 		 * Constructor shorthand -- start with the given UnicodeString, which is
@@ -91,7 +91,7 @@ namespace Toki {
 		 * Input source setter -- as a shared pointer. See the are pointer version
 		 * for info on what happens on the atcual destruction.
 		 */
-		void set_input_source(boost::shared_ptr<UnicodeSource> us);
+		void set_input_source(const boost::shared_ptr<UnicodeSource>& us);
 
 		/**
 		 * Input source setter. The stream must live for as long as the sink

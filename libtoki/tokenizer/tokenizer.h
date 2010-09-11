@@ -56,7 +56,8 @@ namespace Toki {
 		 * pointer
 		 * @see UnicodeSink::set_input_source
 		 */
-		Tokenizer(boost::shared_ptr<UnicodeSource> input, const Config::Node& cfg = default_config());
+		Tokenizer(const boost::shared_ptr<UnicodeSource>& input,
+				const Config::Node& cfg = default_config());
 
 		/**
 		 * Constructor shorthand -- start with the given std::istream. Note no

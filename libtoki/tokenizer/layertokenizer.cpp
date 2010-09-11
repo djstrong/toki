@@ -43,7 +43,8 @@ namespace Toki {
 		new_input_source();
 	}
 	
-	boost::shared_ptr<LayerTokenizer> LayerTokenizer::create_from_named_config(const std::string& config_name)
+	boost::shared_ptr<LayerTokenizer> LayerTokenizer::create_from_named_config(
+			const std::string& config_name)
 	{
 		const Config::Node& cfg = config_name.empty() ?
 				default_config() : get_named_config(config_name);
@@ -59,7 +60,9 @@ namespace Toki {
 		new_input_source();
 	}
 
-	LayerTokenizer::LayerTokenizer(boost::shared_ptr<UnicodeSource> input, const Config::Node &cfg)
+	LayerTokenizer::LayerTokenizer(
+			const boost::shared_ptr<UnicodeSource>& input,
+			const Config::Node &cfg)
 		: Tokenizer(input, cfg)
 		, input_tokenizer_(new WhitespaceTokenizer(cfg.get_child("input", Config::Node())))
 		, error_stream_(Toki::get_default_error_stream())

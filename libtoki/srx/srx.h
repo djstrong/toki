@@ -64,8 +64,8 @@ namespace Toki { namespace Srx {
 		SourceWrapper(UnicodeSource* src, Segmenter* segm,
 				int window = 200, int margin = 100);
 
-		SourceWrapper(boost::shared_ptr<UnicodeSource> src,
-				boost::shared_ptr<Segmenter> segm,
+		SourceWrapper(const boost::shared_ptr<UnicodeSource>& src,
+				const boost::shared_ptr<Segmenter>& segm,
 				int window = 200, int margin = 100);
 
 		~SourceWrapper();
@@ -91,7 +91,7 @@ namespace Toki { namespace Srx {
 		/**
 		 * Setter for the SRX segmenter object -- shared pointer version.
 		 */
-		void set_segmenter(boost::shared_ptr<Segmenter> s);
+		void set_segmenter(const boost::shared_ptr<Segmenter>& s);
 
 		/**
 		 * Setter for the wrapped source object -- raw pointer version.
@@ -102,7 +102,7 @@ namespace Toki { namespace Srx {
 		/**
 		 * Setter for the wrapped source object -- shared pointer version.
 		 */
-		void set_source(boost::shared_ptr<UnicodeSource> s);
+		void set_source(const boost::shared_ptr<UnicodeSource>& s);
 
 		/**
 		 * Getter for the used segmenter

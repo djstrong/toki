@@ -50,7 +50,8 @@ namespace Toki {
 		/**
 		 * Convenience creator using a named config
 		 */
-		static boost::shared_ptr<LayerTokenizer> create_from_named_config(const std::string& config_name);
+		static boost::shared_ptr<LayerTokenizer> create_from_named_config(
+				const std::string& config_name);
 
 		/**
 		 * Constructor shorthand -- start with the given UnicodeSource, and take
@@ -64,7 +65,8 @@ namespace Toki {
 		 * pointer.
 		 * @see Tokenizer::Tokenizer
 		 */
-		LayerTokenizer(boost::shared_ptr<UnicodeSource> input, const Config::Node& cfg = default_config());
+		LayerTokenizer(const boost::shared_ptr<UnicodeSource>& input,
+				const Config::Node& cfg = default_config());
 
 		/**
 		 * Constructor shorthand -- start with the given std::istream. Note no

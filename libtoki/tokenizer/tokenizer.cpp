@@ -37,14 +37,16 @@ namespace Toki {
 		apply_configuration(cfg);
 	}
 
-	Tokenizer::Tokenizer(boost::shared_ptr<UnicodeSource> input, const Config::Node &cfg)
+	Tokenizer::Tokenizer(const boost::shared_ptr<UnicodeSource>& input,
+			const Config::Node &cfg)
 		: TokenSource(), UnicodeSink(input)
 	{
 		apply_configuration(cfg);
 	}
 
 	Tokenizer::Tokenizer(std::istream &is, const Config::Node &cfg)
-		: TokenSource(), UnicodeSink(is, cfg.get<int>("input_buffer_size", 1000))
+		: TokenSource()
+		, UnicodeSink(is, cfg.get<int>("input_buffer_size", 1000))
 	{
 		apply_configuration(cfg);
 	}
