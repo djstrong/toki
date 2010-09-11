@@ -4,7 +4,7 @@ PROJECT(toki)
 
 set(ver_major "0")
 set(ver_minor "4")
-set(ver_patch "0")
+set(ver_patch "1")
 
 set(LIBS "")
 
