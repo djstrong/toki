@@ -34,7 +34,8 @@ namespace Toki {
 		if (separator.empty()) {
 			std::cerr << "No path separator! Defaulting to :\n";
 		} else if (separator.size() > 1) {
-			std::cerr << "Separator size > 1, truncating: '" << separator << "'\n";
+			std::cerr << "Separator size > 1, truncating: '"
+					<< separator << "'\n";
 			separator_ = separator_[0];
 		}
 	}
@@ -53,7 +54,8 @@ namespace Toki {
 		return boost::algorithm::join(paths_, separator_);
 	}
 
-	void PathSearcherBase::set_search_path(const std::vector<std::string> &paths)
+	void PathSearcherBase::set_search_path(
+			const std::vector<std::string> &paths)
 	{
 		paths_ = paths;
 	}
@@ -76,9 +78,11 @@ namespace Toki {
 		boost::filesystem::path i(filename);
 		foreach (const std::string& s, paths_) {
 			boost::filesystem::path pi = s / i;
-			if (boost::filesystem::exists(pi) && boost::filesystem::is_regular(pi)) {
+			if (boost::filesystem::exists(pi) &&
+					boost::filesystem::is_regular(pi)) {
 				if (verbose_loading_) {
-					std::cerr << "Found " << info << " file: " << pi.string() << "\n";
+					std::cerr << "Found " << info << " file: "
+							<< pi.string() << "\n";
 				}
 				return pi.string();
 			}
@@ -98,7 +102,8 @@ namespace Toki {
 	}
 
 
-	ConfigPathSetter::ConfigPathSetter(PathSearcherBase& ps, const std::string &new_path)
+	ConfigPathSetter::ConfigPathSetter(PathSearcherBase& ps,
+			const std::string &new_path)
 		: ps_(ps), old_path_(ps.get_search_path())
 	{
 		ps_.set_search_path(new_path);

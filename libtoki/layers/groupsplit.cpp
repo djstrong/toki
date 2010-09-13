@@ -19,7 +19,8 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 
 namespace Toki {
 
-	GroupSplitLayer::GroupSplitLayer(TokenSource* input, const Config::Node& props)
+	GroupSplitLayer::GroupSplitLayer(TokenSource* input,
+			const Config::Node& props)
 		: BasicSplitLayer(input, props)
 	{
 	}
@@ -68,7 +69,8 @@ namespace Toki {
 				split_end = i;
 				if (split_end < orth.length()) {
 					++i;
-					while (i < orth.length() && !is_split_char(orth.charAt(i))) ++i;
+					while (i < orth.length()
+						&& !is_split_char(orth.charAt(i))) ++i;
 					UnicodeString part;
 					orth.extractBetween(split_end, i, part);
 					Token* b = t->clone_changed(part);

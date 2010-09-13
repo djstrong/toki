@@ -46,7 +46,7 @@ namespace Toki {
 			try {
 				cfg = get_named_config("config");
 			} catch (TokenizerLibError& e) {
-				throw TokenizerLibError(std::string("default config error! ") + e.what());
+				throw TokenizerLibError("default config error! " + e.info());
 			}
 			initialized = true;
 		}
@@ -55,7 +55,8 @@ namespace Toki {
 
 	Config::Node get_named_config(const std::string &id)
 	{
-		std::string fn = Path::Instance().find_file_or_throw(id + ".ini", "tokenizer config");
+		std::string fn = Path::Instance().find_file_or_throw(
+				id + ".ini", "tokenizer config");
 		return Config::from_file(fn);
 	}
 

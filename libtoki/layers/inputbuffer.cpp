@@ -19,7 +19,8 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 
 namespace Toki {
 
-	InputBufferLayer::InputBufferLayer(TokenSource* input, const Config::Node& props)
+	InputBufferLayer::InputBufferLayer(TokenSource* input,
+			const Config::Node& props)
 		: TokenLayer(input, props), buffer_()
 	{
 	}

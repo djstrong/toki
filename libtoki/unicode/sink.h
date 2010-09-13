@@ -39,15 +39,15 @@ namespace Toki {
 		explicit UnicodeSink();
 
 		/**
-		 * Constructor shorthand -- start with the given UnicodeSource, and take
-		 * ownership (through a shared pointer).
+		 * Constructor shorthand -- start with the given UnicodeSource, and
+		 * take ownership (through a shared pointer).
 		 * @see UnicodeSink::set_input_source
 		 */
 		explicit UnicodeSink(UnicodeSource* input);
 
 		/**
-		 * Constructor shorthand -- start with the given UnicodeSource as a shared
-		 * pointer
+		 * Constructor shorthand -- start with the given UnicodeSource as a
+		 * shared pointer
 		 * @see UnicodeSink::set_input_source
 		 */
 		explicit UnicodeSink(const boost::shared_ptr<UnicodeSource>& input);
@@ -60,8 +60,8 @@ namespace Toki {
 		explicit UnicodeSink(std::istream& is, int bufsize = 1000);
 
 		/**
-		 * Constructor shorthand -- start with the given UnicodeString, which is
-		 * copied.
+		 * Constructor shorthand -- start with the given UnicodeString, which
+		 * is copied.
 		 * @see UnicodeSink::set_input_source
 		 */
 		UnicodeSink(const UnicodeString& s);
@@ -70,8 +70,8 @@ namespace Toki {
 		virtual ~UnicodeSink();
 
 		/**
-		 * Explicitly set the input source to be a null object that never returns
-		 * any unicode characters
+		 * Explicitly set the input source to be a null object that never
+		 * returns any unicode characters
 		 */
 		void set_null_input_source();
 
@@ -80,16 +80,16 @@ namespace Toki {
 		 * (through a shared pointer)and will delete it.
 		 * Note, however, that if the source is a UnicodeIstreamWrapper, the
 		 * underlying istream object will *not* be deleted -- see
-		 * UnicodeIstreamWrapper, which also requires that the istream lives for as
-		 * long as the UnicodeIstreamWrapper lives.
-		 * @param us a valid UnicodeSource to use and take ownership of. Behavior is
-		 *           undefined if the pointer is invalid or NULL.
+		 * UnicodeIstreamWrapper, which also requires that the istream lives
+		 * for as long as the UnicodeIstreamWrapper lives.
+		 * @param us a valid UnicodeSource to use and take ownership of.
+		 *           Behavior is undefined if the pointer is invalid or NULL.
 		 */
 		void set_input_source(UnicodeSource* us);
 
 		/**
-		 * Input source setter -- as a shared pointer. See the are pointer version
-		 * for info on what happens on the atcual destruction.
+		 * Input source setter -- as a shared pointer. See the are pointer
+		 * version for info on what happens on the atcual destruction.
 		 */
 		void set_input_source(const boost::shared_ptr<UnicodeSource>& us);
 
@@ -119,13 +119,13 @@ namespace Toki {
 		}
 
 		/**
-		 * Called when a new input source is created, derived classes might want to
-		 * override this.
+		 * Called when a new input source is created, derived classes might
+		 * want to override this.
 		 *
-		 * WARNING: this will *NOT* be called during the initial construction of a
-		 * UnicodeSink, or rather, the overriden version will not be called, so
-		 * derived classess should manually call their handler in constructors that
-		 * cause an actual input source to be set.
+		 * WARNING: this will *NOT* be called during the initial construction
+		 * of a UnicodeSink, or rather, the overriden version will not be
+		 * called, so derived classess should manually call their handler in
+		 * constructors that cause an actual input source to be set.
 		 */
 		virtual void new_input_source() {}
 

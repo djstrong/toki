@@ -22,14 +22,16 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 namespace Toki {
 
 	namespace XmlUtil {
-		const xmlpp::Node* get_child_or_null(const xmlpp::Node* n, const char* name)
+		const xmlpp::Node* get_child_or_null(const xmlpp::Node* n,
+				const char* name)
 		{
 			const xmlpp::Node::NodeList list = n->get_children(name);
 			if (list.empty()) return NULL;
 			return list.front();
 		}
 
-		std::string get_child_text_or_empty(const xmlpp::Node* n, const char* name)
+		std::string get_child_text_or_empty(const xmlpp::Node* n,
+				const char* name)
 		{
 			const xmlpp::Element* el = dynamic_cast<const xmlpp::Element*>(
 				get_child_or_null(n, name));

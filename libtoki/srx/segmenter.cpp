@@ -85,7 +85,8 @@ namespace Toki { namespace Srx {
 		}
 	}
 
-	void NaiveIcuSegmenter::compute_breaks(const UnicodeString& str, int from, int to)
+	void NaiveIcuSegmenter::compute_breaks(const UnicodeString& str, int from,
+			int to)
 	{
 		//std::cerr << "SRXP run from " << from << " to " << to
 		//		<< " on [" << Util::to_utf8(str) << "] :";
@@ -103,7 +104,8 @@ namespace Toki { namespace Srx {
 				if (n >= 0) {
 					if (n < to) {
 						break_map_t::value_type v(n, cr.breaks);
-						break_map_.insert(v); //only insert if the index was not in the map
+						 //only insert if the index was not in the map
+						break_map_.insert(v);
 					} else {
 						break;
 					}
@@ -154,7 +156,8 @@ namespace Toki { namespace Srx {
 				UErrorCode status = U_ZERO_ERROR;
 				RegexMatcher *b, *a;
 				std::string mod_before = r.before + "$";
-				b = new RegexMatcher(UnicodeString::fromUTF8(mod_before), 0, status);
+				b = new RegexMatcher(UnicodeString::fromUTF8(mod_before), 0,
+						status);
 				if (!U_SUCCESS(status)) {
 					throw Error("BeforeRule failed to compile: " + mod_before);
 				}
@@ -162,7 +165,8 @@ namespace Toki { namespace Srx {
 				if (r.after.empty()) {
 					a = NULL;
 				} else {
-					a = new RegexMatcher(UnicodeString::fromUTF8(r.after), 0, status);
+					a = new RegexMatcher(UnicodeString::fromUTF8(r.after), 0,
+						status);
 					if (!U_SUCCESS(status)) {
 						throw Error("AfterRule failed to compile: " + r.after);
 					}
@@ -174,7 +178,8 @@ namespace Toki { namespace Srx {
 		}
 	}
 
-	void HxoIcuSegmenter::compute_breaks(const UnicodeString &str, int from, int to)
+	void HxoIcuSegmenter::compute_breaks(const UnicodeString &str, int from,
+			int to)
 	{
 		break_map_.clear();
 		to -= from;
@@ -198,16 +203,20 @@ namespace Toki { namespace Srx {
 						// that match here and appear earlier
 						UnicodeString h(false, str.getBuffer(), n);
 						bool nobreak_matched = false;
-						for (size_t ri = 0; ri < break_exception_idx_[bri]; ++ri) {
-							//std::cerr << "Checking nobreak rule " << ri << "\n";
+						for (size_t ri = 0; ri < break_exception_idx_[bri];
+								++ri) {
+							//std::cerr << "Checking nobreak rule "
+							//	<< ri << "\n";
 							//std::cerr << "'" << Util::to_utf8(h) << "'\n";
-							//std::cerr << "'" << Util::to_utf8(UnicodeString(str.getBuffer()+n)) << "'\n";
+							//std::cerr << "'" << Util::to_utf8(
+							//		UnicodeString(str.getBuffer()+n)) << "'\n";
 							// check the "after" pattern
 							RegexMatcher* arm = nobreak_fwd_[ri];
 							if (arm) {
 								arm->reset(str);
 							}
-							if (!arm || (arm->find(n, status) && arm->start(status) == n)) {
+							if (!arm || (arm->find(n, status)
+								&& arm->start(status) == n)) {
 								//std::cerr << "After pattern match\n";
 								// after pattern matches
 								// need to check the before pattern
@@ -221,9 +230,11 @@ namespace Toki { namespace Srx {
 								}
 							}
 						}
-						//std::cerr << "Inserting break at " << n << " " << !nobreak_matched << "\n";
+						//std::cerr << "Inserting break at " << n << " "
+						// << !nobreak_matched << "\n";
 						break_map_t::value_type v(n_out, !nobreak_matched);
-						break_map_.insert(v); //only insert if the index was not in the map
+						//only insert if the index was not in the map
+						break_map_.insert(v);
 					}
 				}
 				i = cr.matcher->start(status) + 1;
@@ -247,7 +258,8 @@ namespace Toki { namespace Srx {
 		}
 	}
 
-	void NaiveBoostSegmenter::compute_breaks(const UnicodeString& str, int from, int to)
+	void NaiveBoostSegmenter::compute_breaks(const UnicodeString& str,
+			int from, int to)
 	{
 		//std::cerr << "SRXP run from " << from << " to " << to
 		//		<< " on [" << Util::to_utf8(str) << "] :";
@@ -267,7 +279,8 @@ namespace Toki { namespace Srx {
 				if (n >= 0) {
 					if (n < to) {
 						break_map_t::value_type v(n, cr.second);
-						break_map_.insert(v); //only insert if the index was not in the map
+						//only insert if the index was not in the map
+						break_map_.insert(v);
 					} else {
 						break;
 					}

@@ -48,10 +48,10 @@ namespace Toki { namespace Srx {
 	 * from the wrapped source. SRX segment breaks are then computed again and
 	 * the internal pointer is reset to point at the beginning of the window.
 	 *
-	 * Larger windows should yield more performance, and large margin sizes will
-	 * result in preformance drop. However, the margin size must be large
-	 * enough to contain the longest regex match expected, otherwise results may
-	 * be off. Technically the restriction is slightly more loose, but the
+	 * Larger windows should yield more performance, and large margin sizes
+	 * will result in preformance drop. However, the margin size must be large
+	 * enough to contain the longest regex match expected, otherwise results
+	 * may be off. Technically the restriction is slightly more loose, but the
 	 * aforementioned rule of thumb is reasonable anyway.
 	 */
 	class SourceWrapper : public UnicodeSource, private boost::noncopyable {
@@ -115,17 +115,19 @@ namespace Toki { namespace Srx {
 		/// helper initialisation function
 		void init();
 
-		/// check function for the output index position, inlined for performace
+		/// check function for the output index position
 		bool buffer_ok() {
-			return (out_idx_ < buffer_end_idx_) && (out_idx_ < window_size_ + margin_size_);
+			return (out_idx_ < buffer_end_idx_) &&
+					(out_idx_ < window_size_ + margin_size_);
 		}
 
 		/// buffer initialisation
 		void init_buffer();
 
-		/// helper function used wherever it is possible thatthe buffer will not
-		/// be valid, makes the buffer valid if possible. If the buffer is still
-		/// invalid ater a call to ensure_more, there are no more characters
+		/// helper function used wherever it is possible thatthe buffer will
+		/// not be valid, makes the buffer valid if possible. If the buffer is
+		/// still invalid ater a call to ensure_more, there are no more
+		/// characters
 		void ensure_more();
 
 		/// move the buffer area so that new data can be processed

@@ -20,7 +20,8 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 
 namespace Toki {
 
-	BasicSplitLayer::BasicSplitLayer(TokenSource* input, const Config::Node& props)
+	BasicSplitLayer::BasicSplitLayer(TokenSource* input,
+			const Config::Node& props)
 		: OutputQueueLayer(input, props), split_chars_(), sep_type_()
 	{
 		sep_type_ = props.get<std::string>("separator_token_type", "sep");
@@ -38,7 +39,8 @@ namespace Toki {
 	std::string BasicSplitLayer::long_info() const
 	{
 		std::stringstream ss;
-		ss << ", split: " << split_chars_.size() << " separators, type " << sep_type_;
+		ss << ", split: " << split_chars_.size() << " separators, type "
+			<< sep_type_;
 		return OutputQueueLayer::long_info() + ss.str();
 	}
 

@@ -97,7 +97,8 @@ namespace Toki { namespace Srx {
 		void process_languagerule_node(const xmlpp::Node* n);
 
 		/// internal helper for processing a single rule
-		void process_rule_node(const std::string& language, const xmlpp::Node* n);
+		void process_rule_node(const std::string& language,
+				const xmlpp::Node* n);
 
 		/// internal helper for processing the language map
 		void process_languagemap_node(const xmlpp::Node* n);
@@ -109,7 +110,8 @@ namespace Toki { namespace Srx {
 		language_rules_t language_rules_;
 
 		/// typedef for the language mappings
-		typedef std::vector< std::pair<RegexMatcher*, std::string> > language_map_t;
+		typedef std::vector< std::pair<RegexMatcher*, std::string> >
+				language_map_t;
 
 		/// the language mappings
 		language_map_t language_map_;

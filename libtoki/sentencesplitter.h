@@ -52,7 +52,8 @@ namespace Toki {
 
 		/**
 		 * Returns true if there will be more sentences, false if the source
-		 * has been exhausted. May result in a token being taken from the source.
+		 * has been exhausted. May result in a token being taken from the
+		 * source.
 		 */
 		bool has_more();
 

@@ -22,12 +22,13 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 namespace Toki {
 
 	/**
-	 * This class represents something that we can get ICU Unicode characters from
-	 * and is generally used to abstract away a bit of the functionality we need
-	 * from a ICU-Unicode wrapper for an input stream.
+	 * This class represents something that we can get ICU Unicode characters
+	 * from and is generally used to abstract away a bit of the functionality
+	 * we need from a ICU-Unicode wrapper for an input stream.
 	 *
-	 * It is similar to ICU's ForwardCharacterIterator, but we probably don't want
-	 * to inherit directly from ICU, and we want the extra "peek" functionality.
+	 * It is similar to ICU's ForwardCharacterIterator, but we probably don't
+	 * want to inherit directly from ICU, and we want the extra "peek"
+	 * functionality.
 	 */
 	class UnicodeSource
 	{
@@ -40,8 +41,8 @@ namespace Toki {
 		virtual ~UnicodeSource() {}
 
 		/**
-		 * Peek the next character, that is, return it without advancing to the next
-		 * character.
+		 * Peek the next character, that is, return it without advancing to the
+		 * next character.
 		 *
 		 * This function might change the internal status to make sure there is
 		 * something available for returning, so it cannot be const.

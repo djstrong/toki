@@ -25,7 +25,8 @@ namespace Toki { namespace Srx {
 
 		std::string unquote_regex(const std::string& re);
 
-		std::string prepare_regex_for_lookbehind(const std::string& re, int max_lookbehind);
+		std::string prepare_regex_for_lookbehind(const std::string& re,
+				int max_lookbehind);
 
 	} /* end ns Util */
 

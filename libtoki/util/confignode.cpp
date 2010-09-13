@@ -97,7 +97,8 @@ namespace Toki { namespace Config {
 			errors++;
 		}
 		try {
-			boost::property_tree::json_parser::write_json(filename + ".json", c);
+			boost::property_tree::json_parser::write_json(filename + ".json",
+					c);
 		} catch (boost::property_tree::file_parser_error& e) {
 			errors++;
 		}

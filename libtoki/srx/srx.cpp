@@ -134,7 +134,8 @@ namespace Toki { namespace Srx {
 			buffer_[buffer_end_idx_] = source_->get_next_char();
 			++buffer_end_idx_;
 		}
-		//std::cerr << "init buffer: " << Util::to_utf8(buffer_ + buffer_start_idx_)
+		//std::cerr << "init buffer: "
+		//		<< Util::to_utf8(buffer_ + buffer_start_idx_)
 		//		<< " " << buffer_start_idx_ << "\n";
 		calculate_breaks();
 	}
@@ -169,12 +170,14 @@ namespace Toki { namespace Srx {
 		int from = margin_size_ - buffer_start_idx_;
 		int to = std::min(buffer_end_idx_, window_size_ + margin_size_);
 		//std::cerr << margin_size_ << "/" << window_size_ << "/";
-		//std::cerr << "ZZ" << buffer_start_idx_ << "-" << buffer_end_idx_ << " ";
+		//std::cerr << "ZZ" << buffer_start_idx_
+		//		<< "-" << buffer_end_idx_ << " ";
 		//if (buffer_end_idx_ > buffer_start_idx_) {
 		//	std::cerr << Util::to_utf8(UnicodeString(false, bbegin, blen));
 		//}
 		//std::cerr << "\n";
-		segmenter_->compute_breaks(UnicodeString(false, bbegin, blen), from, to);
+		UnicodeString buf_string = UnicodeString(false, bbegin, blen);
+		segmenter_->compute_breaks(buf_string, from,to);
 		breaks_ = segmenter_->get_break_mask();
 	}
 

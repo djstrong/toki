@@ -22,13 +22,14 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 namespace Toki {
 
 	/**
-	 * A layer to split tokens containing one of the listed characters. Matching
-	 * characters are extracted into continous tokens with a given type, remaining
-	 * bits of the orth are made into tokens with the original token's type.
-	 * This layer works a lot like BasicSplitLayer, with the difference being
-	 * that the extracted separators are not split into one-letter tokens but
-	 * held together, so if a dot -- . -- is a separator the token "aa..bb" will
-	 * be split into three tokens: "aa", "..", and "bb".
+	 * A layer to split tokens containing one of the listed characters.
+	 * Matching characters are extracted into continous tokens with a given
+	 * type, remaining bits of the orth are made into tokens with the original
+	 * token's type. This layer works a lot like BasicSplitLayer, with the
+	 * difference being that the extracted separators are not split into
+	 * one-letter tokens but held together, so if a dot -- . -- is a separator
+	 * the token "aa..bb" will be split into three tokens: "aa", "..", and
+	 * "bb".
 	 */
 	class GroupSplitLayer : public BasicSplitLayer
 	{

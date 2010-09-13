@@ -19,7 +19,8 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 
 namespace Toki {
 
-	GroupAffixSplitLayer::GroupAffixSplitLayer(TokenSource *input, const Config::Node &props)
+	GroupAffixSplitLayer::GroupAffixSplitLayer(TokenSource *input,
+			const Config::Node &props)
 		: AffixSplitLayer(input, props)
 	{
 	}
@@ -40,11 +41,13 @@ namespace Toki {
 	void GroupAffixSplitLayer::prepare_more_tokens(Token* t)
 	{
 		int body_begin_index = 0;
-		while (body_begin_index < t->orth().length() && is_prefix_char(t->orth().charAt(body_begin_index))) {
+		while (body_begin_index < t->orth().length() &&
+				is_prefix_char(t->orth().charAt(body_begin_index))) {
 			++body_begin_index;
 		}
 		int body_end_index = t->orth().length();
-		while (body_end_index > body_begin_index && is_suffix_char(t->orth().charAt(body_end_index - 1))) {
+		while (body_end_index > body_begin_index &&
+				is_suffix_char(t->orth().charAt(body_end_index - 1))) {
 			--body_end_index;
 		}
 		if (body_begin_index > 0) {
@@ -55,12 +58,14 @@ namespace Toki {
 			enqueue_output_token(pre);
 		}
 		if (body_end_index > body_begin_index) {
-			if (body_begin_index == 0 && body_end_index == t->orth().length()) {
+			if (body_begin_index == 0 &&
+					body_end_index == t->orth().length()) {
 				enqueue_output_token(t);
 				return;
 			} else {
 				UnicodeString body_orth;
-				t->orth().extractBetween(body_begin_index, body_end_index, body_orth);
+				t->orth().extractBetween(body_begin_index, body_end_index,
+						body_orth);
 				Token* body = t->clone_changed(body_orth);
 				t->mark_as_cut();
 				enqueue_output_token(body);
@@ -68,7 +73,8 @@ namespace Toki {
 		}
 		if (body_end_index < t->orth().length()) {
 			UnicodeString suf_orth;
-			t->orth().extractBetween(body_end_index, t->orth().length(), suf_orth);
+			t->orth().extractBetween(body_end_index, t->orth().length(),
+					suf_orth);
 			Token* post = t->clone_changed(suf_orth, suffix_type());
 			enqueue_output_token(post);
 		}

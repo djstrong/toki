@@ -28,7 +28,8 @@ namespace Toki { namespace Debug {
 	 * Helper function to pass a token through a given function and feed the
 	 * resulting std::strings into an ostream
 	 */
-	void sink_to_stream(boost::function<std::string (const Token&)> func, std::ostream& os, Token* t);
+	void sink_to_stream(boost::function<std::string (const Token&)> func,
+			std::ostream& os, Token* t);
 
 	/**
 	 * Tokenize the tokens from the TokenSource by passing all tokens through
@@ -74,7 +75,8 @@ namespace Toki { namespace Debug {
 	 * $orth\n format. If count is not null it *count will be set to the number
 	 * of tokens read.
 	 */
-	void tokenize_orths_newline(TokenSource& ts, std::ostream& os, int* count = NULL);
+	void tokenize_orths_newline(TokenSource& ts, std::ostream& os,
+			int* count = NULL);
 
 	/**
 	 * Return a string with all tokens processed and printed according to the
@@ -88,13 +90,14 @@ namespace Toki { namespace Debug {
 	 * given format string, @see token_format for format options.
 	 */
 	void tokenize_formatted(TokenSource& tok, const std::string& format,
-		std::ostream& os, int *count = NULL);
+			std::ostream& os, int *count = NULL);
 
 	/**
 	 * Ignore the tokens but keep track of how many there are and show a
 	 * progress indicator
 	 */
-	void tokenize_progress(TokenSource& tok, std::ostream& os, int step, int *count = NULL);
+	void tokenize_progress(TokenSource& tok, std::ostream& os, int step,
+			int *count = NULL);
 
 } /*end ns Debug */ } /* end ns Toki */
 

@@ -24,7 +24,8 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 namespace Toki {
 
 	/**
-	 * A sample layer that appends a constant bit of text to the orth of each token.
+	 * A sample layer that appends a constant bit of text to the orth of each
+	 * token.
 	 */
 	class AppendLayer : public TokenLayer
 	{
@@ -33,8 +34,8 @@ namespace Toki {
 		 * Constructor.
 		 *
 		 * Keys recognized in the configuration:
-		 * - append - Text to append, treated as UTF-8 and unescaped. Defaults to
-		 *            an exlamation mark (!).
+		 * - append - Text to append, treated as UTF-8 and unescaped. Defaults
+		 *            to an exlamation mark (!).
 		 */
 		AppendLayer(TokenSource* input, const Config::Node& props);
 

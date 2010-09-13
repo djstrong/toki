@@ -22,8 +22,8 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 
 namespace Toki {
 	/**
-	 * A null UnicodeSource that never returns anything and always claims there are
-	 * no more characters. Will throw when peek/get next char is requested.
+	 * A null UnicodeSource that never returns anything and always claims there
+	 * are no more characters. Will throw when peek/get next char is requested.
 	 */
 	class NullUnicodeSource : public UnicodeSource
 	{
@@ -33,13 +33,15 @@ namespace Toki {
 
 		/// UnicodeSource override
 		UChar peek_next_char() {
-			throw TokenizerImpossibleError("NullUnicodeSource::peek_next_char called");
+			throw TokenizerImpossibleError(
+					"NullUnicodeSource::peek_next_char called");
 			return 0;
 		}
 
 		/// UnicodeSource override
 		UChar get_next_char() {
-			throw TokenizerImpossibleError("NullUnicodeSource::get_next_char called");
+			throw TokenizerImpossibleError(
+					"NullUnicodeSource::get_next_char called");
 			return 0;
 		}
 

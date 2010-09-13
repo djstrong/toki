@@ -69,7 +69,8 @@ namespace Toki { namespace Srx {
 		 *             are to be remembered and returned/
 		 * @param to   Index beyond the region in str, see from.
 		 */
-		virtual void compute_breaks(const UnicodeString& str, int from, int to) = 0;
+		virtual void compute_breaks(const UnicodeString& str, int from,
+				int to) = 0;
 
 		/**
 		 * Break positions accesor -- returns a vector of true and false values
@@ -79,8 +80,9 @@ namespace Toki { namespace Srx {
 		std::vector<bool> get_break_mask() const;
 
 		/**
-		 * Break positions accesor -- returns a (sorted) vector of the positions
-		 * where breaks were detected in the previous compute_breaks call.
+		 * Break positions accesor -- returns a (sorted) vector of the
+		 * positions where breaks were detected in the previous
+		 * compute_breaks call.
 		 */
 		std::vector<int> get_break_positions() const;
 
@@ -96,15 +98,15 @@ namespace Toki { namespace Srx {
 		/// break map
 		break_map_t break_map_;
 
-		/// length of the actually processed region in the last compute_breaks()
+		/// length of the actually processed region in the last compute_breaks
 		int length_;
 
 	};
 
 	/**
-	 * A segmenter using ICU regular expressions and a straightforward approach,
-	 * matching all the rules in order and markong their match positions, which
-	 * ends up getting us the break positions.
+	 * A segmenter using ICU regular expressions and a straightforward
+	 * approach, matching all the rules in order and markong their match
+	 * positions, which ends up getting us the break positions.
 	 */
 	class NaiveIcuSegmenter : public Segmenter
 	{
@@ -119,7 +121,8 @@ namespace Toki { namespace Srx {
 		void load_rules(const std::vector<Rule>& rules);
 
 		/// Segmenter override.
-		virtual void compute_breaks(const UnicodeString& str, int from, int to);
+		virtual void compute_breaks(const UnicodeString& str, int from,
+				int to);
 
 		/// Accesor for the compiled rules
 		const std::vector<CompiledRule>& get_compiled_rules() const {
@@ -144,7 +147,8 @@ namespace Toki { namespace Srx {
 		void load_rules(const std::vector<Rule>& rules);
 
 		/// Segmenter override.
-		virtual void compute_breaks(const UnicodeString& str, int from, int to);
+		virtual void compute_breaks(const UnicodeString& str, int from,
+				int to);
 	private:
 		std::vector<CompiledRule> crules_break_;
 		std::vector<size_t> break_exception_idx_;
@@ -166,7 +170,8 @@ namespace Toki { namespace Srx {
 		void load_rules(const std::vector<Rule>& rules);
 
 		/// Segmenter override.
-		virtual void compute_breaks(const UnicodeString& str, int from, int to);
+		virtual void compute_breaks(const UnicodeString& str, int from,
+				int to);
 
 	private:
 		/// The compiled rules

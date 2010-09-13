@@ -27,7 +27,8 @@ namespace Toki { namespace Srx {
 	using XmlUtil::get_child_or_null;
 	using XmlUtil::get_child_text_or_empty;
 	namespace {
-		const xmlpp::Node* get_child_or_throw(const xmlpp::Node* n, const char* name) {
+		const xmlpp::Node* get_child_or_throw(const xmlpp::Node* n,
+				const char* name) {
 			return XmlUtil::get_child_or_throw<Toki::Srx::ParseError>(n, name);
 		}
 	}
@@ -51,20 +52,25 @@ namespace Toki { namespace Srx {
 		if (dom) {
 			const xmlpp::Node* root = dom.get_document()->get_root_node();
 			if (!root) throw ParseError("no root");
-			if (root->get_name() != "srx") throw ParseError("root node not <srx>");
+			if (root->get_name() != "srx") {
+				throw ParseError("root node not <srx>");
+			}
 			const xmlpp::Node* header = get_child_or_null(root, "header");
 			if (header) {
 				process_header_node(header);
 			}
 			const xmlpp::Node* body = get_child_or_throw(root, "body");
-			const xmlpp::Node* languagerules = get_child_or_throw(body, "languagerules");
-			const xmlpp::Node::NodeList lrl = languagerules->get_children("languagerule");
+			const xmlpp::Node* languagerules =
+					get_child_or_throw(body, "languagerules");
+			const xmlpp::Node::NodeList lrl =
+					languagerules->get_children("languagerule");
 			if (lrl.empty()) throw ParseError("no <languagerule>");
 			foreach (const xmlpp::Node* n, lrl) {
 				process_languagerule_node(n);
 			}
 			const xmlpp::Node* maprules = get_child_or_throw(body, "maprules");
-			const xmlpp::Node::NodeList mrl = maprules->get_children("languagemap");
+			const xmlpp::Node::NodeList mrl =
+					maprules->get_children("languagemap");
 			if (mrl.empty()) throw ParseError("no <languagemap>");
 			foreach (const xmlpp::Node* n, mrl) {
 				process_languagemap_node(n);
@@ -96,14 +102,18 @@ namespace Toki { namespace Srx {
 		const xmlpp::Element* el = dynamic_cast<const xmlpp::Element*>(n);
 		if (!el) throw ParseError("<languagerule> not an Element");
 		std::string name = el->get_attribute_value("languagerulename");
-		if (name.empty()) throw ParseError("<languagerule> with empty languagerulename attribute");
+		if (name.empty()) {
+			throw ParseError(
+					"<languagerule> with empty languagerulename attribute");
+		}
 		const xmlpp::Node::NodeList lr = n->get_children("rule");
 		foreach (const xmlpp::Node* n, lr) {
 			process_rule_node(name, n);
 		}
 	}
 
-	void Document::process_rule_node(const std::string &language, const xmlpp::Node *n)
+	void Document::process_rule_node(const std::string &language,
+			const xmlpp::Node *n)
 	{
 		const xmlpp::Element* el = dynamic_cast<const xmlpp::Element*>(n);
 		if (!el) throw ParseError("<rule> not an Element");
@@ -119,7 +129,8 @@ namespace Toki { namespace Srx {
 		rule.before = get_child_text_or_empty(n, "beforebreak");
 		rule.after = get_child_text_or_empty(n, "afterbreak");
 		if (rule.before.empty() && rule.after.empty()) {
-			throw ParseError("<rule> with empty <beforebreak> and <afterbreak>");
+			throw ParseError(
+					"<rule> with empty <beforebreak> and <afterbreak>");
 		}
 		language_rules_[language].push_back(rule);
 	}
@@ -152,7 +163,8 @@ namespace Toki { namespace Srx {
 		return rules;
 	}
 
-	std::vector<Rule> Document::get_rules_for_lang(const std::string &lang) const
+	std::vector<Rule> Document::get_rules_for_lang(
+			const std::string &lang) const
 	{
 		UnicodeString ulang = UnicodeString::fromUTF8(lang);
 		std::vector<Rule> rules;
@@ -161,10 +173,12 @@ namespace Toki { namespace Srx {
 			m.reset(ulang);
 			UErrorCode status = U_ZERO_ERROR;
 			if (m.matches(status)) {
-				language_rules_t::const_iterator ruleset = language_rules_.find(v.second);
+				language_rules_t::const_iterator ruleset =
+						language_rules_.find(v.second);
 				if (ruleset != language_rules_.end()) {
-					std::vector<Rule>::const_iterator i = ruleset->second.begin();
-					std::vector<Rule>::const_iterator e = ruleset->second.end();
+					std::vector<Rule>::const_iterator i, e;
+					i = ruleset->second.begin();
+					e = ruleset->second.end();
 					for (; i != e; ++i) {
 						rules.push_back(*i);
 					}

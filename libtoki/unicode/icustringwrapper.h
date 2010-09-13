@@ -25,8 +25,8 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 namespace Toki {
 
 	/**
-	 * A thin wrapper around UnicodeString (using aStringCharacterIterator) to adapt
-	 * it to the UnicodeSource interface.
+	 * A thin wrapper around UnicodeString (using aStringCharacterIterator) to
+	 * adapt it to the UnicodeSource interface.
 	 */
 	class UnicodeIcuStringWrapper : public UnicodeSource
 	{

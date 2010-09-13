@@ -31,7 +31,8 @@ namespace Toki {
 	{
 		std::vector<std::string> sv;
 		std::string data = props.get("process_types", "");
-		boost::algorithm::split(sv, data, std::bind1st(std::equal_to<char>(), ' '));
+		boost::algorithm::split(sv, data,
+				std::bind1st(std::equal_to<char>(), ' '));
 		foreach (const std::string& s, sv) {
 			if (!s.empty()) {
 				process_token_types_.insert(s);
@@ -39,7 +40,8 @@ namespace Toki {
 		}
 		std::vector<std::string> sv2;
 		std::string data2 = props.get("ignore_types", "");
-		boost::algorithm::split(sv2, data2, std::bind1st(std::equal_to<char>(), ' '));
+		boost::algorithm::split(sv2, data2,
+				std::bind1st(std::equal_to<char>(), ' '));
 		foreach (const std::string& s2, sv2) {
 			if (!s2.empty()) {
 				do_not_process_token_types_.insert(s2);
@@ -66,9 +68,11 @@ namespace Toki {
 		return "Layer '" + id_ + "'";
 	}
 
-	TokenLayer* TokenLayer::create(std::string class_id, TokenSource* input, const Config::Node& props)
+	TokenLayer* TokenLayer::create(std::string class_id, TokenSource* input,
+			const Config::Node& props)
 	{
-		return TokenLayerFactory::Instance().CreateObject(class_id, input, props);
+		return TokenLayerFactory::Instance().CreateObject(
+				class_id, input, props);
 	}
 
 	std::vector<std::string> TokenLayer::available_layer_types()
@@ -99,13 +103,15 @@ namespace Toki {
 
 	bool TokenLayer::should_process_token_type(const std::string &t)
 	{
-		if (do_not_process_token_types_.find(t) != do_not_process_token_types_.end()) {
+		if (do_not_process_token_types_.find(t) !=
+				do_not_process_token_types_.end()) {
 			return false;
 		} else {
 			if (process_token_types_.empty()) {
 				return true;
 			} else {
-				return process_token_types_.find(t) != process_token_types_.end();
+				return process_token_types_.find(t) !=
+						process_token_types_.end();
 			}
 		}
 	}

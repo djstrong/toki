@@ -24,9 +24,9 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 namespace Toki {
 
 /**
- * A layer to extract parts of a token that mach a specified regular expression.
- * Parts that match are extracted into separate tokens with the given type,
- * remaining parts retain the original token's type.
+ * A layer to extract parts of a token that mach a specified regular
+ * expression. Parts that match are extracted into separate tokens with the
+ * given type, remaining parts retain the original token's type.
  */
 class RegexMatchSplitLayer : public OutputQueueLayer
 {

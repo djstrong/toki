@@ -72,7 +72,8 @@ namespace Toki { namespace Srx { namespace Util {
 
 	}
 
-	std::string prepare_regex_for_lookbehind(const std::string& re, int max_lookbehind)
+	std::string prepare_regex_for_lookbehind(const std::string& re,
+			int max_lookbehind)
 	{
 		 UErrorCode ue = U_ZERO_ERROR;
 

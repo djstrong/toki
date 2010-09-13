@@ -45,7 +45,8 @@ namespace Toki {
 		 * @param type      the token type
 		 * @param wa_before preceeding whitespace amount indicator
 		 */
-		Token(const UnicodeString& orth, const std::string& type, Whitespace::Enum wa_before);
+		Token(const UnicodeString& orth, const std::string& type,
+				Whitespace::Enum wa_before);
 
 		/**
 		 * Constructor.
@@ -53,7 +54,8 @@ namespace Toki {
 		 * @param type      the token type
 		 * @param wa_before preceeding whitespace amount indicator
 		 */
-		Token(const char* orth_utf8, const std::string& type, Whitespace::Enum wa_before);
+		Token(const char* orth_utf8, const std::string& type,
+				Whitespace::Enum wa_before);
 
 		/**
 		 * Clone this token.
@@ -74,7 +76,8 @@ namespace Toki {
 		 *
 		 * The caller is responsible for releasing the cloned object.
 		 */
-		Token* clone_changed(const UnicodeString& new_orth, const std::string new_type) const;
+		Token* clone_changed(const UnicodeString& new_orth,
+				const std::string new_type) const;
 
 		/**
 		 * Convenience function, sets the flags as if this token came after no
@@ -92,7 +95,8 @@ namespace Toki {
 #endif
 		/**
 		 * Instance counter accesor, always returns -1 if the
-		 * LIBTOKI_TRACK_TOKEN_CREATION symbol was not defined during compilation
+		 * LIBTOKI_TRACK_TOKEN_CREATION symbol was not defined during
+		 * compilation
 		 */
 		static int instance_count() {
 #ifndef LIBTOKI_NO_TRACK_TOKEN_CREATION
@@ -104,7 +108,8 @@ namespace Toki {
 
 		/**
 		 * Creation counter accesor, always returns -1 if the
-		 * LIBTOKI_TRACK_TOKEN_CREATION symbol was not defined during compilation
+		 * LIBTOKI_TRACK_TOKEN_CREATION symbol was not defined during
+		 * compilation
 		 */
 		static int creation_count() {
 #ifndef LIBTOKI_NO_TRACK_TOKEN_CREATION

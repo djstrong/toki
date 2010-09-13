@@ -61,29 +61,32 @@ namespace Toki {
 		/// Seacrh path setter, vector of already-split paths
 		void set_search_path(const std::vector<std::string> &paths);
 
-		/// Search path setter, string with the paths separated by the separator
+		/// Search path setter, string with the paths separated by the
+		/// separator char
 		void set_search_path(const std::string &);
 
 		/// Separator accesor
 		const std::string& get_path_separator() const;
 
 		/**
-		 * Look for a filename under the search path and return a path to a file
-		 * that exists, or an empty string in case of failure
+		 * Look for a filename under the search path and return a path to a
+		 * file that exists, or an empty string in case of failure
 		 * @param filename the filename to look for
-		 * @param info info about the file to be displayed if verbose loading is
-		 *             on. Empty info string suppreses loading info.
+		 * @param info info about the file to be displayed if verbose loading
+		 *             is on. Empty info string suppreses loading info.
 		 */
-		std::string find_file(const std::string& filename, const std::string& info = "");
+		std::string find_file(const std::string& filename,
+				const std::string& info = "");
 
 		/**
 		 * Open a file stream for a file in the library search path
 		 * @param filename the filename to look for
 		 * @param ifs the stream to use
-		 * @param info info about the file to be displayed if verbose loading is
-		 *             on. Empty info string suppreses loading info.
+		 * @param info info about the file to be displayed if verbose loading
+		 *             is on. Empty info string suppreses loading info.
 		 */
-		bool open_stream(const std::string& filename, std::ifstream& ifs, const std::string& info = "");
+		bool open_stream(const std::string& filename, std::ifstream& ifs,
+				const std::string& info = "");
 
 	private:
 		/// The search paths
@@ -120,17 +123,17 @@ namespace Toki {
 				const std::string& where);
 
 		/**
-		 * Convenience template wrapper around open_stream to throw an exception
-		 * when the file is not found.
+		 * Convenience template wrapper around open_stream to throw an
+		 * exception when the file is not found.
 		 */
-		void open_stream_or_throw(const std::string& filename, std::ifstream& ifs,
-				const std::string& where);
+		void open_stream_or_throw(const std::string& filename,
+				std::ifstream& ifs, const std::string& where);
 
 	};
 
 	/**
-	 * Convenience class to set the library config path and have it automatically
-	 * reset to the original value upon destruction
+	 * Convenience class to set the library config path and have it
+	 * automatically reset to the original value upon destruction
 	 */
 	class ConfigPathSetter
 	{
@@ -152,8 +155,8 @@ namespace Toki {
 /* Implementation */
 
 	template<class E>
-	std::string PathSearcher<E>::find_file_or_throw(const std::string& filename,
-			const std::string& info)
+	std::string PathSearcher<E>::find_file_or_throw(
+			const std::string& filename, const std::string& info)
 	{
 		std::string fn = find_file(filename, info);
 		if (fn.empty()) {

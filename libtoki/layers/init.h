@@ -20,9 +20,9 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 namespace Toki {
 
 	/**
-	 * Classes derived from TokenLayer in the library that want to be avaliable via
-	 * the factory should add relevant register calls in the implementation of this
-	 * function. @see TokenLayer for details.
+	 * Classes derived from TokenLayer in the library that want to be avaliable
+	 * via the factory should add relevant register calls in the implementation
+	 * of this function. @see TokenLayer for details.
 	 */
 	bool init_token_layers();
 

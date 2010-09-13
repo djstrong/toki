@@ -23,8 +23,8 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 namespace Toki {
 
 	/**
-	 * A base class for layers that might want to look ahead into the token source
-	 * but might not always want to consume all the tokens.
+	 * A base class for layers that might want to look ahead into the token
+	 * source but might not always want to consume all the tokens.
 	 */
 	class InputBufferLayer : public TokenLayer
 	{

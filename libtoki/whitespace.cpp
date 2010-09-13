@@ -57,7 +57,8 @@ namespace Toki {
 	Whitespace::Enum Whitespace::from_string(const std::string &s)
 	{
 		int w = Whitespace::None;
-		while (w < Whitespace::PostLast && Whitespace::to_string((Whitespace::Enum)w) != s) ++w;
+		while (w < Whitespace::PostLast
+				&& Whitespace::to_string((Whitespace::Enum)w) != s) ++w;
 		return (Whitespace::Enum)w;
 	}
 

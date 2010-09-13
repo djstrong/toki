@@ -38,22 +38,23 @@ namespace Toki {
 	{
 	public:
 		/**
-		 * Construct an empty Tokenizer. The input source will be a null object that
-		 * will always claim there are no more characters, so get_next_token() will
-		 * just return null.
+		 * Construct an empty Tokenizer. The input source will be a null object
+		 * that will always claim there are no more characters. Consequently,
+		 * get_next_token() will just return null until a new source is set.
 		 */
 		Tokenizer(const Config::Node& cfg = default_config());
 
 		/**
-		 * Constructor shorthand -- start with the given UnicodeSource, and take
-		 * ownership (through a shared pointer).
+		 * Constructor shorthand -- start with the given UnicodeSource, and
+		 * take ownership (through a shared pointer).
 		 * @see UnicodeSink::set_input_source
 		 */
-		Tokenizer(UnicodeSource* input, const Config::Node& cfg = default_config());
+		Tokenizer(UnicodeSource* input,
+				const Config::Node& cfg = default_config());
 
 		/**
-		 * Constructor shorthand -- start with the given UnicodeSource as a shared
-		 * pointer
+		 * Constructor shorthand -- start with the given UnicodeSource as a
+		 * shared pointer
 		 * @see UnicodeSink::set_input_source
 		 */
 		Tokenizer(const boost::shared_ptr<UnicodeSource>& input,
@@ -64,14 +65,16 @@ namespace Toki {
 		 * ownership is taken and the stream must live long enough.
 		 * @see UnicodeSink::set_input_source
 		 */
-		Tokenizer(std::istream& is, const Config::Node& cfg = default_config());
+		explicit Tokenizer(std::istream& is,
+				const Config::Node& cfg = default_config());
 
 		/**
 		 * Constructor shorthand -- start with the given UnicodeString, which is
 		 * copied.
 		 * @see UnicodeSink::set_input_source
 		 */
-		Tokenizer(const UnicodeString& s, const Config::Node& cfg = default_config());
+		explicit Tokenizer(const UnicodeString& s,
+				const Config::Node& cfg = default_config());
 
 		/**
 		 * Destructor
@@ -80,10 +83,11 @@ namespace Toki {
 
 		/**
 		 * Reset the tokenizer internal state (other than the input source).
-		 * Call this when after setting a new input source if the processing should
-		 * start from scratch.
+		 * Call this when after setting a new input source if the processing
+		 * should start from scratch.
 		 *
-		 * Derived classes should take care to always call the parent class' reset()
+		 * Derived classes should take care to always call the parent class'
+		 * reset()
 		 */
 		virtual void reset();
 

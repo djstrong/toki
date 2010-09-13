@@ -32,16 +32,17 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 namespace Toki {
 
 	/**
-	 * Classification layer that changes a token type if the orth matches one of
-	 * the words in the given lexicon. The lexicon is a set of words.
+	 * Classification layer that changes a token type if the orth matches one
+	 * of the words in the given lexicon. The lexicon is a set of words.
 	 *
-	 * This layer is a templated class to allow various comparison functions in the
-	 * word set, mainly to allow case-insensitive lexicons. Two concrete typedefs
-	 * are provided:
-	 *  - CaseLexiconClassifyLayer, for case-sensitive lexicons -- "lexicon" key
+	 * This layer is a templated class to allow various comparison functions in
+	 * the word set, mainly to allow case-insensitive lexicons. Two concrete
+	 * typedefs are provided:
+	 *  - CaseLexiconClassifyLayer, for case-sensitive lexicons
+	 *    -- "lexicon" key
 	 *  - CaselessLexiconClassifyLayer, for case-insensitive lexicons
 	 *    -- "lexicon_caseless" key.
-         * @todo use a hash set
+	 * @todo use a hash set
 	 */
 	template <typename CMP>
 	class LexiconClassifyLayer : public TokenLayer
@@ -51,9 +52,11 @@ namespace Toki {
 		 * Constructor.
 		 *
 		 * Keys recognized in the configuration:
-		 * - lexicon      - The set of orths to recognize, space or comma separated.
+		 * - lexicon      - The set of orths to recognize, space or comma
+		 *                  separated.
 		 * - token_type   - Token type to set in the recognized tokens.
-		 * - lexicon_file - Path to lexicon file, with one word per line, UTF-8.
+		 * - lexicon_file - Path to lexicon file, with one word per line,
+		 *                  UTF-8.
 		 */
 		LexiconClassifyLayer(TokenSource* input, const Config::Node& props);
 
@@ -78,10 +81,11 @@ namespace Toki {
 	};
 
 
-	/** Implementation */
+	/* Implementation */
 
 	template<typename CMP>
-	LexiconClassifyLayer<CMP>::LexiconClassifyLayer(TokenSource *input, const Config::Node &props)
+	LexiconClassifyLayer<CMP>::LexiconClassifyLayer(TokenSource *input,
+			const Config::Node &props)
 		: TokenLayer(input, props), lex_(), token_type_()
 	{
 		token_type_ = props.get<std::string>("token_type", "lex");
@@ -94,7 +98,8 @@ namespace Toki {
 				lex_.insert(UnicodeString::fromUTF8(s).unescape());
 			}
 		}
-		const std::string& file_string = props.get<std::string>("lexicon_file", "");
+		const std::string& file_string = props.get<std::string>("lexicon_file",
+				"");
 		if (!file_string.empty()) {
 			std::ifstream ifs;
 			Path::Instance().open_stream_or_throw(file_string, ifs, "lexicon");
@@ -156,7 +161,7 @@ namespace Toki {
 
 
 	template<>
-	inline std::string LexiconClassifyLayer<IcuStringCaselessCompare>::info() const
+	inline std::string CaselessLexiconClassifyLayer::info() const
 	{
 		std::stringstream ss;
 		ss << "lexicon_caseless{" << lex_.size() << "}";
@@ -164,7 +169,7 @@ namespace Toki {
 	}
 
 	template<>
-	inline std::string LexiconClassifyLayer<IcuStringCaselessCompare>::long_info() const
+	inline std::string CaselessLexiconClassifyLayer::long_info() const
 	{
 		std::stringstream ss;
 		ss << ", lexicon_caseless: " << lex_.size() << " words";

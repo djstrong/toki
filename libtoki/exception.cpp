@@ -33,8 +33,8 @@ namespace Toki {
 		return what();
 	}
 
-	FileNotFound::FileNotFound(const std::string& filename, const std::string& paths,
-			const std::string& where)
+	FileNotFound::FileNotFound(const std::string& filename,
+			const std::string& paths, const std::string& where)
 		: TokenizerLibError("File not found: " + filename), filename(filename),
 		paths(paths), where(where)
 	{

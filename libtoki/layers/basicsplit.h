@@ -26,9 +26,10 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 namespace Toki {
 
 	/**
-	 * A layer to split tokens containing one of the listed characters. Extracted
-	 * characters are made into separate tokens with a given type, remaining bits
-	 * of the orth are made tokens with the original token's type.
+	 * A layer to split tokens containing one of the listed characters.
+	 * Extracted characters are made into separate tokens with a given type,
+	 * remaining bits of the orth are made tokens with the original token's
+	 * type.
 	 */
 	class BasicSplitLayer : public OutputQueueLayer
 	{
@@ -37,12 +38,12 @@ namespace Toki {
 		 * Constructor.
 		 *
 		 * Keys recognized in the configuration:
-		 * - separators - List of characters treated as spearators, treated as UTF-8
-		 *                and unescaped. If it starts with [ and ends with ],
-		 *                it is instead treated as a regex-like unicode set,
-		 *                e.g. [a-zA-Z_]. Defaults to empty.
-		 * - separator_token_type - Type to set in the separator tokens. Defaults
-		 *                          to "sep".
+		 * - separators - List of characters treated as spearators, treated as
+		 *                UTF-8 and unescaped. If it starts with [ and ends
+		 *                with ], it is instead treated as a regex-like unicode
+		 *                set, e.g. [a-zA-Z_]. Defaults to empty.
+		 * - separator_token_type - Type to set in the separator tokens.
+		 *                          Defaults to "sep".
 		 */
 		BasicSplitLayer(TokenSource* input, const Config::Node& props);
 

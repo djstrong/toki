@@ -25,18 +25,23 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #include <fstream>
 #include <iostream>
 
+#include <boost/make_shared.hpp>
+
 namespace Toki {
 
 	WhitespaceTokenizer::WhitespaceTokenizer(const Config::Node &cfg)
 		: Tokenizer(cfg), wa_(Whitespace::None), token_type_(),
-		initial_wa_(Whitespace::None), first_(true), begins_sentence_(true), srx_()
+		initial_wa_(Whitespace::None), first_(true), begins_sentence_(true)
+		, srx_()
 	{
 		process_config(cfg);
 	}
 
-	WhitespaceTokenizer::WhitespaceTokenizer(UnicodeSource* us, const Config::Node& cfg)
+	WhitespaceTokenizer::WhitespaceTokenizer(UnicodeSource* us,
+			const Config::Node& cfg)
 		: Tokenizer(us, cfg), wa_(Whitespace::None), token_type_(),
-		initial_wa_(Whitespace::None), first_(true), begins_sentence_(true), srx_()
+		initial_wa_(Whitespace::None), first_(true), begins_sentence_(true)
+		, srx_()
 	{
 		process_config(cfg);
 	}
@@ -50,7 +55,8 @@ namespace Toki {
 		} else {
 			initial_wa_ = Whitespace::from_string(init_wa);
 			if (initial_wa_ == Whitespace::PostLast) {
-				std::cerr << "Bad initial whitespace value:" << init_wa << "\n";
+				std::cerr << "Bad initial whitespace value:" << init_wa
+						<< "\n";
 				initial_wa_ = Whitespace::None;
 			}
 		}
@@ -68,12 +74,14 @@ namespace Toki {
 				rules = d.get_rules_for_lang(srx_lang);
 			}
 			//std::cerr << "SRX: " << rules.size() << " rules active\n";
-			boost::shared_ptr<Srx::Segmenter> segm(new Srx::NaiveIcuSegmenter());
+			boost::shared_ptr<Srx::Segmenter> segm =
+					boost::make_shared<Srx::NaiveIcuSegmenter>();
 			segm->load_rules(rules);
 			int window = cfg.get("srx_window", 10000);
 			int margin = cfg.get("srx_margin", 100);
 			boost::shared_ptr<Srx::SourceWrapper> u;
-			u.reset(new Srx::SourceWrapper(get_input_source(), segm, window, margin));
+			u = boost::make_shared<Srx::SourceWrapper>(get_input_source(),
+					segm, window, margin);
 			set_input_source(u);
 			srx_ = u;
 		}

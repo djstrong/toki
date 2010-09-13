@@ -28,7 +28,8 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 
 namespace Toki { namespace Debug {
 
-	void sink_to_stream(boost::function<std::string (const Token&)> func, std::ostream& os, Token* t)
+	void sink_to_stream(boost::function<std::string (const Token&)> func,
+			std::ostream& os, Token* t)
 	{
 		os << func(*t);
 		delete t;
@@ -42,7 +43,8 @@ namespace Toki { namespace Debug {
 		delete t;
 	}
 
-	std::string tokenize(TokenSource &tok, boost::function<std::string(const Token &)> func, int * count)
+	std::string tokenize(TokenSource &tok,
+			boost::function<std::string(const Token &)> func, int* count)
 	{
 		std::stringstream ss;
 		if (count) {
@@ -58,7 +60,8 @@ namespace Toki { namespace Debug {
 	std::string token_debug(const Token& t)
 	{
 		std::stringstream ss;
-		ss << "[" << t.orth_utf8() << "]-" << t.type() << "-" << t.preceeding_whitespace() << "-";
+		ss << "[" << t.orth_utf8() << "]-" << t.type() << "-"
+				<< t.preceeding_whitespace() << "-";
 		return ss.str();
 	}
 
@@ -84,7 +87,8 @@ namespace Toki { namespace Debug {
 	void tokenize_orths_newline(TokenSource& ts, std::ostream& os, int* count)
 	{
 		boost::function<std::string (const Token&)> ff;
-		ff = boost::bind(std::plus<std::string>(), boost::bind(&Token::orth_utf8, _1), "\n");
+		ff = boost::bind(std::plus<std::string>(),
+					boost::bind(&Token::orth_utf8, _1), "\n");
 		if (count) {
 			ts.tokenize(boost::bind(&sink_to_stream,
 				boost::ref(ff), boost::ref(os), _1, boost::ref(*count)));
@@ -124,7 +128,8 @@ namespace Toki { namespace Debug {
 		}
 	}
 
-	void tokenize_progress(TokenSource &tok, std::ostream &os, int step, int *count)
+	void tokenize_progress(TokenSource &tok, std::ostream &os, int step,
+			int *count)
 	{
 		int i = step;
 		while(Token* t = tok.get_next_token()) {

@@ -24,14 +24,16 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 
 namespace Toki {
 
-	RegexpClassifyLayer::RegexpClassifyLayer(TokenSource* input, const Config::Node& props)
+	RegexpClassifyLayer::RegexpClassifyLayer(TokenSource* input,
+			const Config::Node& props)
 		: TokenLayer(input, props)
 	{
 		foreach (const Config::Node::value_type &v, props) {
 			if (boost::algorithm::starts_with(v.first, "type:")) {
 				std::string type = v.first.substr(5); //length of "type:"
 				UErrorCode status = U_ZERO_ERROR;
-				RegexMatcher *m = new RegexMatcher(UnicodeString::fromUTF8(v.second.data()), 0, status);
+				RegexMatcher *m = new RegexMatcher(
+						UnicodeString::fromUTF8(v.second.data()), 0, status);
 				if (U_SUCCESS(status)) {
 					classifiers_.push_back(std::make_pair(type, m));
 				} else {

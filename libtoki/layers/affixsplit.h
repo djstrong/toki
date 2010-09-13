@@ -25,9 +25,9 @@ namespace Toki {
 
 	/**
 	 * Layer to recognize and split prefix and posftix characters in tokens.
-	 * All prefix characters are extracted as separate tokens, then the unrecognized
-	 * part is output as the body token (with the type unmodified), and then the
-	 * suffix characters are output.
+	 * All prefix characters are extracted as separate tokens, then the
+	 * unrecognized part is output as the body token (with the type
+	 * unmodified), and then the suffix characters are output.
 	 */
 	class AffixSplitLayer : public OutputQueueLayer
 	{

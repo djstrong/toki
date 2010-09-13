@@ -29,7 +29,8 @@ namespace Toki {
 
 	/**
 	 * A simple tokenizer that takes a UnicodeSource (i.e. continous text) and
-	 * outputs (via get_next_token) tokens split according to whitespace in the text.
+	 * and outputs (via get_next_token) tokens split according to whitespace in
+	 * the text.
 	 */
 	class WhitespaceTokenizer : public Tokenizer
 	{
@@ -41,17 +42,18 @@ namespace Toki {
 		 * - token_type - Token type to set in created tokens, defaults to "t".
 		 * - initial_whitespace - Whitespace to set in the first extracted
 		 *                        token, can be a descriptor or a string with
-		 *                        the actual whitespace, use \\u0020 for a space.
+		 *                        the actual whitespace, use \\u0020 for a
+		 *                        space.
 		 * - srx - SRX file to load and use as a sentence break detector. The
 		 *         segmenter is preserved even if the source of this tokenizer
 		 *         is changed. BY default SRX is not used.
-		 * - srx_language - language to use with the SRX, determines which rules
-		 *                  will be used. The default empty value is likely not
-		 *                  going to work well.
-		 * - srx_window - SRX performance tuning parameter, segmentation wrapper
-		 *                "window" parameter, see Srx::SourceWrapper
-		 * - srx_margin - SRX performance tuning parameter, segmentation wrapper
-		 *                "margin" parameter, see Srx::SourceWrapper
+		 * - srx_language - language to use with the SRX, determines which
+		 *                  rules will be used. The default empty value is
+		 *                  likely not going to work well.
+		 * - srx_window - SRX performance tuning parameter, segmentation
+		 *                wrapper "window" parameter, see Srx::SourceWrapper
+		 * - srx_margin - SRX performance tuning parameter, segmentation
+		 *                wrapper "margin" parameter, see Srx::SourceWrapper
 		 */
 		WhitespaceTokenizer(const Config::Node& cfg = default_config());
 
@@ -59,7 +61,8 @@ namespace Toki {
 		 * Constructor shorthand
 		 * @see Tokenizer::Tokenizer
 		 */
-		WhitespaceTokenizer(UnicodeSource* us, const Config::Node& cfg = default_config());
+		WhitespaceTokenizer(UnicodeSource* us,
+				const Config::Node& cfg = default_config());
 
 		/// TokenSource override
 		Token* get_next_token();

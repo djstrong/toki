@@ -103,8 +103,8 @@ namespace Toki {
 
 	void UnicodeIstreamWrapper::ensure_more()
 	{
-		//keep calling more() as long as there's nothing ready in the target buffer
-		//and it reads something from the input stream.
+		//keep calling more() as long as there's nothing ready in the target
+		//buffer and it reads something from the input stream.
 		while (target_ <= out_ && more()) ;
 	}
 

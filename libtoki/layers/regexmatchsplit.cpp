@@ -19,14 +19,17 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 
 namespace Toki {
 
-	RegexMatchSplitLayer::RegexMatchSplitLayer(TokenSource *input, const Config::Node &props)
+	RegexMatchSplitLayer::RegexMatchSplitLayer(TokenSource *input,
+			const Config::Node &props)
 		: OutputQueueLayer(input, props), regex_(NULL), sep_type_()
 	{
 		UErrorCode status = U_ZERO_ERROR;
-		regex_ = new RegexMatcher(UnicodeString::fromUTF8(props.get("regex", "")), 0, status);
+		regex_ = new RegexMatcher(
+				UnicodeString::fromUTF8(props.get("regex", "")), 0, status);
 		if (!U_SUCCESS(status)) {
 			if (error_stream_) {
-				(*error_stream_) << "Invalid regex: " << props.get("regex", "") << "\n";
+				(*error_stream_) << "Invalid regex: "
+						<< props.get("regex", "") << "\n";
 			}
 			regex_ = NULL;
 		}
@@ -76,7 +79,8 @@ namespace Toki {
 				t->mark_as_cut();
 			}
 			//extract the matching region
-			enqueue_output_token(t->clone_changed(regex_->group(0, status2), separator_type()));
+			enqueue_output_token(t->clone_changed(
+						regex_->group(0, status2), separator_type()));
 			t->mark_as_cut();
 			start = match_end;
 		}

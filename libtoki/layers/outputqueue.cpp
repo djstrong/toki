@@ -21,7 +21,8 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 
 namespace Toki {
 
-	OutputQueueLayer::OutputQueueLayer(TokenSource* input, const Config::Node& props)
+	OutputQueueLayer::OutputQueueLayer(TokenSource* input,
+			const Config::Node& props)
 		: TokenLayer(input, props), queue_()
 	{
 	}

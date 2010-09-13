@@ -20,11 +20,12 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 
 namespace Toki {
 
-	Token::Token(const UnicodeString& orth, const std::string& type, Whitespace::Enum wa_before)
-			: orth_(orth)
-			, type_(type)
-			, preceeding_whitespace_(wa_before)
-			, begins_sentence_(false)
+	Token::Token(const UnicodeString& orth, const std::string& type,
+			Whitespace::Enum wa_before)
+		: orth_(orth)
+		, type_(type)
+		, preceeding_whitespace_(wa_before)
+		, begins_sentence_(false)
 	{
 #ifndef LIBTOKI_NO_TRACK_TOKEN_CREATION
 		++instance_count_;
@@ -32,11 +33,12 @@ namespace Toki {
 #endif
 	}
 
-	Token::Token(const char* orth_utf8, const std::string& type, Whitespace::Enum wa_before)
-			: orth_(UnicodeString::fromUTF8(orth_utf8))
-			, type_(type)
-			, preceeding_whitespace_(wa_before)
-			, begins_sentence_(false)
+	Token::Token(const char* orth_utf8, const std::string& type,
+			Whitespace::Enum wa_before)
+		: orth_(UnicodeString::fromUTF8(orth_utf8))
+		, type_(type)
+		, preceeding_whitespace_(wa_before)
+		, begins_sentence_(false)
 	{
 #ifndef LIBTOKI_NO_TRACK_TOKEN_CREATION
 		++instance_count_;
@@ -56,7 +58,8 @@ namespace Toki {
 		return t;
 	}
 
-	Token* Token::clone_changed(const UnicodeString &new_orth, std::string new_type) const
+	Token* Token::clone_changed(const UnicodeString &new_orth,
+			std::string new_type) const
 	{
 		Token* t = new Token(new_orth, new_type, preceeding_whitespace_);
 		t->set_begins_sentence(begins_sentence_);

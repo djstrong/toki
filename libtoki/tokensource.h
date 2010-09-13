@@ -28,9 +28,10 @@ namespace Toki {
 	class Token;
 
 	/**
-	 * A simple interface for classes that can be used as token sources, for example
-	 * token processing layers. This is actually a template since it might be used with
-	 * different  types, not just Toki Tokens, and avoiding code duplication is good.
+	 * A simple interface for classes that can be used as token sources, for
+	 * example token processing layers. This is actually a template since it
+	 * might be used with different types, not just Toki Tokens, and avoiding
+	 * code duplication is good.
 	 */
 	template<typename T>
 	class TokenSourceTemplate
@@ -67,14 +68,14 @@ namespace Toki {
 	typedef TokenSourceTemplate<Token> TokenSource;
 
 	namespace detail {
-		// Helper template class to get type T when all we have is a type T*/
+		// Helper template class to get type T when all we have is a type T*
 		// This bit does nothing by default...
 		template<typename T>
 		struct deptr
 		{
 		};
 
-		// ...and this bit has a typedef for T when the template is used with T*
+		// ...and this has a typedef for T when the template is used with T*
 		template<typename T>
 		struct deptr<T*>
 		{
@@ -89,12 +90,13 @@ namespace Toki {
 	 * The container should not be modified as long as it is being accesed
 	 * by a RangeSource wrapper.
 	 *
-	 * There is some mild template magic here to make it work with the templated
-	 * TokenSource. Basically when given a container of some Token*, we want to
-	 * end up with a TokenSource<Token>, hence the deptr.
+	 * There is some mild template magic here to make it work with the
+	 * templated TokenSource. Basically when given a container of some Token*,
+	 * we want to end up with a TokenSource<Token>, hence the deptr.
 	 */
 	template<typename T>
-	class RangeSource : public TokenSourceTemplate<typename detail::deptr<typename T::value_type>::type>
+	class RangeSource : public TokenSourceTemplate<
+			typename detail::deptr<typename T::value_type>::type>
 	{
 	public:
 		/// convenience typedef
@@ -137,7 +139,8 @@ namespace Toki {
 	/// Helper function to make a RangeSource from two iterators,
 	/// avoiding lenghty template instantiation
 	template<class T>
-	RangeSource<boost::iterator_range<T> >* make_range_source(const T& b, const T& e)
+	RangeSource<boost::iterator_range<T> >* make_range_source(const T& b,
+			const T& e)
 	{
 		boost::iterator_range<T> range(b, e);
 		return new RangeSource< boost::iterator_range<T> >(range);
