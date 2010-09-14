@@ -195,12 +195,12 @@ namespace Toki {
 		return layers_.back()->get_next_token();
 	}
 
-	void LayerTokenizer::reset()
+	void LayerTokenizer::restart()
 	{
 		for (size_t i = 0; i < layers_.size(); ++i) {
-			layers_[i]->reset();
+			layers_[i]->restart();
 		}
-		input_tokenizer_->reset();
+		input_tokenizer_->restart();
 	}
 
 	void LayerTokenizer::set_error_stream(std::ostream *os)

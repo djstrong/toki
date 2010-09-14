@@ -47,7 +47,7 @@ namespace Toki {
 	{
 	}
 
-	void CheckLayer::reset()
+	void CheckLayer::restart()
 	{
 		token_counter_ = 0;
 		sentence_size_counter_ = 0;

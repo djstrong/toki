@@ -60,7 +60,7 @@ namespace Toki {
 		std::string long_info() const;
 
 		/// TokenLayer override
-		void reset();
+		void restart();
 
 	private:
 		/// helper function for actual warning output

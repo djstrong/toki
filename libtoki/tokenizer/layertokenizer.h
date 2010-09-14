@@ -97,7 +97,7 @@ namespace Toki {
 		void new_input_source();
 
 		/// TokenSource override
-		void reset();
+		void restart();
 
 		/// TokenSource override
 		Token* get_next_token();

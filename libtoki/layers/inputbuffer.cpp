@@ -27,10 +27,10 @@ namespace Toki {
 
 	InputBufferLayer::~InputBufferLayer()
 	{
-		reset();
+		restart();
 	}
 
-	void InputBufferLayer::reset()
+	void InputBufferLayer::restart()
 	{
 		while (!buffer_.empty()) {
 			delete buffer_.front();

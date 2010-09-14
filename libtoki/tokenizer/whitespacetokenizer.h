@@ -68,7 +68,7 @@ namespace Toki {
 		Token* get_next_token();
 
 		/// Tokenizer override
-		void reset();
+		void restart();
 
 		/// SRX state accesor
 		bool has_srx() const;

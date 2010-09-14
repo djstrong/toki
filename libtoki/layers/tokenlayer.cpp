@@ -54,7 +54,7 @@ namespace Toki {
 	{
 	}
 
-	void TokenLayer::reset()
+	void TokenLayer::restart()
 	{
 	}
 

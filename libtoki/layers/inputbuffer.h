@@ -38,7 +38,7 @@ namespace Toki {
 		~InputBufferLayer();
 
 		/// reset function
-		void reset();
+		void restart();
 
 		/// TokenLayer override
 		std::string long_info() const;

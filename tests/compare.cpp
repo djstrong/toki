@@ -111,7 +111,7 @@ void test_one_item(const compare_item& c)
 	for (int i = 0; i < 5; ++i) {
 		std::stringstream ss_in;
 		ss_in << ss.str();
-		tok.reset();
+		tok.restart();
 		tok.set_input_source(ss_in, i + 1);
 		std::stringstream ss_actual_loop;
 		if (cfg.get("debug.warning_dest", "") == "stdout") {
@@ -119,7 +119,7 @@ void test_one_item(const compare_item& c)
 		}
 		Toki::Debug::tokenize_formatted(tok, format, ss_actual_loop);
 		BOOST_REQUIRE_EQUAL (ss_actual_loop.str(), ss_expected.str());
-		tok.reset();
+		tok.restart();
 		tok.set_input_source(us);
 		std::stringstream ss_actual2;
 		if (cfg.get("debug.warning_dest", "") == "stdout") {

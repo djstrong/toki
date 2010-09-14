@@ -51,7 +51,7 @@ namespace Toki {
 		/**
 		 * TokenLayer override. Destroys the output token queue.
 		 */
-		void reset();
+		void restart();
 
 		/// TokenLayer override
 		std::string long_info() const;

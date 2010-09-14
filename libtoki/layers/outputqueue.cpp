@@ -68,7 +68,7 @@ namespace Toki {
 		}
 	}
 
-	void OutputQueueLayer::reset()
+	void OutputQueueLayer::restart()
 	{
 		clear_queue();
 	}

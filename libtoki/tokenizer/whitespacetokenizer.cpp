@@ -93,7 +93,7 @@ namespace Toki {
 		initial_wa_ = wa_ = wa;
 	}
 
-	void WhitespaceTokenizer::reset()
+	void WhitespaceTokenizer::restart()
 	{
 		wa_ = initial_wa_;
 		begins_sentence_ = true;

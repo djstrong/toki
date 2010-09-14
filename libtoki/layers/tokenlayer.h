@@ -107,13 +107,13 @@ namespace Toki {
 		 * over, processing tokens from the input source just like it was just
 		 * constructed.
 		 *
-		 * Note that It does *NOT* automatically call reset() on the input
+		 * Note that It does *NOT* automatically call restart() on the input
 		 * source.
 		 *
 		 * Derived classes should override this to maintain this requirement,
-		 * and always call the parent class' reset().
+		 * and always call the parent class' restart().
 		 */
-		virtual void reset();
+		virtual void restart();
 
 		/**
 		 * Return the layer identifier

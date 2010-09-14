@@ -62,7 +62,7 @@ namespace Toki {
 	}
 
 
-	void Tokenizer::reset()
+	void Tokenizer::restart()
 	{
 	}
 

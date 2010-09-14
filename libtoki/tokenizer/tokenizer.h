@@ -87,9 +87,9 @@ namespace Toki {
 		 * should start from scratch.
 		 *
 		 * Derived classes should take care to always call the parent class'
-		 * reset()
+		 * restart()
 		 */
-		virtual void reset();
+		virtual void restart();
 
 	protected:
 		/**
