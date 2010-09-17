@@ -64,7 +64,7 @@ namespace Toki {
 	{
 		paths_.clear();
 		boost::algorithm::split(paths_, paths,
-			std::bind1st(std::equal_to<char>(), separator_[0]));
+				boost::algorithm::is_any_of(separator_));
 	}
 
 	const std::string& PathSearcherBase::get_path_separator() const
