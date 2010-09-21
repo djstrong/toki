@@ -21,7 +21,6 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 
 #include <boost/algorithm/string.hpp>
 #include <boost/property_tree/ptree.hpp>
-#include <boost/foreach.hpp>
 
 namespace Toki {
 
@@ -29,10 +28,10 @@ namespace Toki {
 		: input_(input), process_token_types_(), do_not_process_token_types_(),
 		id_(), error_stream_(NULL)
 	{
+		const std::string sep = ", ";
 		std::vector<std::string> sv;
 		std::string data = props.get("process_types", "");
-		boost::algorithm::split(sv, data,
-				std::bind1st(std::equal_to<char>(), ' '));
+		boost::algorithm::split(sv, data, boost::algorithm::is_any_of(sep));
 		foreach (const std::string& s, sv) {
 			if (!s.empty()) {
 				process_token_types_.insert(s);
@@ -40,8 +39,7 @@ namespace Toki {
 		}
 		std::vector<std::string> sv2;
 		std::string data2 = props.get("ignore_types", "");
-		boost::algorithm::split(sv2, data2,
-				std::bind1st(std::equal_to<char>(), ' '));
+		boost::algorithm::split(sv2, data2, boost::algorithm::is_any_of(sep));
 		foreach (const std::string& s2, sv2) {
 			if (!s2.empty()) {
 				do_not_process_token_types_.insert(s2);
