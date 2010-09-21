@@ -10,8 +10,6 @@ include_directories(${Boost_INCLUDE_DIR})
 link_directories(${Boost_LIBRARY_DIRS})
 
 if(UNIX)
-
-        install(TARGETS toki-app
-                RUNTIME DESTINATION bin)
-        
+	install(TARGETS toki-app
+		RUNTIME DESTINATION bin)
 endif(UNIX)
