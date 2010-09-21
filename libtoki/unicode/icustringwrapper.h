@@ -24,36 +24,36 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 
 namespace Toki {
 
+/**
+ * A thin wrapper around UnicodeString (using aStringCharacterIterator) to
+ * adapt it to the UnicodeSource interface.
+ */
+class UnicodeIcuStringWrapper : public UnicodeSource
+{
+public:
 	/**
-	 * A thin wrapper around UnicodeString (using aStringCharacterIterator) to
-	 * adapt it to the UnicodeSource interface.
+	 * The constructor.
+	 *
+	 * @param u The Unicode string to wrap. The string is copied.
 	 */
-	class UnicodeIcuStringWrapper : public UnicodeSource
-	{
-	public:
-		/**
-		 * The constructor.
-		 *
-		 * @param u The Unicode string to wrap. The string is copied.
-		 */
-		UnicodeIcuStringWrapper(const UnicodeString& u);
+	UnicodeIcuStringWrapper(const UnicodeString& u);
 
-		/// The destructor
-		~UnicodeIcuStringWrapper();
+	/// The destructor
+	~UnicodeIcuStringWrapper();
 
-		/// Override from UnicodeSource
-		UChar peek_next_char();
+	/// Override from UnicodeSource
+	UChar peek_next_char();
 
-		/// Override from UnicodeSource
-		UChar get_next_char();
+	/// Override from UnicodeSource
+	UChar get_next_char();
 
-		/// Override from UnicodeSource
-		bool has_more_chars();
+	/// Override from UnicodeSource
+	bool has_more_chars();
 
-	private:
-		/// The internal StringCharacterIterator object
-		StringCharacterIterator iter_;
-	};
+private:
+	/// The internal StringCharacterIterator object
+	StringCharacterIterator iter_;
+};
 
 } /* end ns Toki */
 

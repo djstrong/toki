@@ -20,30 +20,25 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #include <libxml++/nodes/node.h>
 
 namespace Toki {
+namespace XmlUtil {
 
-	namespace XmlUtil {
+const xmlpp::Node* get_child_or_null(const xmlpp::Node* n, const char* name);
 
-		const xmlpp::Node* get_child_or_null(const xmlpp::Node* n,
-				const char* name);
+template<typename TE> inline
+const xmlpp::Node* get_child_or_throw(const xmlpp::Node* n, const char* name)
+{
+	const xmlpp::Node* c = get_child_or_null(n, name);
+	if (!c) {
+		std::stringstream ss;
+		ss << "no " << "<" << name << ">";
+		throw TE(ss.str());
+	}
+	return c;
+}
 
-		template<typename TE>
-		inline const xmlpp::Node* get_child_or_throw(const xmlpp::Node* n,
-				const char* name)
-		{
-			const xmlpp::Node* c = get_child_or_null(n, name);
-			if (!c) {
-				std::stringstream ss;
-				ss << "no " << "<" << name << ">";
-				throw TE(ss.str());
-			}
-			return c;
-		}
+std::string get_child_text_or_empty(const xmlpp::Node* n, const char* name);
 
-		std::string get_child_text_or_empty(const xmlpp::Node* n,
-				const char* name);
-
-	} /* end ns XmlUtil */
-
+} /* end ns XmlUtil */
 } /* end ns Toki */
 
 #endif // XMLUTIL_H

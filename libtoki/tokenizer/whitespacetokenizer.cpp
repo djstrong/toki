@@ -17,7 +17,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #include <libtoki/srx/srx.h>
 #include <libtoki/tokenizer/tokenizer.h>
 #include <libtoki/tokenizer/whitespacetokenizer.h>
-#include <libtoki/util/util.h>
+#include <libpwrutils/util.h>
 
 #include <unicode/uchar.h>
 #include <unicode/ucnv.h>
@@ -30,8 +30,8 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 namespace Toki {
 
 	WhitespaceTokenizer::WhitespaceTokenizer(const Config::Node &cfg)
-		: Tokenizer(cfg), wa_(Whitespace::None), token_type_(),
-		initial_wa_(Whitespace::None), first_(true), begins_sentence_(true)
+		: Tokenizer(cfg), wa_(PwrNlp::Whitespace::None), token_type_(),
+		initial_wa_(PwrNlp::Whitespace::None), first_(true), begins_sentence_(true)
 		, srx_()
 	{
 		process_config(cfg);
@@ -39,8 +39,8 @@ namespace Toki {
 
 	WhitespaceTokenizer::WhitespaceTokenizer(UnicodeSource* us,
 			const Config::Node& cfg)
-		: Tokenizer(us, cfg), wa_(Whitespace::None), token_type_(),
-		initial_wa_(Whitespace::None), first_(true), begins_sentence_(true)
+		: Tokenizer(us, cfg), wa_(PwrNlp::Whitespace::None), token_type_(),
+		initial_wa_(PwrNlp::Whitespace::None), first_(true), begins_sentence_(true)
 		, srx_()
 	{
 		process_config(cfg);
@@ -51,13 +51,13 @@ namespace Toki {
 		token_type_ = cfg.get("token_type", "t");
 		std::string init_wa = cfg.get("initial_whitespace", "");
 		if (init_wa.empty()) {
-			initial_wa_ = Whitespace::Newline;
+			initial_wa_ = PwrNlp::Whitespace::Newline;
 		} else {
-			initial_wa_ = Whitespace::from_string(init_wa);
-			if (initial_wa_ == Whitespace::PostLast) {
+			initial_wa_ = PwrNlp::Whitespace::from_string(init_wa);
+			if (initial_wa_ == PwrNlp::Whitespace::PostLast) {
 				std::cerr << "Bad initial whitespace value:" << init_wa
 						<< "\n";
-				initial_wa_ = Whitespace::None;
+				initial_wa_ = PwrNlp::Whitespace::None;
 			}
 		}
 		std::string srx = cfg.get("srx", "");
@@ -88,7 +88,7 @@ namespace Toki {
 		wa_ = initial_wa_;
 	}
 
-	void WhitespaceTokenizer::set_initial_whitespace(Whitespace::Enum wa)
+	void WhitespaceTokenizer::set_initial_whitespace(PwrNlp::Whitespace::Enum wa)
 	{
 		initial_wa_ = wa_ = wa;
 	}
@@ -133,15 +133,15 @@ namespace Toki {
 			}
 		}
 		if (nl > 1) {
-			wa_ = Whitespace::ManyNewlines;
+			wa_ = PwrNlp::Whitespace::ManyNewlines;
 		} else if (nl == 1) {
-			wa_ = Whitespace::Newline;
+			wa_ = PwrNlp::Whitespace::Newline;
 		} else if (ws > 1) {
-			wa_ = Whitespace::ManySpaces;
+			wa_ = PwrNlp::Whitespace::ManySpaces;
 		} else if (ws == 1) {
-			wa_ = Whitespace::Space;
+			wa_ = PwrNlp::Whitespace::Space;
 		} else {
-			wa_ = Whitespace::None;
+			wa_ = PwrNlp::Whitespace::None;
 		}
 		if (first_) {
 			if (wa_ < initial_wa_) {

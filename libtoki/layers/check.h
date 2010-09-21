@@ -21,67 +21,67 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 
 namespace Toki {
 
+/**
+ * A sanity-check layer that can be configured to output warning messages
+ * when very long tokens or very long sentences are noticed.
+ */
+class CheckLayer : public TokenLayer
+{
+public:
 	/**
-	 * A sanity-check layer that can be configured to output warning messages
-	 * when very long tokens or very long sentences are noticed.
+	 * Constructor.
+	 *
+	 * Keys recognized in the configuration:
+	 * - max_token_size      - token size to consider overly huge, defaults
+	 *                         to 300 characters
+	 * - max_sentence_size   - sentence size to consider overly huge,
+	 *                         defaults to 1000 tokens
+	 * - huge_token_warn     - set to 0 to disable huge token warnings
+	 * - huge_sentence_warn  - set to 0 to disable huge sentence warnings
+	 * - huge_sentence_split - set to 1 to force-split huge sentences
+	 * - check_spaces        - set to true to check for stray whitespace in
+	 *                         the tokens' orths
+	 * - warn_format         - either 1 for a '1' char for every warning,
+	 *                       - 01 to also emit '0' for tokens with no
+	 *                         warnings, and text for a text message.
 	 */
-	class CheckLayer : public TokenLayer
-	{
-	public:
-		/**
-		 * Constructor.
-		 *
-		 * Keys recognized in the configuration:
-		 * - max_token_size      - token size to consider overly huge, defaults
-		 *                         to 300 characters
-		 * - max_sentence_size   - sentence size to consider overly huge,
-		 *                         defaults to 1000 tokens
-		 * - huge_token_warn     - set to 0 to disable huge token warnings
-		 * - huge_sentence_warn  - set to 0 to disable huge sentence warnings
-		 * - huge_sentence_split - set to 1 to force-split huge sentences
-		 * - check_spaces        - set to true to check for stray whitespace in
-		 *                         the tokens' orths
-		 * - warn_format         - either 1 for a '1' char for every warning,
-		 *                       - 01 to also emit '0' for tokens with no
-		 *                         warnings, and text for a text message.
-		 */
-		CheckLayer(TokenSource* input, const Config::Node& props);
+	CheckLayer(TokenSource* input, const Config::Node& props);
 
-		/// Destrctor
-		~CheckLayer();
+	/// Destrctor
+	~CheckLayer();
 
-		/// TokenLayer override
-		Token* process_token(Token *t);
+	/// TokenLayer override
+	Token* process_token(Token *t);
 
-		/// TokenLayer override
-		virtual std::string info() const;
+	/// TokenLayer override
+	virtual std::string info() const;
 
-		/// TokenLayer override
-		std::string long_info() const;
+	/// TokenLayer override
+	std::string long_info() const;
 
-		/// TokenLayer override
-		void restart();
+	/// TokenLayer override
+	void restart();
 
-	private:
-		/// helper function for actual warning output
-		bool warn(const std::string& msg);
+private:
+	/// helper function for actual warning output
+	bool warn(const std::string& msg);
 
-		/// behavior flags
-		int max_token_size_;
-		int max_sentence_size_;
-		bool huge_token_warn_;
-		bool huge_sentence_warn_;
-		bool huge_sentence_split_;
-		bool check_spaces_;
+	/// behavior flags
+	int max_token_size_;
+	int max_sentence_size_;
+	bool huge_token_warn_;
+	bool huge_sentence_warn_;
+	bool huge_sentence_split_;
+	bool check_spaces_;
 
-		bool emit_0_on_no_warnings_;
-		bool emit_1_on_warnings_;
+	bool emit_0_on_no_warnings_;
+	bool emit_1_on_warnings_;
 
-		/// Token counter to keep track of which tokens trigger warnings
-		int token_counter_;
-		/// Sentence size counter
-		int sentence_size_counter_;
-	};
+	/// Token counter to keep track of which tokens trigger warnings
+	int token_counter_;
+	/// Sentence size counter
+	int sentence_size_counter_;
+};
 
 } /* end ns Toki */
 

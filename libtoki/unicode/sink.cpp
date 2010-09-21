@@ -23,68 +23,68 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 
 namespace Toki {
 
-	UnicodeSink::UnicodeSink()
-		: input_()
-	{
-		set_null_input_source();
-	}
+UnicodeSink::UnicodeSink()
+	: input_()
+{
+	set_null_input_source();
+}
 
-	UnicodeSink::UnicodeSink(UnicodeSource *input)
-		: input_()
-	{
-		set_input_source(input);
-	}
+UnicodeSink::UnicodeSink(UnicodeSource *input)
+	: input_()
+{
+	set_input_source(input);
+}
 
-	UnicodeSink::UnicodeSink(const boost::shared_ptr<UnicodeSource>& input)
-		: input_()
-	{
-		set_input_source(input);
-	}
+UnicodeSink::UnicodeSink(const boost::shared_ptr<UnicodeSource>& input)
+	: input_()
+{
+	set_input_source(input);
+}
 
-	UnicodeSink::UnicodeSink(std::istream &is, int bufsize)
-		: input_()
-	{
-		set_input_source(is, bufsize);
-	}
+UnicodeSink::UnicodeSink(std::istream &is, int bufsize)
+	: input_()
+{
+	set_input_source(is, bufsize);
+}
 
-	UnicodeSink::UnicodeSink(const UnicodeString &s)
-		: input_()
-	{
-		set_input_source(s);
-	}
+UnicodeSink::UnicodeSink(const UnicodeString &s)
+	: input_()
+{
+	set_input_source(s);
+}
 
-	UnicodeSink::~UnicodeSink()
-	{
-	}
+UnicodeSink::~UnicodeSink()
+{
+}
 
-	void UnicodeSink::set_null_input_source()
-	{
-		set_input_source(boost::make_shared<NullUnicodeSource>());
-	}
+void UnicodeSink::set_null_input_source()
+{
+	set_input_source(boost::make_shared<NullUnicodeSource>());
+}
 
-	void UnicodeSink::set_input_source(UnicodeSource *us)
-	{
-		input_.reset(us);
-		new_input_source();
-	}
+void UnicodeSink::set_input_source(UnicodeSource *us)
+{
+	input_.reset(us);
+	new_input_source();
+}
 
-	void UnicodeSink::set_input_source(
-			const boost::shared_ptr<UnicodeSource>& us)
-	{
-		input_ = us;
-		new_input_source();
-	}
+void UnicodeSink::set_input_source(
+		const boost::shared_ptr<UnicodeSource>& us)
+{
+	input_ = us;
+	new_input_source();
+}
 
-	void UnicodeSink::set_input_source(std::istream &is, int bufsize)
-	{
-		set_input_source(boost::make_shared<UnicodeIstreamWrapper>(
-					boost::ref(is), bufsize));
-	}
+void UnicodeSink::set_input_source(std::istream &is, int bufsize)
+{
+	set_input_source(boost::make_shared<UnicodeIstreamWrapper>(
+				boost::ref(is), bufsize));
+}
 
-	void UnicodeSink::set_input_source(const UnicodeString &s)
-	{
-		set_input_source(boost::make_shared<UnicodeIcuStringWrapper>(s));
-	}
+void UnicodeSink::set_input_source(const UnicodeString &s)
+{
+	set_input_source(boost::make_shared<UnicodeIcuStringWrapper>(s));
+}
 
 
 } /* end ns Toki */

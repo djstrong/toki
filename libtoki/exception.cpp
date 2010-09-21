@@ -19,41 +19,36 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 
 namespace Toki {
 
-	TokenizerLibError::TokenizerLibError(const std::string &what)
-	 : std::runtime_error(what)
-	{
-	}
+Error::Error(const std::string &what)
+	: PwrNlp::Error(what)
+{
+}
 
-	TokenizerLibError::~TokenizerLibError() throw()
-	{
-	}
+Error::~Error() throw()
+{
+}
 
-	std::string TokenizerLibError::info() const
-	{
-		return what();
-	}
+FileNotFound::FileNotFound(const std::string& filename,
+		const std::string& paths, const std::string& where)
+	: Error("File not found: " + filename), filename(filename),
+	paths(paths), where(where)
+{
+}
 
-	FileNotFound::FileNotFound(const std::string& filename,
-			const std::string& paths, const std::string& where)
-		: TokenizerLibError("File not found: " + filename), filename(filename),
-		paths(paths), where(where)
-	{
-	}
+FileNotFound::~FileNotFound() throw()
+{
+}
 
-	FileNotFound::~FileNotFound() throw()
-	{
+std::string FileNotFound::info() const
+{
+	std::ostringstream ss;
+	if (where.empty()) {
+		ss << "File ";
+	} else {
+		ss << where << " file ";
 	}
-
-	std::string FileNotFound::info() const
-	{
-		std::ostringstream ss;
-		if (where.empty()) {
-			ss << "File ";
-		} else {
-			ss << where << " file ";
-		}
-		ss << "'" << filename << "' not found in search path " << paths;
-		return ss.str();
-	}
+	ss << "'" << filename << "' not found in search path " << paths;
+	return ss.str();
+}
 
 } /* end ns Toki */

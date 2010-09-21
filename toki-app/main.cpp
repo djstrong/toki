@@ -19,7 +19,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #include <libtoki/token.h>
 #include <libtoki/unicode/istreamwrapper.h>
 #include <libtoki/unicode/icustringwrapper.h>
-#include <libtoki/util/util.h>
+#include <libpwrutils/util.h>
 #include <libtoki/util/debug.h>
 #include <libtoki/exception.h>
 #include <libtoki/srx/srx.h>
@@ -143,7 +143,7 @@ int main(int argc, char** argv)
 				out << srx_mark_end;
 				out << srx_mark_start;
 			}
-			out << Toki::Util::to_utf8(srx.get_next_char());
+			out << PwrNlp::to_utf8(srx.get_next_char());
 		}
 		out << srx_mark_end;
 		std::cerr << segments << "\n";
@@ -185,8 +185,8 @@ int main(int argc, char** argv)
 		}
 		tok.set_input_source(std::cin, bufsize);
 		if (!initial_wa_override.empty()) {
-			Toki::Whitespace::Enum wa = Toki::Whitespace::from_string(initial_wa_override);
-			if (Toki::Whitespace::is_valid(wa)) {
+			PwrNlp::Whitespace::Enum wa = PwrNlp::Whitespace::from_string(initial_wa_override);
+			if (PwrNlp::Whitespace::is_valid(wa)) {
 				tok.input_tokenizer().set_initial_whitespace(wa);
 			} else {
 				std::cerr << "Invalid initial whitespace: " << initial_wa_override << "\n";
@@ -200,7 +200,7 @@ int main(int argc, char** argv)
 			if (format.empty()) {
 				format = conf.get("debug.format", "[$orth]-$type-$ws-\n");
 			}
-			format = Toki::Util::unescape_utf8(format);
+			format = PwrNlp::unescape_utf8(format);
 			Toki::Debug::tokenize_formatted(tok, format, out, cptr);
 			if (end_newline) {
 				std::cout << std::endl;
@@ -209,7 +209,7 @@ int main(int argc, char** argv)
 		if (stats) {
 			std::cerr << count << "\n";
 		}
-	} catch (Toki::TokenizerLibError& e) {
+	} catch (Toki::Error& e) {
 		std::cerr << "Error: " << e.info() << "\n";
 	}
 }

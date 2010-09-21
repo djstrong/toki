@@ -14,7 +14,6 @@ or FITNESS FOR A PARTICULAR PURPOSE.
     See the LICENSE and COPYING files for more details.
 */
 
-#include <libtoki/srx/util.h>
 #include <libtoki/srx/document.h>
 #include <libtoki/srx/segmenter.h>
 #include <libtoki/srx/srx.h>
@@ -40,39 +39,6 @@ namespace {
 
 
 BOOST_AUTO_TEST_SUITE( srx );
-
-BOOST_AUTO_TEST_CASE( unquote )
-{
-
-	std::string s1 = "asdlkh\\asjkd\\.asd+{}\\alh\\\\asd21\\a";
-	std::string s1u = Toki::Srx::Util::unquote_regex(s1);
-	BOOST_CHECK_EQUAL( s1, s1u );
-	std::string s2 = "as\\Q.!abcd\\E.";
-	BOOST_CHECK_EQUAL( "as\\.!abcd.", Toki::Srx::Util::unquote_regex(s2) );
-	std::string s3 = "Characters that must be quoted to be treated as literals "
-					 "\nare \\Q* ? + [ ( ) { } ^ $ | \\ . /\\E";
-	std::string s3c ="Characters that must be quoted to be treated as literals "
-					 "\nare \\* \\? \\+ \\[ \\( \\) \\{ \\} \\^ \\$ \\| \\\\ \\. \\/";
-	BOOST_CHECK_EQUAL( s3c, Toki::Srx::Util::unquote_regex(s3) );
-}
-
-BOOST_AUTO_TEST_CASE( finitize )
-{
-	return;
-	std::string s00 = "a*";
-	BOOST_CHECK_EQUAL("a{0,9}", Toki::Srx::Util::prepare_regex_for_lookbehind(s00, 9));
-	std::string s01 = "a\\*";
-	BOOST_CHECK_EQUAL("a\\*", Toki::Srx::Util::prepare_regex_for_lookbehind(s01, 9));
-	std::string s02 = "a\\\\*";
-	BOOST_CHECK_EQUAL("a\\\\{0,9}", Toki::Srx::Util::prepare_regex_for_lookbehind(s02, 9));
-	std::string s03 = "a\\\\\\*";
-	BOOST_CHECK_EQUAL("a\\\\\\*", Toki::Srx::Util::prepare_regex_for_lookbehind(s03, 9));
-	std::string s04 = "a\\\\\\\\*";
-	BOOST_CHECK_EQUAL("a\\\\\\\\{0,9}", Toki::Srx::Util::prepare_regex_for_lookbehind(s04, 9));
-
-	std::string ss1 = "a+b*c{10,}";
-	BOOST_CHECK_EQUAL("a{1,99}b{0,99}c{10,99}", Toki::Srx::Util::prepare_regex_for_lookbehind(ss1, 99));
-}
 
 BOOST_AUTO_TEST_CASE( parse )
 {
@@ -173,16 +139,16 @@ BOOST_AUTO_TEST_CASE( variable_window )
 BOOST_AUTO_TEST_CASE( sentence )
 {
 	std::vector<Toki::Token*> v;
-	v.push_back(new Toki::Token("a", "1", Toki::Whitespace::Space));
+	v.push_back(new Toki::Token("a", "1", PwrNlp::Whitespace::Space));
 	v[0]->set_begins_sentence(true);
-	v.push_back(new Toki::Token("b", "2", Toki::Whitespace::Space));
-	v.push_back(new Toki::Token("c", "3", Toki::Whitespace::Space));
-	v.push_back(new Toki::Token("d", "4", Toki::Whitespace::Space));
+	v.push_back(new Toki::Token("b", "2", PwrNlp::Whitespace::Space));
+	v.push_back(new Toki::Token("c", "3", PwrNlp::Whitespace::Space));
+	v.push_back(new Toki::Token("d", "4", PwrNlp::Whitespace::Space));
 	v[3]->set_begins_sentence(true);
-	v.push_back(new Toki::Token("e", "5", Toki::Whitespace::Space));
+	v.push_back(new Toki::Token("e", "5", PwrNlp::Whitespace::Space));
 	v[4]->set_begins_sentence(true);
-	v.push_back(new Toki::Token("f", "6", Toki::Whitespace::Space));
-	v.push_back(new Toki::Token("g", "7", Toki::Whitespace::Space));
+	v.push_back(new Toki::Token("f", "6", PwrNlp::Whitespace::Space));
+	v.push_back(new Toki::Token("g", "7", PwrNlp::Whitespace::Space));
 	v[6]->set_begins_sentence(true);
 	Toki::TokenSource* src = Toki::make_range_source(v);
 

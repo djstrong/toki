@@ -17,9 +17,9 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #include <libtoki/tokenizer/layertokenizer.h>
 #include "compare.h"
 #include <libtoki/util/debug.h>
-#include <libtoki/util/util.h>
+#include <libpwrutils/util.h>
 #include <libtoki/token.h>
-#include <libtoki/util/foreach.h>
+#include <libpwrutils/foreach.h>
 
 #include <fstream>
 #include <boost/filesystem/fstream.hpp>
@@ -70,7 +70,7 @@ void test_one_item(const compare_item& c)
 	int created_before = Toki::Token::creation_count();
 	int instances_before = Toki::Token::instance_count();
 	int tok_count = 0;
-	Toki::ConfigPathSetter path_setter(Toki::Path::Instance(), data_dir);
+	PwrNlp::ConfigPathSetter path_setter(Toki::Path::Instance(), data_dir);
 	fs::path file_in = c.in_file;
 	fs::path file_out = c.out_file;
 	std::string rel_path = boost::algorithm::replace_first_copy(
@@ -91,7 +91,7 @@ void test_one_item(const compare_item& c)
 	}
 
 	Toki::LayerTokenizer tok(ifs_in, cfg);
-	std::string format = Toki::Util::unescape_utf8(cfg.get("debug.format", "[$orth]"));
+	std::string format = PwrNlp::unescape_utf8(cfg.get("debug.format", "[$orth]"));
 	std::stringstream ss_expected;
 	std::stringstream ss_actual;
 	if (cfg.get("debug.warning_dest", "") == "stdout") {
@@ -148,7 +148,7 @@ void subdir_exists()
 
 void init_subdir(fs::path dir)
 {
-	Toki::ConfigPathSetter path_setter(Toki::Path::Instance(), data_dir);
+	PwrNlp::ConfigPathSetter path_setter(Toki::Path::Instance(), data_dir);
 	fs::directory_iterator end_itr; // default_config construction yields past-the-end
 
 	std::set<std::string> tests_in;

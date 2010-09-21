@@ -18,7 +18,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #define LIBTOKI_SETTINGS_H
 
 #include <libtoki/util/confignode.h>
-#include <libtoki/util/pathsearch.h>
+#include <libpwrutils/pathsearch.h>
 #include <libtoki/exception.h>
 
 #include <unicode/unistr.h>
@@ -34,7 +34,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 
 namespace Toki {
 
-	class TokiPathSearcher : public PathSearcher<FileNotFound>
+	class TokiPathSearcher : public PwrNlp::PathSearcher<FileNotFound>
 	{
 	public:
 		TokiPathSearcher();

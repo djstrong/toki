@@ -15,6 +15,9 @@ include_directories(${ICU_INCLUDE_DIR})
 link_directories(${ICU_LIBRARY_DIRS})
 set(LIBS ${LIBS} icuuc icuio)
 
+find_package(PwrUtils REQUIRED)
+set(LIBS ${PwrUtils_LIBRARY})
+
 find_package(Loki REQUIRED)
 set(LIBS ${LIBS} loki)
 
@@ -50,16 +53,12 @@ add_definitions(-DHAVE_VERSION_H)
 SET(libtoki_STAT_SRC
     exception.cpp
     main.cpp
-    sentence.cpp
     sentencesplitter.cpp
     token.cpp
-    tokensource.cpp
-    whitespace.cpp
     srx/document.cpp
     srx/rule.cpp
     srx/segmenter.cpp
     srx/srx.cpp
-    srx/util.cpp
     layers/affixsplit.cpp
     layers/append.cpp
     layers/basicsplit.cpp
@@ -84,13 +83,13 @@ SET(libtoki_STAT_SRC
     unicode/source.cpp
     util/confignode.cpp
     util/debug.cpp
-    util/pathsearch.cpp
     util/settings.cpp
-    util/util.cpp
     util/xmlutil.cpp
 )
 
-add_library(toki SHARED ${libtoki_STAT_SRC})
+file(GLOB_RECURSE INCS "*.h")
+
+add_library(toki SHARED ${libtoki_STAT_SRC} ${INCS})
 target_link_libraries ( toki ${LIBS} )
 set_target_properties(toki PROPERTIES
         VERSION "${ver_major}.${ver_minor}"

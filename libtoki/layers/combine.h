@@ -21,23 +21,23 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 
 namespace Toki {
 
+/**
+ * Sample layer to glue pairs of tokens together.
+ */
+class CombineLayer : public OutputQueueLayer
+{
+public:
 	/**
-	 * Sample layer to glue pairs of tokens together.
+	 * Constructor.
+	 *
+	 * No new configuration keys processed. See parent class.
 	 */
-	class CombineLayer : public OutputQueueLayer
-	{
-	public:
-		/**
-		 * Constructor.
-		 *
-		 * No new configuration keys processed. See parent class.
-		 */
-		CombineLayer(TokenSource* input, const Config::Node& props);
+	CombineLayer(TokenSource* input, const Config::Node& props);
 
-	protected:
-		/// OutputQueueLayer override
-		void prepare_more_tokens(Token* t);
-	};
+protected:
+	/// OutputQueueLayer override
+	void prepare_more_tokens(Token* t);
+};
 
 } //end namespace Toki
 

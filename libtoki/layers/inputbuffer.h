@@ -22,42 +22,42 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 
 namespace Toki {
 
+/**
+ * A base class for layers that might want to look ahead into the token
+ * source but might not always want to consume all the tokens.
+ */
+class InputBufferLayer : public TokenLayer
+{
+public:
 	/**
-	 * A base class for layers that might want to look ahead into the token
-	 * source but might not always want to consume all the tokens.
+	 * Constructor. No config keys recognized.
 	 */
-	class InputBufferLayer : public TokenLayer
-	{
-	public:
-		/**
-		 * Constructor. No config keys recognized.
-		 */
-		InputBufferLayer(TokenSource* input, const Config::Node& props);
+	InputBufferLayer(TokenSource* input, const Config::Node& props);
 
-		/// Destructor
-		~InputBufferLayer();
+	/// Destructor
+	~InputBufferLayer();
 
-		/// reset function
-		void restart();
+	/// reset function
+	void restart();
 
-		/// TokenLayer override
-		std::string long_info() const;
+	/// TokenLayer override
+	std::string long_info() const;
 
-	protected:
-		/**
-		 * TokenLayer override that uses the buffer.
-		 */
-		Token* get_token_from_input();
+protected:
+	/**
+	 * TokenLayer override that uses the buffer.
+	 */
+	Token* get_token_from_input();
 
-		/**
-		 * Put back a received token into the buffer
-		 */
-		void put_back_token(Token* t);
+	/**
+	 * Put back a received token into the buffer
+	 */
+	void put_back_token(Token* t);
 
-	private:
-		/// The token buffer
-		std::queue<Token*> buffer_;
-	};
+private:
+	/// The token buffer
+	std::queue<Token*> buffer_;
+};
 
 } //end namespace Toki
 

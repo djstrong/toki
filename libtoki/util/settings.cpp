@@ -21,7 +21,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #endif
 
 #include <libtoki/exception.h>
-#include <libtoki/util/foreach.h>
+#include <libpwrutils/foreach.h>
 
 
 #include <iostream>
@@ -29,7 +29,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 namespace Toki {
 
 	TokiPathSearcher::TokiPathSearcher()
-		: PathSearcher<FileNotFound>(LIBTOKI_PATH_SEPARATOR)
+		: PwrNlp::PathSearcher<FileNotFound>(LIBTOKI_PATH_SEPARATOR)
 	{
 #ifdef LIBTOKI_DATA_DIR
 		set_search_path(LIBTOKI_DATA_DIR);
@@ -45,8 +45,8 @@ namespace Toki {
 		if (!initialized) {
 			try {
 				cfg = get_named_config("config");
-			} catch (TokenizerLibError& e) {
-				throw TokenizerLibError("default config error! " + e.info());
+			} catch (Error& e) {
+				throw Error("default config error! " + e.info());
 			}
 			initialized = true;
 		}

@@ -19,7 +19,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #include <libtoki/layers/tokenlayer.h>
 #include <libtoki/tokenizer/layertokenizer.h>
 #include <libtoki/tokenizer/whitespacetokenizer.h>
-#include <libtoki/util/foreach.h>
+#include <libpwrutils/foreach.h>
 
 #include <boost/property_tree/ptree.hpp>
 #include <boost/foreach.hpp>
@@ -143,7 +143,7 @@ namespace Toki {
 		try {
 			ltp = &cfg.get_child("layers");
 		} catch (boost::property_tree::ptree_error& e) {
-			throw TokenizerLibError("No layers in LayerTokenizer config");
+			throw Error("No layers in LayerTokenizer config");
 		}
 		const ptree& layers_tree = *ltp;
 
@@ -186,7 +186,7 @@ namespace Toki {
 
 		if (layers_.empty()) {
 			std::cerr << "No valid layers in layer tokenizer!\n";
-			throw TokenizerLibError("No valid layers in LayerTokenizer");
+			throw Error("No valid layers in LayerTokenizer");
 		}
 	}
 

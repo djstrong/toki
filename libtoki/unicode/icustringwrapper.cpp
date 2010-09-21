@@ -18,28 +18,28 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 
 namespace Toki {
 
-	UnicodeIcuStringWrapper::UnicodeIcuStringWrapper(const UnicodeString& u)
-		: iter_(u)
-	{
-	}
+UnicodeIcuStringWrapper::UnicodeIcuStringWrapper(const UnicodeString& u)
+	: iter_(u)
+{
+}
 
-	UnicodeIcuStringWrapper::~UnicodeIcuStringWrapper()
-	{
-	}
+UnicodeIcuStringWrapper::~UnicodeIcuStringWrapper()
+{
+}
 
-	UChar UnicodeIcuStringWrapper::peek_next_char()
-	{
-		return iter_.current();
-	}
+UChar UnicodeIcuStringWrapper::peek_next_char()
+{
+	return iter_.current();
+}
 
-	UChar UnicodeIcuStringWrapper::get_next_char()
-	{
-		return iter_.nextPostInc();
-	}
+UChar UnicodeIcuStringWrapper::get_next_char()
+{
+	return iter_.nextPostInc();
+}
 
-	bool UnicodeIcuStringWrapper::has_more_chars()
-	{
-		return iter_.hasNext();
-	}
+bool UnicodeIcuStringWrapper::has_more_chars()
+{
+	return iter_.hasNext();
+}
 
 } /* end namespace Toki */

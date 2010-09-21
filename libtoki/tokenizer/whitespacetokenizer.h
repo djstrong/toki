@@ -74,7 +74,7 @@ namespace Toki {
 		bool has_srx() const;
 
 		/// Initial whitespace setter
-		void set_initial_whitespace(Whitespace::Enum wa);
+		void set_initial_whitespace(PwrNlp::Whitespace::Enum wa);
 
 	protected:
 		/// UnicodeSink override
@@ -93,7 +93,7 @@ namespace Toki {
 		/**
 		 * Stored whitespace amount that preceeds the next token
 		 */
-		Whitespace::Enum wa_;
+		PwrNlp::Whitespace::Enum wa_;
 
 		/**
 		 * The type of tokens to return
@@ -103,7 +103,7 @@ namespace Toki {
 		/**
 		 * Initial whitespace for the first token
 		 */
-		Whitespace::Enum initial_wa_;
+		PwrNlp::Whitespace::Enum initial_wa_;
 
 
 		/**

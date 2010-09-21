@@ -18,50 +18,50 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 
 namespace Toki {
 
-	SentenceSplitter::SentenceSplitter(TokenSource& ts)
-		: ts_(&ts), buf_(NULL)
-	{
-	}
+SentenceSplitter::SentenceSplitter(TokenSource& ts)
+	: ts_(&ts), buf_(NULL)
+{
+}
 
-	SentenceSplitter::~SentenceSplitter()
-	{
-		delete buf_;
-	}
+SentenceSplitter::~SentenceSplitter()
+{
+	delete buf_;
+}
 
-	void SentenceSplitter::set_source(TokenSource &ts)
-	{
-		ts_ = &ts;
-	}
+void SentenceSplitter::set_source(TokenSource &ts)
+{
+	ts_ = &ts;
+}
 
-	Token* SentenceSplitter::get_buf()
-	{
-		Token* tmp = buf_;
-		buf_ = NULL;
-		return tmp;
-	}
+Token* SentenceSplitter::get_buf()
+{
+	Token* tmp = buf_;
+	buf_ = NULL;
+	return tmp;
+}
 
-	bool SentenceSplitter::has_more()
-	{
-		if (buf_ != NULL) return true;
+bool SentenceSplitter::has_more()
+{
+	if (buf_ != NULL) return true;
+	buf_ = source().get_next_token();
+	return buf_ != NULL;
+}
+
+Sentence* SentenceSplitter::get_next_sentence()
+{
+	Sentence* sentence = new Sentence();
+	if (buf_ == NULL) {
 		buf_ = source().get_next_token();
-		return buf_ != NULL;
 	}
-
-	Sentence* SentenceSplitter::get_next_sentence()
-	{
-		Sentence* sentence = new Sentence();
-		if (buf_ == NULL) {
-			buf_ = source().get_next_token();
-		}
-		if (buf_) {
+	if (buf_) {
+		sentence->append(buf_);
+		buf_ = source().get_next_token();
+		while (buf_ != NULL && !buf_->begins_sentence()) {
 			sentence->append(buf_);
 			buf_ = source().get_next_token();
-			while (buf_ != NULL && !buf_->begins_sentence()) {
-				sentence->append(buf_);
-				buf_ = source().get_next_token();
-			}
 		}
-		return sentence;
 	}
+	return sentence;
+}
 
 } /* end ns Toki */

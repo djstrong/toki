@@ -14,7 +14,6 @@ or FITNESS FOR A PARTICULAR PURPOSE.
     See the LICENSE and COPYING files for more details.
 */
 
-#include <libtoki/srx/util.h>
 #include <libtoki/srx/document.h>
 #include <libtoki/srx/segmenter.h>
 

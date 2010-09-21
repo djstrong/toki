@@ -20,27 +20,25 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #include <libxml++/nodes/textnode.h>
 
 namespace Toki {
+namespace XmlUtil {
 
-	namespace XmlUtil {
-		const xmlpp::Node* get_child_or_null(const xmlpp::Node* n,
-				const char* name)
-		{
-			const xmlpp::Node::NodeList list = n->get_children(name);
-			if (list.empty()) return NULL;
-			return list.front();
-		}
+const xmlpp::Node* get_child_or_null(const xmlpp::Node* n, const char* name)
+{
+	const xmlpp::Node::NodeList list = n->get_children(name);
+	if (list.empty()) return NULL;
+	return list.front();
+}
 
-		std::string get_child_text_or_empty(const xmlpp::Node* n,
-				const char* name)
-		{
-			const xmlpp::Element* el = dynamic_cast<const xmlpp::Element*>(
-				get_child_or_null(n, name));
-			if (el) {
-				const xmlpp::TextNode* t = el->get_child_text();
-				if (t) return t->get_content();
-			}
-			return "";
-		}
-	} /* end ns XmlUtil */
+std::string get_child_text_or_empty(const xmlpp::Node* n, const char* name)
+{
+	const xmlpp::Element* el = dynamic_cast<const xmlpp::Element*>(
+		get_child_or_null(n, name));
+	if (el) {
+		const xmlpp::TextNode* t = el->get_child_text();
+		if (t) return t->get_content();
+	}
+	return "";
+}
 
+} /* end ns XmlUtil */
 } /* end ns Toki */

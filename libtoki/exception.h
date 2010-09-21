@@ -17,58 +17,56 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #ifndef LIBTOKI_EXCEPTION_H
 #define LIBTOKI_EXCEPTION_H
 
-#include <stdexcept>
+#include <libpwrutils/exception.h>
 
 namespace Toki {
 
+/**
+ * Base class for all tokenizer errors. Derives from
+ * @c PwrNlp::Error. Call member function @c what to get a
+ * human-readable message associated with the error.
+ */
+class Error : public PwrNlp::Error
+{
+public:
 	/**
-	 * Base class for all tokenizer errors. Derives from
-	 * @c std::runtime_error. Call member function @c what to get a
-	 * human-readable message associated with the error.
+	 * Instantiate a TokenizerLibError instance with the given message.
+	 * @param what The message to associate with this error.
 	 */
-	class TokenizerLibError : public std::runtime_error
+	Error(const std::string &what);
+
+	~Error() throw();
+};
+
+
+/**
+ * Class to signify "can't happen" errors
+ */
+class TokenizerImpossibleError : public Error
+{
+public:
+	TokenizerImpossibleError(const std::string &what)
+	 : Error(what)
 	{
-	public:
-		/**
-		 * Instantiate a TokenizerLibError instance with the given message.
-		 * @param what The message to associate with this error.
-		 */
-		TokenizerLibError(const std::string &what);
+	}
 
-		~TokenizerLibError() throw();
-
-		virtual std::string info() const;
-	};
-
-
-	/**
-	 * Class to signify "can't happen" errors
-	 */
-	class TokenizerImpossibleError : public TokenizerLibError
+	~TokenizerImpossibleError() throw()
 	{
-	public:
-		TokenizerImpossibleError(const std::string &what)
-		 : TokenizerLibError(what)
-		{
-		}
+	}
+};
 
-		~TokenizerImpossibleError() throw()
-		{
-		}
-	};
+class FileNotFound : public Error
+{
+public:
+	FileNotFound(const std::string& filename, const std::string& paths,
+			const std::string& where);
 
-	class FileNotFound : public TokenizerLibError
-	{
-	public:
-		FileNotFound(const std::string& filename, const std::string& paths,
-				const std::string& where);
+	~FileNotFound() throw();
 
-		~FileNotFound() throw();
+	std::string info() const;
 
-		std::string info() const;
-
-		std::string filename, paths, where;
-	};
+	std::string filename, paths, where;
+};
 
 } /* end ns Toki */
 

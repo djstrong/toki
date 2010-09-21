@@ -16,9 +16,8 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 
 #include <libtoki/util/settings.h>
 #include <libtoki/exception.h>
-#include <libtoki/util/foreach.h>
+#include <libpwrutils/foreach.h>
 #include <boost/test/unit_test.hpp>
-#include <boost/foreach.hpp>
 
 BOOST_AUTO_TEST_SUITE( config )
 
@@ -39,10 +38,10 @@ BOOST_AUTO_TEST_CASE(test_default_config_config)
 BOOST_AUTO_TEST_CASE(test_default_config_config_fail)
 {
 	{
-		Toki::ConfigPathSetter l(Toki::Path::Instance(), "nonexistant9427398yq564657^%&");
+		PwrNlp::ConfigPathSetter l(Toki::Path::Instance(), "nonexistant9427398yq564657^%&");
 		BOOST_CHECK_THROW(
 			Toki::Config::Node n = Toki::default_config(),
-			Toki::TokenizerLibError
+			Toki::Error
 		);
 	}
 	BOOST_CHECK_NO_THROW(
@@ -55,7 +54,7 @@ BOOST_AUTO_TEST_CASE(test_nonexistant_config)
 {
 	BOOST_CHECK_THROW(
 		Toki::Config::Node n = Toki::get_named_config("nonexistant97yh(*^$4u678"),
-		Toki::TokenizerLibError
+		Toki::Error
 	);
 }
 
