@@ -36,6 +36,9 @@ public:
 	TokiError(const std::string &what);
 
 	~TokiError() throw();
+
+	/// PwrNlpError override
+	std::string info() const;
 };
 
 

@@ -28,6 +28,11 @@ TokiError::~TokiError() throw()
 {
 }
 
+std::string TokiError::info() const
+{
+	return "Toki";
+}
+
 FileNotFound::FileNotFound(const std::string& filename,
 		const std::string& paths, const std::string& where)
 	: TokiError("File not found: " + filename), filename(filename),
