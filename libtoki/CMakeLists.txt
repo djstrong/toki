@@ -29,7 +29,7 @@ set(LIBS ${LIBS} ${LibXML++_LIBRARIES})
 link_directories(${Boost_LIBRARY_DIRS})
 set(LIBS ${LIBS} ${Boost_LIBRARIES})
 
-set(LIBTOKI_INSTALL_DATA_DIR lib/toki)
+set(LIBTOKI_INSTALL_DATA_DIR share/toki)
 set(LIBTOKI_PATH_SEPARATOR ";")
 set(LIBTOKI_DATA_DIR ".;${CMAKE_INSTALL_PREFIX}/${LIBTOKI_INSTALL_DATA_DIR}")
 set(LIBTOKI_VERSION "${ver_major}.${ver_minor}.${ver_patch}")
