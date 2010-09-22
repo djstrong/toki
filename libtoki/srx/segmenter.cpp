@@ -80,7 +80,7 @@ void NaiveIcuSegmenter::load_rules(const std::vector<Rule>& rules)
 		} else {
 			std::stringstream ss;
 			ss << r.before << " : " << r.after;
-			throw Error("Rule failed to compile: " + ss.str());
+			throw SrxError("Rule failed to compile: " + ss.str());
 		}
 	}
 }
@@ -150,7 +150,7 @@ void HxoIcuSegmenter::load_rules(const std::vector<Rule> &rules)
 			} else {
 				std::stringstream ss;
 				ss << r.before << " : " << r.after;
-				throw Error("Rule failed to compile: " + ss.str());
+				throw SrxError("Rule failed to compile: " + ss.str());
 			}
 		} else {
 			UErrorCode status = U_ZERO_ERROR;
@@ -159,7 +159,7 @@ void HxoIcuSegmenter::load_rules(const std::vector<Rule> &rules)
 			b = new RegexMatcher(UnicodeString::fromUTF8(mod_before), 0,
 					status);
 			if (!U_SUCCESS(status)) {
-				throw Error("BeforeRule failed to compile: " + mod_before);
+				throw SrxError("BeforeRule failed to compile: " + mod_before);
 			}
 			//std::cerr << "XXX" << r.after << "\n";
 			if (r.after.empty()) {
@@ -168,7 +168,7 @@ void HxoIcuSegmenter::load_rules(const std::vector<Rule> &rules)
 				a = new RegexMatcher(UnicodeString::fromUTF8(r.after), 0,
 					status);
 				if (!U_SUCCESS(status)) {
-					throw Error("AfterRule failed to compile: " + r.after);
+					throw SrxError("AfterRule failed to compile: " + r.after);
 				}
 			}
 			nobreak_back_.push_back(b);

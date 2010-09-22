@@ -41,7 +41,7 @@ Node from_file(const std::string &filename)
 	try {
 		loose_ini_parser::read_loose_ini(filename, p);
 	} catch (boost::property_tree::file_parser_error& e) {
-		throw Error(e.what());
+		throw TokiError(e.what());
 	}
 
 	return p;
@@ -53,7 +53,7 @@ Node from_stream(std::istream &is)
 	try {
 		loose_ini_parser::read_loose_ini(is, p);
 	} catch (boost::property_tree::file_parser_error& e) {
-		throw Error(e.what());
+		throw TokiError(e.what());
 	}
 	return p;
 }

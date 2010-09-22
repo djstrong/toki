@@ -41,7 +41,7 @@ BOOST_AUTO_TEST_CASE(test_default_config_config_fail)
 		PwrNlp::ConfigPathSetter l(Toki::Path::Instance(), "nonexistant9427398yq564657^%&");
 		BOOST_CHECK_THROW(
 			Toki::Config::Node n = Toki::default_config(),
-			Toki::Error
+			Toki::TokiError
 		);
 	}
 	BOOST_CHECK_NO_THROW(
@@ -54,7 +54,7 @@ BOOST_AUTO_TEST_CASE(test_nonexistant_config)
 {
 	BOOST_CHECK_THROW(
 		Toki::Config::Node n = Toki::get_named_config("nonexistant97yh(*^$4u678"),
-		Toki::Error
+		Toki::TokiError
 	);
 }
 

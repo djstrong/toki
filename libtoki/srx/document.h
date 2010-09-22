@@ -39,11 +39,11 @@ namespace Srx {
 /**
  * Exception class for Srx parse errors
  */
-class ParseError : public Error
+class ParseError : public SrxError
 {
 public:
 	ParseError(const std::string& what)
-		: Error("Parse error: " + what)
+		: SrxError("Parse error: " + what)
 	{
 	}
 

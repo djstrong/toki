@@ -22,15 +22,15 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 namespace Toki {
 namespace Srx {
 
-class Error : public ::Toki::Error
+class SrxError : public TokiError
 {
 public:
-	Error(const std::string& what)
-		: ::Toki::Error("SRX error: " + what)
+	SrxError(const std::string& what)
+		: TokiError("SRX error: " + what)
 	{
 	}
 
-	~Error() throw()
+	~SrxError() throw()
 	{
 	}
 };

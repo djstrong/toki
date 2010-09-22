@@ -26,27 +26,27 @@ namespace Toki {
  * @c PwrNlp::Error. Call member function @c what to get a
  * human-readable message associated with the error.
  */
-class Error : public PwrNlp::Error
+class TokiError : public PwrNlp::PwrNlpError
 {
 public:
 	/**
 	 * Instantiate a TokenizerLibError instance with the given message.
 	 * @param what The message to associate with this error.
 	 */
-	Error(const std::string &what);
+	TokiError(const std::string &what);
 
-	~Error() throw();
+	~TokiError() throw();
 };
 
 
 /**
  * Class to signify "can't happen" errors
  */
-class TokenizerImpossibleError : public Error
+class TokenizerImpossibleError : public TokiError
 {
 public:
 	TokenizerImpossibleError(const std::string &what)
-	 : Error(what)
+	 : TokiError(what)
 	{
 	}
 
@@ -55,7 +55,7 @@ public:
 	}
 };
 
-class FileNotFound : public Error
+class FileNotFound : public TokiError
 {
 public:
 	FileNotFound(const std::string& filename, const std::string& paths,

@@ -45,8 +45,8 @@ namespace Toki {
 		if (!initialized) {
 			try {
 				cfg = get_named_config("config");
-			} catch (Error& e) {
-				throw Error("default config error! " + e.info());
+			} catch (TokiError& e) {
+				throw TokiError("default config error! " + e.info());
 			}
 			initialized = true;
 		}

@@ -19,18 +19,18 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 
 namespace Toki {
 
-Error::Error(const std::string &what)
-	: PwrNlp::Error(what)
+TokiError::TokiError(const std::string &what)
+	: PwrNlp::PwrNlpError(what)
 {
 }
 
-Error::~Error() throw()
+TokiError::~TokiError() throw()
 {
 }
 
 FileNotFound::FileNotFound(const std::string& filename,
 		const std::string& paths, const std::string& where)
-	: Error("File not found: " + filename), filename(filename),
+	: TokiError("File not found: " + filename), filename(filename),
 	paths(paths), where(where)
 {
 }

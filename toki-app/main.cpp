@@ -209,7 +209,7 @@ int main(int argc, char** argv)
 		if (stats) {
 			std::cerr << count << "\n";
 		}
-	} catch (Toki::Error& e) {
+	} catch (Toki::TokiError& e) {
 		std::cerr << "Error: " << e.info() << "\n";
 	}
 }
