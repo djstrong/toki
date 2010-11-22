@@ -57,7 +57,7 @@ public:
 	 * a UnicodeString. The entire string is taken into account, but only
 	 * breaks between 'from' and 'to' are actually retained.
 	 *
-	 * This function returns void, use one of the accesor methods to get
+	 * This function returns void, use one of the accessor methods to get
 	 * a representation of the found break positions, @see get_break_mask
 	 * @see get_break_positions
 	 *
@@ -73,14 +73,14 @@ public:
 			int to) = 0;
 
 	/**
-	 * Break positions accesor -- returns a vector of true and false values
+	 * Break positions accessor -- returns a vector of true and false values
 	 * for break positions in the from..to range used in the previous
 	 * compute_breaks call.
 	 */
 	std::vector<bool> get_break_mask() const;
 
 	/**
-	 * Break positions accesor -- returns a (sorted) vector of the
+	 * Break positions accessor -- returns a (sorted) vector of the
 	 * positions where breaks were detected in the previous
 	 * compute_breaks call.
 	 */
@@ -124,7 +124,7 @@ public:
 	virtual void compute_breaks(const UnicodeString& str, int from,
 			int to);
 
-	/// Accesor for the compiled rules
+	/// Accessor for the compiled rules
 	const std::vector<CompiledRule>& get_compiled_rules() const {
 		return crules_;
 	}

@@ -68,12 +68,12 @@ public:
 		return suffix_type_;
 	}
 
-	/// prefix characters set accesor
+	/// prefix characters set accessor
 	const std::set<UChar>& prefix_chars() const {
 		return prefix_chars_;
 	}
 
-	/// suffix characters set accesor
+	/// suffix characters set accessor
 	const std::set<UChar>& suffix_chars() const {
 		return suffix_chars_;
 	}

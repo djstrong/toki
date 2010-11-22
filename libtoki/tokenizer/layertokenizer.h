@@ -114,12 +114,12 @@ namespace Toki {
 		 */
 		void set_error_stream(std::ostream* os);
 
-		/// input tokenizer non-const accesor
+		/// input tokenizer non-const accessor
 		WhitespaceTokenizer& input_tokenizer() {
 			return *input_tokenizer_;
 		}
 
-		/// input tokenizer const accesor
+		/// input tokenizer const accessor
 		const WhitespaceTokenizer& input_tokenizer() const {
 			return *input_tokenizer_;
 		}

@@ -70,7 +70,7 @@ namespace Toki {
 		/// Tokenizer override
 		void restart();
 
-		/// SRX state accesor
+		/// SRX state accessor
 		bool has_srx() const;
 
 		/// Initial whitespace setter

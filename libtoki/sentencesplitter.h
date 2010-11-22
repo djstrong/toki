@@ -63,7 +63,7 @@ public:
 	 */
 	Sentence* get_next_sentence();
 
-	/// Buffer accesor
+	/// Buffer accessor
 	Token* get_buf();
 
 private:

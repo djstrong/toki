@@ -94,7 +94,7 @@ public:
 
 #endif
 	/**
-	 * Instance counter accesor, always returns -1 if the
+	 * Instance counter accessor, always returns -1 if the
 	 * LIBTOKI_TRACK_TOKEN_CREATION symbol was not defined during
 	 * compilation
 	 */
@@ -107,7 +107,7 @@ public:
 	}
 
 	/**
-	 * Creation counter accesor, always returns -1 if the
+	 * Creation counter accessor, always returns -1 if the
 	 * LIBTOKI_TRACK_TOKEN_CREATION symbol was not defined during
 	 * compilation
 	 */
