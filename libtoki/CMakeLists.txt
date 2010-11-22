@@ -2,9 +2,9 @@
 
 PROJECT(toki)
 
-set(ver_major "0")
-set(ver_minor "4")
-set(ver_patch "2")
+set(ver_major "1")
+set(ver_minor "0")
+set(ver_patch "0")
 
 set(LIBS "")
 
