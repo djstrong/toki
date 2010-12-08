@@ -28,7 +28,7 @@ TokiError::~TokiError() throw()
 {
 }
 
-std::string TokiError::info() const
+std::string TokiError::scope() const
 {
 	return "Toki";
 }

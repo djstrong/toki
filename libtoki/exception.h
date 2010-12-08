@@ -38,7 +38,7 @@ public:
 	~TokiError() throw();
 
 	/// PwrNlpError override
-	std::string info() const;
+	std::string scope() const;
 };
 
 
