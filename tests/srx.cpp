@@ -168,6 +168,8 @@ BOOST_AUTO_TEST_CASE( sentence )
 	o = s.get_next_sentence();
 	BOOST_REQUIRE_EQUAL(o->size(), 1);
 	BOOST_REQUIRE_EQUAL((*o)[0]->orth_utf8(), "g");
+	delete o;
+	delete src;
 }
 
 
