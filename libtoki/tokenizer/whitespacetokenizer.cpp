@@ -119,13 +119,20 @@ namespace Toki {
 		int ws = 0; int nl = 0;
 		while (input().has_more_chars()) {
 			UChar u = input().peek_next_char();
-			if (!u_isUWhiteSpace(u)) {
+			if (u == 0xfeff) { //BOM mark (aka ZERO WIDTH NO-BREAK SPACE)
+				//do not increment ws. BOM's are skipped entirely
+				input().get_next_char();
+			} else if (!u_isUWhiteSpace(u)) {
 				if (input().peek_begins_sentence()) {
 					begins_sentence_ = true;
 				}
 				break;
 			} else {
 				ws++;
+				// Newlines recognized:
+				// U+A <control> (newline)
+				// U+2028 LINE SEPARATOR
+				// U+2029 PARAGRAPH SEPARATOR
 				if (u == 0xA || u == 0x2029 || u == 0x2028) {
 					nl++;
 				}
