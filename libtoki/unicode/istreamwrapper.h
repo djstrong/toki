@@ -26,7 +26,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 
 namespace Toki {
 
-	/**
+/**
  * This class is a ICU-Unicode wrapper for a std::istream that allows
  * getting Unicode characters from the stream in a reliable and efficient
  * way.
