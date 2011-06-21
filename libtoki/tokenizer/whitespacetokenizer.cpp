@@ -119,7 +119,9 @@ namespace Toki {
 		int ws = 0; int nl = 0;
 		while (input().has_more_chars()) {
 			UChar u = input().peek_next_char();
-			if (u == 0xfeff) { //BOM mark (aka ZERO WIDTH NO-BREAK SPACE)
+			if (u == 0xfeff || u == 0x200b) { 
+				//U+FEFF BOM mark (aka ZERO WIDTH NO-BREAK SPACE)
+				//U+200B ZERO WIDTH SPACE
 				//do not increment ws. BOM's are skipped entirely
 				input().get_next_char();
 			} else if (!u_isUWhiteSpace(u)) {
