@@ -178,7 +178,7 @@ namespace Toki {
 				//		<< input().peek_begins_sentence() << " "
 				//		<< next_token_begins_sentence << "\n";
 				u = input().peek_next_char();
-				if (u_isUWhiteSpace(u)) {
+				if (u_isUWhiteSpace(u) || u == 0xfeff || u == 0x200b) {
 					if (input().peek_begins_sentence()) {
 						next_token_begins_sentence = true;
 					}
