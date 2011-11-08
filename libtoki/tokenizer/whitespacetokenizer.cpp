@@ -119,15 +119,15 @@ namespace Toki {
 		int ws = 0; int nl = 0;
 		while (input().has_more_chars()) {
 			UChar u = input().peek_next_char();
+			if (input().peek_begins_sentence()) {
+				begins_sentence_ = true;
+			}
 			if (u == 0xfeff || u == 0x200b) { 
 				//U+FEFF BOM mark (aka ZERO WIDTH NO-BREAK SPACE)
 				//U+200B ZERO WIDTH SPACE
 				//do not increment ws. BOM's are skipped entirely
 				input().get_next_char();
 			} else if (!u_isUWhiteSpace(u)) {
-				if (input().peek_begins_sentence()) {
-					begins_sentence_ = true;
-				}
 				break;
 			} else {
 				ws++;
@@ -172,11 +172,11 @@ namespace Toki {
 			UChar u = input().get_next_char();
 			orth = u;
 			while (input().has_more_chars()) {
-				//std::string ou = Util::to_utf8(orth);
+				std::string ou = PwrNlp::to_utf8(orth);
 				//std::cerr << ">> " << ou << " "
-				//		<< begins_sentence_ << " "
-				//		<< input().peek_begins_sentence() << " "
-				//		<< next_token_begins_sentence << "\n";
+				//		<< "begs=" << begins_sentence_ << " "
+				//		<< "inbegs=" << input().peek_begins_sentence() << " "
+				//		<< "nextbegs=" << next_token_begins_sentence << "\n";
 				u = input().peek_next_char();
 				if (u_isUWhiteSpace(u) || u == 0xfeff || u == 0x200b) {
 					if (input().peek_begins_sentence()) {
