@@ -5,6 +5,7 @@ Required libraries:
 • Boost 1.41
 • Loki
 • libxml++2.6 (for SRX support)
+• libpwrutils from corpus2 repository, http://nlp.pwr.wroc.pl/corpus2.git
 
 These libraries must be installed along with their headers. If you are using a repository with older versions (provided by your Linux distribution), you may need to uninstall the old versions from the repository and install new from sources.
 
