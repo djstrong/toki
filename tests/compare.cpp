@@ -160,11 +160,11 @@ void init_subdir(fs::path dir)
 			subdirs.insert(itr->path());
 		} else {
 			if (itr->path().extension() == ".in") {
-				tests_in.insert(itr->path().stem());
+				tests_in.insert(itr->path().stem().c_str());
 			} else if (itr->path().extension() == ".out") {
-				tests_out.insert(itr->path().stem());
+				tests_out.insert(itr->path().stem().c_str());
 			} else if (itr->path().extension() == ".ini") {
-				configs.insert(itr->path().stem());
+				configs.insert(itr->path().stem().c_str());
 			}
 		}
 	}

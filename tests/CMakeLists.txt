@@ -13,10 +13,13 @@ add_executable(tests
 	regex.cpp
 )
 
-target_link_libraries ( tests toki ${Boost_LIBRARIES})
+target_link_libraries ( tests toki ${Boost_LIBRARIES} ${ICU_LIBRARY} )
 
 include_directories(${Boost_INCLUDE_DIR})
 link_directories(${Boost_LIBRARY_DIRS})
+
+include_directories(${ICU_INCLUDE_DIR})
+link_directories(${ICU_LIBRARY_DIRS})
 
 
 configure_file(test-sanity.sh ${CMAKE_CURRENT_BINARY_DIR})
