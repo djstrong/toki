@@ -2,7 +2,7 @@ Toki — a configurable tokeniser.
 © 2010, Tomasz Śniatowski and Adam Radziszewski
 Wrocław University of Technology
 
-This is free software, see LICENSE.
+This is free software, see LICENSE.LESSER and LICENSE.
 
 
 Toki is a software package performing segmentation of running text into tokens and (optionally) sentences. The tokeniser is targeted at European languages, especially at Polish (the default configuration is for Polish).
