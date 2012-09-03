@@ -1,7 +1,7 @@
 #!/bin/bash
 
-TOKI_DATA=/home/pawelo/proj/toki/config
-TEST_DATA=/home/pawelo/proj/toki/tests
+TOKI_DATA=@LIBTOKI_SRC_DATA_DIR@
+TEST_DATA=@PROJECT_SOURCE_DIR@
 
 if [ "$2" == "-a" ]; then
 	EXIT=0
