@@ -13,7 +13,7 @@ include_directories( ${CMAKE_SOURCE_DIR} )
 find_package(ICU REQUIRED)
 include_directories(${ICU_INCLUDE_DIR})
 link_directories(${ICU_LIBRARY_DIRS})
-set(LIBS ${LIBS} icuuc icuio)
+set(LIBS ${LIBS} icuuc icuio icutu icuin)
 
 find_package(PwrUtils REQUIRED)
 set(LIBS ${LIBS} ${PwrUtils_LIBRARY})
