@@ -44,5 +44,7 @@ endif(CMAKE_COMPILER_IS_GNUCXX)
 find_package(Boost 1.41 REQUIRED COMPONENTS program_options filesystem system regex)
 
 add_subdirectory(libtoki)
+if(UNIX)
 add_subdirectory(tests)
+endif(UNIX)
 add_subdirectory(toki-app)
