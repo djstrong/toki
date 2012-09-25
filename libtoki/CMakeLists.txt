@@ -17,6 +17,7 @@ set(LIBS ${LIBS} icuuc icuio)
 
 find_package(PwrUtils REQUIRED)
 set(LIBS ${LIBS} ${PwrUtils_LIBRARY})
+include_directories(${PwrUtils_INCLUDE_DIR})
 
 find_package(Loki REQUIRED)
 set(LIBS ${LIBS} loki)
@@ -26,6 +27,7 @@ include_directories(${LibXML++_INCLUDE_DIRS})
 link_directories(${LibXML++_LIBRARY_DIRS})
 set(LIBS ${LIBS} ${LibXML++_LIBRARIES})
 
+include_directories(${Boost_INCLUDE_DIR})
 link_directories(${Boost_LIBRARY_DIRS})
 set(LIBS ${LIBS} ${Boost_LIBRARIES})
 

@@ -1,4 +1,4 @@
-FIND_PATH(PwrUtils_INCLUDE_DIR version.h /usr/include/libpwrutils /usr/local/include/libpwrutils )
+FIND_PATH(PwrUtils_INCLUDE_DIR libpwrutils/version.h /usr/include /usr/local/include )
 
 FIND_LIBRARY(PwrUtils_LIBRARY NAMES pwrutils PATH /usr/lib /usr/local/lib) 
 
