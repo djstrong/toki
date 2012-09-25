@@ -156,6 +156,7 @@ private:
 	std::vector<RegexMatcher*> nobreak_back_;
 };
 
+#ifdef HAVE_BOOST_REGEX
 /**
  * A segmenter using Boost regular expressions and the same approach
  * as the ICU counterpart, @see NaiveIcuSegmenter.
@@ -177,6 +178,7 @@ private:
 	/// The compiled rules
 	std::vector< std::pair<boost::u32regex, bool> > crules_;
 };
+#endif
 
 } /* end ns Srx */ } /* end ns Toki */
 

@@ -54,7 +54,9 @@ std::vector<int> Segmenter::get_break_positions() const {
 Segmenter* Segmenter::get_segmenter_by_name(const std::string &name)
 {
 	if (name == "icu") return new NaiveIcuSegmenter;
+#ifdef HAVE_BOOST_REGEX
 	if (name == "boost") return new NaiveBoostSegmenter;
+#endif
 	if (name == "icu-hxo") return new HxoIcuSegmenter;
 	return NULL;
 }
@@ -243,7 +245,7 @@ void HxoIcuSegmenter::compute_breaks(const UnicodeString &str, int from,
 }
 
 
-
+#ifdef HAVE_BOOST_REGEX
 NaiveBoostSegmenter::NaiveBoostSegmenter()
 {
 }
@@ -296,7 +298,7 @@ void NaiveBoostSegmenter::compute_breaks(const UnicodeString& str,
 	//}
 	//std::cerr << "\n";
 }
-
+#endif
 
 } /* end ns Srx */
 } /* end ns Toki */
