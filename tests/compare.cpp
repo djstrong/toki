@@ -19,7 +19,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #include <libtoki/util/debug.h>
 #include <libpwrutils/util.h>
 #include <libtoki/token.h>
-#include <libpwrutils/foreach.h>
+#include <boost/foreach.hpp>
 
 #include <fstream>
 #include <boost/filesystem/fstream.hpp>
@@ -85,7 +85,7 @@ void test_one_item(const compare_item& c)
 		cfg = *(c.base_config);
 	}
 
-	foreach (const fs::path& p, c.configs) {
+	BOOST_FOREACH (const fs::path& p, c.configs) {
 		Toki::Config::Node additional = Toki::Config::from_file(p.string());
 		Toki::Config::merge_into(cfg, additional);
 	}
@@ -179,7 +179,7 @@ void init_subdir(fs::path dir)
 	}
 	global_configs.push_back(boost::shared_ptr<Toki::Config::Node>(cfg));
 	int count = 0;
-	foreach (const std::string& s, tests_out) {
+	BOOST_FOREACH (const std::string& s, tests_out) {
 		compare_item c;
 		if (tests_in.find(s) == tests_in.end()) {
 			if (tests_in.find("main") == tests_in.end()) {
@@ -202,7 +202,7 @@ void init_subdir(fs::path dir)
 	BOOST_TEST_MESSAGE("Found " << count << " valid compare test case"
 		<< (count > 1 ? "s" : "")
 		<< " in " << dir);
-	foreach (const fs::path& s, subdirs) {
+	BOOST_FOREACH (const fs::path& s, subdirs) {
 		init_subdir(s);
 	}
 }
@@ -216,7 +216,7 @@ void init_compare_suite(boost::unit_test::test_suite *ts, const std::string& pat
 	ts->add(BOOST_TEST_CASE(&subdir_exists));
 	if (!fs::exists(subdir_name)) return;
 	init_subdir(subdir_name);
-	foreach (const compare_item& ci, global_compares) {
+	BOOST_FOREACH (const compare_item& ci, global_compares) {
 		std::string rel_path = boost::algorithm::replace_first_copy(
 				ci.out_file.string(), subdir_name, "");
 		std::string name = "test_compare:" + rel_path;

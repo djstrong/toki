@@ -19,7 +19,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #include <libtoki/layers/tokenlayer.h>
 #include <libtoki/tokenizer/layertokenizer.h>
 #include <libtoki/tokenizer/whitespacetokenizer.h>
-#include <libpwrutils/foreach.h>
+#include <boost/foreach.hpp>
 
 #include <boost/property_tree/ptree.hpp>
 #include <boost/foreach.hpp>
@@ -149,14 +149,14 @@ namespace Toki {
 
 		std::vector<std::string> layer_ids;
 
-		foreach (const Config::Node::value_type &v, layers_tree) {
+		BOOST_FOREACH (const Config::Node::value_type &v, layers_tree) {
 			if (v.first == "layer") {
 				layer_ids.push_back(v.second.data());
 			}
 		}
 
 		TokenSource* previous = input_tokenizer_.get();
-		foreach (const std::string& id, layer_ids) {
+		BOOST_FOREACH (const std::string& id, layer_ids) {
 			try {
 				std::string layer_class;
 				layer_class = cfg.get("layer:" + id + ".class", "");

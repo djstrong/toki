@@ -17,7 +17,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #ifndef LIBTOKI_LEXICONCLASSIFYLAYER_H
 #define LIBTOKI_LEXICONCLASSIFYLAYER_H
 
-#include <libpwrutils/foreach.h>
+#include <boost/foreach.hpp>
 #include <libtoki/layers/tokenlayer.h>
 #include <libtoki/token.h>
 
@@ -93,7 +93,7 @@ LexiconClassifyLayer<CMP>::LexiconClassifyLayer(TokenSource *input,
 	std::string sep(", ");
 	const std::string& sepstring = props.get<std::string>("lexicon", "");
 	boost::algorithm::split(v, sepstring, boost::is_any_of(sep));
-	foreach (const std::string& s, v) {
+	BOOST_FOREACH (const std::string& s, v) {
 		if (!s.empty()) {
 			lex_.insert(UnicodeString::fromUTF8(s).unescape());
 		}

@@ -14,7 +14,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
     See the LICENSE, COPYING.LESSER and COPYING files for more details.
 */
 
-#include <libpwrutils/foreach.h>
+#include <boost/foreach.hpp>
 #include <libtoki/layers/regexpclassify.h>
 #include <libtoki/token.h>
 
@@ -28,7 +28,7 @@ RegexpClassifyLayer::RegexpClassifyLayer(TokenSource* input,
 		const Config::Node& props)
 	: TokenLayer(input, props)
 {
-	foreach (const Config::Node::value_type &v, props) {
+	BOOST_FOREACH (const Config::Node::value_type &v, props) {
 		if (boost::algorithm::starts_with(v.first, "type:")) {
 			std::string type = v.first.substr(5); //length of "type:"
 			UErrorCode status = U_ZERO_ERROR;
@@ -50,7 +50,7 @@ RegexpClassifyLayer::RegexpClassifyLayer(TokenSource* input,
 RegexpClassifyLayer::~RegexpClassifyLayer()
 {
 	typedef std::pair<std::string, RegexMatcher*> vt;
-	foreach (const vt &v, classifiers_) {
+	BOOST_FOREACH (const vt &v, classifiers_) {
 		delete v.second;
 	}
 }

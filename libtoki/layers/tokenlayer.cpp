@@ -14,7 +14,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
     See the LICENSE, COPYING.LESSER and COPYING files for more details.
 */
 
-#include <libpwrutils/foreach.h>
+#include <boost/foreach.hpp>
 #include <libtoki/layers/init.h>
 #include <libtoki/layers/tokenlayer.h>
 #include <libtoki/token.h>
@@ -32,7 +32,7 @@ TokenLayer::TokenLayer(TokenSource* input, const Config::Node& props)
 	std::vector<std::string> sv;
 	std::string data = props.get("process_types", "");
 	boost::algorithm::split(sv, data, boost::algorithm::is_any_of(sep));
-	foreach (const std::string& s, sv) {
+	BOOST_FOREACH (const std::string& s, sv) {
 		if (!s.empty()) {
 			process_token_types_.insert(s);
 		}
@@ -40,7 +40,7 @@ TokenLayer::TokenLayer(TokenSource* input, const Config::Node& props)
 	std::vector<std::string> sv2;
 	std::string data2 = props.get("ignore_types", "");
 	boost::algorithm::split(sv2, data2, boost::algorithm::is_any_of(sep));
-	foreach (const std::string& s2, sv2) {
+	BOOST_FOREACH (const std::string& s2, sv2) {
 		if (!s2.empty()) {
 			do_not_process_token_types_.insert(s2);
 		}

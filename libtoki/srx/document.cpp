@@ -14,7 +14,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
     See the LICENSE, COPYING.LESSER and COPYING files for more details.
 */
 
-#include <libpwrutils/foreach.h>
+#include <boost/foreach.hpp>
 #include <libtoki/util/xmlutil.h>
 #include <libtoki/srx/document.h>
 
@@ -41,7 +41,7 @@ Document::Document()
 
 Document::~Document()
 {
-	foreach (language_map_t::value_type v, language_map_) {
+	BOOST_FOREACH (language_map_t::value_type v, language_map_) {
 		delete v.first;
 	}
 }
@@ -67,14 +67,14 @@ void Document::load(std::istream &is)
 		const xmlpp::Node::NodeList lrl =
 				languagerules->get_children("languagerule");
 		if (lrl.empty()) throw ParseError("no <languagerule>");
-		foreach (const xmlpp::Node* n, lrl) {
+		BOOST_FOREACH (const xmlpp::Node* n, lrl) {
 			process_languagerule_node(n);
 		}
 		const xmlpp::Node* maprules = get_child_or_throw(body, "maprules");
 		const xmlpp::Node::NodeList mrl =
 				maprules->get_children("languagemap");
 		if (mrl.empty()) throw ParseError("no <languagemap>");
-		foreach (const xmlpp::Node* n, mrl) {
+		BOOST_FOREACH (const xmlpp::Node* n, mrl) {
 			process_languagemap_node(n);
 		}
 
@@ -109,7 +109,7 @@ void Document::process_languagerule_node(const xmlpp::Node *n)
 				"<languagerule> with empty languagerulename attribute");
 	}
 	const xmlpp::Node::NodeList lr = n->get_children("rule");
-	foreach (const xmlpp::Node* n, lr) {
+	BOOST_FOREACH (const xmlpp::Node* n, lr) {
 		process_rule_node(name, n);
 	}
 }
@@ -170,7 +170,7 @@ std::vector<Rule> Document::get_rules_for_lang(
 {
 	UnicodeString ulang = UnicodeString::fromUTF8(lang);
 	std::vector<Rule> rules;
-	foreach (language_map_t::value_type v, language_map_) {
+	BOOST_FOREACH (language_map_t::value_type v, language_map_) {
 		RegexMatcher& m = *v.first;
 		m.reset(ulang);
 		UErrorCode status = U_ZERO_ERROR;

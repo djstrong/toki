@@ -20,7 +20,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 
 #include <libtoki/util/confignode.h>
 #include <libtoki/exception.h>
-#include <libpwrutils/foreach.h>
+#include <boost/foreach.hpp>
 #include <libtoki/parser/loose_ini_paser.h>
 
 #include <boost/algorithm/string.hpp>
@@ -62,7 +62,7 @@ Node& merge_into(Node& accu, const Node& other)
 {
 	accu.data() = other.data();
 	using boost::property_tree::ptree;
-	foreach (const ptree::value_type& in_other, other) {
+	BOOST_FOREACH (const ptree::value_type& in_other, other) {
 		boost::optional< ptree& > in_one;
 		if ((in_one = accu.get_child_optional(in_other.first))) {
 			if (in_other.second.get("_merge", "") == "override") {

@@ -16,7 +16,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 
 #include <libtoki/util/settings.h>
 #include <libtoki/exception.h>
-#include <libpwrutils/foreach.h>
+#include <boost/foreach.hpp>
 #include <boost/test/unit_test.hpp>
 
 BOOST_AUTO_TEST_SUITE( config )
@@ -122,7 +122,7 @@ template<typename T>
 std::vector<T> all_values(const Toki::Config::Node& c, const std::string& key)
 {
 	std::vector<T> vec;
-	foreach (const Toki::Config::Node::value_type &v, c) {
+	BOOST_FOREACH (const Toki::Config::Node::value_type &v, c) {
 		if (v.first == key) {
 			vec.push_back(v.second.get_value<T>());
 		}

@@ -21,7 +21,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #endif
 
 #include <libtoki/exception.h>
-#include <libpwrutils/foreach.h>
+#include <boost/foreach.hpp>
 
 
 #include <iostream>

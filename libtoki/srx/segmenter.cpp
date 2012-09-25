@@ -16,7 +16,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 
 #include <libtoki/srx/segmenter.h>
 #include <libtoki/srx/exception.h>
-#include <libpwrutils/foreach.h>
+#include <boost/foreach.hpp>
 #include <libpwrutils/util.h>
 
 #include <map>
@@ -35,7 +35,7 @@ Segmenter::~Segmenter()
 
 std::vector<bool> Segmenter::get_break_mask() const {
 	std::vector<bool> breaks(length_);
-	foreach (break_map_t::value_type v, break_map_) {
+	BOOST_FOREACH (break_map_t::value_type v, break_map_) {
 		breaks[v.first] = v.second;
 	}
 	return breaks;
@@ -43,7 +43,7 @@ std::vector<bool> Segmenter::get_break_mask() const {
 
 std::vector<int> Segmenter::get_break_positions() const {
 	std::vector<int> breaks;
-	foreach (break_map_t::value_type v, break_map_) {
+	BOOST_FOREACH (break_map_t::value_type v, break_map_) {
 		if (v.second) {
 			breaks.push_back(v.first);
 		}
@@ -65,14 +65,14 @@ NaiveIcuSegmenter::NaiveIcuSegmenter()
 
 NaiveIcuSegmenter::~NaiveIcuSegmenter()
 {
-	foreach (const CompiledRule& cr, crules_) {
+	BOOST_FOREACH (const CompiledRule& cr, crules_) {
 		delete cr.matcher;
 	}
 }
 
 void NaiveIcuSegmenter::load_rules(const std::vector<Rule>& rules)
 {
-	foreach (const Rule& r, rules) {
+	BOOST_FOREACH (const Rule& r, rules) {
 		UErrorCode status = U_ZERO_ERROR;
 		CompiledRule cr = r.compile(status);
 		if (U_SUCCESS(status)) {
@@ -93,7 +93,7 @@ void NaiveIcuSegmenter::compute_breaks(const UnicodeString& str, int from,
 	break_map_.clear();
 	to -= from;
 	length_ = to;
-	foreach (const CompiledRule& cr, crules_) {
+	BOOST_FOREACH (const CompiledRule& cr, crules_) {
 		UErrorCode ue = U_ZERO_ERROR;
 		int i = 0;
 		cr.matcher->reset(str);
@@ -127,20 +127,20 @@ HxoIcuSegmenter::HxoIcuSegmenter()
 
 HxoIcuSegmenter::~HxoIcuSegmenter()
 {
-	foreach (RegexMatcher* r, nobreak_back_) {
+	BOOST_FOREACH (RegexMatcher* r, nobreak_back_) {
 		delete r;
 	}
-	foreach (RegexMatcher* r, nobreak_fwd_) {
+	BOOST_FOREACH (RegexMatcher* r, nobreak_fwd_) {
 		delete r;
 	}
-	foreach (CompiledRule& r, crules_break_) {
+	BOOST_FOREACH (CompiledRule& r, crules_break_) {
 		delete r.matcher;
 	}
 }
 
 void HxoIcuSegmenter::load_rules(const std::vector<Rule> &rules)
 {
-	foreach (const Rule& r, rules) {
+	BOOST_FOREACH (const Rule& r, rules) {
 		if (r.breaks) {
 			UErrorCode status = U_ZERO_ERROR;
 			CompiledRule cr = r.compile(status);
@@ -251,7 +251,7 @@ NaiveBoostSegmenter::NaiveBoostSegmenter()
 void NaiveBoostSegmenter::load_rules(const std::vector<Rule>& rules)
 {
 	std::pair<boost::u32regex, bool> cr;
-	foreach (const Rule& r, rules) {
+	BOOST_FOREACH (const Rule& r, rules) {
 		cr.first = boost::make_u32regex(r.create_pattern());
 		cr.second = r.breaks;
 		crules_.push_back(cr);
@@ -268,7 +268,7 @@ void NaiveBoostSegmenter::compute_breaks(const UnicodeString& str,
 	length_ = to;
 
 	typedef std::pair<boost::u32regex, bool> cr_t;
-	foreach (const cr_t& cr, crules_) {
+	BOOST_FOREACH (const cr_t& cr, crules_) {
 		boost::match_results<const UChar*> what;
 		const UChar* start = str.getBuffer();
 		const UChar* end = start + str.length();
