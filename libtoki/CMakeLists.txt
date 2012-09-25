@@ -16,7 +16,7 @@ link_directories(${ICU_LIBRARY_DIRS})
 set(LIBS ${LIBS} icuuc icuio)
 
 find_package(PwrUtils REQUIRED)
-set(LIBS ${PwrUtils_LIBRARY})
+set(LIBS ${LIBS} ${PwrUtils_LIBRARY})
 
 find_package(Loki REQUIRED)
 set(LIBS ${LIBS} loki)
@@ -101,9 +101,9 @@ if(UNIX)
 endif(UNIX)
 
 
-if(UNIX)
 	install(TARGETS toki
 		LIBRARY DESTINATION lib
+		ARCHIVE DESTINATION lib
 		PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE
 		GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
 
@@ -131,5 +131,4 @@ if(UNIX)
 		PATTERN "*.txt"
 		PATTERN ".svn" EXCLUDE
 	)
-endif(UNIX)
 
