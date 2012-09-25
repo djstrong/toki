@@ -13,7 +13,7 @@ ENDIF (PwrUtils_INCLUDE_DIR AND PwrUtils_LIBRARY)
 
 IF (PwrUtils_FOUND)
    set(PwrUtils_VERSION 0.0.0)
-   FIND_FILE(_PwrUtils_VERSION_FILE version.h ${PwrUtils_INCLUDE_DIR})
+   FIND_FILE(_PwrUtils_VERSION_FILE libpwrutils/version.h ${PwrUtils_INCLUDE_DIR})
    MARK_AS_ADVANCED(_PwrUtils_VERSION_FILE)
    IF (_PwrUtils_VERSION_FILE)
       FILE(READ ${_PwrUtils_VERSION_FILE} _PwrUtils_VERSION_CONENTS)
