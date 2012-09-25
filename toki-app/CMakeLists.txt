@@ -4,6 +4,7 @@ include_directories( ${CMAKE_SOURCE_DIR} )
 
 
 
+include_directories(${PwrUtils_INCLUDE_DIR})
 include_directories(${Boost_INCLUDE_DIR})
 link_directories(${Boost_LIBRARY_DIRS})
 
