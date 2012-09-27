@@ -73,6 +73,8 @@ BOOST_AUTO_TEST_CASE( simple )
 
 	BOOST_CHECK_EQUAL_COLLECTIONS(tb, tbe, breaks.begin(), breaks.end());
 
+#ifdef HAVE_BOOST_REGEX
+	// test only if build with boost.regex support
 	Toki::Srx::NaiveBoostSegmenter boo;
 	boo.load_rules(d.get_all_rules());
 
@@ -88,6 +90,7 @@ BOOST_AUTO_TEST_CASE( simple )
 	breaks = hxo.get_break_positions();
 
 	BOOST_CHECK_EQUAL_COLLECTIONS(tb, tbe, breaks.begin(), breaks.end());
+#endif
 }
 
 BOOST_AUTO_TEST_CASE( variable_window )
