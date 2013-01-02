@@ -32,7 +32,9 @@ The desired output format can be selected by providing format string. The format
 • $ws_ws  → the qualitative description of whitespace characters that came before the token (actual spaces / newlines)
 
 
-TODO: example calls
+For example calls and some more information, please consult the project wiki site:
+http://nlp.pwr.wroc.pl/redmine/projects/toki/wiki
+
 
 Using toki as a shared library (libtoki)
 
