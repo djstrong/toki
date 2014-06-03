@@ -190,4 +190,70 @@ BOOST_FIXTURE_TEST_CASE( config_dup_merge_dup, Fc2 )
 	BOOST_CHECK_EQUAL_COLLECTIONS( v.begin(), v.end(), va.begin(), va.end() );
 }
 
+struct FcBool {
+	FcBool()
+	 : cfg1()
+	{
+		cfg1.put<bool>("a.btrue", true);
+		cfg1.put<bool>("a.bfalse", false);
+		cfg1.put<std::string>("a.strue", "true");
+		cfg1.put<std::string>("a.strue2", "True");
+		cfg1.put<std::string>("a.strue3", "TRUE");
+		cfg1.put<std::string>("a.syes", "yes");
+		cfg1.put<std::string>("a.syes2", "Yes");
+		cfg1.put<std::string>("a.syes3", "yeS");
+		cfg1.put<std::string>("a.son", "on");
+		cfg1.put<std::string>("a.son2", "On");
+		cfg1.put<std::string>("a.sfalse", "false");
+		cfg1.put<std::string>("a.sfalse2", "False");
+		cfg1.put<std::string>("a.soff", "OFF");
+		cfg1.put<std::string>("a.sno", "no");
+		cfg1.put<std::string>("a.sno2", "NO");
+	}
+
+	~FcBool()
+	{
+	}
+
+	Toki::Config::Node cfg1;
+};
+
+BOOST_FIXTURE_TEST_CASE( config_bool_noxlate, FcBool )
+{
+	// bool as bool, no translation
+	BOOST_CHECK_EQUAL( cfg1.get<bool>("a.btrue"), true );
+	BOOST_CHECK_EQUAL( cfg1.get<bool>("a.bfalse"), false );
+	// string as string, no translation
+	BOOST_CHECK_EQUAL( cfg1.get<std::string>("a.strue2"), "True" );
+	BOOST_CHECK_EQUAL( cfg1.get<std::string>("a.sno2"), "NO" );
+}
+
+BOOST_FIXTURE_TEST_CASE( config_bool_xlate_trivial, FcBool )
+{
+	// string as bool
+	BOOST_CHECK_EQUAL( cfg1.get<bool>("a.strue"), true );
+	BOOST_CHECK_EQUAL( cfg1.get<bool>("a.sfalse"), false );
+}
+
+
+BOOST_FIXTURE_TEST_CASE( config_bool_xlate_true, FcBool )
+{
+	// string as bool
+	BOOST_CHECK_EQUAL( cfg1.get<bool>("a.strue2"), true );
+	BOOST_CHECK_EQUAL( cfg1.get<bool>("a.strue3"), true );
+	BOOST_CHECK_EQUAL( cfg1.get<bool>("a.syes2"), true );
+	BOOST_CHECK_EQUAL( cfg1.get<bool>("a.syes3"), true );
+	BOOST_CHECK_EQUAL( cfg1.get<bool>("a.son"), true );
+	BOOST_CHECK_EQUAL( cfg1.get<bool>("a.son2"), true );
+}
+
+BOOST_FIXTURE_TEST_CASE( config_bool_xlate_false, FcBool )
+{
+	// string as bool
+	BOOST_CHECK_EQUAL( cfg1.get<bool>("a.sfalse2"), false );
+	BOOST_CHECK_EQUAL( cfg1.get<bool>("a.soff"), false );
+	BOOST_CHECK_EQUAL( cfg1.get<bool>("a.sno"), false );
+	BOOST_CHECK_EQUAL( cfg1.get<bool>("a.sno2"), false );
+}
+
 BOOST_AUTO_TEST_SUITE_END()
