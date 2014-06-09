@@ -108,5 +108,33 @@ void write(const Node &c, const std::string &filename)
 	}
 }
 
+/** Boolean values translator **/
+class BoolTranslator {
+public:
+	typedef std::string	internal_type;
+	typedef bool		external_type;
+
+	boost::optional<external_type> get_value(internal_type const &v);
+	boost::optional<internal_type> put_value(external_type const &v);
+}
+
+boost::optional<BoolTranslator::external_type>
+BoolTranslator::get_value(BoolTranslator::internal_type const &v)
+{}
+
+boost::optional<BoolTranslator::internal_type>
+BoolTranslator::get_value(BoolTranslator::external_type const &v)
+{}
+
 } /* end ns Config */
 } /* end namespace Toki */
+
+// This will make boost use our translator
+// when retrieving boolean value all the time
+namespace boost { namespace property_tree {
+	template<>
+	struct translator_between<std::string, bool>
+	{
+		typedef BoolTranslator type;
+	};
+}}
