@@ -139,7 +139,7 @@ void tokenize_progress(TokenSource &tok, std::ostream &os, int step,
 			i = step;
 		}
 		if (count) {
-			*count++;
+			(*count)++;
 		}
 		delete t;
 	}
