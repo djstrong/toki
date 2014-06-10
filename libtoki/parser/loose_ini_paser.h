@@ -190,7 +190,6 @@ namespace loose_ini_parser
         using detail::check_dupes;
 
         typedef typename Ptree::key_type::value_type Ch;
-        typedef std::basic_string<Ch> Str;
 
         BOOST_ASSERT(validate_flags(flags));
         (void)flags;
