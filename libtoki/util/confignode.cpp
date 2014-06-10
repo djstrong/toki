@@ -20,7 +20,6 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 
 #include <libtoki/util/confignode.h>
 #include <libtoki/exception.h>
-#include <boost/foreach.hpp>
 #include <libtoki/parser/loose_ini_paser.h>
 
 #include <boost/algorithm/string.hpp>
@@ -29,6 +28,7 @@ or FITNESS FOR A PARTICULAR PURPOSE.
 #include <boost/property_tree/ini_parser.hpp>
 #include <boost/property_tree/xml_parser.hpp>
 #include <boost/property_tree/json_parser.hpp>
+#include <boost/optional.hpp>
 
 #include <iostream>
 
@@ -108,33 +108,32 @@ void write(const Node &c, const std::string &filename)
 	}
 }
 
-/** Boolean values translator **/
-class BoolTranslator {
-public:
-	typedef std::string	internal_type;
-	typedef bool		external_type;
-
-	boost::optional<external_type> get_value(internal_type const &v);
-	boost::optional<internal_type> put_value(external_type const &v);
-}
-
 boost::optional<BoolTranslator::external_type>
 BoolTranslator::get_value(BoolTranslator::internal_type const &v)
-{}
+{
+	std::string v_lower = boost::algorithm::to_lower_copy(v);
+	if( v_lower.compare("true") == 0 ||
+		v_lower.compare("yes") == 0 ||
+		v_lower.compare("on") == 0 ||
+		v_lower.compare("1") == 0 )
+			return true;
+	else if(v_lower.compare("false") == 0 ||
+			v_lower.compare("off") == 0 ||
+			v_lower.compare("no") == 0 ||
+			v_lower.compare("0") == 0 )
+			return false;
+	else
+			return boost::none;
+}
 
 boost::optional<BoolTranslator::internal_type>
-BoolTranslator::get_value(BoolTranslator::external_type const &v)
-{}
+BoolTranslator::put_value(BoolTranslator::external_type const &v)
+{
+	if(v)
+		return boost::optional<BoolTranslator::internal_type>("true");
+	else
+		return boost::optional<BoolTranslator::internal_type>("false");
+}
 
 } /* end ns Config */
 } /* end namespace Toki */
-
-// This will make boost use our translator
-// when retrieving boolean value all the time
-namespace boost { namespace property_tree {
-	template<>
-	struct translator_between<std::string, bool>
-	{
-		typedef BoolTranslator type;
-	};
-}}
