@@ -105,6 +105,11 @@ if(UNIX)
 	set_target_properties(toki PROPERTIES
 		LINK_FLAGS -Wl,-e,LIBTOKI_entry_)
 endif(UNIX)
+# Newer LibXML requires C++11
+if(NOT ${LibXML++_PKGCONF_VERSION} VERSION_LESS 2.40)
+	set_target_properties(toki PROPERTIES
+		CXX_STANDARD 11)
+endif(NOT ${LibXML++_PKGCONF_VERSION} VERSION_LESS 2.40)
 
 
 	install(TARGETS toki
