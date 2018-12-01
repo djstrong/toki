@@ -221,7 +221,7 @@ void init_compare_suite(boost::unit_test::test_suite *ts, const std::string& pat
 				ci.out_file.string(), subdir_name, "");
 		std::string name = "test_compare:" + rel_path;
 		ts->add(boost::unit_test::make_test_case(
-				boost::bind(test_one_item, ci), name)
+				boost::bind(test_one_item, ci), name,0,0)
 				);
 	}
 }

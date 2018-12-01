@@ -14,6 +14,8 @@ or FITNESS FOR A PARTICULAR PURPOSE.
     See the LICENSE, COPYING.LESSER and COPYING files for more details.
 */
 
+#define BOOST_MESSAGE(msg) BOOST_TEST_MESSAGE(msg)
+
 #include <libtoki/srx/document.h>
 #include <libtoki/srx/segmenter.h>
 #include <libtoki/srx/srx.h>
